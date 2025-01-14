@@ -12,9 +12,9 @@ export default class Controller {
       const result = await repository.list();
       if (result?.length < 1)
         return response.failed('Data not found', 404, res);
-      return response.success('list data menu', result, res);
+      return response.success('list data client', result, res);
     } catch (err: any) {
-      return helper.catchError(`menu all-data: ${err?.message}`, 500, res);
+      return helper.catchError(`client all-data: ${err?.message}`, 500, res);
     }
   }
 
@@ -29,29 +29,37 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
-      return response.success('Data menu', { total: count, values: rows }, res);
+      return response.success(
+        'Data client',
+        { total: count, values: rows },
+        res
+      );
     } catch (err: any) {
-      return helper.catchError(`menu index: ${err?.message}`, 500, res);
+      return helper.catchError(`client index: ${err?.message}`, 500, res);
     }
   }
 
   public async create(req: Request, res: Response) {
     try {
-      const check = await repository.detail({
-        menu_name: req?.body?.menu_name,
-      });
-      if (check) return response.failed('Data already exists', 400, res);
       const data: Object = helper.only(variable.fillable(), req?.body);
+      const { relation_id, relation_name } = req?.body;
+      const relationId: string =
+        relation_id && relation_id != undefined
+          ? relation_id
+          : '00000000-0000-0000-0000-000000000000';
+      const relationName: string =
+        relation_name && relation_name != undefined ? relation_name : null;
       await repository.create({
         payload: {
           ...data,
-          module_name: req?.body?.module_name.replace(/ /g, ''),
+          relation_id: relationId,
+          relation_name: relationName,
           created_by: req?.user?.id,
         },
       });
       return response.success('Data success saved', null, res);
     } catch (err: any) {
-      return helper.catchError(`menu create: ${err?.message}`, 500, res);
+      return helper.catchError(`client create: ${err?.message}`, 500, res);
     }
   }
 
@@ -61,20 +69,20 @@ export default class Controller {
       if (!helper.isValidUUID(id))
         return response.failed(`id ${id} is not valid`, 400, res);
 
-      const check = await repository.detail({ menu_id: id });
+      const check = await repository.detail({ id });
       if (!check) return response.failed('Data not found', 404, res);
+
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
         payload: {
           ...data,
-          module_name: req?.body?.module_name.replace(/ /g, ''),
           modified_by: req?.user?.id,
         },
-        condition: { menu_id: id },
+        condition: { id },
       });
       return response.success('Data success updated', null, res);
     } catch (err: any) {
-      return helper.catchError(`menu update: ${err?.message}`, 500, res);
+      return helper.catchError(`client update: ${err?.message}`, 500, res);
     }
   }
 
@@ -85,7 +93,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const date: string = helper.date();
-      const check = await repository.detail({ menu_id: id });
+      const check = await repository.detail({ id });
       if (!check) return response.failed('Data not found', 404, res);
       await repository.update({
         payload: {
@@ -93,12 +101,12 @@ export default class Controller {
           modified_by: req?.user?.id,
           modified_date: date,
         },
-        condition: { menu_id: id },
+        condition: { id },
       });
       return response.success('Data success deleted', null, res);
     } catch (err: any) {
-      return helper.catchError(`menu delete: ${err?.message}`, 500, res);
+      return helper.catchError(`client delete: ${err?.message}`, 500, res);
     }
   }
 }
-export const menu = new Controller();
+export const client = new Controller();

@@ -33,6 +33,10 @@ const Model = conn.sequelize.define(
     relation_name: {
       type: DataTypes.STRING,
     },
+    status: {
+      type: DataTypes.TINYINT,
+      defaultValue: 1,
+    },
     created_by: {
       type: DataTypes.STRING,
     },

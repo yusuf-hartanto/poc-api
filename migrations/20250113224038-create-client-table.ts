@@ -14,6 +14,7 @@ export const up = async (queryInterface: QueryInterface) => {
       address varchar(255) DEFAULT NULL,
       relation_id varchar(50) DEFAULT NULL,
       relation_name varchar(100) DEFAULT NULL,
+      \`status\` INT(1) NULL,
       created_by varchar(50) DEFAULT NULL,
       created_date datetime DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,

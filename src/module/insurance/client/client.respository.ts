@@ -7,14 +7,14 @@ export default class Respository {
   public list() {
     return Model.findAll({
       where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
     });
   }
 
   public index(data: any) {
     let query: Object = {
       where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
@@ -24,8 +24,8 @@ export default class Respository {
         where: {
           status: { [Op.ne]: 9 },
           [Op.or]: [
-            { menu_name: { [Op.like]: `%${data?.keyword}%` } },
-            { module_name: { [Op.like]: `%${data?.keyword}%` } },
+            { name: { [Op.like]: `%${data?.keyword}%` } },
+            { relation_name: { [Op.like]: `%${data?.keyword}%` } },
           ],
         },
       };
@@ -48,6 +48,12 @@ export default class Respository {
 
   public update(data: any) {
     return Model.update(data?.payload, {
+      where: data?.condition,
+    });
+  }
+
+  public delete(data: any) {
+    return Model.destroy({
       where: data?.condition,
     });
   }
