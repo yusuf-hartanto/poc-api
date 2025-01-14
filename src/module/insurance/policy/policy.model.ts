@@ -2,6 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { DataTypes } from 'sequelize';
+import Detail from './policy.detail.model';
 import conn from '../../../config/database';
 
 const Model = conn.sequelize.define(
@@ -39,6 +40,9 @@ const Model = conn.sequelize.define(
     premi_value: {
       type: DataTypes.DECIMAL,
     },
+    premi_off: {
+      type: DataTypes.STRING,
+    },
     payment_term: {
       type: DataTypes.INTEGER,
     },
@@ -59,6 +63,10 @@ const Model = conn.sequelize.define(
     },
     notes: {
       type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.TINYINT,
+      defaultValue: 1,
     },
     created_by: {
       type: DataTypes.STRING,
@@ -85,5 +93,6 @@ Model.beforeCreate(
   (insurance_policy: { policy_id: string }) =>
     (insurance_policy.policy_id = uuidv4())
 );
+Model.hasMany(Detail, { as: 'detail', foreignKey: 'policy_id' });
 
 export default Model;

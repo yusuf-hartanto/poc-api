@@ -32,9 +32,10 @@ export default class Controller {
         admin
       );
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      const users = await transformer.list(rows);
       return response.success(
         'Data resource',
-        { total: count, values: rows },
+        { total: count, values: users },
         res
       );
     } catch (err: any) {

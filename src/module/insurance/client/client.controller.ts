@@ -39,6 +39,20 @@ export default class Controller {
     }
   }
 
+  public async detail(req: Request, res: Response) {
+    try {
+      const id: string = req.params.id || '';
+      if (!helper.isValidUUID(id))
+        return response.failed(`id ${id} is not valid`, 400, res);
+
+      const result: Object | any = await repository.detail({ id });
+      if (!result) return response.failed('Data not found', 404, res);
+      return response.success('Data client', result, res);
+    } catch (err: any) {
+      return helper.catchError(`client detail: ${err?.message}`, 500, res);
+    }
+  }
+
   public async create(req: Request, res: Response) {
     try {
       const data: Object = helper.only(variable.fillable(), req?.body);

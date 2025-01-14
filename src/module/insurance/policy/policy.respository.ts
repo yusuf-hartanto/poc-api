@@ -2,19 +2,27 @@
 
 import { Op } from 'sequelize';
 import Model from './policy.model';
+import Detail from './policy.detail.model';
 
 export default class Respository {
   public list() {
     return Model.findAll({
       where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
+      include: [
+        {
+          model: Detail,
+          as: 'detail',
+          required: false,
+        },
+      ],
     });
   }
 
   public index(data: any) {
     let query: Object = {
       where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
@@ -24,8 +32,8 @@ export default class Respository {
         where: {
           status: { [Op.ne]: 9 },
           [Op.or]: [
-            { menu_name: { [Op.like]: `%${data?.keyword}%` } },
-            { module_name: { [Op.like]: `%${data?.keyword}%` } },
+            { provider_company: { [Op.like]: `%${data?.keyword}%` } },
+            { product_name: { [Op.like]: `%${data?.keyword}%` } },
           ],
         },
       };
@@ -39,6 +47,19 @@ export default class Respository {
         ...condition,
         status: { [Op.ne]: 9 },
       },
+      include: [
+        {
+          model: Detail,
+          as: 'detail',
+          required: false,
+        },
+      ],
+    });
+  }
+
+  public findDetail(condition: any) {
+    return Detail.findAll({
+      where: condition,
     });
   }
 
@@ -48,6 +69,26 @@ export default class Respository {
 
   public update(data: any) {
     return Model.update(data?.payload, {
+      where: data?.condition,
+    });
+  }
+
+  public createDetail(data: any) {
+    return Detail.create(data?.payload);
+  }
+
+  public bulkCreate(data: any) {
+    return Detail.bulkCreate(data?.payload);
+  }
+
+  public updateDetail(data: any) {
+    return Detail.update(data?.payload, {
+      where: data?.condition,
+    });
+  }
+
+  public deleteDetail(data: any) {
+    return Detail.destroy({
       where: data?.condition,
     });
   }

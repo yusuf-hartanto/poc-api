@@ -42,6 +42,16 @@ export default class Respository {
     });
   }
 
+  public detailSurvey(condition: any) {
+    return Model.findOne({
+      attributes: ['id', 'name', 'bod', 'age', 'contact_number', 'address'],
+      where: {
+        ...condition,
+        status: { [Op.ne]: 9 },
+      },
+    });
+  }
+
   public create(data: any) {
     return Model.create(data?.payload);
   }

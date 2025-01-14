@@ -3658,6 +3658,1798 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Insurance",
+      "item": [
+        {
+          "name": "Client",
+          "item": [
+            {
+              "name": "All Data",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client/all-data",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "client", "all-data"]
+                }
+              },
+              "response": [
+                {
+                  "name": "All Data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/all-data",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client", "all-data"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "897"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"381-mMrkgrsbYeh9iH7HP6N3NK/NZZE\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 05:10:10 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"list data client\",\n    \"data\": [\n        {\n            \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n            \"name\": \"Lina Panjaitan\",\n            \"bod\": \"1985-01-01\",\n            \"age\": 40,\n            \"contact_number\": \"083621726181\",\n            \"address\": \"Kab. Bandung, Jawa Barat\",\n            \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n            \"relation_name\": \"Istri\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-14T05:09:53.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null\n        },\n        {\n            \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n            \"name\": \"Jhon Panjaitan\",\n            \"bod\": \"1980-01-01\",\n            \"age\": 45,\n            \"contact_number\": \"0983282672892\",\n            \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n            \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n            \"relation_name\": null,\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-14T05:06:10.000Z\",\n            \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Data",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client?page=1&perPage=10&q=",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "client"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client?page=1&perPage=10&q=",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "969"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c9-b2vctc+CgFu2kGJkxxmZPSFe7lA\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 08:04:51 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"name\": \"Lina Panjaitan\",\n                \"bod\": \"1985-01-01\",\n                \"age\": 40,\n                \"contact_number\": \"083621726181\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"relation_name\": \"Istri\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"name\": \"Jhon Panjaitan\",\n                \"bod\": \"1980-01-01\",\n                \"age\": 45,\n                \"contact_number\": \"0983282672892\",\n                \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:06:10.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Detail",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "client",
+                    "63702df5-ab13-496f-bde3-09b1f58a7698"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "client",
+                        "63702df5-ab13-496f-bde3-09b1f58a7698"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "503"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"1f7-KQUtLDxB2f9AOBOJ5zVNkzLW0ak\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 07:22:20 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"name\": \"Jhon Panjaitan\",\n        \"bod\": \"1980-01-01\",\n        \"age\": 45,\n        \"contact_number\": \"0983282672892\",\n        \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n        \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n        \"relation_name\": null,\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-14T05:06:10.000Z\",\n        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "client"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "58"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3a-qGezOo04MzEeApKzvU/AblPyk9s\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 05:06:10 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success saved\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "client",
+                    "63702df5-ab13-496f-bde3-09b1f58a7698"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "client",
+                        "63702df5-ab13-496f-bde3-09b1f58a7698"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "60"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c-/dzEopCZbEx9eoGCdFcFr8B2Wjw\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 05:08:19 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success updated\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/insurance/client/77588f9d-d292-4c00-b7fb-5e9fa08f445a",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "client",
+                    "77588f9d-d292-4c00-b7fb-5e9fa08f445a"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{url}}/insurance/client/77588f9d-d292-4c00-b7fb-5e9fa08f445a",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "client",
+                        "77588f9d-d292-4c00-b7fb-5e9fa08f445a"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "60"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c-wOkzT6ZXBolosnPlAwsLzmOYr5Q\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 05:12:25 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Policy",
+          "item": [
+            {
+              "name": "Data",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/policy?page=1&perPage=10&q=",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "policy"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/policy?page=1&perPage=10&q=",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "policy"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "2886"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"b46-0gTJwVyXT7il0hIgvXAVy81+pHA\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 08:03:50 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data policy\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"policy_id\": \"98e5a430-cd63-4342-9b05-8b1380ed363f\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz Update\",\n                \"product_name\": \"My Protection Prima Update\",\n                \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hani Panjaitan dan Leo Panjaitan\",\n                \"issued_date\": \"2021-08-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"5000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank Update\",\n                \"notes\": \"note Updates\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:19:06.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T07:30:38.000Z\",\n                \"detail\": [\n                    {\n                        \"id\": \"31cbaed0-bb8b-4cb7-9370-a8e8c8fc43a9\",\n                        \"policy_id\": \"98e5a430-cd63-4342-9b05-8b1380ed363f\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"14509000.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 50000000,\n                            \"rs\": \"santunan medical assistance 100juta\",\n                            \"penyakit_kritis\": 50000000,\n                            \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:30:38.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2021-08-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"5000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:07:20.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"6e08c67d-5aac-4a5c-a5eb-94efe00b1e96\",\n                        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                        \"unit_link\": 0,\n                        \"fund\": \"-\",\n                        \"cash_value\": \"0.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 125000000,\n                            \"rs\": \"plan platinum\",\n                            \"penyakit_kritis\": null,\n                            \"pensiun\": null,\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"56d9d66d-7e8a-4d22-a312-12bce0387ca5\",\n                        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"14509000.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 50000000,\n                            \"rs\": \"santunan medical assistance 100juta\",\n                            \"penyakit_kritis\": 50000000,\n                            \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Detail",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "policy",
+                    "9dea2989-8f2f-472e-a29b-4df733e76506"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "policy",
+                        "9dea2989-8f2f-472e-a29b-4df733e76506"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1599"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"63f-LrKBL9xTsqBgECId1aaonjVGhCg\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 08:05:15 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n        \"policy_number\": \"67950792\",\n        \"provider_company\": \"Allianz\",\n        \"product_name\": \"My Protection Prima\",\n        \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n        \"beneficiary_holder\": \"Bryan Panjaitan\",\n        \"issued_date\": \"2021-08-31\",\n        \"premi_currency\": \"IDR\",\n        \"premi_value\": \"5000000.00\",\n        \"premi_off\": \"N\",\n        \"payment_term\": 7,\n        \"payment_term_unit\": \"tahun\",\n        \"insured_term\": 80,\n        \"insured_term_unit\": \"usia\",\n        \"due_date\": \"2101-08-31\",\n        \"seller_name\": \"Maybank\",\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-14T07:07:20.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"detail\": [\n            {\n                \"id\": \"6e08c67d-5aac-4a5c-a5eb-94efe00b1e96\",\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"unit_link\": 0,\n                \"fund\": \"-\",\n                \"cash_value\": \"0.00\",\n                \"benefit\": {\n                    \"up_jiwa\": 125000000,\n                    \"rs\": \"plan platinum\",\n                    \"penyakit_kritis\": null,\n                    \"pensiun\": null,\n                    \"jatuh_tempo\": null\n                },\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            },\n            {\n                \"id\": \"56d9d66d-7e8a-4d22-a312-12bce0387ca5\",\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"unit_link\": 1,\n                \"fund\": \"Equity\",\n                \"cash_value\": \"14509000.00\",\n                \"benefit\": {\n                    \"up_jiwa\": 50000000,\n                    \"rs\": \"santunan medical assistance 100juta\",\n                    \"penyakit_kritis\": 50000000,\n                    \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                    \"jatuh_tempo\": null\n                },\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz\",\r\n    \"product_name\": \"My Protection Prima\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Bryan Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank\",\r\n    \"notes\": \"notes\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 0,\r\n            \"fund\": \"-\",\r\n            \"cash_value\": 0,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 125000000,\r\n                \"rs\": \"plan platinum\",\r\n                \"penyakit_kritis\": null,\r\n                \"pensiun\": null,\r\n                \"jatuh_tempo\": null\r\n            }\r\n        },\r\n        {\r\n            \"unit_link\":1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/policy",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "policy"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz\",\r\n    \"product_name\": \"My Protection Prima\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Bryan Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank\",\r\n    \"notes\": \"notes\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 0,\r\n            \"fund\": \"-\",\r\n            \"cash_value\": 0,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 125000000,\r\n                \"rs\": \"plan platinum\",\r\n                \"penyakit_kritis\": null,\r\n                \"pensiun\": null,\r\n                \"jatuh_tempo\": null\r\n            }\r\n        },\r\n        {\r\n            \"unit_link\":1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/policy",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "policy"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "58"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3a-qGezOo04MzEeApKzvU/AblPyk9s\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 07:14:58 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success saved\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz Update\",\r\n    \"product_name\": \"My Protection Prima Update\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Hani Panjaitan dan Leo Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank Update\",\r\n    \"notes\": \"note Updates\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/policy/98e5a430-cd63-4342-9b05-8b1380ed363f",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "policy",
+                    "98e5a430-cd63-4342-9b05-8b1380ed363f"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz Update\",\r\n    \"product_name\": \"My Protection Prima Update\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Hani Panjaitan dan Leo Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank Update\",\r\n    \"notes\": \"note Updates\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/policy/98e5a430-cd63-4342-9b05-8b1380ed363f",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "policy",
+                        "98e5a430-cd63-4342-9b05-8b1380ed363f"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "60"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c-/dzEopCZbEx9eoGCdFcFr8B2Wjw\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 07:30:38 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success updated\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "insurance",
+                    "policy",
+                    "9dea2989-8f2f-472e-a29b-4df733e76506"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "insurance",
+                        "policy",
+                        "9dea2989-8f2f-472e-a29b-4df733e76506"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "60"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c-wOkzT6ZXBolosnPlAwsLzmOYr5Q\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 14 Jan 2025 08:05:52 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Survey",
+      "item": [
+        {
+          "name": "Data",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/event?page=1&perPage=10&q=",
+              "host": ["{{url}}"],
+              "path": ["survey", "event"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/event?page=1&perPage=10&q=",
+                  "host": ["{{url}}"],
+                  "path": ["survey", "event"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "22683"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"589b-GiZ3FRCQuZhK1fgxhE2VdAqavek\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 08:34:28 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data event\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"id\": \"4c80a64b-9723-466b-8e30-1c15fe45a0d0\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"event\": \"Event Survey 1\",\n                \"desc\": \"Event Survey 1\",\n                \"start_period\": \"2024-12-31T17:00:00.000Z\",\n                \"end_period\": \"2025-01-31T16:59:59.000Z\",\n                \"is_active\": 1,\n                \"is_random\": 0,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"form\": [\n                    {\n                        \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah sudah menikah?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 1,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"0467421e-4d50-4a0e-988d-a2e39b373a94\",\n                                \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Tanpa perjanjian nikah, harta bersama atau harta gono gini harus dibagi 2 apabila ada perceraian atau apabila ada risiko tutup usia salah satu pasangan\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"d9d99050-9301-49df-b538-cdc91ea9f925\",\n                                \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Pernikahan ke berapa untuk anda?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 2,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"4051c649-6b5a-4417-8578-ddd4ae600c5a\",\n                                \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                                \"text_answer\": \"Pertama\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"a0274c0e-ebf3-4686-bbeb-5c6ba1d2ea0a\",\n                                \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                                \"text_answer\": \"Lebih dari 1\",\n                                \"alert_answer\": \"Apabila memiliki anak dari pernikahan sebelumnya, anak bawaan memiliki hak legitimate portie untuk warisan\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Pernikahan ke berapa untuk pasangan?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 3,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"1c255374-dfb3-42ef-8577-3ba3356f6de6\",\n                                \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                                \"text_answer\": \"1\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"77afb064-2bd7-4ec5-85d7-d2b0d92125d7\",\n                                \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                                \"text_answer\": \"> 1\",\n                                \"alert_answer\": \"Apabila memiliki anak dari pernikahan sebelumnya, anak bawaan memiliki hak legitimate portie untuk warisan\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Berapa jumlah anak?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 4,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"7885afda-3863-44f7-9928-c9229f3bfb99\",\n                                \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                                \"text_answer\": \"1\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"19053e91-7d89-40ae-b5fb-6d9ae838b244\",\n                                \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                                \"text_answer\": \"> 1\",\n                                \"alert_answer\": \"Pembagian warisan harus memenuhi legitimate portie. Apabila tidak memenuhi legitimate portie, ahli waris berhak melakukan gugatan waris.\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memilki anak yang berusia di bawah 18 tahun?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 5,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"dce249b0-3b5c-4a2c-94d5-0723ebfb1785\",\n                                \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apabila terjadi risiko tutup usia, anak yang berumur di bawah 18 tahun harus memiliki wali\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"3688dcdc-381c-4388-a93e-182bab765a71\",\n                                \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Status pasangan WNI atau WNA?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 6,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"bbf7bfc7-3a06-41eb-b6a3-1f3321b0a727\",\n                                \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Menurut UU no 5 tahun 1950 tentang Peraturan Dasar Pokok-Pokok Agraria, WNA hanya memiliki hak pakai dan hak sewa atas tanah dan bangunan di Indonesia\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"e3c5366d-0fe5-4609-bf25-54b989b360c5\",\n                                \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Status anak WNI atau WNA?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 7,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"7629f48f-ab59-45ec-8a7b-58276b2e4b21\",\n                                \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Menurut UU no 5 tahun 1950 tentang Peraturan Dasar Pokok-Pokok Agraria, WNA hanya memiliki hak pakai dan hak sewa atas tanah dan bangunan di Indonesia\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"e54984d5-bc46-4a41-95a6-6ae70b941284\",\n                                \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda pernah melakukan hibah terhadap anak?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 8,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"cbbf30f1-491b-4dcc-bd25-9a6dd8199457\",\n                                \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Untuk non muslim, hibah satu garis keturunan dapat ditarik kembali untuk perhitungan waris.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"fdad2d18-452c-4786-8c66-e22beb3cd944\",\n                                \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah agama anda\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 9,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"b7547ed4-dda1-4f4e-ac65-20bceb220b27\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Islam/Muslim\",\n                                \"alert_answer\": \"Pengaturan hak waris untuk Muslim dapat mengikuti 2 ketentuan : Hukum Faraidh dan Kompilasi Hukum Islam (HKI). Keduanya bisa sedikit berbeda dalam pelaksanaannya.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"e65a493f-957e-41e1-b1a0-cdee0ebc0d67\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Kristen Protestan\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"3ae55b39-32b6-4065-b650-a95d406c0f1e\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Katolik\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 3,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"150b4634-a6e2-437e-ae04-1c685b978181\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Hindu\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 4,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"2d2f87f2-96a4-4888-8517-d2a650d4042c\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Buddha\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 5,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"cd8775e4-13a1-4017-9ccb-0e6b92646b0d\",\n                                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                                \"text_answer\": \"Konghucu\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 6,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda sudah memiliki rencana pensiun?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 10,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"1b08c594-4af5-4e12-b25e-6170ed044c53\",\n                                \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Dana pensiun mesti setara dengan pengeluaran untuk usia harapan hidup dikurangi usia saat pensiun serta dengan mempertimbankan tingkat inflasi.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"327615ac-16f1-4a0b-8329-7e77ca41a0d8\",\n                                \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"Dana pensiun mesti setara dengan pengeluaran untuk usia harapan hidup dikurangi usia saat pensiun serta dengan mempertimbankan tingkat inflasi.\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memiliki aset properti?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 11,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"ca1686d4-dd0e-42bd-929a-c84aadeea44c\",\n                                \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apabila terjadi risiko tutup usia, ahli waris harus membayar BPHTB sebesar 50% dari BPHTP terutang (saat ini 5%).  Dana likuid untuk BPHTB bagi ahli waris harus sudah dipersiapkan tanpa mengganggu cashflow.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"884b6098-c862-430a-b62c-e4d77226e92f\",\n                                \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah status properti anda saat ini diagunkan ke bank?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 12,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"efccba3b-ca20-4315-8902-74f702f4e6a7\",\n                                \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apabila agunan diatasnamakan ke salah satu pihak ahli waris, maka pihak ahli waris lainnya dapat melakukan gugatan waris.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"b313667a-e679-4879-a67b-610dc94691c9\",\n                                \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memiliki aset di lebih dari satu bank?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 13,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"4558fe07-9196-43a7-84f0-c852fdad5596\",\n                                \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apabila terjadi risiko tutup usia, aset di bank akan dibekukan hingga proses pewarisan selesai.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"5fc53818-54f3-4aa7-87e3-d62ce52bceb8\",\n                                \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memiliki aset di safe deposit box?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 14,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"71b327de-5a2b-4889-9c80-cfdf44893a55\",\n                                \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Aset yang ditempatkan di safe deposit box di bank adalah termasuk dalam aset yang akan dibekukan apabila terjadi risiko tutup usia.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"1def7780-10ef-461e-8de0-9e4d4ef35b03\",\n                                \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda pengusaha?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 15,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"cd969f5f-5f6a-4123-8b83-49c45778fe6e\",\n                                \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apakah anda telah mempersiapkan suksesi bisnis dari anda ke suksesor yang ditunjuk?\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"412915cf-06e2-4974-8437-e9c924a7d1fb\",\n                                \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah perusahaan anda adalah perusahaan keluarga?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 16,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"f941ead4-dbf7-44e6-8901-42ade779b492\",\n                                \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Apakah anda adalah generasi pertama atau generasi kedua dan lebih dalam bisnis perusahaan keluarga ini? Apakah anda telah melibatkan profesional dalam pengaturan suksesi bisnis? Pembagian saham, keuntungan serta perbedaan generasi adalah salah satu yang harus direncanakan dalam suksesi bisnis supaya tidak mengganggu operasional dan keberlanjutan bisnis.\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"089bff63-3a0b-47df-b34e-2b52165d04b2\",\n                                \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memiliki surat wasiat?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 17,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"6fea2dc0-934f-4274-8059-89e0698acbbe\",\n                                \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"2d54af6c-3fc3-4f64-b222-cae907a2e21a\",\n                                \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"Tanpa adanya surat wasiat, ada kemungkinan keinginan anda sebagai pewaris tidak terlaksana dengan sempurna.\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                        \"question\": \"Apakah anda memiliki keinginan untuk meninggalkan legacy dalam bentuk lain misalnya untuk charity atau hal lain yang anda support?\",\n                        \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"type\": \"MultipleChoice\",\n                        \"nourut\": 18,\n                        \"url_image1\": null,\n                        \"url_image2\": null,\n                        \"is_active\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null,\n                        \"answer\": [\n                            {\n                                \"answer_id\": \"3d69346c-a332-4943-8e17-24322494ebee\",\n                                \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                                \"text_answer\": \"Iya\",\n                                \"alert_answer\": \"Charity dan legacy yang anda dukung mesti direncanakan dari sekarang supaya pendistribusiannya dapat berjalan sempurna\",\n                                \"nourut\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            },\n                            {\n                                \"answer_id\": \"1b52597a-12cf-49e3-942a-a5852ee87222\",\n                                \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                                \"text_answer\": \"Tidak\",\n                                \"alert_answer\": \"\",\n                                \"nourut\": 2,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                                \"modified_by\": null,\n                                \"modified_date\": null\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Detail",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/event/4c80a64b-9723-466b-8e30-1c15fe45a0d0",
+              "host": ["{{url}}"],
+              "path": [
+                "survey",
+                "event",
+                "4c80a64b-9723-466b-8e30-1c15fe45a0d0"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Detail",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/event/4c80a64b-9723-466b-8e30-1c15fe45a0d0",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "survey",
+                    "event",
+                    "4c80a64b-9723-466b-8e30-1c15fe45a0d0"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "22660"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5884-vHTz1y+XNoicfoR5+yr4YuvsiBA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 08:38:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data event\",\n    \"data\": {\n        \"id\": \"4c80a64b-9723-466b-8e30-1c15fe45a0d0\",\n        \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n        \"event\": \"Event Survey 1\",\n        \"desc\": \"Event Survey 1\",\n        \"start_period\": \"2024-12-31T17:00:00.000Z\",\n        \"end_period\": \"2025-01-31T16:59:59.000Z\",\n        \"is_active\": 1,\n        \"is_random\": 0,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"form\": [\n            {\n                \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah sudah menikah?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 1,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"0467421e-4d50-4a0e-988d-a2e39b373a94\",\n                        \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Tanpa perjanjian nikah, harta bersama atau harta gono gini harus dibagi 2 apabila ada perceraian atau apabila ada risiko tutup usia salah satu pasangan\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"d9d99050-9301-49df-b538-cdc91ea9f925\",\n                        \"question_id\": \"23b489e4-a70a-4684-9410-d95d9a0a4fcd\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Pernikahan ke berapa untuk anda?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 2,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"4051c649-6b5a-4417-8578-ddd4ae600c5a\",\n                        \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                        \"text_answer\": \"Pertama\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"a0274c0e-ebf3-4686-bbeb-5c6ba1d2ea0a\",\n                        \"question_id\": \"3235744b-eef4-410e-a6a7-0ec628676176\",\n                        \"text_answer\": \"Lebih dari 1\",\n                        \"alert_answer\": \"Apabila memiliki anak dari pernikahan sebelumnya, anak bawaan memiliki hak legitimate portie untuk warisan\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Pernikahan ke berapa untuk pasangan?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 3,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"1c255374-dfb3-42ef-8577-3ba3356f6de6\",\n                        \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                        \"text_answer\": \"1\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"77afb064-2bd7-4ec5-85d7-d2b0d92125d7\",\n                        \"question_id\": \"6ba91c4f-ed8a-48aa-bf6d-3423169e5016\",\n                        \"text_answer\": \"> 1\",\n                        \"alert_answer\": \"Apabila memiliki anak dari pernikahan sebelumnya, anak bawaan memiliki hak legitimate portie untuk warisan\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Berapa jumlah anak?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 4,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"7885afda-3863-44f7-9928-c9229f3bfb99\",\n                        \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                        \"text_answer\": \"1\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"19053e91-7d89-40ae-b5fb-6d9ae838b244\",\n                        \"question_id\": \"26fbeab4-51c2-48ad-a35b-cd464959e517\",\n                        \"text_answer\": \"> 1\",\n                        \"alert_answer\": \"Pembagian warisan harus memenuhi legitimate portie. Apabila tidak memenuhi legitimate portie, ahli waris berhak melakukan gugatan waris.\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memilki anak yang berusia di bawah 18 tahun?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 5,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"dce249b0-3b5c-4a2c-94d5-0723ebfb1785\",\n                        \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apabila terjadi risiko tutup usia, anak yang berumur di bawah 18 tahun harus memiliki wali\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"3688dcdc-381c-4388-a93e-182bab765a71\",\n                        \"question_id\": \"adf3d935-228e-4f2a-9b54-012fdc0194f6\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Status pasangan WNI atau WNA?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 6,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"bbf7bfc7-3a06-41eb-b6a3-1f3321b0a727\",\n                        \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Menurut UU no 5 tahun 1950 tentang Peraturan Dasar Pokok-Pokok Agraria, WNA hanya memiliki hak pakai dan hak sewa atas tanah dan bangunan di Indonesia\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"e3c5366d-0fe5-4609-bf25-54b989b360c5\",\n                        \"question_id\": \"c964d6ab-30e2-4429-afbc-233c9440996a\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Status anak WNI atau WNA?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 7,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"7629f48f-ab59-45ec-8a7b-58276b2e4b21\",\n                        \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Menurut UU no 5 tahun 1950 tentang Peraturan Dasar Pokok-Pokok Agraria, WNA hanya memiliki hak pakai dan hak sewa atas tanah dan bangunan di Indonesia\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"e54984d5-bc46-4a41-95a6-6ae70b941284\",\n                        \"question_id\": \"44d4e551-d2e5-444f-9d86-90dc6665144b\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda pernah melakukan hibah terhadap anak?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 8,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"cbbf30f1-491b-4dcc-bd25-9a6dd8199457\",\n                        \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Untuk non muslim, hibah satu garis keturunan dapat ditarik kembali untuk perhitungan waris.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"fdad2d18-452c-4786-8c66-e22beb3cd944\",\n                        \"question_id\": \"e8674c01-1ed2-441c-8a92-789e64fe1d9b\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah agama anda\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 9,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"b7547ed4-dda1-4f4e-ac65-20bceb220b27\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Islam/Muslim\",\n                        \"alert_answer\": \"Pengaturan hak waris untuk Muslim dapat mengikuti 2 ketentuan : Hukum Faraidh dan Kompilasi Hukum Islam (HKI). Keduanya bisa sedikit berbeda dalam pelaksanaannya.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"e65a493f-957e-41e1-b1a0-cdee0ebc0d67\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Kristen Protestan\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"3ae55b39-32b6-4065-b650-a95d406c0f1e\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Katolik\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 3,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"150b4634-a6e2-437e-ae04-1c685b978181\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Hindu\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 4,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"2d2f87f2-96a4-4888-8517-d2a650d4042c\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Buddha\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 5,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"cd8775e4-13a1-4017-9ccb-0e6b92646b0d\",\n                        \"question_id\": \"54e3b44d-eb5d-48fa-ae95-d83f835f31ff\",\n                        \"text_answer\": \"Konghucu\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 6,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda sudah memiliki rencana pensiun?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 10,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"1b08c594-4af5-4e12-b25e-6170ed044c53\",\n                        \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Dana pensiun mesti setara dengan pengeluaran untuk usia harapan hidup dikurangi usia saat pensiun serta dengan mempertimbankan tingkat inflasi.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"327615ac-16f1-4a0b-8329-7e77ca41a0d8\",\n                        \"question_id\": \"42ada99a-8dfd-4c12-a1da-b598c569e8f6\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"Dana pensiun mesti setara dengan pengeluaran untuk usia harapan hidup dikurangi usia saat pensiun serta dengan mempertimbankan tingkat inflasi.\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memiliki aset properti?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 11,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"ca1686d4-dd0e-42bd-929a-c84aadeea44c\",\n                        \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apabila terjadi risiko tutup usia, ahli waris harus membayar BPHTB sebesar 50% dari BPHTP terutang (saat ini 5%).  Dana likuid untuk BPHTB bagi ahli waris harus sudah dipersiapkan tanpa mengganggu cashflow.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"884b6098-c862-430a-b62c-e4d77226e92f\",\n                        \"question_id\": \"f6cbf511-8674-463a-af67-7c57a3937c59\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah status properti anda saat ini diagunkan ke bank?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 12,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"efccba3b-ca20-4315-8902-74f702f4e6a7\",\n                        \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apabila agunan diatasnamakan ke salah satu pihak ahli waris, maka pihak ahli waris lainnya dapat melakukan gugatan waris.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"b313667a-e679-4879-a67b-610dc94691c9\",\n                        \"question_id\": \"ad4ff4a2-c3a2-4570-94d0-52a1da034cf5\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memiliki aset di lebih dari satu bank?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 13,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"4558fe07-9196-43a7-84f0-c852fdad5596\",\n                        \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apabila terjadi risiko tutup usia, aset di bank akan dibekukan hingga proses pewarisan selesai.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"5fc53818-54f3-4aa7-87e3-d62ce52bceb8\",\n                        \"question_id\": \"5d83369a-2630-467f-8bf7-1bedd1ccaa98\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memiliki aset di safe deposit box?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 14,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"71b327de-5a2b-4889-9c80-cfdf44893a55\",\n                        \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Aset yang ditempatkan di safe deposit box di bank adalah termasuk dalam aset yang akan dibekukan apabila terjadi risiko tutup usia.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"1def7780-10ef-461e-8de0-9e4d4ef35b03\",\n                        \"question_id\": \"7f5f1ab1-08f9-4c93-83cb-dfb0a8f360d5\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda pengusaha?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 15,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"cd969f5f-5f6a-4123-8b83-49c45778fe6e\",\n                        \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apakah anda telah mempersiapkan suksesi bisnis dari anda ke suksesor yang ditunjuk?\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"412915cf-06e2-4974-8437-e9c924a7d1fb\",\n                        \"question_id\": \"289d927e-a092-46f9-8189-7994cc7f9527\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah perusahaan anda adalah perusahaan keluarga?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 16,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"f941ead4-dbf7-44e6-8901-42ade779b492\",\n                        \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Apakah anda adalah generasi pertama atau generasi kedua dan lebih dalam bisnis perusahaan keluarga ini? Apakah anda telah melibatkan profesional dalam pengaturan suksesi bisnis? Pembagian saham, keuntungan serta perbedaan generasi adalah salah satu yang harus direncanakan dalam suksesi bisnis supaya tidak mengganggu operasional dan keberlanjutan bisnis.\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"089bff63-3a0b-47df-b34e-2b52165d04b2\",\n                        \"question_id\": \"8d1ea91f-871f-4dc2-a612-a88575c34161\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memiliki surat wasiat?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 17,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"6fea2dc0-934f-4274-8059-89e0698acbbe\",\n                        \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"2d54af6c-3fc3-4f64-b222-cae907a2e21a\",\n                        \"question_id\": \"652a2157-def6-411d-a4b4-f82fa57bc600\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"Tanpa adanya surat wasiat, ada kemungkinan keinginan anda sebagai pewaris tidak terlaksana dengan sempurna.\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e1764863ff\",\n                \"question\": \"Apakah anda memiliki keinginan untuk meninggalkan legacy dalam bentuk lain misalnya untuk charity atau hal lain yang anda support?\",\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"type\": \"MultipleChoice\",\n                \"nourut\": 18,\n                \"url_image1\": null,\n                \"url_image2\": null,\n                \"is_active\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"answer\": [\n                    {\n                        \"answer_id\": \"3d69346c-a332-4943-8e17-24322494ebee\",\n                        \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                        \"text_answer\": \"Iya\",\n                        \"alert_answer\": \"Charity dan legacy yang anda dukung mesti direncanakan dari sekarang supaya pendistribusiannya dapat berjalan sempurna\",\n                        \"nourut\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"answer_id\": \"1b52597a-12cf-49e3-942a-a5852ee87222\",\n                        \"question_id\": \"3c13746f-deef-42da-98d3-0df168f28a09\",\n                        \"text_answer\": \"Tidak\",\n                        \"alert_answer\": \"\",\n                        \"nourut\": 2,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-13T22:58:45.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"event\": \"Event Survey 2\",\r\n    \"desc\": \"Event Survey 2\",\r\n    \"start_period\": \"2025-01-01 00:00:00\",\r\n    \"end_period\": \"2025-01-31 23:59:59\",\r\n    \"is_active\": 1,\r\n    \"is_random\": 0,\r\n    \"form\": [\r\n        {\r\n            \"question\": \"Apakah sudah memiliki anak?\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"answer\": [\r\n                {\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki anak laki-laki\",\r\n                    \"nourut\": 1\r\n                },\r\n                {\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"\",\r\n                    \"nourut\": 2\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"Apakah sudah memiliki rumah?\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"answer\": [\r\n                {\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki rumah pribadi\",\r\n                    \"nourut\": 1\r\n                },\r\n                {\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"Tinggal di kontrakan\",\r\n                    \"nourut\": 2\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/event",
+              "host": ["{{url}}"],
+              "path": ["survey", "event"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"event\": \"Event Survey 2\",\r\n    \"desc\": \"Event Survey 2\",\r\n    \"start_period\": \"2025-01-01 00:00:00\",\r\n    \"end_period\": \"2025-01-31 23:59:59\",\r\n    \"is_active\": 1,\r\n    \"is_random\": 0,\r\n    \"form\": [\r\n        {\r\n            \"question\": \"Apakah sudah memiliki anak?\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"answer\": [\r\n                {\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki anak laki-laki\",\r\n                    \"nourut\": 1\r\n                },\r\n                {\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"\",\r\n                    \"nourut\": 2\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"question\": \"Apakah sudah memiliki rumah?\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"answer\": [\r\n                {\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki rumah pribadi\",\r\n                    \"nourut\": 1\r\n                },\r\n                {\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"Tinggal di kontrakan\",\r\n                    \"nourut\": 2\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/event",
+                  "host": ["{{url}}"],
+                  "path": ["survey", "event"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "58"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3a-qGezOo04MzEeApKzvU/AblPyk9s\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 08:56:54 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data success saved\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"event\": \"Event Survey 2\",\r\n    \"desc\": \"Event Survey 22222\",\r\n    \"start_period\": \"2024-12-31T17:00:00.000Z\",\r\n    \"end_period\": \"2025-01-31T16:59:59.000Z\",\r\n    \"is_active\": 1,\r\n    \"is_random\": 0,\r\n    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n    \"modified_by\": null,\r\n    \"modified_date\": null,\r\n    \"form\": [\r\n        {\r\n            \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n            \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n            \"question\": \"Apakah sudah memiliki anak?\",\r\n            \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n            \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n            \"modified_by\": null,\r\n            \"modified_date\": null,\r\n            \"answer\": [\r\n                {\r\n                    \"answer_id\": \"65c8574e-940b-4dd7-ad2b-03819de62818\",\r\n                    \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki anak laki-laki\",\r\n                    \"nourut\": 1,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                },\r\n                {\r\n                    \"answer_id\": \"4dfdb3a6-5fba-42a3-bf91-eb19c3da3062\",\r\n                    \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"\",\r\n                    \"nourut\": 2,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n            \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n            \"question\": \"Apakah sudah memiliki rumah?\",\r\n            \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n            \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n            \"modified_by\": null,\r\n            \"modified_date\": null,\r\n            \"answer\": [\r\n                {\r\n                    \"answer_id\": \"3e8f371f-3952-40a5-8301-07dfc243148b\",\r\n                    \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki rumah pribadi\",\r\n                    \"nourut\": 1,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                },\r\n                {\r\n                    \"answer_id\": \"06bb8357-6fc7-4321-9a5b-2827baef0f05\",\r\n                    \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"Tinggal di kontrakan\",\r\n                    \"nourut\": 2,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/event/45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3",
+              "host": ["{{url}}"],
+              "path": [
+                "survey",
+                "event",
+                "45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"event\": \"Event Survey 2\",\r\n    \"desc\": \"Event Survey 22222\",\r\n    \"start_period\": \"2024-12-31T17:00:00.000Z\",\r\n    \"end_period\": \"2025-01-31T16:59:59.000Z\",\r\n    \"is_active\": 1,\r\n    \"is_random\": 0,\r\n    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n    \"modified_by\": null,\r\n    \"modified_date\": null,\r\n    \"form\": [\r\n        {\r\n            \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n            \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n            \"question\": \"Apakah sudah memiliki anak?\",\r\n            \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n            \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n            \"modified_by\": null,\r\n            \"modified_date\": null,\r\n            \"answer\": [\r\n                {\r\n                    \"answer_id\": \"65c8574e-940b-4dd7-ad2b-03819de62818\",\r\n                    \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki anak laki-laki\",\r\n                    \"nourut\": 1,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                },\r\n                {\r\n                    \"answer_id\": \"4dfdb3a6-5fba-42a3-bf91-eb19c3da3062\",\r\n                    \"question_id\": \"78089984-ff72-4180-8404-83e3ee64c245\",\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"\",\r\n                    \"nourut\": 2,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n            \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n            \"question\": \"Apakah sudah memiliki rumah?\",\r\n            \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"type\": \"MultipleChoice\",\r\n            \"nourut\": 1,\r\n            \"url_image1\": null,\r\n            \"url_image2\": null,\r\n            \"is_active\": 1,\r\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n            \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n            \"modified_by\": null,\r\n            \"modified_date\": null,\r\n            \"answer\": [\r\n                {\r\n                    \"answer_id\": \"3e8f371f-3952-40a5-8301-07dfc243148b\",\r\n                    \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n                    \"text_answer\": \"Iya\",\r\n                    \"alert_answer\": \"Memiliki rumah pribadi\",\r\n                    \"nourut\": 1,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                },\r\n                {\r\n                    \"answer_id\": \"06bb8357-6fc7-4321-9a5b-2827baef0f05\",\r\n                    \"question_id\": \"d3700110-649d-4239-a415-e47c393c770e\",\r\n                    \"text_answer\": \"Tidak\",\r\n                    \"alert_answer\": \"Tinggal di kontrakan\",\r\n                    \"nourut\": 2,\r\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\r\n                    \"created_date\": \"2025-01-14T08:56:53.000Z\",\r\n                    \"modified_by\": null,\r\n                    \"modified_date\": null\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/event/45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "survey",
+                    "event",
+                    "45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "60"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3c-/dzEopCZbEx9eoGCdFcFr8B2Wjw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 09:03:46 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data success updated\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/survey/event/45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3",
+              "host": ["{{url}}"],
+              "path": [
+                "survey",
+                "event",
+                "45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/survey/event/45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "survey",
+                    "event",
+                    "45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "60"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3c-wOkzT6ZXBolosnPlAwsLzmOYr5Q\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 09:06:12 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Question Answer",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"client_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\r\n    \"event_id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"question_id\": \"df5e06f7-1935-428b-81fd-51282b578386\",\r\n    \"question\": \"Apakah sudah memiliki rumah?\",\r\n    \"text_answer\": \"Tidak\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/answer",
+              "host": ["{{url}}"],
+              "path": ["survey", "answer"]
+            }
+          },
+          "response": [
+            {
+              "name": "Question Answer",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"client_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\r\n    \"event_id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\r\n    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\r\n    \"question_id\": \"f04541a4-8b41-49f7-b18a-5b3baecba6d5\",\r\n    \"question\": \"Apakah sudah memiliki anak?\",\r\n    \"text_answer\": \"Memiliki anak laki-laki\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/answer",
+                  "host": ["{{url}}"],
+                  "path": ["survey", "answer"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "58"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3a-qGezOo04MzEeApKzvU/AblPyk9s\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 09:17:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data success saved\",\n    \"data\": null\n}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -2,19 +2,31 @@
 
 import { Op } from 'sequelize';
 import Model from './record.model';
+import Policy from '../policy/policy.model';
+import Client from '../client/client.model';
 
 export default class Respository {
   public list() {
     return Model.findAll({
-      where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
+      include: [
+        {
+          model: Policy,
+          as: 'policy',
+          required: false,
+        },
+        {
+          model: Client,
+          as: 'client',
+          required: false,
+        },
+      ],
     });
   }
 
   public index(data: any) {
     let query: Object = {
-      where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
@@ -22,7 +34,6 @@ export default class Respository {
       query = {
         ...query,
         where: {
-          status: { [Op.ne]: 9 },
           [Op.or]: [
             { menu_name: { [Op.like]: `%${data?.keyword}%` } },
             { module_name: { [Op.like]: `%${data?.keyword}%` } },
@@ -30,15 +41,38 @@ export default class Respository {
         },
       };
     }
-    return Model.findAndCountAll(query);
+    return Model.findAndCountAll({
+      ...query,
+      include: [
+        {
+          model: Policy,
+          as: 'policy',
+          required: false,
+        },
+        {
+          model: Client,
+          as: 'client',
+          required: false,
+        },
+      ],
+    });
   }
 
   public detail(condition: any) {
     return Model.findOne({
-      where: {
-        ...condition,
-        status: { [Op.ne]: 9 },
-      },
+      where: condition,
+      include: [
+        {
+          model: Policy,
+          as: 'policy',
+          required: false,
+        },
+        {
+          model: Client,
+          as: 'client',
+          required: false,
+        },
+      ],
     });
   }
 

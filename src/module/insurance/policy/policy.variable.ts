@@ -1,7 +1,7 @@
 'use strict';
 
 export default class Variable {
-  public fillable() {
+  public policy() {
     const field: Array<string> = [
       'policy_number',
       'provider_company',
@@ -12,6 +12,7 @@ export default class Variable {
       'issued_date',
       'premi_currency',
       'premi_value',
+      'premi_off',
       'payment_term',
       'payment_term_unit',
       'insured_term',
@@ -19,6 +20,18 @@ export default class Variable {
       'due_date',
       'seller_name',
       'notes',
+      'status',
+    ];
+    return field;
+  }
+
+  public detail() {
+    const field: Array<string> = [
+      'policy_id',
+      'unit_link',
+      'fund',
+      'cash_value',
+      'benefit',
     ];
     return field;
   }

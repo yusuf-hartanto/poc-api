@@ -1,5 +1,7 @@
 'use strict';
 
+import Form from './form.model';
+import Event from './event.model';
 import { v4 as uuidv4 } from 'uuid';
 import { DataTypes } from 'sequelize';
 import conn from '../../config/database';
@@ -55,5 +57,7 @@ Model.beforeCreate(
   (survey_form_answer_value: { id: string }) =>
     (survey_form_answer_value.id = uuidv4())
 );
+Model.belongsTo(Event, { as: 'event', foreignKey: 'event_id' });
+Model.belongsTo(Form, { as: 'form', foreignKey: 'question_id' });
 
 export default Model;
