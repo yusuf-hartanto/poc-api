@@ -39,7 +39,7 @@ export default class Controller {
       const navigation = nestedChildren(result);
       return response.success('Data navigation', navigation, res);
     } catch (err: any) {
-      return helper.catchError(`sendmail: ${err?.message}`, 500, res);
+      return helper.catchError(`navigation: ${err?.message}`, 500, res);
     }
   }
 

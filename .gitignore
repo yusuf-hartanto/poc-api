@@ -3,8 +3,9 @@
 /.env
 /package-lock.json
 /tmp
+/config/config.json
 # exclude everything
 /public/uploads/*
 
 # exception to the rule
-!/public/uploads/.gitkeep 
+!/public/uploads/.gitkeep

@@ -18,11 +18,6 @@
     "db:seed": "ts-node ./node_modules/sequelize-cli/lib/sequelize db:seed:all",
     "db:seed-undo": "ts-node ./node_modules/sequelize-cli/lib/sequelize db:seed:undo:all"
   },
-  "sequelize": {
-    "config": "config/config.json",
-    "migrations-path": "migrations",
-    "seeders-path": "seeders"
-  },
   "keywords": [],
   "author": "alpha cipta teknologi",
   "license": "ISC",
@@ -61,6 +56,7 @@
     "querystring": "^0.2.1",
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2",
+    "sequelize-typescript": "^2.1.6",
     "sharp": "^0.33.5",
     "tele-sender": "^1.0.2",
     "ts-node": "^10.9.2",

@@ -1,12 +1,12 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
-import { datasurvey } from '../config/data/survey';
-import Model from '../src/module/survey/event.model';
+import { datasurvey } from '../data/survey';
+import Model from '../../module/survey/event.model';
 import { QueryInterface, Sequelize } from 'sequelize';
-import ModelForm from '../src/module/survey/form.model';
-import ModelFormAnswer from '../src/module/survey/form.answer.model';
-import { repository as repoResource } from '../src/module/app/resource/resource.repository';
+import ModelForm from '../../module/survey/form.model';
+import ModelFormAnswer from '../../module/survey/form.answer.model';
+import { repository as repoResource } from '../../module/app/resource/resource.repository';
 
 type Migration = (
   queryInterface: QueryInterface,
