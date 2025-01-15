@@ -7,14 +7,14 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
-
 # Copy the rest of the application code
 COPY . .
 
 COPY wait-for-it.sh /usr/bin/wait-for-it
 RUN chmod +x /usr/bin/wait-for-it
+
+# Install dependencies
+RUN npm install
 
 # Build the application
 RUN npm run build
@@ -24,3 +24,4 @@ EXPOSE 5000
 
 # Define the default command
 CMD ["npm", "start"]
+#CMD ["tail", "-f", "/dev/null"]

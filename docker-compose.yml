@@ -1,20 +1,17 @@
-version: '3.8'
-  
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  poc-api:
+    image: poc-api:latest
+    pull_policy: if_not_present
     ports:
       - "5000:5000"
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+    #volumes:
+    #  - .:/usr/src/app
+    #  - /usr/src/app/node_modules
     environment:
       DB_HOST: db
       DB_NAME: poc
       DB_USER: root
-      DB_PASS: 
+      DB_PASS:
     depends_on:
       - db
     command: >
@@ -30,7 +27,7 @@ services:
     ports:
       - "3336:3336"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data_volume:/var/lib/mysql
 
 volumes:
-  db_data:
+  db_data_volume:
