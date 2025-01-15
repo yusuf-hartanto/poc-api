@@ -7,8 +7,8 @@ services:
     environment:
       DB_HOST: db-poc.dev-alphact.internal
       DB_NAME: dbpoc
-      DB_USER: heimdall-db
-      DB_PASS: mh8BgLKInh/OZuUIZSqy6e2s
+      DB_USER: 'heimdall-db'
+      DB_PASSWORD: 'mh8BgLKInh/OZuUIZSqy6e2s'
       DB_DEBUG: false
       PATH_ASSET: public/uploads
       BASE_URL: http://127.0.0.1:5000
