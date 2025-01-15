@@ -3,9 +3,6 @@
 import { QueryInterface } from 'sequelize';
 
 export const up = async (queryInterface: QueryInterface) => {
-  await queryInterface.sequelize.query(
-    `DROP TABLE IF EXISTS insurance_record;`
-  );
   await queryInterface.sequelize.query(`
     CREATE TABLE insurance_record (
       id varchar(50) NOT NULL,
@@ -24,9 +21,6 @@ export const up = async (queryInterface: QueryInterface) => {
 };
 
 export const down = async (queryInterface: QueryInterface) => {
-  await queryInterface.sequelize.query(
-    `DROP TABLE IF EXISTS insurance_policy;`
-  );
   await queryInterface.sequelize.query(
     `DROP TABLE IF EXISTS insurance_record;`
   );
