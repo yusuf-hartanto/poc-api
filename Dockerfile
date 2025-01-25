@@ -24,4 +24,3 @@ EXPOSE 5000
 
 # Define the default command
 CMD ["npm", "start"]
-#CMD ["tail", "-f", "/dev/null"]

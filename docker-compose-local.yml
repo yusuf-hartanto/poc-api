@@ -1,0 +1,30 @@
+services:
+  poc-api:
+    image: poc-api:latest
+    pull_policy: if_not_present
+    ports:
+      - '5000:5000'
+    environment:
+      DB_HOST: db
+      DB_NAME: poc
+      DB_USER: root
+      DB_PASS:
+    depends_on:
+      - db
+    command: >
+      sh -c "npm run db:migrate && npm start"
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_poc
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    ports:
+      - '3336:3336'
+    volumes:
+      - db_data_volume:/var/lib/mysql
+
+volumes:
+  db_data_volume:
