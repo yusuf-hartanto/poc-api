@@ -4,9 +4,12 @@ import { Op } from 'sequelize';
 import Model from './client.model';
 
 export default class Respository {
-  public list() {
+  public list(condition: any) {
     return Model.findAll({
-      where: { status: { [Op.ne]: 9 } },
+      where: {
+        ...condition,
+        status: { [Op.ne]: 9 },
+      },
       order: [['created_date', 'DESC']],
     });
   }
@@ -22,6 +25,32 @@ export default class Respository {
       query = {
         ...query,
         where: {
+          status: { [Op.ne]: 9 },
+          [Op.or]: [
+            { name: { [Op.like]: `%${data?.keyword}%` } },
+            { relation_name: { [Op.like]: `%${data?.keyword}%` } },
+          ],
+        },
+      };
+    }
+    return Model.findAndCountAll(query);
+  }
+
+  public relation(data: any) {
+    let query: Object = {
+      where: {
+        relation_id: '00000000-0000-0000-0000-000000000000',
+        status: { [Op.ne]: 9 },
+      },
+      order: [['created_date', 'DESC']],
+      offset: data?.offset,
+      limit: data?.limit,
+    };
+    if (data?.keyword !== undefined && data?.keyword != null) {
+      query = {
+        ...query,
+        where: {
+          relation_id: '00000000-0000-0000-0000-000000000000',
           status: { [Op.ne]: 9 },
           [Op.or]: [
             { name: { [Op.like]: `%${data?.keyword}%` } },

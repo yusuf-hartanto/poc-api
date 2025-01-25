@@ -7,6 +7,7 @@ import { response } from '../../helpers/response';
 import { helperauth } from '../../helpers/auth.helper';
 import { Request, Response, NextFunction } from 'express';
 import { repository } from '../app/resource/resource.repository';
+import { repository as repoRoleMenu } from '../app/role.menu/role.menu.respository';
 
 dotenv.config();
 type RequestBody<T> = Request<{}, {}, T>;
@@ -151,6 +152,28 @@ export default class Middleware {
       req.user = null;
       next();
     }
+  }
+
+  public checkAccess(role: string) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const { role_name } = req?.user;
+        const role_menu: any = await repoRoleMenu.detailRole({
+          role_name: { [Op.like]: `%${role_name}%` },
+        });
+        const ability = role_menu?.dataValues?.menu.find(
+          (rm: any) => rm?.menu?.menu_name.toLowerCase() === role.toLowerCase()
+        );
+
+        if (!ability && role_name !== 'administrator')
+          return response.failed(`Sorry! You don't have access.`, 400, res);
+
+        next();
+        return;
+      } catch (err: any) {
+        return helper.catchError(`check access: ${err?.message}`, 400, res);
+      }
+    };
   }
 }
 

@@ -1,15 +1,22 @@
 'use strict';
 
+import dotenv from 'dotenv';
+import { Op } from 'sequelize';
 import { variable } from './client.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
 import { repository } from './client.respository';
+import { transformer } from './client.transformer';
 import { response } from '../../../helpers/response';
+import { repository as repoRole } from '../../app/role/role.respository';
+import { repository as repoResource } from '../../app/resource/resource.repository';
+
+dotenv.config();
 
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
-      const result = await repository.list();
+      const result = await repository.list({});
       if (result?.length < 1)
         return response.failed('Data not found', 404, res);
       return response.success('list data client', result, res);
@@ -39,6 +46,28 @@ export default class Controller {
     }
   }
 
+  public async relation(req: Request, res: Response) {
+    try {
+      const limit: any = req?.query?.perPage || 10;
+      const offset: any = req?.query?.page || 1;
+      const keyword: any = req?.query?.q;
+      const { count, rows } = await repository.relation({
+        limit: parseInt(limit),
+        offset: parseInt(limit) * (parseInt(offset) - 1),
+        keyword: keyword,
+      });
+      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      const clients = await transformer.relation(rows);
+      return response.success(
+        'Data client',
+        { total: count, values: clients },
+        res
+      );
+    } catch (err: any) {
+      return helper.catchError(`client relation: ${err?.message}`, 500, res);
+    }
+  }
+
   public async detail(req: Request, res: Response) {
     try {
       const id: string = req.params.id || '';
@@ -54,16 +83,23 @@ export default class Controller {
   }
 
   public async create(req: Request, res: Response) {
+    let confirm_hash: string = '';
+    let username: string = '';
+    let pass: string = helper.makeid(10);
+    let relationId: string = '';
+
     try {
-      const data: Object = helper.only(variable.fillable(), req?.body);
-      const { relation_id, relation_name } = req?.body;
-      const relationId: string =
+      const { relation_id, relation_name, name, dob, age, contact_number } =
+        req?.body;
+      relationId =
         relation_id && relation_id != undefined
           ? relation_id
           : '00000000-0000-0000-0000-000000000000';
       const relationName: string =
         relation_name && relation_name != undefined ? relation_name : null;
-      await repository.create({
+
+      const data: Object = helper.only(variable.fillable(), req?.body);
+      const client = await repository.create({
         payload: {
           ...data,
           relation_id: relationId,
@@ -71,6 +107,39 @@ export default class Controller {
           created_by: req?.user?.id,
         },
       });
+
+      if (relationId == '00000000-0000-0000-0000-000000000000') {
+        username = name.toLowerCase().replace(/ /g, '');
+        const checkUsername = await repoResource.check({
+          username: username,
+        });
+        if (checkUsername) username = username + helper.random(100, 999);
+
+        const role = await repoRole.detail({
+          role_name: { [Op.like]: '%public%' },
+        });
+
+        // create resource
+        confirm_hash = await helper.hashIt(username, 6);
+        const password: string = await helper.hashIt(pass);
+        await repoResource.create({
+          payload: {
+            client_id: client?.getDataValue('id') || null,
+            role_id: role?.getDataValue('role_id') || null,
+            username: username,
+            email: `${pass}@poc.com`,
+            password: password,
+            full_name: name || null,
+            date_of_birth: dob || null,
+            usia: age || 0,
+            telepon: contact_number || null,
+            status: 'A',
+            confirm_hash: confirm_hash,
+            created_by: req?.user?.id || null,
+          },
+        });
+      }
+
       return response.success('Data success saved', null, res);
     } catch (err: any) {
       return helper.catchError(`client create: ${err?.message}`, 500, res);

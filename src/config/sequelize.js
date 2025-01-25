@@ -1,9 +1,9 @@
 'use strict';
 
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
-  development : {
+  development: {
     dialect: 'mysql',
     host: process.env.DB_HOST || '127.0.0.1',
     port: +(process.env.DB_PORT || 3306),
@@ -16,5 +16,5 @@ module.exports = {
       acquire: 30000,
       idle: 10000,
     },
-  }
+  },
 };
