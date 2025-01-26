@@ -6687,6 +6687,263 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Area",
+      "item": [
+        {
+          "name": "Province",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/province",
+              "host": ["{{url}}"],
+              "path": ["area", "province"]
+            }
+          },
+          "response": [
+            {
+              "name": "Province",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/province",
+                  "host": ["{{url}}"],
+                  "path": ["area", "province"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2651"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"a5b-1+1jr1aGyPRO3mrTGJhRzmn+pIg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:38:03 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data province\",\n    \"data\": [\n        {\n            \"id\": \"067b1025-5266-4b40-ae4b-65f56eb00a39\",\n            \"name\": \"KEPULAUAN BANGKA BELITUNG\"\n        },\n        {\n            \"id\": \"06a95572-ecaf-48f9-b2fe-f87a122ff532\",\n            \"name\": \"PAPUA PEGUNUNGAN\"\n        },\n        {\n            \"id\": \"0a78ac49-c23f-4178-bc4d-ec8d3ee53ad3\",\n            \"name\": \"NUSA TENGGARA BARAT\"\n        },\n        {\n            \"id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"JAWA BARAT\"\n        },\n        {\n            \"id\": \"333abebb-6794-42a3-8351-ce2a1bcbf56b\",\n            \"name\": \"BENGKULU\"\n        },\n        {\n            \"id\": \"3d925c5a-d27e-4e8e-bf5d-27e4dd837436\",\n            \"name\": \"GORONTALO\"\n        },\n        {\n            \"id\": \"44200847-be90-4e41-aeb9-65af440c5867\",\n            \"name\": \"PAPUA BARAT\"\n        },\n        {\n            \"id\": \"5285528a-e27b-4ec4-87ec-60be4b84466b\",\n            \"name\": \"SULAWESI TENGGARA\"\n        },\n        {\n            \"id\": \"56fe30fd-6699-4fdc-ae85-c375a68115c8\",\n            \"name\": \"KALIMANTAN SELATAN\"\n        },\n        {\n            \"id\": \"5bb91963-e8c9-4dd1-bc6d-7d1772cb6755\",\n            \"name\": \"SULAWESI BARAT\"\n        },\n        {\n            \"id\": \"5d5ac9bd-b653-4579-a743-63eed0d71c76\",\n            \"name\": \"ACEH\"\n        },\n        {\n            \"id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n            \"name\": \"BALI\"\n        },\n        {\n            \"id\": \"67aa2a6d-4abe-4a1f-8c7d-93ef892c6128\",\n            \"name\": \"KEPULAUAN RIAU\"\n        },\n        {\n            \"id\": \"682d098e-249d-4836-93aa-6c64f2161c7d\",\n            \"name\": \"KALIMANTAN TENGAH\"\n        },\n        {\n            \"id\": \"688c762e-d070-4f61-ad7f-16ac6c799909\",\n            \"name\": \"RIAU\"\n        },\n        {\n            \"id\": \"6c6df784-735a-4b2c-b9cb-438552f317e0\",\n            \"name\": \"KALIMANTAN UTARA\"\n        },\n        {\n            \"id\": \"6c97cd68-3c8f-45db-ac4c-7a829691bbf4\",\n            \"name\": \"SULAWESI TENGAH\"\n        },\n        {\n            \"id\": \"7f30b09e-27a4-4a76-9487-29e9695120f4\",\n            \"name\": \"JAMBI\"\n        },\n        {\n            \"id\": \"80bc8978-70bd-4801-8091-ced23f458d94\",\n            \"name\": \"SUMATERA BARAT\"\n        },\n        {\n            \"id\": \"8b619707-5f20-42ba-957b-25323db6143e\",\n            \"name\": \"SUMATERA SELATAN\"\n        },\n        {\n            \"id\": \"8ff8361f-48e0-4b1c-85df-063eb491bdbb\",\n            \"name\": \"MALUKU UTARA\"\n        },\n        {\n            \"id\": \"9288fc77-a1b2-4fee-95c4-d2d418e88dcf\",\n            \"name\": \"NUSA TENGGARA TIMUR\"\n        },\n        {\n            \"id\": \"a29b63e0-3ca6-420a-8570-da3cd267a62a\",\n            \"name\": \"KALIMANTAN BARAT\"\n        },\n        {\n            \"id\": \"a7e71eff-a5c7-4155-9dea-e75b3e8d6888\",\n            \"name\": \"PAPUA BARAT DAYA\"\n        },\n        {\n            \"id\": \"aa5300d8-90c5-4f6b-baff-588705e3c6f6\",\n            \"name\": \"DKI JAKARTA\"\n        },\n        {\n            \"id\": \"ab6e96fb-6475-401f-886a-e922119871d0\",\n            \"name\": \"DI YOGYAKARTA\"\n        },\n        {\n            \"id\": \"acf02d47-8421-4bce-871c-d1657a6d5f06\",\n            \"name\": \"SULAWESI UTARA\"\n        },\n        {\n            \"id\": \"b721b6fd-5570-43e7-8032-fb2273532ef4\",\n            \"name\": \"PAPUA\"\n        },\n        {\n            \"id\": \"bd294fc0-8ad1-4e1e-be79-debc10290ee9\",\n            \"name\": \"JAWA TENGAH\"\n        },\n        {\n            \"id\": \"c177b5a5-ddb1-4692-82fb-cacc7208e05c\",\n            \"name\": \"KALIMANTAN TIMUR\"\n        },\n        {\n            \"id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n            \"name\": \"JAWA TIMUR\"\n        },\n        {\n            \"id\": \"c72db554-401c-4f68-b38f-30a9a7465063\",\n            \"name\": \"SUMATERA UTARA\"\n        },\n        {\n            \"id\": \"ce182588-8ad0-4164-bb9d-e2f766dba8e2\",\n            \"name\": \"LAMPUNG\"\n        },\n        {\n            \"id\": \"cfb32df3-dad3-491e-a958-d7a75c6d19eb\",\n            \"name\": \"MALUKU\"\n        },\n        {\n            \"id\": \"e942e3b0-b727-4b36-8fcc-89048618bdc6\",\n            \"name\": \"SULAWESI SELATAN\"\n        },\n        {\n            \"id\": \"ec3dd4be-7b1e-4fb8-b54c-cb97f7d62bb0\",\n            \"name\": \"BANTEN\"\n        },\n        {\n            \"id\": \"f5c2f166-c663-411b-9817-5891f4bc58b3\",\n            \"name\": \"PAPUA SELATAN\"\n        },\n        {\n            \"id\": \"fe1e1829-d77c-4cfc-ae59-f7d98a47b332\",\n            \"name\": \"PAPUA TENGAH\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Regency",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/regency/12c7fe8f-4e14-46c7-b379-663794784146",
+              "host": ["{{url}}"],
+              "path": [
+                "area",
+                "regency",
+                "12c7fe8f-4e14-46c7-b379-663794784146"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Regency",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/regency/12c7fe8f-4e14-46c7-b379-663794784146",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "area",
+                    "regency",
+                    "12c7fe8f-4e14-46c7-b379-663794784146"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "3558"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"de6-ceZJZPm9kF4uDVwsLq+ZQ9YpTyU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:39:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data regency\",\n    \"data\": [\n        {\n            \"id\": \"0c995f63-29e9-4c9a-b0f9-3c521a74e7b7\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA CIMAHI\"\n        },\n        {\n            \"id\": \"10eee177-a44a-4a66-a39f-8ccd66992218\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIAMIS\"\n        },\n        {\n            \"id\": \"185b3c18-e247-4a9d-83ad-b84efccf926b\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BANJAR\"\n        },\n        {\n            \"id\": \"19ee4d08-4dab-4231-80bf-9d762324be89\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN TASIKMALAYA\"\n        },\n        {\n            \"id\": \"20c04e08-eac4-412f-8b54-73aa660c9b06\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN INDRAMAYU\"\n        },\n        {\n            \"id\": \"24d98e69-0f07-4883-902d-8e3077a70422\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BOGOR\"\n        },\n        {\n            \"id\": \"25d32932-ed2e-47f7-8da3-5580cbb3c076\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN KUNINGAN\"\n        },\n        {\n            \"id\": \"2d1444f2-edbc-4a7e-a9d8-f4a9553e9fe2\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA CIREBON\"\n        },\n        {\n            \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BANDUNG\"\n        },\n        {\n            \"id\": \"4075357c-6831-4280-8890-28640fd5af45\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN PURWAKARTA\"\n        },\n        {\n            \"id\": \"42bd8c98-4c5b-465f-834d-7046ce1b3b1a\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA TASIKMALAYA\"\n        },\n        {\n            \"id\": \"6c476b02-bab7-48ca-8985-289dd4a2238f\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BANDUNG\"\n        },\n        {\n            \"id\": \"724f7e17-d87e-46c0-818f-c43a7ea1f8bf\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN GARUT\"\n        },\n        {\n            \"id\": \"79d8e2df-5d7e-4dca-a2e4-e138267f4b7e\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUKABUMI\"\n        },\n        {\n            \"id\": \"7ce45f2b-1dc4-47dc-964c-cb1d633534e2\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN PANGANDARAN\"\n        },\n        {\n            \"id\": \"7e128932-ad7a-4e3b-990e-fa7c408ad10f\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BANDUNG BARAT\"\n        },\n        {\n            \"id\": \"8e1aaaee-a9c9-481b-beab-055160fe3307\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BEKASI\"\n        },\n        {\n            \"id\": \"99ea3eb7-1cb8-4195-84b7-e89c8c36c4fe\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUBANG\"\n        },\n        {\n            \"id\": \"9ef33295-da87-471a-81f4-b6260ce2e35e\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIANJUR\"\n        },\n        {\n            \"id\": \"b7b47be8-a77a-40a3-bb27-4212dde6b3ab\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN KARAWANG\"\n        },\n        {\n            \"id\": \"b7f2230a-1479-47a5-87dc-5829d0bcbe84\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BOGOR\"\n        },\n        {\n            \"id\": \"c6b84ca7-a629-4e8b-aaac-533f8e2c8ea8\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BEKASI\"\n        },\n        {\n            \"id\": \"cc2f7d85-8ee9-4662-9831-e62a69d54497\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIREBON\"\n        },\n        {\n            \"id\": \"d8a797b2-11d4-4abb-9906-b19de4c39d60\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUMEDANG\"\n        },\n        {\n            \"id\": \"d923a5e3-8682-4a66-8b6a-35c660141019\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN MAJALENGKA\"\n        },\n        {\n            \"id\": \"f2565498-fb6b-458e-aa38-27415a816c70\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA DEPOK\"\n        },\n        {\n            \"id\": \"f9ea44d2-d1f4-42a8-be7d-b66c20404917\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA SUKABUMI\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Regency Data",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/regency?perPage=10&page=1&q=ban",
+              "host": ["{{url}}"],
+              "path": ["area", "regency"],
+              "query": [
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "q",
+                  "value": "ban"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Regency Data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/regency?perPage=10&page=1&q=ban",
+                  "host": ["{{url}}"],
+                  "path": ["area", "regency"],
+                  "query": [
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "q",
+                      "value": "ban"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1378"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"562-MQ8nIdUTxErkjQmnatdf15aYyNI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:40:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data regency\",\n    \"data\": {\n        \"total\": 34,\n        \"values\": [\n            {\n                \"id\": \"0ed1594d-d0bf-45fe-aaf8-86176c366af7\",\n                \"area_province_id\": \"bd294fc0-8ad1-4e1e-be79-debc10290ee9\",\n                \"name\": \"KABUPATEN BANYUMAS\"\n            },\n            {\n                \"id\": \"185b3c18-e247-4a9d-83ad-b84efccf926b\",\n                \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"KOTA BANJAR\"\n            },\n            {\n                \"id\": \"1967cf94-7abf-492c-a103-f75270b941c9\",\n                \"area_province_id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n                \"name\": \"KABUPATEN BANGKALAN\"\n            },\n            {\n                \"id\": \"1aae1264-3660-4b20-8472-6079f7e72801\",\n                \"area_province_id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n                \"name\": \"KABUPATEN JOMBANG\"\n            },\n            {\n                \"id\": \"257968ac-a3a2-46b0-afa1-237c105302f5\",\n                \"area_province_id\": \"ce182588-8ad0-4164-bb9d-e2f766dba8e2\",\n                \"name\": \"KOTA BANDAR LAMPUNG\"\n            },\n            {\n                \"id\": \"278e6d26-4c41-476f-91e6-8be4b972092c\",\n                \"area_province_id\": \"5d5ac9bd-b653-4579-a743-63eed0d71c76\",\n                \"name\": \"KOTA BANDA ACEH\"\n            },\n            {\n                \"id\": \"344dbee6-a5ef-4eee-a0c5-7342368a7d64\",\n                \"area_province_id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n                \"name\": \"KABUPATEN BANGLI\"\n            },\n            {\n                \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n                \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"KABUPATEN BANDUNG\"\n            },\n            {\n                \"id\": \"48f47776-f6f9-49c3-8b50-642d1338174d\",\n                \"area_province_id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n                \"name\": \"KABUPATEN TABANAN\"\n            },\n            {\n                \"id\": \"51aa96ef-bc9b-474c-8c77-f6881cb1dcaa\",\n                \"area_province_id\": \"e942e3b0-b727-4b36-8fcc-89048618bdc6\",\n                \"name\": \"KABUPATEN BANTAENG\"\n            }\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
