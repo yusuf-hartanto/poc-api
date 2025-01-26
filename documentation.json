@@ -925,6 +925,86 @@
               "body": "{\n    \"status\": true,\n    \"message\": \"Send email success\",\n    \"data\": null\n}"
             }
           ]
+        },
+        {
+          "name": "Update Currency",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/update-currency/USD",
+              "host": ["{{url}}"],
+              "path": ["update-currency", "USD"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Currency",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{url}}/update-currency/USD",
+                  "host": ["{{url}}"],
+                  "path": ["update-currency", "USD"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "63"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3f-1RyG2DEeU9BP5ynWWJUglhfwaJs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:53:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success update currency\",\n    \"data\": null\n}"
+            }
+          ]
         }
       ]
     },
@@ -6467,6 +6547,142 @@
               ],
               "cookie": [],
               "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"3b94f439-a232-4023-a27e-294d4c01352e\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"pensiun\",\n                        \"start_date\": \"2038-01-01\",\n                        \"end_date\": \"2051-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit Dijamin",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=dijamin",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "dijamin"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit Dijamin",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=dijamin",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "dijamin"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1176"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"498-Jzc81xfDWEtFTUR4t12nzVHGYN4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:27:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"f6db8ba1-5cdf-4383-b65a-ca86520db87c\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"dijamin\",\n                        \"start_date\": null,\n                        \"end_date\": \"2052-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            }\n        ]\n    }\n}"
             }
           ]
         }

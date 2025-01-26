@@ -296,10 +296,11 @@ export default class Helper {
     return result;
   }
 
-  public async fetchLatestCurrency() {
+  public async fetchLatestCurrency(currency: string = 'USD') {
+    let message: string = 'success update currency';
     try {
       const response = await axios.get(
-        'https://api.exchangerate-api.com/v4/latest/USD'
+        `https://api.exchangerate-api.com/v4/latest/${currency}`
       );
       const { base, date, time_last_updated, rates } = response?.data;
       if (rates) {
@@ -334,12 +335,19 @@ export default class Helper {
             });
           }
         }
-        await this.sendNotif('success update currency');
+      } else {
+        message = 'failed update currency: base not found';
       }
-      await this.sendNotif('failed update currency: base not found');
     } catch (err: any) {
-      await this.sendNotif(`failed update currency: ${err?.message}`);
+      message = `failed update currency: ${err?.message}`;
     }
+
+    try {
+      await this.sendNotif(message);
+    } catch (err: any) {
+      await this.sendNotif(`failed sendNotif update currency: ${err?.message}`);
+    }
+    return message;
   }
 }
 

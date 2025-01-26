@@ -195,6 +195,17 @@ export default class Controller {
       return helper.catchError(`dashboard: ${err?.message}`, 500, res);
     }
   }
+
+  public async updateCurrency(req: Request, res: Response) {
+    try {
+      const currency: string = req.params.currency || '';
+      if (!currency) return response.failed('currency is required', 422, res);
+      const result = await helper.fetchLatestCurrency(currency);
+      return response.success(result, null, res);
+    } catch (err: any) {
+      return helper.catchError(`update currency: ${err?.message}`, 500, res);
+    }
+  }
 }
 
 export const global = new Controller();
