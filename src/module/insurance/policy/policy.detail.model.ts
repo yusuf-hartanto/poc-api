@@ -27,6 +27,12 @@ const Model = conn.sequelize.define(
     benefit: {
       type: DataTypes.STRING,
     },
+    start_date: {
+      type: DataTypes.DATE,
+    },
+    end_date: {
+      type: DataTypes.DATE,
+    },
     created_by: {
       type: DataTypes.STRING,
     },

@@ -5,31 +5,42 @@ import Model from './policy.model';
 import Detail from './policy.detail.model';
 
 export default class Respository {
-  public list() {
+  public list(condition: any, benefit: string = '') {
+    let detailWhere = {};
+    if (benefit) detailWhere = { where: { benefit: benefit } };
+
     return Model.findAll({
-      where: { status: { [Op.ne]: 9 } },
+      where: {
+        ...condition,
+        status: { [Op.ne]: 9 },
+      },
       order: [['created_date', 'DESC']],
       include: [
         {
           model: Detail,
           as: 'detail',
-          required: false,
+          required: detailWhere ? true : false,
+          ...detailWhere,
         },
       ],
     });
   }
 
-  public index(data: any) {
+  public index(data: any, withDetail: boolean = false, benefit: string = '') {
     let query: Object = {
-      where: { status: { [Op.ne]: 9 } },
+      where: {
+        ...data?.condition,
+        status: { [Op.ne]: 9 },
+      },
       order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {
+          ...data?.condition,
           status: { [Op.ne]: 9 },
           [Op.or]: [
             { provider_company: { [Op.like]: `%${data?.keyword}%` } },
@@ -38,10 +49,29 @@ export default class Respository {
         },
       };
     }
+    if (withDetail) {
+      let detailWhere = {};
+      if (benefit) detailWhere = { where: { benefit: benefit } };
+
+      query = {
+        ...query,
+        include: [
+          {
+            model: Detail,
+            as: 'detail',
+            required: detailWhere ? true : false,
+            ...detailWhere,
+          },
+        ],
+      };
+    }
     return Model.findAndCountAll(query);
   }
 
-  public detail(condition: any) {
+  public detail(condition: any, benefit: string = '') {
+    let detailWhere = {};
+    if (benefit) detailWhere = { where: { benefit: benefit } };
+
     return Model.findOne({
       where: {
         ...condition,
@@ -51,7 +81,8 @@ export default class Respository {
         {
           model: Detail,
           as: 'detail',
-          required: false,
+          required: detailWhere ? true : false,
+          ...detailWhere,
         },
       ],
     });

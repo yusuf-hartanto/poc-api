@@ -7,7 +7,7 @@ import { response } from '../../helpers/response';
 import { helperauth } from '../../helpers/auth.helper';
 import { Request, Response, NextFunction } from 'express';
 import { repository } from '../app/resource/resource.repository';
-import { repository as repoRoleMenu } from '../app/role.menu/role.menu.respository';
+import { repository as repoRoleMenu } from '../app/role.menu/role.menu.repository';
 
 dotenv.config();
 type RequestBody<T> = Request<{}, {}, T>;

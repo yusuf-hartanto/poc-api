@@ -1,6 +1,6 @@
 'use strict';
 
-import { repository } from '../role.menu/role.menu.respository';
+import { repository } from '../role.menu/role.menu.repository';
 
 export default class Transformer {
   public async list(data: any, withAbility: boolean = true) {

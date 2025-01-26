@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
 import { variable } from './param.global.variable';
 import { response } from '../../../helpers/response';
-import { repository } from './param.globalrespository';
+import { repository } from './param.global.repository';
 
 const date: string = helper.date();
 

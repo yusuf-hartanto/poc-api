@@ -3,10 +3,10 @@
 import { variable } from './survey.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
-import { repository } from './survey.respository';
+import { repository } from './survey.repository';
 import { response } from '../../helpers/response';
 import { transformer } from './survey.transformer';
-import { repository as repoClient } from '../insurance/client/client.respository';
+import { repository as repoClient } from '../insurance/client/client.repository';
 
 const date: string = helper.date();
 
@@ -50,9 +50,12 @@ export default class Controller {
 
   public async clientSurvey(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
+      let id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
         return response.failed(`id ${id} is not valid`, 400, res);
+
+      if (req?.user?.role_name != 'administrator' && req?.user?.client_id != id)
+        return response.failed('Data not found', 404, res);
 
       const result: Object | any = await repoClient.detailSurvey({ id });
       if (!result) return response.failed('Data not found', 404, res);

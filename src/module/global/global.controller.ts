@@ -1,10 +1,15 @@
 'use strict';
 
 import dotenv from 'dotenv';
+import moment from 'moment';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
+import { Op, fn, col, Sequelize } from 'sequelize';
 import { response } from '../../helpers/response';
-import { repository as RepoMenu } from '../app/menu/menu.respository';
+import { transformer } from './global.transformer';
+import { repository as RepoMenu } from '../app/menu/menu.repository';
+import { repository as repoPolicy } from '../insurance/policy/policy.repository';
+import { transformer as transformerPolicy } from '../insurance/policy/policy.transformer';
 
 dotenv.config();
 
@@ -80,6 +85,116 @@ export default class Controller {
       return helper.catchError(`sendmail: ${err?.message}`, 500, res);
     }
   };
+
+  public async summary(req: Request, res: Response) {
+    try {
+      let condition: any = {};
+      if (req?.user?.role_name != 'administrator')
+        condition = {
+          [Op.or]: [
+            { policy_holder: req?.user?.client_id },
+            { insured_holder: req?.user?.client_id },
+          ],
+        };
+
+      const jatuhTempo = await repoPolicy.list({
+        ...condition,
+        [Op.and]: [
+          {
+            issued_date: Sequelize.where(
+              fn('MONTH', col('issued_date')),
+              moment().format('M')
+            ),
+          },
+          {
+            issued_date: Sequelize.where(
+              fn('YEAR', col('issued_date')),
+              moment().format('YYYY')
+            ),
+          },
+          { premi_off: 'N' },
+        ],
+      });
+
+      const benefit = await repoPolicy.list(condition);
+      const result = await transformer.summary(jatuhTempo, benefit);
+      return response.success('Data summary', result, res);
+    } catch (err: any) {
+      return helper.catchError(`summary: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async dashboard(req: Request, res: Response) {
+    try {
+      const limit: any = req?.query?.perPage || 10;
+      const offset: any = req?.query?.page || 1;
+      const keyword: any = req?.query?.q;
+      const flag: any = req?.query?.flag;
+
+      let condition: any = {};
+      if (req?.user?.role_name != 'administrator')
+        condition = {
+          [Op.or]: [
+            { policy_holder: req?.user?.client_id },
+            { insured_holder: req?.user?.client_id },
+          ],
+        };
+
+      if (flag && flag == 'total_premi') {
+        condition = {
+          ...condition,
+          [Op.and]: [
+            {
+              issued_date: Sequelize.where(
+                fn('MONTH', col('issued_date')),
+                moment().format('M')
+              ),
+            },
+            {
+              issued_date: Sequelize.where(
+                fn('YEAR', col('issued_date')),
+                moment().format('YYYY')
+              ),
+            },
+            { premi_off: 'N' },
+          ],
+        };
+      }
+
+      let benefit: string = '';
+      if (
+        flag &&
+        ['up_jiwa', 'rs', 'penyakit_kritis', 'pensiun', 'dijamin'].includes(
+          flag
+        )
+      ) {
+        benefit = flag;
+      }
+
+      const { count, rows } = await repoPolicy.index(
+        {
+          limit: parseInt(limit),
+          offset: parseInt(limit) * (parseInt(offset) - 1),
+          keyword: keyword,
+          condition: condition,
+        },
+        true,
+        benefit
+      );
+      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      const policy = await transformerPolicy.list(rows);
+      return response.success(
+        'Data dashboard',
+        {
+          total: count,
+          values: policy,
+        },
+        res
+      );
+    } catch (err: any) {
+      return helper.catchError(`dashboard: ${err?.message}`, 500, res);
+    }
+  }
 }
 
 export const global = new Controller();

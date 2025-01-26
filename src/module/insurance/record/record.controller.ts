@@ -3,7 +3,7 @@
 import { variable } from './record.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './record.respository';
+import { repository } from './record.repository';
 import { response } from '../../../helpers/response';
 
 export default class Controller {

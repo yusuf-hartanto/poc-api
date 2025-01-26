@@ -16,19 +16,28 @@ export default class Respository {
 
   public index(data: any) {
     let query: Object = {
-      where: { status: { [Op.ne]: 9 } },
+      where: {
+        ...data?.condition,
+        status: { [Op.ne]: 9 },
+      },
       order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {
+          ...data?.condition,
           status: { [Op.ne]: 9 },
-          [Op.or]: [
-            { name: { [Op.like]: `%${data?.keyword}%` } },
-            { relation_name: { [Op.like]: `%${data?.keyword}%` } },
+          [Op.and]: [
+            ...(data?.condition[Op.and] ? data?.condition[Op.and] : []),
+            {
+              [Op.or]: [
+                { name: { [Op.like]: `%${data?.keyword}%` } },
+                { relation_name: { [Op.like]: `%${data?.keyword}%` } },
+              ],
+            },
           ],
         },
       };
@@ -46,7 +55,7 @@ export default class Respository {
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {

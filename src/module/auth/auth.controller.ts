@@ -9,7 +9,7 @@ import { helperauth } from '../../helpers/auth.helper';
 import { variable } from '../app/resource/resource.variable';
 import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
-import { repository as repoRole } from '../app/role/role.respository';
+import { repository as repoRole } from '../app/role/role.repository';
 
 dotenv.config();
 const date: string = helper.date();

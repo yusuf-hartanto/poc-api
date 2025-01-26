@@ -5,10 +5,10 @@ import { Op } from 'sequelize';
 import { variable } from './client.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './client.respository';
+import { repository } from './client.repository';
 import { transformer } from './client.transformer';
 import { response } from '../../../helpers/response';
-import { repository as repoRole } from '../../app/role/role.respository';
+import { repository as repoRole } from '../../app/role/role.repository';
 import { repository as repoResource } from '../../app/resource/resource.repository';
 
 dotenv.config();
@@ -16,7 +16,16 @@ dotenv.config();
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
-      const result = await repository.list({});
+      let condition: any = {};
+      if (req?.user?.role_name != 'administrator')
+        condition = {
+          [Op.or]: [
+            { id: req?.user?.client_id },
+            { relation_id: req?.user?.client_id },
+          ],
+        };
+
+      const result = await repository.list(condition);
       if (result?.length < 1)
         return response.failed('Data not found', 404, res);
       return response.success('list data client', result, res);
@@ -30,10 +39,21 @@ export default class Controller {
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
+
+      let condition: any = {};
+      if (req?.user?.role_name != 'administrator')
+        condition = {
+          [Op.or]: [
+            { id: req?.user?.client_id },
+            { relation_id: req?.user?.client_id },
+          ],
+        };
+
       const { count, rows } = await repository.index({
         limit: parseInt(limit),
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
+        condition: condition,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
       return response.success(

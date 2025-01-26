@@ -1,6 +1,6 @@
 'use strict';
 
-import { repository } from './client.respository';
+import { repository } from './client.repository';
 
 const nestedChild = async (data: any) => {
   const client = await repository.list({

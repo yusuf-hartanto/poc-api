@@ -32,6 +32,8 @@ export default class Variable {
       'fund',
       'cash_value',
       'benefit',
+      'start_date',
+      'end_date',
     ];
     return field;
   }
