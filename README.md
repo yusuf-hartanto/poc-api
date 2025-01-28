@@ -23,3 +23,5 @@
 ## Endpoint
 
     * documentation.json
+
+## Fun
