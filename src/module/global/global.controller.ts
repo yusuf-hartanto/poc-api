@@ -88,14 +88,24 @@ export default class Controller {
 
   public async summary(req: Request, res: Response) {
     try {
+      const client: any = req?.query?.client;
+      const role: string = req?.user?.role_name;
+
       let condition: any = {};
-      if (req?.user?.role_name != 'administrator')
-        condition = {
-          [Op.or]: [
-            { policy_holder: req?.user?.client_id },
-            { insured_holder: req?.user?.client_id },
-          ],
-        };
+      if (role != 'administrator') {
+        if (role == 'agent' && client) {
+          condition = {
+            [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
+          };
+        } else {
+          condition = {
+            [Op.or]: [
+              { policy_holder: req?.user?.client_id },
+              { insured_holder: req?.user?.client_id },
+            ],
+          };
+        }
+      }
 
       const jatuhTempo = await repoPolicy.list({
         ...condition,
@@ -126,19 +136,28 @@ export default class Controller {
 
   public async dashboard(req: Request, res: Response) {
     try {
+      const client: any = req?.query?.client;
+      const role: string = req?.user?.role_name;
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
       const flag: any = req?.query?.flag;
 
       let condition: any = {};
-      if (req?.user?.role_name != 'administrator')
-        condition = {
-          [Op.or]: [
-            { policy_holder: req?.user?.client_id },
-            { insured_holder: req?.user?.client_id },
-          ],
-        };
+      if (role != 'administrator') {
+        if (role == 'agent' && client) {
+          condition = {
+            [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
+          };
+        } else {
+          condition = {
+            [Op.or]: [
+              { policy_holder: req?.user?.client_id },
+              { insured_holder: req?.user?.client_id },
+            ],
+          };
+        }
+      }
 
       if (flag && flag == 'total_premi') {
         condition = {

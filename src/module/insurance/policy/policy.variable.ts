@@ -21,6 +21,9 @@ export default class Variable {
       'seller_name',
       'notes',
       'status',
+      'unit_link',
+      'fund',
+      'cash_value',
     ];
     return field;
   }

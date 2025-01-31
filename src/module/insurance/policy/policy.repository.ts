@@ -18,6 +18,14 @@ export default class Respository {
       include: [
         {
           model: Detail,
+          attributes: [
+            'id',
+            'policy_id',
+            'cash_value',
+            'benefit',
+            'start_date',
+            'end_date',
+          ],
           as: 'detail',
           required: detailWhere ? true : false,
           ...detailWhere,
@@ -58,11 +66,20 @@ export default class Respository {
         include: [
           {
             model: Detail,
+            attributes: [
+              'id',
+              'policy_id',
+              'cash_value',
+              'benefit',
+              'start_date',
+              'end_date',
+            ],
             as: 'detail',
             required: detailWhere ? true : false,
             ...detailWhere,
           },
         ],
+        distinct: true,
       };
     }
     return Model.findAndCountAll(query);
@@ -80,6 +97,14 @@ export default class Respository {
       include: [
         {
           model: Detail,
+          attributes: [
+            'id',
+            'policy_id',
+            'cash_value',
+            'benefit',
+            'start_date',
+            'end_date',
+          ],
           as: 'detail',
           required: detailWhere ? true : false,
           ...detailWhere,

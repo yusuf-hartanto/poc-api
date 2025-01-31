@@ -16,7 +16,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (req?.user?.role_name != 'administrator')
+      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { policy_holder: req?.user?.client_id },
@@ -76,6 +76,8 @@ export default class Controller {
           await repository.createDetail({
             payload: {
               ...dataDetail,
+              unit_link: req?.body?.unit_link || null,
+              fund: req?.body?.fund || null,
               policy_id: policy?.dataValues?.policy_id,
               created_by: req?.user?.id,
             },
@@ -120,6 +122,8 @@ export default class Controller {
             payload: {
               ...dataDetail,
               policy_id: id,
+              unit_link: req?.body?.unit_link || null,
+              fund: req?.body?.fund || null,
               created_by: req?.user?.id,
               modified_by: req?.user?.id,
             },

@@ -158,6 +158,7 @@ export default class Middleware {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { role_name } = req?.user;
+        console.warn(role_name);
         const role_menu: any = await repoRoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });

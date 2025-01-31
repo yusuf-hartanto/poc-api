@@ -76,7 +76,6 @@ export default class Transformer {
       if (dataBenefit?.detail?.length > 0) {
         for (let d in dataBenefit?.detail) {
           const detail: any = dataBenefit?.detail[d]?.dataValues;
-          console.warn(detail, parseFloat(detail?.cash_value), rateCurr);
           if (detail?.benefit == 'up_jiwa') {
             result.up_jiwa += parseFloat(detail?.cash_value) * rateCurr;
           } else if (detail?.benefit == 'rs') {

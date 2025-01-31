@@ -17,7 +17,7 @@ export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       let condition: any = {};
-      if (req?.user?.role_name != 'administrator')
+      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -41,7 +41,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (req?.user?.role_name != 'administrator')
+      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -71,13 +71,16 @@ export default class Controller {
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
+      const option: any = req?.query?.option;
+      const relation: any = req?.query?.relation;
       const { count, rows } = await repository.relation({
         limit: parseInt(limit),
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
+        relation: relation,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
-      const clients = await transformer.relation(rows);
+      const clients = await transformer.relation(rows, { option });
       return response.success(
         'Data client',
         { total: count, values: clients },
@@ -136,7 +139,7 @@ export default class Controller {
         if (checkUsername) username = username + helper.random(100, 999);
 
         const role = await repoRole.detail({
-          role_name: { [Op.like]: '%public%' },
+          role_name: { [Op.like]: '%client%' },
         });
 
         // create resource

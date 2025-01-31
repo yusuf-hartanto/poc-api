@@ -22,17 +22,38 @@ const nestedChild = async (data: any) => {
   return result;
 };
 
+const nestedChildOption = async (result: any, data: any) => {
+  const client = await repository.list({
+    relation_id: data?.id,
+  });
+
+  if (client && client?.length > 0) {
+    for (let i in client) {
+      result.push(client[i]?.dataValues);
+
+      await nestedChildOption(result, client[i]?.dataValues);
+    }
+  }
+  return result;
+};
+
 export default class Transformer {
-  public async relation(data: any) {
+  public async relation(data: any, flag: any) {
     let result: Array<object> = [];
     for (let i in data) {
-      const child = await nestedChild(data[i]?.dataValues);
+      if (flag && flag?.option == 1) {
+        result.push(data[i]?.dataValues);
 
-      const client: any = {
-        ...data[i]?.dataValues,
-        child,
-      };
-      result.push(client);
+        await nestedChildOption(result, data[i]?.dataValues);
+      } else {
+        const child = await nestedChild(data[i]?.dataValues);
+
+        const client: any = {
+          ...data[i]?.dataValues,
+          child,
+        };
+        result.push(client);
+      }
     }
     return result;
   }

@@ -46,9 +46,11 @@ export default class Respository {
   }
 
   public relation(data: any) {
+    const relation_id: string =
+      data?.relation || '00000000-0000-0000-0000-000000000000';
     let query: Object = {
       where: {
-        relation_id: '00000000-0000-0000-0000-000000000000',
+        relation_id,
         status: { [Op.ne]: 9 },
       },
       order: [['created_date', 'DESC']],
@@ -59,7 +61,7 @@ export default class Respository {
       query = {
         ...query,
         where: {
-          relation_id: '00000000-0000-0000-0000-000000000000',
+          relation_id,
           status: { [Op.ne]: 9 },
           [Op.or]: [
             { name: { [Op.like]: `%${data?.keyword}%` } },

@@ -113,7 +113,7 @@ export default class Controller {
       const only: Object = helper.only(variable.fillable(), req?.body);
 
       const role = await repoRole.detail({
-        role_name: { [Op.like]: '%public%' },
+        role_name: { [Op.like]: '%client%' },
       });
 
       const { province_id, regency_id } = req?.body;
