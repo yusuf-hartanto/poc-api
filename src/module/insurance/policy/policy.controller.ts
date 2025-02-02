@@ -16,7 +16,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+      if (!['administrator', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { policy_holder: req?.user?.client_id },

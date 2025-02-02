@@ -22,7 +22,7 @@ export default class Controller {
       const admin: string = role == 'administrator' ? '' : 'administrator';
 
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(role))
+      if (!['administrator', 'agent'].includes(role))
         condition['client_id'] = req?.user?.client_id;
 
       const { count, rows } = await repository.index(
@@ -69,7 +69,7 @@ export default class Controller {
       const admin: string = role == 'administrator' ? '' : 'administrator';
 
       let condition: any = { resource_id: id };
-      if (!['administrastor', 'agent'].includes(role))
+      if (!['administrator', 'agent'].includes(role))
         condition['client_id'] = req?.user?.client_id;
 
       const result: Object | any = await repository.detail(condition, admin);

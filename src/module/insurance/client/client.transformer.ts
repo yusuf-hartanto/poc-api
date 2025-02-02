@@ -38,6 +38,49 @@ const nestedChildOption = async (result: any, data: any) => {
 };
 
 export default class Transformer {
+  public async list(data: any) {
+    let result: Array<object> = [];
+    for (let i in data) {
+      let client: any = data[i]?.dataValues;
+
+      let relation: any = null;
+      if (
+        client?.relation_id &&
+        client?.relation_id != '00000000-0000-0000-0000-000000000000'
+      ) {
+        relation = await repository.detail({
+          id: client?.relation_id,
+        });
+      }
+
+      result.push({
+        ...client,
+        relation: relation,
+      });
+    }
+    return result;
+  }
+
+  public async detail(data: any) {
+    const client = data?.dataValues;
+    let result: any = client;
+
+    let relation: any = null;
+    if (
+      client?.relation_id &&
+      client?.relation_id != '00000000-0000-0000-0000-000000000000'
+    ) {
+      relation = await repository.detail({
+        id: client?.relation_id,
+      });
+    }
+
+    return {
+      ...result,
+      relation: relation,
+    };
+  }
+
   public async relation(data: any, flag: any) {
     let result: Array<object> = [];
     for (let i in data) {

@@ -17,7 +17,7 @@ export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+      if (!['administrator', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -28,7 +28,8 @@ export default class Controller {
       const result = await repository.list(condition);
       if (result?.length < 1)
         return response.failed('Data not found', 404, res);
-      return response.success('list data client', result, res);
+      const clients = await transformer.list(result);
+      return response.success('list data client', clients, res);
     } catch (err: any) {
       return helper.catchError(`client all-data: ${err?.message}`, 500, res);
     }
@@ -41,7 +42,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+      if (!['administrator', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -56,9 +57,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      const clients = await transformer.list(rows);
       return response.success(
         'Data client',
-        { total: count, values: rows },
+        { total: count, values: clients },
         res
       );
     } catch (err: any) {
@@ -99,7 +101,8 @@ export default class Controller {
 
       const result: Object | any = await repository.detail({ id });
       if (!result) return response.failed('Data not found', 404, res);
-      return response.success('Data client', result, res);
+      const client = await transformer.detail(result);
+      return response.success('Data client', client, res);
     } catch (err: any) {
       return helper.catchError(`client detail: ${err?.message}`, 500, res);
     }

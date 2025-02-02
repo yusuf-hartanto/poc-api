@@ -55,7 +55,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       if (
-        !['administrastor', 'agent'].includes(req?.user?.role_name) &&
+        !['administrator', 'agent'].includes(req?.user?.role_name) &&
         req?.user?.client_id != id
       )
         return response.failed('Data not found', 404, res);
