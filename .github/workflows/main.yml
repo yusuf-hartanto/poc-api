@@ -101,6 +101,7 @@ jobs:
         echo "Get environment to passing into github env"
         echo "ECR_REGISTRY=`echo ${{ secrets.ECR_REGISTRY }}`" >> $GITHUB_ENV
         echo "ECR_REPOSITORY=`echo ${{ secrets.ECR_REPOSITORY }}`" >> $GITHUB_ENV
+        echo "DOLLAR='$'" >> $GITHUB_ENV
         echo "ENVIRONMENT=`echo ${{ needs.build-and-push.outputs.ENVIRONMENT }}`" >> $GITHUB_ENV
         echo "IMAGE_TAG=`echo ${{ needs.build-and-push.outputs.IMAGE_TAG }}`" >> $GITHUB_ENV
         echo "DB_HOST=`echo ${{ secrets.DB_HOST }}`" >> $GITHUB_ENV
@@ -127,7 +128,7 @@ jobs:
         cat <<EOF > ssm-params.json
         {
           "commands": [
-            "sudo -u heimdall bash -c 'cd /home/heimdall/apps && mkdir -p poc-app-api && echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && chown heimdall:heimdall docker-compose.yml && aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && docker-compose down && docker image prune -a --force --filter=\"label=app-poc-api\" && docker-compose up -d'"
+            "sudo -u heimdall bash -c 'cd /home/heimdall/apps && mkdir -p poc-app-api && cd poc-app-api && echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && chown heimdall:heimdall docker-compose.yml && aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && docker-compose down && docker image prune -a --force --filter=\"label=app-poc-api\" && docker-compose up -d'"
           ]
         }
         EOF
