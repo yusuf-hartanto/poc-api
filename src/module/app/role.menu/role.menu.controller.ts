@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from 'express';
 import { response } from '../../../helpers/response';
 import { helper } from '../../../helpers/helper';
-import { repository } from './role.menu.respository';
+import { repository } from './role.menu.repository';
 import { transformer } from './role.menu.transformer';
 
 export default class Controller {

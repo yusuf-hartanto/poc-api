@@ -3,7 +3,7 @@
 import { variable } from './menu.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './menu.respository';
+import { repository } from './menu.repository';
 import { response } from '../../../helpers/response';
 
 export default class Controller {

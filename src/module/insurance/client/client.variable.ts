@@ -4,7 +4,8 @@ export default class Variable {
   public fillable() {
     const field: Array<string> = [
       'name',
-      'bod',
+      'ktp',
+      'dob',
       'age',
       'contact_number',
       'address',

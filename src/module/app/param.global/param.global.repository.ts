@@ -1,31 +1,40 @@
 'use strict';
 
 import { Op } from 'sequelize';
-import Model from './menu.model';
+import Model from './param.global.model';
 
 export default class Respository {
-  public list() {
-    return Model.findAll({
-      where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
-    });
+  public list(data: any) {
+    let query: Object = {
+      order: [['id', 'DESC']],
+    };
+    if (data?.param_key !== undefined && data?.param_key != null) {
+      query = {
+        ...query,
+        where: {
+          status: { [Op.ne]: 9 },
+          param_key: { [Op.like]: `%${data?.param_key}%` },
+        },
+      };
+    }
+    return Model.findAll(query);
   }
 
   public index(data: any) {
     let query: Object = {
-      where: { status: { [Op.ne]: 9 } },
-      order: [['seq_number', 'ASC']],
+      order: [['id', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {
           status: { [Op.ne]: 9 },
           [Op.or]: [
-            { menu_name: { [Op.like]: `%${data?.keyword}%` } },
-            { module_name: { [Op.like]: `%${data?.keyword}%` } },
+            { param_key: { [Op.like]: `%${data?.keyword}%` } },
+            { param_value: { [Op.like]: `%${data?.keyword}%` } },
+            { param_desc: { [Op.like]: `%${data?.keyword}%` } },
           ],
         },
       };
@@ -42,7 +51,7 @@ export default class Respository {
     });
   }
 
-  public create(data: any) {
+  public async create(data: any) {
     return Model.create(data?.payload);
   }
 

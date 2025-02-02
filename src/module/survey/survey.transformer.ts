@@ -1,7 +1,7 @@
 'use strict';
 
 import { Op } from 'sequelize';
-import { repository } from './survey.respository';
+import { repository } from './survey.repository';
 
 export default class Transformer {
   public async list(data: any) {

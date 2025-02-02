@@ -2,7 +2,7 @@
 
 import { variable } from './role.variable';
 import { Request, Response } from 'express';
-import { repository } from './role.respository';
+import { repository } from './role.repository';
 import { helper } from '../../../helpers/helper';
 import { response } from '../../../helpers/response';
 

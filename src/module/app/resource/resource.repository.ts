@@ -10,7 +10,7 @@ export default class Respository {
   public list(data: any) {
     return Model.findAll({
       where: data?.condition,
-      order: [['resource_id', 'DESC']],
+      order: [['created_date', 'DESC']],
     });
   }
 
@@ -20,11 +20,11 @@ export default class Respository {
         ...condition,
         status: { [Op.ne]: 'D' },
       },
-      order: [['resource_id', 'DESC']],
+      order: [['created_date', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {

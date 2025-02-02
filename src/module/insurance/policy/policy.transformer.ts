@@ -1,45 +1,48 @@
 'use strict';
 
-import { repository } from './policy.respository';
+import { currency } from '../../currency/currency.controller';
+import { repository as repoCurr } from '../../currency/currency.repository';
 
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
     for (let i in data) {
-      const details = await repository.findDetail({
-        policy_id: data[i]?.dataValues?.policy_id,
-      });
+      let rateCurr = 1;
+      let premiValue = parseFloat(data[i]?.dataValues?.premi_value);
+      const curr = data[i]?.dataValues?.premi_currency;
+      if (curr != 'IDR') {
+        const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
+        if (rate) {
+          rateCurr = parseFloat(rate?.getDataValue('value'));
+          premiValue = rateCurr * premiValue;
+        }
+      }
 
       result.push({
         ...data[i]?.dataValues,
-        detail: details?.map((d: any) => {
-          return {
-            ...d?.dataValues,
-            benefit: d?.dataValues?.benefit
-              ? JSON.parse(d?.dataValues?.benefit)
-              : d?.dataValues?.benefit,
-          };
-        }),
+        total_premi: premiValue,
+        currency_value: rateCurr,
       });
     }
     return result;
   }
 
   public async detail(data: any) {
-    const details = await repository.findDetail({
-      policy_id: data?.dataValues?.policy_id,
-    });
+    let rateCurr = 1;
+    let premiValue = parseFloat(data?.dataValues?.premi_value);
+    const curr = data?.dataValues?.premi_currency;
+    if (curr != 'IDR') {
+      const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
+      if (rate) {
+        rateCurr = parseFloat(rate?.getDataValue('value'));
+        premiValue = rateCurr * premiValue;
+      }
+    }
 
     return {
+      total_premi: premiValue,
+      currency_value: rateCurr,
       ...data?.dataValues,
-      detail: details?.map((d: any) => {
-        return {
-          ...d?.dataValues,
-          benefit: d?.dataValues?.benefit
-            ? JSON.parse(d?.dataValues?.benefit)
-            : d?.dataValues?.benefit,
-        };
-      }),
     };
   }
 }

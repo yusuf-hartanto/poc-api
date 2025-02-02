@@ -9,7 +9,7 @@ import { helperauth } from '../../helpers/auth.helper';
 import { variable } from '../app/resource/resource.variable';
 import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
-import { repository as repoRole } from '../app/role/role.respository';
+import { repository as repoRole } from '../app/role/role.repository';
 
 dotenv.config();
 const date: string = helper.date();
@@ -25,6 +25,7 @@ export default class Controller {
         username: user?.getDataValue('username'),
         province_id: user?.getDataValue('area_province_id'),
         regency_id: user?.getDataValue('area_regencies_id'),
+        client_id: user?.getDataValue('client_id'),
         role_name: role?.getDataValue('role_name'),
       };
 
@@ -73,6 +74,7 @@ export default class Controller {
       username: result?.getDataValue('username'),
       province_id: result?.getDataValue('area_province_id'),
       regency_id: result?.getDataValue('area_regencies_id'),
+      client_id: result?.getDataValue('client_id'),
       role_name: result?.getDataValue('role')?.role_name,
     };
 
@@ -111,7 +113,7 @@ export default class Controller {
       const only: Object = helper.only(variable.fillable(), req?.body);
 
       const role = await repoRole.detail({
-        role_name: { [Op.like]: '%public%' },
+        role_name: { [Op.like]: '%client%' },
       });
 
       const { province_id, regency_id } = req?.body;

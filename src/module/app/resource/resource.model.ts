@@ -54,6 +54,9 @@ const Model = conn.sequelize.define(
     total_login: {
       type: DataTypes.INTEGER,
     },
+    client_id: {
+      type: DataTypes.STRING,
+    },
     area_province_id: {
       type: DataTypes.STRING,
     },

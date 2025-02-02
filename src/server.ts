@@ -59,6 +59,7 @@ app.use(routes);
 
 cron.schedule('1 0 * * *', async () => {
   await helper.updateUsia();
+  await helper.fetchLatestCurrency();
 });
 
 app.listen(port, () => {

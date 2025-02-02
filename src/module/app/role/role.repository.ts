@@ -1,32 +1,30 @@
 'use strict';
 
 import { Op } from 'sequelize';
-import Model from './client.model';
+import Model from './role.model';
 
 export default class Respository {
   public list() {
     return Model.findAll({
-      where: { status: { [Op.ne]: 9 } },
-      order: [['created_date', 'DESC']],
+      where: {
+        status: { [Op.ne]: 9 },
+      },
+      order: [['role_id', 'DESC']],
     });
   }
 
   public index(data: any) {
     let query: Object = {
-      where: { status: { [Op.ne]: 9 } },
-      order: [['created_date', 'DESC']],
+      order: [['role_id', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
     };
-    if (data?.keyword !== undefined && data?.keyword != null) {
+    if (data?.keyword && data?.keyword != undefined) {
       query = {
         ...query,
         where: {
           status: { [Op.ne]: 9 },
-          [Op.or]: [
-            { name: { [Op.like]: `%${data?.keyword}%` } },
-            { relation_name: { [Op.like]: `%${data?.keyword}%` } },
-          ],
+          [Op.or]: [{ role_name: { [Op.like]: `%${data?.keyword}%` } }],
         },
       };
     }
@@ -35,16 +33,6 @@ export default class Respository {
 
   public detail(condition: any) {
     return Model.findOne({
-      where: {
-        ...condition,
-        status: { [Op.ne]: 9 },
-      },
-    });
-  }
-
-  public detailSurvey(condition: any) {
-    return Model.findOne({
-      attributes: ['id', 'name', 'bod', 'age', 'contact_number', 'address'],
       where: {
         ...condition,
         status: { [Op.ne]: 9 },
@@ -61,11 +49,6 @@ export default class Respository {
       where: data?.condition,
     });
   }
-
-  public delete(data: any) {
-    return Model.destroy({
-      where: data?.condition,
-    });
-  }
 }
+
 export const repository = new Respository();

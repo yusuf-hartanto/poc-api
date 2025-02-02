@@ -68,6 +68,15 @@ const Model = conn.sequelize.define(
       type: DataTypes.TINYINT,
       defaultValue: 1,
     },
+    unit_link: {
+      type: DataTypes.TINYINT,
+    },
+    fund: {
+      type: DataTypes.STRING,
+    },
+    cash_value: {
+      type: DataTypes.DECIMAL,
+    },
     created_by: {
       type: DataTypes.STRING,
     },

@@ -7,17 +7,78 @@ import { policy } from '../insurance/policy/policy.controller';
 
 const router: Router = Router();
 
-router.get('/client/all-data', auth.checkBearerToken, client.list);
-router.get('/client', auth.checkBearerToken, client.index);
-router.get('/client/:id', auth.checkBearerToken, client.detail);
-router.post('/client', auth.checkBearerToken, client.create);
-router.put('/client/:id', auth.checkBearerToken, client.update);
-router.delete('/client/:id', auth.checkBearerToken, client.delete);
+router.get(
+  '/client/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.list
+);
+router.get(
+  '/client',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.index
+);
+router.get(
+  '/client/relation',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.relation
+);
+router.get(
+  '/client/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.detail
+);
+router.post(
+  '/client',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.create
+);
+router.put(
+  '/client/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.update
+);
+router.delete(
+  '/client/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.delete
+);
 
-router.get('/policy', auth.checkBearerToken, policy.index);
-router.get('/policy/:id', auth.checkBearerToken, policy.detail);
-router.post('/policy', auth.checkBearerToken, policy.create);
-router.put('/policy/:id', auth.checkBearerToken, policy.update);
-router.delete('/policy/:id', auth.checkBearerToken, policy.delete);
+router.get(
+  '/policy',
+  auth.checkBearerToken,
+  auth.checkAccess('policy'),
+  policy.index
+);
+router.get(
+  '/policy/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('policy'),
+  policy.detail
+);
+router.post(
+  '/policy',
+  auth.checkBearerToken,
+  auth.checkAccess('policy'),
+  policy.create
+);
+router.put(
+  '/policy/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('policy'),
+  policy.update
+);
+router.delete(
+  '/policy/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('policy'),
+  policy.delete
+);
 
 export default router;

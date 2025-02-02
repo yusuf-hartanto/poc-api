@@ -5,7 +5,7 @@ import { helper } from '../../helpers/helper';
 import { Op, QueryInterface, Sequelize } from 'sequelize';
 import Model from '../../module/app/resource/resource.model';
 import { repository as repoArea } from '../../module/area/area.repository';
-import { repository as repoRole } from '../../module/app/role/role.respository';
+import { repository as repoRole } from '../../module/app/role/role.repository';
 
 type Migration = (
   queryInterface: QueryInterface,

@@ -6,13 +6,43 @@ import { event } from '../survey/survey.controller';
 
 const router: Router = Router();
 
-router.get('/event', auth.checkBearerToken, event.index);
-router.get('/event/:id', auth.checkBearerToken, event.detail);
-router.post('/event', auth.checkBearerToken, event.create);
-router.put('/event/:id', auth.checkBearerToken, event.update);
-router.delete('/event/:id', auth.checkBearerToken, event.delete);
+router.get(
+  '/event',
+  auth.checkBearerToken,
+  auth.checkAccess('event'),
+  event.index
+);
+router.get(
+  '/event/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('event'),
+  event.detail
+);
+router.post(
+  '/event',
+  auth.checkBearerToken,
+  auth.checkAccess('event'),
+  event.create
+);
+router.put(
+  '/event/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('event'),
+  event.update
+);
+router.delete(
+  '/event/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('event'),
+  event.delete
+);
 
-router.get('/client/:id', auth.checkBearerToken, event.clientSurvey);
+router.get(
+  '/client/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  event.clientSurvey
+);
 router.post('/answer', auth.checkBearerToken, event.createAnswer);
 
 export default router;

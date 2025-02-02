@@ -15,12 +15,15 @@ const date: string = helper.date();
 export default class Controller {
   public async index(req: Request, res: Response) {
     try {
+      const role: string = req?.user?.role_name;
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
-      const conditionArea: object = helper.conditionArea(req?.user);
-      const admin: string =
-        req?.user?.role_name == 'administrator' ? '' : 'administrator';
+      const admin: string = role == 'administrator' ? '' : 'administrator';
+
+      let condition: any = {};
+      if (!['administrastor', 'agent'].includes(role))
+        condition['client_id'] = req?.user?.client_id;
 
       const { count, rows } = await repository.index(
         {
@@ -28,11 +31,11 @@ export default class Controller {
           offset: parseInt(limit) * (parseInt(offset) - 1),
           keyword: keyword,
         },
-        conditionArea,
+        condition,
         admin
       );
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
-      const users = await transformer.list(rows);
+      const users = await transformer.list(rows, false);
       return response.success(
         'Data resource',
         { total: count, values: users },
@@ -58,18 +61,20 @@ export default class Controller {
 
   public async detail(req: Request, res: Response) {
     try {
+      const role: string = req?.user?.role_name;
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
         return response.failed(`id ${id} is not valid`, 400, res);
 
-      const admin: string =
-        req?.user?.role_name == 'administrator' ? '' : 'administrator';
-      const result: Object | any = await repository.detail(
-        { resource_id: id },
-        admin
-      );
+      const admin: string = role == 'administrator' ? '' : 'administrator';
+
+      let condition: any = { resource_id: id };
+      if (!['administrastor', 'agent'].includes(role))
+        condition['client_id'] = req?.user?.client_id;
+
+      const result: Object | any = await repository.detail(condition, admin);
       if (!result) return response.failed('Data not found', 404, res);
-      const getUser: Object = await transformer.detail(result);
+      const getUser: Object = await transformer.detail(result, false);
       return response.success('Data resource', getUser, res);
     } catch (err: any) {
       return helper.catchError(`resource detail: ${err?.message}`, 500, res);

@@ -925,6 +925,86 @@
               "body": "{\n    \"status\": true,\n    \"message\": \"Send email success\",\n    \"data\": null\n}"
             }
           ]
+        },
+        {
+          "name": "Update Currency",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/update-currency/USD",
+              "host": ["{{url}}"],
+              "path": ["update-currency", "USD"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Currency",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{url}}/update-currency/USD",
+                  "host": ["{{url}}"],
+                  "path": ["update-currency", "USD"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "63"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3f-1RyG2DEeU9BP5ynWWJUglhfwaJs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:53:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success update currency\",\n    \"data\": null\n}"
+            }
+          ]
         }
       ]
     },
@@ -3023,12 +3103,12 @@
                       }
                     },
                     "url": {
-                      "raw": "{{url}}/app/resource/3e0d9e86-cbae-45e7-b32f-b7bcfa667073",
+                      "raw": "{{url}}/app/resource/e5f32e34-234c-4b41-adc0-7cd553ea8e70",
                       "host": ["{{url}}"],
                       "path": [
                         "app",
                         "resource",
-                        "3e0d9e86-cbae-45e7-b32f-b7bcfa667073"
+                        "e5f32e34-234c-4b41-adc0-7cd553ea8e70"
                       ]
                     }
                   },
@@ -3054,15 +3134,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "5420"
+                      "value": "714"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"152c-8fDhONBcRtYStmHF4f+2pN4RF9s\""
+                      "value": "W/\"2ca-6q5PSqaaLsG74tzTbdMNGwmld/Q\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 04:13:22 GMT"
+                      "value": "Sat, 25 Jan 2025 00:24:15 GMT"
                     },
                     {
                       "key": "Connection",
@@ -3074,7 +3154,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"resource_id\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n        \"username\": \"adminuser\",\n        \"email\": \"admin@mail.com\",\n        \"full_name\": \"Super Admin\",\n        \"place_of_birth\": \"Bandung\",\n        \"date_of_birth\": \"2025-01-14\",\n        \"usia\": 1,\n        \"telepon\": \"085722800025\",\n        \"image_foto\": null,\n        \"status\": \"A\",\n        \"total_login\": 2,\n        \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n        \"area_regencies_id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n        \"created_by\": \"00000000-0000-0000-0000-000000000000\",\n        \"created_date\": \"2025-01-13T22:58:44.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"role\": {\n            \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n            \"role_name\": \"administrator\",\n            \"status\": 1\n        },\n        \"province\": {\n            \"id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"JAWA BARAT\"\n        },\n        \"regency\": {\n            \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n            \"name\": \"KABUPATEN BANDUNG\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\"\n        },\n        \"ability\": [\n            {\n                \"menu_id\": \"cb49c2af-437d-444e-85ac-d6e9aeaa152b\",\n                \"menu_name\": \"User\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"user\",\n                \"type_menu\": null,\n                \"seq_number\": 44,\n                \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"152ec805-ea1c-4e01-9649-0613ece7599c\",\n                \"menu_name\": \"Form\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"form\",\n                \"type_menu\": null,\n                \"seq_number\": 32,\n                \"parent_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"28319c97-144b-43d8-a714-f208fec5fbab\",\n                \"menu_name\": \"Event\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"event\",\n                \"type_menu\": null,\n                \"seq_number\": 31,\n                \"parent_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                \"menu_name\": \"Survey\",\n                \"menu_icon\": \"CheckSquare\",\n                \"module_name\": \"#\",\n                \"type_menu\": null,\n                \"seq_number\": 3,\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"1ea02aa7-d18b-4a8a-9606-eedc4037dec0\",\n                \"menu_name\": \"Role Menu\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"role_menu\",\n                \"type_menu\": null,\n                \"seq_number\": 43,\n                \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"d3b9bcae-dd40-43af-9cb9-1ec1a0ae8198\",\n                \"menu_name\": \"Client\",\n                \"menu_icon\": \"Users\",\n                \"module_name\": \"#\",\n                \"type_menu\": null,\n                \"seq_number\": 21,\n                \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"30d7e09b-dfe8-492d-8ffb-76f7ea4f5398\",\n                \"menu_name\": \"Role\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"role\",\n                \"type_menu\": null,\n                \"seq_number\": 42,\n                \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"2590841a-1775-446d-afaa-d9705141c392\",\n                \"menu_name\": \"Dashboard\",\n                \"menu_icon\": \"Home\",\n                \"module_name\": \"dashboard\",\n                \"type_menu\": null,\n                \"seq_number\": 1,\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"d6cef944-6019-433b-8e5f-02e0e2d07de2\",\n                \"menu_name\": \"Record\",\n                \"menu_icon\": \"Activity\",\n                \"module_name\": \"record\",\n                \"type_menu\": null,\n                \"seq_number\": 23,\n                \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"83000f68-b1c3-4ea4-985b-0013f6fcaa2e\",\n                \"menu_name\": \"Menu\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"menu\",\n                \"type_menu\": null,\n                \"seq_number\": 41,\n                \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                \"menu_name\": \"Insurance\",\n                \"menu_icon\": \"Activity\",\n                \"module_name\": \"#\",\n                \"type_menu\": null,\n                \"seq_number\": 2,\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_name\": \"Control Panel\",\n                \"menu_icon\": \"Users\",\n                \"module_name\": \"#\",\n                \"type_menu\": null,\n                \"seq_number\": 4,\n                \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"ca5d8c40-4958-441c-af1a-035448e3c4ea\",\n                \"menu_name\": \"Policy\",\n                \"menu_icon\": \"Activity\",\n                \"module_name\": \"policy\",\n                \"type_menu\": null,\n                \"seq_number\": 22,\n                \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            },\n            {\n                \"menu_id\": \"17f60e1c-b88e-4500-85f4-5780fe7daec7\",\n                \"menu_name\": \"Global Param\",\n                \"menu_icon\": \"Circle\",\n                \"module_name\": \"global_param\",\n                \"type_menu\": null,\n                \"seq_number\": 45,\n                \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                \"menu_status\": 1,\n                \"role_menu_status\": 1,\n                \"role_menu_create\": 1,\n                \"role_menu_edit\": 1,\n                \"role_menu_delete\": 1,\n                \"role_menu_approve\": 1\n            }\n        ]\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"resource_id\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n        \"role_id\": \"bc0cc242-05c4-41cb-8594-eaa1924facb8\",\n        \"username\": \"hartanto\",\n        \"email\": \"Xu6Kd1tTuK@poc.com\",\n        \"full_name\": \"Hartanto\",\n        \"place_of_birth\": null,\n        \"date_of_birth\": \"1992-03-05\",\n        \"usia\": 32,\n        \"telepon\": \"085811866445\",\n        \"image_foto\": null,\n        \"status\": \"A\",\n        \"total_login\": 5,\n        \"client_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n        \"area_province_id\": null,\n        \"area_regencies_id\": null,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-24T23:40:29.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"role\": {\n            \"role_id\": \"bc0cc242-05c4-41cb-8594-eaa1924facb8\",\n            \"role_name\": \"public\",\n            \"status\": 1\n        },\n        \"province\": null,\n        \"regency\": null\n    }\n}"
                 }
               ]
             },
@@ -3741,15 +3821,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "897"
+                      "value": "937"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"381-mMrkgrsbYeh9iH7HP6N3NK/NZZE\""
+                      "value": "W/\"3a9-3+nUUpxGc0V/EJjY7wpZRnPBGRc\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 05:10:10 GMT"
+                      "value": "Fri, 31 Jan 2025 22:29:39 GMT"
                     },
                     {
                       "key": "Connection",
@@ -3761,7 +3841,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"list data client\",\n    \"data\": [\n        {\n            \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n            \"name\": \"Lina Panjaitan\",\n            \"bod\": \"1985-01-01\",\n            \"age\": 40,\n            \"contact_number\": \"083621726181\",\n            \"address\": \"Kab. Bandung, Jawa Barat\",\n            \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n            \"relation_name\": \"Istri\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-14T05:09:53.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null\n        },\n        {\n            \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n            \"name\": \"Jhon Panjaitan\",\n            \"bod\": \"1980-01-01\",\n            \"age\": 45,\n            \"contact_number\": \"0983282672892\",\n            \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n            \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n            \"relation_name\": null,\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-14T05:06:10.000Z\",\n            \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n        }\n    ]\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"list data client\",\n    \"data\": [\n        {\n            \"id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n            \"name\": \"Hartanto\",\n            \"ktp\": \"3402030503920009\",\n            \"dob\": \"1992-03-05\",\n            \"age\": 32,\n            \"contact_number\": \"085811866445\",\n            \"address\": \"KABUPATEN BANTUL, DI YOGYAKARTA\",\n            \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n            \"relation_name\": null,\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-24T23:40:29.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null\n        },\n        {\n            \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n            \"name\": \"Yusuf Hartanto\",\n            \"ktp\": \"3402030503920008\",\n            \"dob\": \"1992-03-05\",\n            \"age\": 32,\n            \"contact_number\": \"085811866445\",\n            \"address\": \"Kab. Bantul, DI Yogyakarta\",\n            \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n            \"relation_name\": \"Kakak\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-01-14T05:09:53.000Z\",\n            \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n        }\n    ]\n}"
                 }
               ]
             },
@@ -3869,15 +3949,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "969"
+                      "value": "953"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"3c9-b2vctc+CgFu2kGJkxxmZPSFe7lA\""
+                      "value": "W/\"3b9-PiQQpDz182Qm45nmHvvddGEPN6g\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 08:04:51 GMT"
+                      "value": "Fri, 31 Jan 2025 22:29:53 GMT"
                     },
                     {
                       "key": "Connection",
@@ -3889,7 +3969,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"name\": \"Lina Panjaitan\",\n                \"bod\": \"1985-01-01\",\n                \"age\": 40,\n                \"contact_number\": \"083621726181\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"relation_name\": \"Istri\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"name\": \"Jhon Panjaitan\",\n                \"bod\": \"1980-01-01\",\n                \"age\": 45,\n                \"contact_number\": \"0983282672892\",\n                \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:06:10.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n            }\n        ]\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"name\": \"Hartanto\",\n                \"ktp\": \"3402030503920009\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"KABUPATEN BANTUL, DI YOGYAKARTA\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-24T23:40:29.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"name\": \"Yusuf Hartanto\",\n                \"ktp\": \"3402030503920008\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"relation_name\": \"Kakak\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            }\n        ]\n    }\n}"
                 }
               ]
             },
@@ -3977,15 +4057,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "503"
+                      "value": "526"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"1f7-KQUtLDxB2f9AOBOJ5zVNkzLW0ak\""
+                      "value": "W/\"20e-7psb+VmsXLQkpOJhfp1CCB1TakI\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 07:22:20 GMT"
+                      "value": "Fri, 31 Jan 2025 22:30:04 GMT"
                     },
                     {
                       "key": "Connection",
@@ -3997,7 +4077,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"name\": \"Jhon Panjaitan\",\n        \"bod\": \"1980-01-01\",\n        \"age\": 45,\n        \"contact_number\": \"0983282672892\",\n        \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n        \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n        \"relation_name\": null,\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-14T05:06:10.000Z\",\n        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"name\": \"Jhon Panjaitan\",\n        \"ktp\": \"3402030503920005\",\n        \"dob\": \"1980-01-01\",\n        \"age\": 45,\n        \"contact_number\": \"0983282672892\",\n        \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n        \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n        \"relation_name\": null,\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-14T05:06:10.000Z\",\n        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n    }\n}"
                 }
               ]
             },
@@ -4018,7 +4098,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"dob\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4115,7 +4195,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4289,6 +4369,310 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Data Relation",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client/relation?page=1&perPage=10&q=&option=1&relation=25b4402e-6ae1-4519-8573-3608edebd87b",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "client", "relation"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "option",
+                      "value": "1"
+                    },
+                    {
+                      "key": "relation",
+                      "value": "25b4402e-6ae1-4519-8573-3608edebd87b"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Data Relation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/relation?page=1&perPage=10&q=",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client", "relation"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": ""
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "2426"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"97a-925iUYRiqKF64eFfk4VfV0/fh5Y\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Fri, 31 Jan 2025 22:31:37 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"name\": \"Hartanto\",\n                \"ktp\": \"3402030503920009\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"KABUPATEN BANTUL, DI YOGYAKARTA\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-24T23:40:29.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"child\": [\n                    {\n                        \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                        \"name\": \"Yusuf Hartanto\",\n                        \"ktp\": \"3402030503920008\",\n                        \"dob\": \"1992-03-05\",\n                        \"age\": 32,\n                        \"contact_number\": \"085811866445\",\n                        \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                        \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                        \"relation_name\": \"Kakak\",\n                        \"status\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"modified_date\": \"2025-01-14T05:12:25.000Z\",\n                        \"child\": [\n                            {\n                                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445b\",\n                                \"name\": \"Hana Panjaitan\",\n                                \"ktp\": \"3402030503920007\",\n                                \"dob\": \"1999-01-01\",\n                                \"age\": 26,\n                                \"contact_number\": \"083621726182\",\n                                \"address\": \"Kab. Bandung, Jawa Barat\",\n                                \"relation_id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                                \"relation_name\": \"Sepupu\",\n                                \"status\": 1,\n                                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                                \"modified_date\": \"2025-01-14T05:12:25.000Z\",\n                                \"child\": []\n                            }\n                        ]\n                    }\n                ]\n            },\n            {\n                \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"name\": \"Jhon Panjaitan\",\n                \"ktp\": \"3402030503920005\",\n                \"dob\": \"1980-01-01\",\n                \"age\": 45,\n                \"contact_number\": \"0983282672892\",\n                \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:06:10.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:08:19.000Z\",\n                \"child\": [\n                    {\n                        \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                        \"name\": \"Lina Panjaitan\",\n                        \"ktp\": \"3402030503920006\",\n                        \"dob\": \"1985-01-01\",\n                        \"age\": 40,\n                        \"contact_number\": \"083621726181\",\n                        \"address\": \"Kab. Bandung, Jawa Barat\",\n                        \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                        \"relation_name\": \"Istri\",\n                        \"status\": 1,\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"modified_date\": \"2025-01-14T05:12:25.000Z\",\n                        \"child\": []\n                    }\n                ]\n            }\n        ]\n    }\n}"
+                },
+                {
+                  "name": "Data Relation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/relation?page=1&perPage=10&q=&option=1",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client", "relation"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": ""
+                        },
+                        {
+                          "key": "option",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "2374"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"946-zrhAccYgU/vKj2/KUqCpEY4MlOo\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Fri, 31 Jan 2025 22:38:34 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"name\": \"Hartanto\",\n                \"ktp\": \"3402030503920009\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"KABUPATEN BANTUL, DI YOGYAKARTA\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-24T23:40:29.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"name\": \"Yusuf Hartanto\",\n                \"ktp\": \"3402030503920008\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"relation_name\": \"Kakak\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445b\",\n                \"name\": \"Hana Panjaitan\",\n                \"ktp\": \"3402030503920007\",\n                \"dob\": \"1999-01-01\",\n                \"age\": 26,\n                \"contact_number\": \"083621726182\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"relation_name\": \"Sepupu\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"name\": \"Jhon Panjaitan\",\n                \"ktp\": \"3402030503920005\",\n                \"dob\": \"1980-01-01\",\n                \"age\": 45,\n                \"contact_number\": \"0983282672892\",\n                \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:06:10.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:08:19.000Z\"\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"name\": \"Lina Panjaitan\",\n                \"ktp\": \"3402030503920006\",\n                \"dob\": \"1985-01-01\",\n                \"age\": 40,\n                \"contact_number\": \"083621726181\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"relation_name\": \"Istri\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            }\n        ]\n    }\n}"
+                },
+                {
+                  "name": "Data Relation",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/relation?page=1&perPage=10&q=&option=1&relation=25b4402e-6ae1-4519-8573-3608edebd87b",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client", "relation"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": ""
+                        },
+                        {
+                          "key": "option",
+                          "value": "1"
+                        },
+                        {
+                          "key": "relation",
+                          "value": "25b4402e-6ae1-4519-8573-3608edebd87b"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1012"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3f4-7mQUgfoYnT25YC0A53fdQUn0zh0\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Fri, 31 Jan 2025 22:45:46 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"name\": \"Yusuf Hartanto\",\n                \"ktp\": \"3402030503920008\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 32,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"relation_name\": \"Kakak\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445b\",\n                \"name\": \"Hana Panjaitan\",\n                \"ktp\": \"3402030503920007\",\n                \"dob\": \"1999-01-01\",\n                \"age\": 26,\n                \"contact_number\": \"083621726182\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"relation_name\": \"Sepupu\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            }\n        ]\n    }\n}"
+                }
+              ]
             }
           ]
         },
@@ -4399,15 +4783,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "2886"
+                      "value": "3596"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"b46-0gTJwVyXT7il0hIgvXAVy81+pHA\""
+                      "value": "W/\"e0c-kunPtl3nUzsZ7nZLzCpoDocNSJ0\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 08:03:50 GMT"
+                      "value": "Sun, 26 Jan 2025 00:51:09 GMT"
                     },
                     {
                       "key": "Connection",
@@ -4419,7 +4803,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data policy\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"policy_id\": \"98e5a430-cd63-4342-9b05-8b1380ed363f\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz Update\",\n                \"product_name\": \"My Protection Prima Update\",\n                \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hani Panjaitan dan Leo Panjaitan\",\n                \"issued_date\": \"2021-08-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"5000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank Update\",\n                \"notes\": \"note Updates\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:19:06.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T07:30:38.000Z\",\n                \"detail\": [\n                    {\n                        \"id\": \"31cbaed0-bb8b-4cb7-9370-a8e8c8fc43a9\",\n                        \"policy_id\": \"98e5a430-cd63-4342-9b05-8b1380ed363f\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"14509000.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 50000000,\n                            \"rs\": \"santunan medical assistance 100juta\",\n                            \"penyakit_kritis\": 50000000,\n                            \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:30:38.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2021-08-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"5000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:07:20.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"6e08c67d-5aac-4a5c-a5eb-94efe00b1e96\",\n                        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                        \"unit_link\": 0,\n                        \"fund\": \"-\",\n                        \"cash_value\": \"0.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 125000000,\n                            \"rs\": \"plan platinum\",\n                            \"penyakit_kritis\": null,\n                            \"pensiun\": null,\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"56d9d66d-7e8a-4d22-a312-12bce0387ca5\",\n                        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"14509000.00\",\n                        \"benefit\": {\n                            \"up_jiwa\": 50000000,\n                            \"rs\": \"santunan medical assistance 100juta\",\n                            \"penyakit_kritis\": 50000000,\n                            \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                            \"jatuh_tempo\": null\n                        },\n                        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                        \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data policy\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"Y\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"total_premi\": 44283376.72,\n                \"detail\": [\n                    {\n                        \"id\": \"2ad694a6-156e-4784-b186-2ffeb584a050\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"US Global\",\n                        \"cash_value\": \"5000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"b3294142-f3f8-4352-a2c2-6cbb5684fd68\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"500.00\",\n                        \"benefit\": \"pensiun\",\n                        \"start_date\": null,\n                        \"end_date\": \"2037-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"3b94f439-a232-4023-a27e-294d4c01352e\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"pensiun\",\n                        \"start_date\": \"2038-01-01\",\n                        \"end_date\": \"2051-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"f6db8ba1-5cdf-4383-b65a-ca86520db87c\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"jatuh_tempo\",\n                        \"start_date\": null,\n                        \"end_date\": \"2052-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            },\n            {\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2025-01-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"15000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"total_premi\": 15000000,\n                \"detail\": [\n                    {\n                        \"id\": \"771dbb34-9f5f-44c1-ae29-86e46da6c005\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"125000000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"4f3b3b76-2835-4e43-b5e3-15a032b816b8\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"3000000000.00\",\n                        \"benefit\": \"rs\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
                 }
               ]
             },
@@ -4451,12 +4835,12 @@
                   }
                 },
                 "url": {
-                  "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                  "raw": "{{url}}/insurance/policy/dce89b72-ae86-4fb0-bd67-3a7bc36adfd2",
                   "host": ["{{url}}"],
                   "path": [
                     "insurance",
                     "policy",
-                    "9dea2989-8f2f-472e-a29b-4df733e76506"
+                    "dce89b72-ae86-4fb0-bd67-3a7bc36adfd2"
                   ]
                 }
               },
@@ -4476,12 +4860,12 @@
                       }
                     },
                     "url": {
-                      "raw": "{{url}}/insurance/policy/9dea2989-8f2f-472e-a29b-4df733e76506",
+                      "raw": "{{url}}/insurance/policy/dce89b72-ae86-4fb0-bd67-3a7bc36adfd2",
                       "host": ["{{url}}"],
                       "path": [
                         "insurance",
                         "policy",
-                        "9dea2989-8f2f-472e-a29b-4df733e76506"
+                        "dce89b72-ae86-4fb0-bd67-3a7bc36adfd2"
                       ]
                     }
                   },
@@ -4507,15 +4891,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "1599"
+                      "value": "1255"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"63f-LrKBL9xTsqBgECId1aaonjVGhCg\""
+                      "value": "W/\"4e7-Ksc1cmIWGliQMiEZbuQpPGlWxX8\""
                     },
                     {
                       "key": "Date",
-                      "value": "Tue, 14 Jan 2025 08:05:15 GMT"
+                      "value": "Fri, 31 Jan 2025 22:53:45 GMT"
                     },
                     {
                       "key": "Connection",
@@ -4527,7 +4911,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data resource\",\n    \"data\": {\n        \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n        \"policy_number\": \"67950792\",\n        \"provider_company\": \"Allianz\",\n        \"product_name\": \"My Protection Prima\",\n        \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n        \"beneficiary_holder\": \"Bryan Panjaitan\",\n        \"issued_date\": \"2021-08-31\",\n        \"premi_currency\": \"IDR\",\n        \"premi_value\": \"5000000.00\",\n        \"premi_off\": \"N\",\n        \"payment_term\": 7,\n        \"payment_term_unit\": \"tahun\",\n        \"insured_term\": 80,\n        \"insured_term_unit\": \"usia\",\n        \"due_date\": \"2101-08-31\",\n        \"seller_name\": \"Maybank\",\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-01-14T07:07:20.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"detail\": [\n            {\n                \"id\": \"6e08c67d-5aac-4a5c-a5eb-94efe00b1e96\",\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"unit_link\": 0,\n                \"fund\": \"-\",\n                \"cash_value\": \"0.00\",\n                \"benefit\": {\n                    \"up_jiwa\": 125000000,\n                    \"rs\": \"plan platinum\",\n                    \"penyakit_kritis\": null,\n                    \"pensiun\": null,\n                    \"jatuh_tempo\": null\n                },\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            },\n            {\n                \"id\": \"56d9d66d-7e8a-4d22-a312-12bce0387ca5\",\n                \"policy_id\": \"9dea2989-8f2f-472e-a29b-4df733e76506\",\n                \"unit_link\": 1,\n                \"fund\": \"Equity\",\n                \"cash_value\": \"14509000.00\",\n                \"benefit\": {\n                    \"up_jiwa\": 50000000,\n                    \"rs\": \"santunan medical assistance 100juta\",\n                    \"penyakit_kritis\": 50000000,\n                    \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\n                    \"jatuh_tempo\": null\n                },\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T07:14:43.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            }\n        ]\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data policy\",\n    \"data\": {\n        \"total_premi\": 15000000,\n        \"currency_value\": 1,\n        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n        \"policy_number\": \"67950792\",\n        \"provider_company\": \"Allianz\",\n        \"product_name\": \"My Protection Prima\",\n        \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n        \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n        \"beneficiary_holder\": \"Bryan Panjaitan\",\n        \"issued_date\": \"2021-08-31\",\n        \"premi_currency\": \"IDR\",\n        \"premi_value\": \"15000000.00\",\n        \"premi_off\": \"N\",\n        \"payment_term\": 7,\n        \"payment_term_unit\": \"tahun\",\n        \"insured_term\": 80,\n        \"insured_term_unit\": \"usia\",\n        \"due_date\": \"2101-08-31\",\n        \"seller_name\": \"Maybank\",\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"unit_link\": 1,\n        \"fund\": \"Equity\",\n        \"cash_value\": \"54023000.00\",\n        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n        \"modified_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n        \"modified_date\": \"2025-01-31T22:53:34.000Z\",\n        \"detail\": [\n            {\n                \"id\": \"0570ad11-2e80-40e5-a2a2-5b2072030a77\",\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"cash_value\": \"3000000000.00\",\n                \"benefit\": \"rs\",\n                \"start_date\": null,\n                \"end_date\": null\n            },\n            {\n                \"id\": \"e7529bd2-b2fa-447c-bb1f-9b5dd7521358\",\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"cash_value\": \"125000000.00\",\n                \"benefit\": \"up_jiwa\",\n                \"start_date\": null,\n                \"end_date\": null\n            }\n        ]\n    }\n}"
                 }
               ]
             },
@@ -4548,7 +4932,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz\",\r\n    \"product_name\": \"My Protection Prima\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Bryan Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank\",\r\n    \"notes\": \"notes\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 0,\r\n            \"fund\": \"-\",\r\n            \"cash_value\": 0,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 125000000,\r\n                \"rs\": \"plan platinum\",\r\n                \"penyakit_kritis\": null,\r\n                \"pensiun\": null,\r\n                \"jatuh_tempo\": null\r\n            }\r\n        },\r\n        {\r\n            \"unit_link\":1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "raw": "{\r\n    \"policy_number\": \"35443066\",\r\n    \"provider_company\": \"AIA\",\r\n    \"product_name\": \"Ultimate Harvest Assurance\",\r\n    \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Hana Panjaitan\",\r\n    \"issued_date\": \"2017-10-31\",\r\n    \"premi_currency\": \"USD\",\r\n    \"premi_value\": 2741,\r\n    \"premi_off\": \"Y\",\r\n    \"payment_term\": 5,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 0,\r\n    \"insured_term_unit\": \"seumur hidup\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Citibank\",\r\n    \"notes\": \"notes\",\r\n    \"status\": 1,\r\n    \"unit_link\": 1,\r\n    \"fund\": \"Equity\",\r\n    \"cash_value\": 5023,\r\n    \"detail\": [\r\n        {\r\n            \"cash_value\": 5000,\r\n            \"benefit\": \"up_jiwa\",\r\n            \"start_date\": null,\r\n            \"end_date\": null\r\n        },\r\n        {\r\n            \"cash_value\": 500,\r\n            \"benefit\": \"pensiun\",\r\n            \"start_date\": null,\r\n            \"end_date\": \"2037-01-01\"\r\n        },\r\n        {\r\n            \"cash_value\": 1000,\r\n            \"benefit\": \"pensiun\",\r\n            \"start_date\": \"2038-01-01\",\r\n            \"end_date\": \"2051-01-01\"\r\n        },\r\n        {\r\n            \"cash_value\": 1000,\r\n            \"benefit\": \"jatuh_tempo\",\r\n            \"start_date\": null,\r\n            \"end_date\": \"2052-01-01\"\r\n        }\r\n    ]\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4645,7 +5029,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz Update\",\r\n    \"product_name\": \"My Protection Prima Update\",\r\n    \"policy_holder\": \"63702df5-ab13-496f-bde3-09b1f58a7698\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Hani Panjaitan dan Leo Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 5000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank Update\",\r\n    \"notes\": \"note Updates\",\r\n    \"detail\": [\r\n        {\r\n            \"unit_link\": 1,\r\n            \"fund\": \"Equity\",\r\n            \"cash_value\": 14509000,\r\n            \"benefit\": {\r\n                \"up_jiwa\": 50000000,\r\n                \"rs\": \"santunan medical assistance 100juta\",\r\n                \"penyakit_kritis\": 50000000,\r\n                \"pensiun\": \"1M (tiap 2 tahun naik 20% maksimum naik 100%)\",\r\n                \"jatuh_tempo\": null\r\n            }\r\n        }\r\n    ]\r\n}",
+                  "raw": "{\r\n    \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\r\n    \"policy_number\": \"67950792\",\r\n    \"provider_company\": \"Allianz\",\r\n    \"product_name\": \"My Protection Prima\",\r\n    \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\", // client_id\r\n    \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\", // client_id\r\n    \"beneficiary_holder\": \"Bryan Panjaitan\",\r\n    \"issued_date\": \"2021-08-31\",\r\n    \"premi_currency\": \"IDR\",\r\n    \"premi_value\": 15000000,\r\n    \"premi_off\": \"N\",\r\n    \"payment_term\": 7,\r\n    \"payment_term_unit\": \"tahun\",\r\n    \"insured_term\": 80,\r\n    \"insured_term_unit\": \"usia\",\r\n    \"due_date\": \"2101-08-31\",\r\n    \"seller_name\": \"Maybank\",\r\n    \"notes\": \"notes\",\r\n    \"status\": 1,\r\n    \"unit_link\": 1,\r\n    \"fund\": \"Equity\",\r\n    \"cash_value\": 54023000,\r\n    \"detail\": [\r\n        {\r\n            \"cash_value\": 125000000,\r\n            \"benefit\": \"up_jiwa\",\r\n            \"start_date\": null,\r\n            \"end_date\": null\r\n        },\r\n        {\r\n            \"cash_value\": 3000000000,\r\n            \"benefit\": \"rs\",\r\n            \"start_date\": null,\r\n            \"end_date\": null\r\n        }\r\n    ]\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4653,12 +5037,12 @@
                   }
                 },
                 "url": {
-                  "raw": "{{url}}/insurance/policy/98e5a430-cd63-4342-9b05-8b1380ed363f",
+                  "raw": "{{url}}/insurance/policy/dce89b72-ae86-4fb0-bd67-3a7bc36adfd2",
                   "host": ["{{url}}"],
                   "path": [
                     "insurance",
                     "policy",
-                    "98e5a430-cd63-4342-9b05-8b1380ed363f"
+                    "dce89b72-ae86-4fb0-bd67-3a7bc36adfd2"
                   ]
                 }
               },
@@ -5446,6 +5830,1322 @@
               ],
               "cookie": [],
               "body": "{\n    \"status\": true,\n    \"message\": \"Data success saved\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Survey By Client",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/survey/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": [
+                "survey",
+                "client",
+                "63702df5-ab13-496f-bde3-09b1f58a7698"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Survey By Client",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/survey/client/63702df5-ab13-496f-bde3-09b1f58a7698",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "survey",
+                    "client",
+                    "63702df5-ab13-496f-bde3-09b1f58a7698"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2286"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"8ee-intD06yj2Vvyr+qGage4nU6DZ5s\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 14 Jan 2025 10:07:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n        \"name\": \"Jhon Panjaitan\",\n        \"bod\": \"1980-01-01\",\n        \"age\": 45,\n        \"contact_number\": \"0983282672892\",\n        \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\",\n        \"survey\": [\n            {\n                \"id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                \"event\": \"Event Survey 2\",\n                \"desc\": \"Event Survey 22222\",\n                \"start_period\": \"2024-12-31T17:00:00.000Z\",\n                \"end_period\": \"2025-01-31T16:59:59.000Z\",\n                \"is_active\": 1,\n                \"is_random\": 0,\n                \"question\": {\n                    \"question_id\": \"df5e06f7-1935-428b-81fd-51282b578386\",\n                    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                    \"question\": \"Apakah sudah memiliki rumah?\",\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"type\": \"MultipleChoice\",\n                    \"nourut\": 2,\n                    \"url_image1\": null,\n                    \"url_image2\": null,\n                    \"is_active\": 1,\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                    \"created_date\": \"2025-01-14T09:03:46.000Z\",\n                    \"modified_by\": null,\n                    \"modified_date\": \"2025-01-14T09:03:46.000Z\"\n                },\n                \"answer\": {\n                    \"id\": \"db5c1a10-009a-4d2f-a323-9ce9753dbcc0\",\n                    \"client_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                    \"event_id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\n                    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                    \"question_id\": \"df5e06f7-1935-428b-81fd-51282b578386\",\n                    \"text_answer\": \"Tidak\",\n                    \"alert_answer\": \"Tinggal di kontrakan\"\n                }\n            },\n            {\n                \"id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\n                \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                \"event\": \"Event Survey 2\",\n                \"desc\": \"Event Survey 22222\",\n                \"start_period\": \"2024-12-31T17:00:00.000Z\",\n                \"end_period\": \"2025-01-31T16:59:59.000Z\",\n                \"is_active\": 1,\n                \"is_random\": 0,\n                \"question\": {\n                    \"question_id\": \"f04541a4-8b41-49f7-b18a-5b3baecba6d5\",\n                    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                    \"question\": \"Apakah sudah memiliki anak?\",\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"type\": \"MultipleChoice\",\n                    \"nourut\": 1,\n                    \"url_image1\": null,\n                    \"url_image2\": null,\n                    \"is_active\": 1,\n                    \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                    \"created_date\": \"2025-01-14T09:03:46.000Z\",\n                    \"modified_by\": null,\n                    \"modified_date\": \"2025-01-14T09:03:46.000Z\"\n                },\n                \"answer\": {\n                    \"id\": \"d00c4751-aef8-474e-a550-c18d4c0feb24\",\n                    \"client_id\": \"63702df5-ab13-496f-bde3-09b1f58a7698\",\n                    \"event_id\": \"45bd5e56-b2dc-4684-a5ef-b30cdfbb7dc3\",\n                    \"form_id\": \"144cb104-d917-4e73-af0c-b2e176486333\",\n                    \"question_id\": \"f04541a4-8b41-49f7-b18a-5b3baecba6d5\",\n                    \"text_answer\": \"Ya\",\n                    \"alert_answer\": \"Memiliki anak laki-laki\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Summary",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard/summary?client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard", "summary"],
+              "query": [
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Summary",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard/summary",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard", "summary"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "175"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"af-CWoImP5jDg9eUCGQNmfXpQ/p/Fg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:28:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data summary\",\n    \"data\": {\n        \"total_premi\": 59283376.72,\n        \"up_jiwa\": 205779600,\n        \"rs\": 3000000000,\n        \"penyakit_kritis\": 8077960,\n        \"pensiun\": 16155920,\n        \"dijamin\": 16155920\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Total Premi",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=total_premi&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "total_premi"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Total Premi",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=total_premi",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "total_premi"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "3648"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"e40-+XJtjJDA3/A+TabdqRiJ6e63AuM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:29:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 6,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"2ad694a6-156e-4784-b186-2ffeb584a050\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"US Global\",\n                        \"cash_value\": \"5000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"b3294142-f3f8-4352-a2c2-6cbb5684fd68\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"500.00\",\n                        \"benefit\": \"penyakit_kritis\",\n                        \"start_date\": null,\n                        \"end_date\": \"2037-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"3b94f439-a232-4023-a27e-294d4c01352e\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"pensiun\",\n                        \"start_date\": \"2038-01-01\",\n                        \"end_date\": \"2051-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"f6db8ba1-5cdf-4383-b65a-ca86520db87c\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"dijamin\",\n                        \"start_date\": null,\n                        \"end_date\": \"2052-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            },\n            {\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2025-01-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"15000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"771dbb34-9f5f-44c1-ae29-86e46da6c005\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"125000000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    },\n                    {\n                        \"id\": \"4f3b3b76-2835-4e43-b5e3-15a032b816b8\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"3000000000.00\",\n                        \"benefit\": \"rs\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 15000000,\n                \"currency_value\": 1\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit Up Jiwa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=up_jiwa&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "up_jiwa"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit Up Jiwa",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=up_jiwa",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "up_jiwa"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2256"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"8d0-D4cW8Vy64pQrXZxKHXUNETkXPx8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:29:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 2,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"2ad694a6-156e-4784-b186-2ffeb584a050\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"US Global\",\n                        \"cash_value\": \"5000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            },\n            {\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2025-01-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"15000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"771dbb34-9f5f-44c1-ae29-86e46da6c005\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"125000000.00\",\n                        \"benefit\": \"up_jiwa\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 15000000,\n                \"currency_value\": 1\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit RS",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=rs&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "rs"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit RS",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=rs",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "rs"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1153"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"481-wlpoIH5q/LYu2/H53+2v2WVydbg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:28:58 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                \"policy_number\": \"67950792\",\n                \"provider_company\": \"Allianz\",\n                \"product_name\": \"My Protection Prima\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Bryan Panjaitan\",\n                \"issued_date\": \"2025-01-31\",\n                \"premi_currency\": \"IDR\",\n                \"premi_value\": \"15000000.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 7,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 80,\n                \"insured_term_unit\": \"usia\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Maybank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"4f3b3b76-2835-4e43-b5e3-15a032b816b8\",\n                        \"policy_id\": \"dce89b72-ae86-4fb0-bd67-3a7bc36adfd2\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"3000000000.00\",\n                        \"benefit\": \"rs\",\n                        \"start_date\": null,\n                        \"end_date\": null,\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:24:47.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 15000000,\n                \"currency_value\": 1\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit Penyakit Kritis",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=penyakit_kritis&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "penyakit_kritis"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit Penyakit Kritis",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=penyakit_kritis",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "penyakit_kritis"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1183"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"49f-Ojltaann7OuiZ7Yl/t+T5ISticU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:28:26 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"b3294142-f3f8-4352-a2c2-6cbb5684fd68\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"500.00\",\n                        \"benefit\": \"penyakit_kritis\",\n                        \"start_date\": null,\n                        \"end_date\": \"2037-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit Pensiun",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=pensiun&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "pensiun"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit Pensiun",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=pensiun",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "pensiun"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1184"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"4a0-tXBM8ey4tCuJyGszYFeIL9lCVzY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:28:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"3b94f439-a232-4023-a27e-294d4c01352e\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"pensiun\",\n                        \"start_date\": \"2038-01-01\",\n                        \"end_date\": \"2051-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Dashboard Benefit Dijamin",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=dijamin&client=63702df5-ab13-496f-bde3-09b1f58a7698",
+              "host": ["{{url}}"],
+              "path": ["dashboard"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "q",
+                  "value": ""
+                },
+                {
+                  "key": "flag",
+                  "value": "dijamin"
+                },
+                {
+                  "key": "client",
+                  "value": "63702df5-ab13-496f-bde3-09b1f58a7698"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Dashboard Benefit Dijamin",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/dashboard?page=1&perPage=10&q=&flag=dijamin",
+                  "host": ["{{url}}"],
+                  "path": ["dashboard"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": ""
+                    },
+                    {
+                      "key": "flag",
+                      "value": "dijamin"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1176"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"498-Jzc81xfDWEtFTUR4t12nzVHGYN4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 01:27:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data dashboard\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                \"policy_number\": \"35443066\",\n                \"provider_company\": \"AIA\",\n                \"product_name\": \"Ultimate Harvest Assurance\",\n                \"policy_holder\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"insured_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445a\",\n                \"beneficiary_holder\": \"Hana Panjaitan\",\n                \"issued_date\": \"2025-01-30\",\n                \"premi_currency\": \"USD\",\n                \"premi_value\": \"2741.00\",\n                \"premi_off\": \"N\",\n                \"payment_term\": 5,\n                \"payment_term_unit\": \"tahun\",\n                \"insured_term\": 0,\n                \"insured_term_unit\": \"seumur hidup\",\n                \"due_date\": \"2101-08-31\",\n                \"seller_name\": \"Citibank\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"detail\": [\n                    {\n                        \"id\": \"f6db8ba1-5cdf-4383-b65a-ca86520db87c\",\n                        \"policy_id\": \"d71ae192-a50e-4ec2-a973-0d97277e728d\",\n                        \"unit_link\": 1,\n                        \"fund\": \"Equity\",\n                        \"cash_value\": \"1000.00\",\n                        \"benefit\": \"dijamin\",\n                        \"start_date\": null,\n                        \"end_date\": \"2052-01-01\",\n                        \"created_by\": \"e5f32e34-234c-4b41-adc0-7cd553ea8e70\",\n                        \"created_date\": \"2025-01-25T22:35:12.000Z\",\n                        \"modified_by\": null,\n                        \"modified_date\": null\n                    }\n                ],\n                \"total_premi\": 44283376.72,\n                \"currency_value\": 16155.92\n            }\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Area",
+      "item": [
+        {
+          "name": "Province",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/province",
+              "host": ["{{url}}"],
+              "path": ["area", "province"]
+            }
+          },
+          "response": [
+            {
+              "name": "Province",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/province",
+                  "host": ["{{url}}"],
+                  "path": ["area", "province"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2651"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"a5b-1+1jr1aGyPRO3mrTGJhRzmn+pIg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:38:03 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data province\",\n    \"data\": [\n        {\n            \"id\": \"067b1025-5266-4b40-ae4b-65f56eb00a39\",\n            \"name\": \"KEPULAUAN BANGKA BELITUNG\"\n        },\n        {\n            \"id\": \"06a95572-ecaf-48f9-b2fe-f87a122ff532\",\n            \"name\": \"PAPUA PEGUNUNGAN\"\n        },\n        {\n            \"id\": \"0a78ac49-c23f-4178-bc4d-ec8d3ee53ad3\",\n            \"name\": \"NUSA TENGGARA BARAT\"\n        },\n        {\n            \"id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"JAWA BARAT\"\n        },\n        {\n            \"id\": \"333abebb-6794-42a3-8351-ce2a1bcbf56b\",\n            \"name\": \"BENGKULU\"\n        },\n        {\n            \"id\": \"3d925c5a-d27e-4e8e-bf5d-27e4dd837436\",\n            \"name\": \"GORONTALO\"\n        },\n        {\n            \"id\": \"44200847-be90-4e41-aeb9-65af440c5867\",\n            \"name\": \"PAPUA BARAT\"\n        },\n        {\n            \"id\": \"5285528a-e27b-4ec4-87ec-60be4b84466b\",\n            \"name\": \"SULAWESI TENGGARA\"\n        },\n        {\n            \"id\": \"56fe30fd-6699-4fdc-ae85-c375a68115c8\",\n            \"name\": \"KALIMANTAN SELATAN\"\n        },\n        {\n            \"id\": \"5bb91963-e8c9-4dd1-bc6d-7d1772cb6755\",\n            \"name\": \"SULAWESI BARAT\"\n        },\n        {\n            \"id\": \"5d5ac9bd-b653-4579-a743-63eed0d71c76\",\n            \"name\": \"ACEH\"\n        },\n        {\n            \"id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n            \"name\": \"BALI\"\n        },\n        {\n            \"id\": \"67aa2a6d-4abe-4a1f-8c7d-93ef892c6128\",\n            \"name\": \"KEPULAUAN RIAU\"\n        },\n        {\n            \"id\": \"682d098e-249d-4836-93aa-6c64f2161c7d\",\n            \"name\": \"KALIMANTAN TENGAH\"\n        },\n        {\n            \"id\": \"688c762e-d070-4f61-ad7f-16ac6c799909\",\n            \"name\": \"RIAU\"\n        },\n        {\n            \"id\": \"6c6df784-735a-4b2c-b9cb-438552f317e0\",\n            \"name\": \"KALIMANTAN UTARA\"\n        },\n        {\n            \"id\": \"6c97cd68-3c8f-45db-ac4c-7a829691bbf4\",\n            \"name\": \"SULAWESI TENGAH\"\n        },\n        {\n            \"id\": \"7f30b09e-27a4-4a76-9487-29e9695120f4\",\n            \"name\": \"JAMBI\"\n        },\n        {\n            \"id\": \"80bc8978-70bd-4801-8091-ced23f458d94\",\n            \"name\": \"SUMATERA BARAT\"\n        },\n        {\n            \"id\": \"8b619707-5f20-42ba-957b-25323db6143e\",\n            \"name\": \"SUMATERA SELATAN\"\n        },\n        {\n            \"id\": \"8ff8361f-48e0-4b1c-85df-063eb491bdbb\",\n            \"name\": \"MALUKU UTARA\"\n        },\n        {\n            \"id\": \"9288fc77-a1b2-4fee-95c4-d2d418e88dcf\",\n            \"name\": \"NUSA TENGGARA TIMUR\"\n        },\n        {\n            \"id\": \"a29b63e0-3ca6-420a-8570-da3cd267a62a\",\n            \"name\": \"KALIMANTAN BARAT\"\n        },\n        {\n            \"id\": \"a7e71eff-a5c7-4155-9dea-e75b3e8d6888\",\n            \"name\": \"PAPUA BARAT DAYA\"\n        },\n        {\n            \"id\": \"aa5300d8-90c5-4f6b-baff-588705e3c6f6\",\n            \"name\": \"DKI JAKARTA\"\n        },\n        {\n            \"id\": \"ab6e96fb-6475-401f-886a-e922119871d0\",\n            \"name\": \"DI YOGYAKARTA\"\n        },\n        {\n            \"id\": \"acf02d47-8421-4bce-871c-d1657a6d5f06\",\n            \"name\": \"SULAWESI UTARA\"\n        },\n        {\n            \"id\": \"b721b6fd-5570-43e7-8032-fb2273532ef4\",\n            \"name\": \"PAPUA\"\n        },\n        {\n            \"id\": \"bd294fc0-8ad1-4e1e-be79-debc10290ee9\",\n            \"name\": \"JAWA TENGAH\"\n        },\n        {\n            \"id\": \"c177b5a5-ddb1-4692-82fb-cacc7208e05c\",\n            \"name\": \"KALIMANTAN TIMUR\"\n        },\n        {\n            \"id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n            \"name\": \"JAWA TIMUR\"\n        },\n        {\n            \"id\": \"c72db554-401c-4f68-b38f-30a9a7465063\",\n            \"name\": \"SUMATERA UTARA\"\n        },\n        {\n            \"id\": \"ce182588-8ad0-4164-bb9d-e2f766dba8e2\",\n            \"name\": \"LAMPUNG\"\n        },\n        {\n            \"id\": \"cfb32df3-dad3-491e-a958-d7a75c6d19eb\",\n            \"name\": \"MALUKU\"\n        },\n        {\n            \"id\": \"e942e3b0-b727-4b36-8fcc-89048618bdc6\",\n            \"name\": \"SULAWESI SELATAN\"\n        },\n        {\n            \"id\": \"ec3dd4be-7b1e-4fb8-b54c-cb97f7d62bb0\",\n            \"name\": \"BANTEN\"\n        },\n        {\n            \"id\": \"f5c2f166-c663-411b-9817-5891f4bc58b3\",\n            \"name\": \"PAPUA SELATAN\"\n        },\n        {\n            \"id\": \"fe1e1829-d77c-4cfc-ae59-f7d98a47b332\",\n            \"name\": \"PAPUA TENGAH\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Regency",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/regency/12c7fe8f-4e14-46c7-b379-663794784146",
+              "host": ["{{url}}"],
+              "path": [
+                "area",
+                "regency",
+                "12c7fe8f-4e14-46c7-b379-663794784146"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Regency",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/regency/12c7fe8f-4e14-46c7-b379-663794784146",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "area",
+                    "regency",
+                    "12c7fe8f-4e14-46c7-b379-663794784146"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "3558"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"de6-ceZJZPm9kF4uDVwsLq+ZQ9YpTyU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:39:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data regency\",\n    \"data\": [\n        {\n            \"id\": \"0c995f63-29e9-4c9a-b0f9-3c521a74e7b7\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA CIMAHI\"\n        },\n        {\n            \"id\": \"10eee177-a44a-4a66-a39f-8ccd66992218\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIAMIS\"\n        },\n        {\n            \"id\": \"185b3c18-e247-4a9d-83ad-b84efccf926b\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BANJAR\"\n        },\n        {\n            \"id\": \"19ee4d08-4dab-4231-80bf-9d762324be89\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN TASIKMALAYA\"\n        },\n        {\n            \"id\": \"20c04e08-eac4-412f-8b54-73aa660c9b06\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN INDRAMAYU\"\n        },\n        {\n            \"id\": \"24d98e69-0f07-4883-902d-8e3077a70422\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BOGOR\"\n        },\n        {\n            \"id\": \"25d32932-ed2e-47f7-8da3-5580cbb3c076\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN KUNINGAN\"\n        },\n        {\n            \"id\": \"2d1444f2-edbc-4a7e-a9d8-f4a9553e9fe2\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA CIREBON\"\n        },\n        {\n            \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BANDUNG\"\n        },\n        {\n            \"id\": \"4075357c-6831-4280-8890-28640fd5af45\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN PURWAKARTA\"\n        },\n        {\n            \"id\": \"42bd8c98-4c5b-465f-834d-7046ce1b3b1a\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA TASIKMALAYA\"\n        },\n        {\n            \"id\": \"6c476b02-bab7-48ca-8985-289dd4a2238f\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BANDUNG\"\n        },\n        {\n            \"id\": \"724f7e17-d87e-46c0-818f-c43a7ea1f8bf\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN GARUT\"\n        },\n        {\n            \"id\": \"79d8e2df-5d7e-4dca-a2e4-e138267f4b7e\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUKABUMI\"\n        },\n        {\n            \"id\": \"7ce45f2b-1dc4-47dc-964c-cb1d633534e2\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN PANGANDARAN\"\n        },\n        {\n            \"id\": \"7e128932-ad7a-4e3b-990e-fa7c408ad10f\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BANDUNG BARAT\"\n        },\n        {\n            \"id\": \"8e1aaaee-a9c9-481b-beab-055160fe3307\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BEKASI\"\n        },\n        {\n            \"id\": \"99ea3eb7-1cb8-4195-84b7-e89c8c36c4fe\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUBANG\"\n        },\n        {\n            \"id\": \"9ef33295-da87-471a-81f4-b6260ce2e35e\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIANJUR\"\n        },\n        {\n            \"id\": \"b7b47be8-a77a-40a3-bb27-4212dde6b3ab\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN KARAWANG\"\n        },\n        {\n            \"id\": \"b7f2230a-1479-47a5-87dc-5829d0bcbe84\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA BOGOR\"\n        },\n        {\n            \"id\": \"c6b84ca7-a629-4e8b-aaac-533f8e2c8ea8\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN BEKASI\"\n        },\n        {\n            \"id\": \"cc2f7d85-8ee9-4662-9831-e62a69d54497\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN CIREBON\"\n        },\n        {\n            \"id\": \"d8a797b2-11d4-4abb-9906-b19de4c39d60\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN SUMEDANG\"\n        },\n        {\n            \"id\": \"d923a5e3-8682-4a66-8b6a-35c660141019\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KABUPATEN MAJALENGKA\"\n        },\n        {\n            \"id\": \"f2565498-fb6b-458e-aa38-27415a816c70\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA DEPOK\"\n        },\n        {\n            \"id\": \"f9ea44d2-d1f4-42a8-be7d-b66c20404917\",\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"name\": \"KOTA SUKABUMI\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Regency Data",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/area/regency?perPage=10&page=1&q=ban",
+              "host": ["{{url}}"],
+              "path": ["area", "regency"],
+              "query": [
+                {
+                  "key": "perPage",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "q",
+                  "value": "ban"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Regency Data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/area/regency?perPage=10&page=1&q=ban",
+                  "host": ["{{url}}"],
+                  "path": ["area", "regency"],
+                  "query": [
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "q",
+                      "value": "ban"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1378"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"562-MQ8nIdUTxErkjQmnatdf15aYyNI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 26 Jan 2025 09:40:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Data regency\",\n    \"data\": {\n        \"total\": 34,\n        \"values\": [\n            {\n                \"id\": \"0ed1594d-d0bf-45fe-aaf8-86176c366af7\",\n                \"area_province_id\": \"bd294fc0-8ad1-4e1e-be79-debc10290ee9\",\n                \"name\": \"KABUPATEN BANYUMAS\"\n            },\n            {\n                \"id\": \"185b3c18-e247-4a9d-83ad-b84efccf926b\",\n                \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"KOTA BANJAR\"\n            },\n            {\n                \"id\": \"1967cf94-7abf-492c-a103-f75270b941c9\",\n                \"area_province_id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n                \"name\": \"KABUPATEN BANGKALAN\"\n            },\n            {\n                \"id\": \"1aae1264-3660-4b20-8472-6079f7e72801\",\n                \"area_province_id\": \"c3cbc450-ec68-4494-8877-2bde6385f146\",\n                \"name\": \"KABUPATEN JOMBANG\"\n            },\n            {\n                \"id\": \"257968ac-a3a2-46b0-afa1-237c105302f5\",\n                \"area_province_id\": \"ce182588-8ad0-4164-bb9d-e2f766dba8e2\",\n                \"name\": \"KOTA BANDAR LAMPUNG\"\n            },\n            {\n                \"id\": \"278e6d26-4c41-476f-91e6-8be4b972092c\",\n                \"area_province_id\": \"5d5ac9bd-b653-4579-a743-63eed0d71c76\",\n                \"name\": \"KOTA BANDA ACEH\"\n            },\n            {\n                \"id\": \"344dbee6-a5ef-4eee-a0c5-7342368a7d64\",\n                \"area_province_id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n                \"name\": \"KABUPATEN BANGLI\"\n            },\n            {\n                \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n                \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"KABUPATEN BANDUNG\"\n            },\n            {\n                \"id\": \"48f47776-f6f9-49c3-8b50-642d1338174d\",\n                \"area_province_id\": \"613c987a-a406-4521-89e0-21b0e07e2bb0\",\n                \"name\": \"KABUPATEN TABANAN\"\n            },\n            {\n                \"id\": \"51aa96ef-bc9b-474c-8c77-f6881cb1dcaa\",\n                \"area_province_id\": \"e942e3b0-b727-4b36-8fcc-89048618bdc6\",\n                \"name\": \"KABUPATEN BANTAENG\"\n            }\n        ]\n    }\n}"
             }
           ]
         }

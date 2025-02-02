@@ -1,10 +1,10 @@
 'use strict';
 
-import { v4 as uuidv4 } from 'uuid';
+import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { variable } from './policy.variable';
 import { helper } from '../../../helpers/helper';
-import { repository } from './policy.respository';
+import { repository } from './policy.repository';
 import { transformer } from './policy.transformer';
 import { response } from '../../../helpers/response';
 
@@ -14,10 +14,21 @@ export default class Controller {
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
+
+      let condition: any = {};
+      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+        condition = {
+          [Op.or]: [
+            { policy_holder: req?.user?.client_id },
+            { insured_holder: req?.user?.client_id },
+          ],
+        };
+
       const { count, rows } = await repository.index({
         limit: parseInt(limit),
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
+        condition: condition,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
       const policy = await transformer.list(rows);
@@ -61,17 +72,13 @@ export default class Controller {
       const { detail } = req?.body;
       if (detail?.length > 0) {
         for (let i in detail) {
+          const dataDetail: Object = helper.only(variable.detail(), detail[i]);
           await repository.createDetail({
             payload: {
-              id: uuidv4(),
+              ...dataDetail,
+              unit_link: req?.body?.unit_link || null,
+              fund: req?.body?.fund || null,
               policy_id: policy?.dataValues?.policy_id,
-              unit_link: detail[i]?.unit_link,
-              fund: detail[i]?.fund,
-              cash_value: detail[i]?.cash_value,
-              benefit:
-                detail[i]?.benefit && detail[i]?.benefit != undefined
-                  ? JSON.stringify(detail[i]?.benefit)
-                  : null,
               created_by: req?.user?.id,
             },
           });
@@ -106,18 +113,19 @@ export default class Controller {
           condition: { policy_id: id },
         });
         for (let i in detail) {
+          const dataDetail: Object = helper.only(
+            variable.detail(),
+            detail[i],
+            true
+          );
           await repository.createDetail({
             payload: {
-              id: uuidv4(),
+              ...dataDetail,
               policy_id: id,
-              unit_link: detail[i]?.unit_link,
-              fund: detail[i]?.fund,
-              cash_value: detail[i]?.cash_value,
-              benefit:
-                detail[i]?.benefit && detail[i]?.benefit != undefined
-                  ? JSON.stringify(detail[i]?.benefit)
-                  : null,
+              unit_link: req?.body?.unit_link || null,
+              fund: req?.body?.fund || null,
               created_by: req?.user?.id,
+              modified_by: req?.user?.id,
             },
           });
         }

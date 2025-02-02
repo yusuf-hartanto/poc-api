@@ -15,7 +15,10 @@ const Model = conn.sequelize.define(
     name: {
       type: DataTypes.STRING,
     },
-    bod: {
+    ktp: {
+      type: DataTypes.STRING,
+    },
+    dob: {
       type: DataTypes.DATEONLY,
     },
     age: {

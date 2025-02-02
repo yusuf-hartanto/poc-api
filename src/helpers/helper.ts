@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import axios from 'axios';
 import sharp from 'sharp';
 import moment from 'moment';
 import dotenv from 'dotenv';
@@ -13,6 +14,7 @@ import { Response } from 'express';
 import { response } from '../helpers/response';
 import Telegram, { Telegram_ParseModes } from 'tele-sender';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
+import { repository as repoCurr } from '../module/currency/currency.repository';
 
 interface mail {
   host: string;
@@ -268,7 +270,7 @@ export default class Helper {
       );
       await this.sendNotif('success update usia');
     } catch (err: any) {
-      await this.sendNotif(`gagal update usia: ${err?.message}`);
+      await this.sendNotif(`failed update usia: ${err?.message}`);
     }
   }
 
@@ -279,6 +281,73 @@ export default class Helper {
 
   public isValidUUID(uuid: string) {
     return uuidValidate(uuid) && uuidVersion(uuid) == 4;
+  }
+
+  public makeid(length: number): string {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter: number = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  }
+
+  public async fetchLatestCurrency(currency: string = 'USD') {
+    let message: string = 'success update currency';
+    try {
+      const response = await axios.get(
+        `https://api.exchangerate-api.com/v4/latest/${currency}`
+      );
+      const { base, date, time_last_updated, rates } = response?.data;
+      if (rates) {
+        const ratesKeys = Object.keys(rates);
+        for (let i = 0; i < ratesKeys.length; i++) {
+          const key = ratesKeys[i];
+          const condition = {
+            base: base,
+            key: key,
+          };
+          const check = await repoCurr.detail(condition);
+          if (check) {
+            await repoCurr.update({
+              payload: {
+                base,
+                key,
+                last_update: date,
+                time_last_updated: moment(time_last_updated).format('HH:mm:ss'),
+                value: rates[key] || 0,
+              },
+              condition,
+            });
+          } else {
+            await repoCurr.create({
+              payload: {
+                base,
+                key,
+                last_update: date,
+                time_last_updated: moment(time_last_updated).format('HH:mm:ss'),
+                value: rates[key] || 0,
+              },
+            });
+          }
+        }
+      } else {
+        message = 'failed update currency: base not found';
+      }
+    } catch (err: any) {
+      message = `failed update currency: ${err?.message}`;
+    }
+
+    try {
+      await this.sendNotif(message);
+    } catch (err: any) {
+      await this.sendNotif(`failed sendNotif update currency: ${err?.message}`);
+    }
+    return message;
   }
 }
 
