@@ -130,15 +130,14 @@ jobs:
         --document-name "AWS-RunShellScript" \
         --parameters '{
         "commands": [
-            "sudo su - heimdall",
-            "cd apps",
-            "mkdir poc-app-api",
-            "echo '${{ env.DOCKER_COMPOSE_YML }}' | base64 -d > docker-compose.yml",
-            "chown heimdall:heimdall docker-compose.yml",
-            "aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
-            "docker-compose down",
-            "docker image prune -a --force --filter 'label=app-poc-api'",
-            "docker-compose up -d"
+            "sudo su - heimdall bash -c \
+            cd apps && mkdir poc-app-api \
+              && echo '${{ env.DOCKER_COMPOSE_YML }}' | base64 -d > docker-compose.yml \
+              && chown heimdall:heimdall docker-compose.yml \
+              && aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} \
+              && docker-compose down \
+              && docker image prune -a --force --filter="label=app-poc-api" \
+              && docker-compose up -d"
         ]
         }' \
         --region ${{ secrets.AWS_REGION }}
