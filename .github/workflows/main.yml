@@ -104,7 +104,6 @@ jobs:
         echo "Get environment to passing into github env"
         echo "ECR_REGISTRY=`echo ${ECR_REGISTRY}`" >> $GITHUB_ENV
         echo "ECR_REPOSITORY=`echo ${ECR_REPOSITORY}`" >> $GITHUB_ENV
-        echo "DOLLAR='$'" >> $GITHUB_ENV
         echo "ENVIRONMENT=`echo ${{ needs.build-and-push.outputs.ENVIRONMENT }}`" >> $GITHUB_ENV
         echo "IMAGE_TAG=`echo ${{ needs.build-and-push.outputs.IMAGE_TAG }}`" >> $GITHUB_ENV
         echo "DB_HOST=`echo ${{ secrets.DB_HOST }}`" >> $GITHUB_ENV
