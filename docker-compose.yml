@@ -1,6 +1,6 @@
 services:
   poc-api:
-    image: ${ECR_REGISTRY}/${ECR_REPOSTIORY}:${ENVIRONMENT}-${IMAGE_TAG}
+    image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${ENVIRONMENT}-${IMAGE_TAG}
     pull_policy: if_not_present
     ports:
       - '5000:5000'
