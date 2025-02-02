@@ -47,19 +47,17 @@ jobs:
         echo "ECR_REPOSITORY=`echo ${{ secrets.ECR_REPOSITORY }}`" >> $GITHUB_OUTPUT
 
     - name: Build and Push Docker Image
-      env:
-        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-      run: |
-        echo "Building and pushing image: ${{ steps.build-env.outputs.ECR_REGISTRY}}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-${{ steps.build-env.outputs.IMAGE_TAG }} "
-        docker buildx build \
-          --platform linux/arm64 \
-          --label app-poc-api \
-          --tag ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.IMAGE_TAG }} \
-          --tag ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-${{ steps.build-env.outputs.IMAGE_TAG }} \
-          --tag ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-latest
-          --push \
-          .
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        platforms: linux/arm64
+        labels: |
+            app-poc-api
+        tags: |
+            ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.IMAGE_TAG }}
+            ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-${{ steps.build-env.outputs.IMAGE_TAG }}
+            ${{ steps.build-env.outputs.ECR_REGISTRY }}/${{ steps.build-env.outputs.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-latest
 
     - name: Verify Image in ECR
       env:
