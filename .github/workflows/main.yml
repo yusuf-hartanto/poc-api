@@ -137,7 +137,7 @@ jobs:
             "chown heimdall:heimdall docker-compose.yml",
             "aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
             "docker-compose down",
-            "docker image prune -a --force --filter="label=app-poc-api"",
+            "docker image prune -a --force --filter 'label=app-poc-api'",
             "docker-compose up -d"
         ]
         }' \
