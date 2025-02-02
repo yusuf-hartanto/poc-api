@@ -1,15 +1,15 @@
 services:
   poc-api:
-    image: ${ECR_REGISTRY}/${ECR_REPOSTIORY}:${ENVIRONMENT}-${IMAGE_TAG}
+    image: poc-api:latest
     pull_policy: if_not_present
     ports:
-      - '5000:5000'
+      - "5000:5000"
     restart: always
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_NAME: ${DB_NAME}
-      DB_USER: '${DB_USER}'
-      DB_PASSWORD: '${DB_PASSWORD}'
+      DB_HOST: db-poc.dev-alphact.internal
+      DB_NAME: dbpoc
+      DB_USER: 'heimdall-db'
+      DB_PASSWORD: 'mh8BgLKInh/OZuUIZSqy6e2s'
       DB_DEBUG: false
       PATH_ASSET: public/uploads
       BASE_URL: http://127.0.0.1:5000
@@ -25,7 +25,7 @@ services:
       MAIL_PASSWORD: password
       MAIL_PORT: 578
       MAIL_SERVER: server
-      TOKEN_TELEGRAM: ${TOKEN_TELEGRAM}
-      CHAT_ID_TELEGRAM: ${CHAT_ID_TELEGRAM}
+      TOKEN_TELEGRAM: 5987860245:AAEHu96VGr35DdZcqQzvlvKXOVl_nvPHHB8
+      CHAT_ID_TELEGRAM: 843549776
     command: >
       sh -c "npm run db:migrate && npm start"
