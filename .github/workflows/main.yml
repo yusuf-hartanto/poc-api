@@ -121,25 +121,30 @@ jobs:
       run: |
         base64 docker-compose.yml | tr -d '\n' > docker-compose.yml.b64
         echo "DOCKER_COMPOSE_YML=$(cat docker-compose.yml.b64)" >> $GITHUB_ENV
-
+    
+    - name: Create JSON file
+      run: |
+        cat <<EOF > ssm-params.json
+        {
+          "commands": [
+            "sudo -u heimdall bash -c ' 
+              cd apps && 
+              mkdir -p poc-app-api && 
+              echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && 
+              chown heimdall:heimdall docker-compose.yml && 
+              aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && 
+              docker-compose down && 
+              docker image prune -a --force --filter=\"label=app-poc-api\" && 
+              docker-compose up -d 
+            '"
+          ]
+        }
+        EOF
     
     - name: Deploy to EC2
       run: |
         aws ssm send-command \
         --instance-ids "${{ env.INSTANCE_ID }}" \
         --document-name "AWS-RunShellScript" \
-        --parameters '{
-        "commands": [
-          "sudo -u heimdall bash -c '\'' 
-            cd apps && \
-            mkdir -p poc-app-api && \
-            echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && \
-            chown heimdall:heimdall docker-compose.yml && \
-            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && \
-            docker-compose down && \
-            docker image prune -a --force --filter=\"label=app-poc-api\" && \
-            docker-compose up -d 
-          '\''"
-        ]
-        }' \
+        --parameters file://ssm-params.json \
         --region ${{ secrets.AWS_REGION }}
