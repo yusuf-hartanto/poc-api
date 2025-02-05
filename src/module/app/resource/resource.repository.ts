@@ -135,10 +135,7 @@ export default class Respository {
           as: 'role',
           required: true,
           where: {
-            [Op.or]: [
-              { role_name: 'administrator' },
-              { role_name: 'admin pusat' },
-            ],
+            role_name: 'administrator',
           },
         },
       ],

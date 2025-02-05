@@ -92,19 +92,19 @@ export default class Controller {
       const role: string = req?.user?.role_name;
 
       let condition: any = {};
-      if (role != 'administrator') {
-        if (role == 'agent' && client) {
+      if (['administrator', 'agent'].includes(role)) {
+        if (client && client != undefined) {
           condition = {
             [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
           };
-        } else {
-          condition = {
-            [Op.or]: [
-              { policy_holder: req?.user?.client_id },
-              { insured_holder: req?.user?.client_id },
-            ],
-          };
         }
+      } else {
+        condition = {
+          [Op.or]: [
+            { policy_holder: req?.user?.client_id },
+            { insured_holder: req?.user?.client_id },
+          ],
+        };
       }
 
       const jatuhTempo = await repoPolicy.list({
@@ -144,19 +144,19 @@ export default class Controller {
       const flag: any = req?.query?.flag;
 
       let condition: any = {};
-      if (role != 'administrator') {
-        if (role == 'agent' && client) {
+      if (['administrator', 'agent'].includes(role)) {
+        if (client && client != undefined) {
           condition = {
             [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
           };
-        } else {
-          condition = {
-            [Op.or]: [
-              { policy_holder: req?.user?.client_id },
-              { insured_holder: req?.user?.client_id },
-            ],
-          };
         }
+      } else {
+        condition = {
+          [Op.or]: [
+            { policy_holder: req?.user?.client_id },
+            { insured_holder: req?.user?.client_id },
+          ],
+        };
       }
 
       if (flag && flag == 'total_premi') {

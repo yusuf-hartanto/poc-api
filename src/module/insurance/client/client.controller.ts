@@ -82,7 +82,7 @@ export default class Controller {
         relation: relation,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
-      const clients = await transformer.relation(rows, { option });
+      const clients = await transformer.relation(rows, { option, relation });
       return response.success(
         'Data client',
         { total: count, values: clients },
