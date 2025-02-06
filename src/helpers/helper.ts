@@ -259,18 +259,37 @@ export default class Helper {
     try {
       await conn.sequelize.query(
         `
-          UPDATE app_resource SET usia = (
-            SELECT timestampdiff(YEAR, ar.date_of_birth, curdate()) AS usia
-            FROM app_resource ar
-            WHERE ar.resource_id = app_resource.resource_id
-          )
-          WHERE date_of_birth IS NOT NULL AND date_of_birth < curdate()
+          UPDATE app_resource AS ar
+          JOIN (
+              SELECT resource_id, TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS usia
+              FROM app_resource
+          ) AS subquery ON ar.resource_id = subquery.resource_id
+          SET ar.usia = subquery.usia;
         `,
         { type: QueryTypes.SELECT }
       );
       await this.sendNotif('success update usia');
     } catch (err: any) {
       await this.sendNotif(`failed update usia: ${err?.message}`);
+    }
+  }
+
+  public async updateClientAge() {
+    try {
+      await conn.sequelize.query(
+        `
+          UPDATE client AS cl
+          JOIN (
+              SELECT id, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age
+              FROM client
+          ) AS subquery ON cl.id = subquery.id
+          SET cl.age = subquery.age;
+        `,
+        { type: QueryTypes.SELECT }
+      );
+      await this.sendNotif('success update usia client');
+    } catch (err: any) {
+      await this.sendNotif(`failed update usia client: ${err?.message}`);
     }
   }
 

@@ -100,9 +100,8 @@ export default class Transformer {
     let result: Array<object> = [];
     for (let i in data) {
       if (flag && flag?.option == 1) {
-        if (flag?.relation == undefined || !flag?.relation) {
-          result.push(data[i]?.dataValues);
-        }
+        result.push(data[i]?.dataValues);
+
         await nestedParentOption(result, data[i]?.dataValues);
         await nestedChildOption(result, data[i]?.dataValues);
       } else {
