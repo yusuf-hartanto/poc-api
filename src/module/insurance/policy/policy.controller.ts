@@ -76,7 +76,7 @@ export default class Controller {
           await repository.createDetail({
             payload: {
               ...dataDetail,
-              unit_link: req?.body?.unit_link || null,
+              unit_link: req?.body?.unit_link || 0,
               fund: req?.body?.fund || null,
               policy_id: policy?.dataValues?.policy_id,
               created_by: req?.user?.id,
@@ -122,7 +122,7 @@ export default class Controller {
             payload: {
               ...dataDetail,
               policy_id: id,
-              unit_link: req?.body?.unit_link || null,
+              unit_link: req?.body?.unit_link || 0,
               fund: req?.body?.fund || null,
               created_by: req?.user?.id,
               modified_by: req?.user?.id,
