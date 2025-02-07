@@ -109,21 +109,14 @@ export default class Controller {
 
       const jatuhTempo = await repoPolicy.list({
         ...condition,
-        [Op.and]: [
-          {
-            issued_date: Sequelize.where(
-              fn('MONTH', col('issued_date')),
-              moment().format('M')
-            ),
-          },
-          {
-            issued_date: Sequelize.where(
-              fn('YEAR', col('issued_date')),
-              moment().format('YYYY')
-            ),
-          },
-          { premi_off: 'N' },
-        ],
+        policy_id: {
+          [Op.in]: Sequelize.literal(`(
+            SELECT pc.policy_id
+            FROM insurance_policy pc
+            WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
+            AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+          )`),
+        },
       });
 
       const benefit = await repoPolicy.list(condition);
@@ -162,21 +155,14 @@ export default class Controller {
       if (flag && flag == 'total_premi') {
         condition = {
           ...condition,
-          [Op.and]: [
-            {
-              issued_date: Sequelize.where(
-                fn('MONTH', col('issued_date')),
-                moment().format('M')
-              ),
-            },
-            {
-              issued_date: Sequelize.where(
-                fn('YEAR', col('issued_date')),
-                moment().format('YYYY')
-              ),
-            },
-            { premi_off: 'N' },
-          ],
+          policy_id: {
+            [Op.in]: Sequelize.literal(`(
+              SELECT pc.policy_id
+              FROM insurance_policy pc
+              WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
+              AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+            )`),
+          },
         };
       }
 
