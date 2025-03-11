@@ -34,6 +34,20 @@ export default class Controller {
       return helper.catchError(`menu index: ${err?.message}`, 500, res);
     }
   }
+  
+  public async detail(req: Request, res: Response) {
+    try {
+      const id: string = req.params.id || '';
+      if (!helper.isValidUUID(id))
+        return response.failed(`id ${id} is not valid`, 400, res);
+
+      const result: Object | any = await repository.detail({ menu_id: id });
+      if (!result) return response.failed('Data not found', 404, res);
+      return response.success('Data menu', result, res);
+    } catch (err: any) {
+      return helper.catchError(`menu detail: ${err?.message}`, 500, res);
+    }
+  }
 
   public async create(req: Request, res: Response) {
     try {
@@ -42,10 +56,15 @@ export default class Controller {
       });
       if (check) return response.failed('Data already exists', 400, res);
       const data: Object = helper.only(variable.fillable(), req?.body);
+
+      let parent_id: string = req?.body?.parent_id || '';
+      if (!parent_id || parent_id == undefined) parent_id = '00000000-0000-0000-0000-000000000000';
+
       await repository.create({
         payload: {
           ...data,
           module_name: req?.body?.module_name.replace(/ /g, ''),
+          parent_id: parent_id,
           created_by: req?.user?.id,
         },
       });

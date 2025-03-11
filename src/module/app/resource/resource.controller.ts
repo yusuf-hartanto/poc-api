@@ -84,7 +84,7 @@ export default class Controller {
   public async create(req: Request, res: Response) {
     let confirm_hash: string = '';
     let message: string = '';
-    let username: string = '';
+    let username: string = req?.body?.username || '';
 
     try {
       const checkEmail = await repository.check({
@@ -94,11 +94,13 @@ export default class Controller {
       if (!req?.body?.password)
         return response.failed('Password is required', 422, res);
 
-      username = req?.body?.email.split('@')[0];
-      const checkUsername = await repository.check({
-        username: username,
-      });
-      if (checkUsername) username = username + helper.random(100, 999);
+      if (!username || username == undefined) {
+        username = req?.body?.email.split('@')[0];
+        const checkUsername = await repository.check({
+          username: username,
+        });
+        if (checkUsername) username = username + helper.random(100, 999);
+      }
 
       let role_id: any = null;
       let image_foto: any = null;

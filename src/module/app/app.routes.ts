@@ -53,6 +53,12 @@ router.get(
   auth.checkAccess('menu'),
   menu.index
 );
+router.get(
+  '/menu/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('menu'),
+  menu.detail
+);
 router.post(
   '/menu',
   auth.checkBearerToken,
