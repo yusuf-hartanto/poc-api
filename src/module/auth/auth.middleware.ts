@@ -161,7 +161,7 @@ export default class Middleware {
         const role_menu: any = await repoRoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });
-        const ability = role_menu?.dataValues?.menu.find(
+        const ability = role_menu?.dataValues?.role_menu.find(
           (rm: any) => rm?.menu?.menu_name.toLowerCase() === role.toLowerCase()
         );
 

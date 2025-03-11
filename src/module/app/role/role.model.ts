@@ -48,6 +48,6 @@ const Model = conn.sequelize.define(
 Model.beforeCreate(
   (app_role: { role_id: string }) => (app_role.role_id = uuidv4())
 );
-Model.hasMany(RoleMenu, { as: 'menu', foreignKey: 'role_id' });
+Model.hasMany(RoleMenu, { as: 'role_menu', foreignKey: 'role_id' });
 
 export default Model;

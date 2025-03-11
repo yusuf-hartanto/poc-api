@@ -11,6 +11,16 @@ export default class Respository {
     });
   }
 
+  public allData(condition: any) {
+    return Model.findAll({
+      where: {
+        ...condition,
+        status: { [Op.ne]: 9 },
+      },
+      order: [['seq_number', 'ASC']],
+    });
+  }
+
   public index(data: any) {
     let query: Object = {
       where: { status: { [Op.ne]: 9 } },

@@ -4,14 +4,16 @@ import dotenv from 'dotenv';
 import moment from 'moment';
 import ExcelJS from 'exceljs';
 import puppeteer from 'puppeteer';
+import { Op, Sequelize } from 'sequelize';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
-import { Op, fn, col, Sequelize } from 'sequelize';
 import { response } from '../../helpers/response';
 import { transformer } from './global.transformer';
 import { repository as RepoMenu } from '../app/menu/menu.repository';
+import { repository as RoleMenu } from '../app/role.menu/role.menu.repository';
 import { repository as repoPolicy } from '../insurance/policy/policy.repository';
 import { transformer as transformerPolicy } from '../insurance/policy/policy.transformer';
+import { transformer as transformerRoleMenu } from '../app/role.menu/role.menu.transformer';
 
 dotenv.config();
 
@@ -217,6 +219,16 @@ const generateHtmlPDF = (title: string, details: any) => {
   return html;
 };
 
+const formatNavigationRole = (data: any) => {
+  let result: Array<object> = [];
+  if (data?.dataValues?.role_menu?.length > 0) {
+    result = data?.dataValues?.role_menu.map((rm: any) => rm?.menu);
+  }
+  console.warn(result);
+  const navigation = nestedChildren(result);
+  return navigation;
+};
+
 export default class Controller {
   public index(req: Request, res: Response) {
     return response.success('Hello from the POC RESTful API  !!!!!', null, res);
@@ -224,10 +236,23 @@ export default class Controller {
 
   public async navigation(req: Request, res: Response) {
     try {
-      const result = await RepoMenu.list();
-      if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
-      const navigation = nestedChildren(result);
+      let navigation: any;
+
+      const role_name: string = req?.user?.role_name;
+      if (role_name && role_name != undefined) {
+        const result = await RoleMenu.detailRole({
+          role_name: { [Op.like]: `%${role_name}%` },
+        });
+        if (result?.length < 1)
+          return response.failed('Data not found', 404, res);
+        navigation = formatNavigationRole(result);
+      } else {
+        const result = await RepoMenu.list();
+        if (result?.length < 1)
+          return response.failed('Data not found', 404, res);
+        navigation = nestedChildren(result);
+      }
+
       return response.success('Data navigation', navigation, res);
     } catch (err: any) {
       return helper.catchError(`navigation: ${err?.message}`, 500, res);

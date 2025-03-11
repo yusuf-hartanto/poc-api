@@ -13,8 +13,8 @@ export default class Transformer {
           role_id: data[i]?.dataValues?.role_id,
         });
         let ability: Array<object> = [];
-        if (role_menu?.dataValues?.menu?.length > 0) {
-          ability = role_menu?.dataValues?.menu.map((rm: any) => ({
+        if (role_menu?.dataValues?.role_menu?.length > 0) {
+          ability = role_menu?.dataValues?.role_menu.map((rm: any) => ({
             menu_id: rm?.menu?.menu_id,
             menu_name: rm?.menu?.menu_name,
             menu_icon: rm?.menu?.menu_icon,
@@ -55,8 +55,8 @@ export default class Transformer {
         role_id: resource?.role_id,
       });
       let ability: Array<object> = [];
-      if (role_menu?.dataValues?.menu?.length > 0) {
-        ability = role_menu?.dataValues?.menu.map((rm: any) => ({
+      if (role_menu?.dataValues?.role_menu?.length > 0) {
+        ability = role_menu?.dataValues?.role_menu.map((rm: any) => ({
           menu_id: rm?.menu?.menu_id,
           menu_name: rm?.menu?.menu_name,
           menu_icon: rm?.menu?.menu_icon,
