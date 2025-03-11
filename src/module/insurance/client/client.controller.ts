@@ -110,8 +110,8 @@ export default class Controller {
 
   public async create(req: Request, res: Response) {
     let confirm_hash: string = '';
-    let username: string = '';
-    let pass: string = helper.makeid(10);
+    let username: string = req?.body?.username;
+    let pass: string = req?.body?.password;
     let relationId: string = '';
 
     try {
@@ -134,8 +134,7 @@ export default class Controller {
         },
       });
 
-      if (relationId == '00000000-0000-0000-0000-000000000000') {
-        username = name.toLowerCase().replace(/ /g, '');
+      if (username && pass) {
         const checkUsername = await repoResource.check({
           username: username,
         });

@@ -1,5 +1,6 @@
 'use strict';
 
+import moment from 'moment';
 import { variable } from './survey.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
@@ -129,6 +130,7 @@ export default class Controller {
         event_id,
         form_id,
         question_id,
+        periode: moment().locale('id').format('YYYY-MM-DD'),
       });
 
       if (check) {

@@ -142,16 +142,30 @@ export default class Respository {
     });
   }
 
-  public findFormAnswerValue(condition: any) {
+  public findAnswerValuePeriode(condition: any) {
     return FormAnswerValue.findAll({
       where: condition,
-      order: [['created_date', 'DESC']],
+      attributes: ['event_id', 'periode'],
+      group: ['event_id', 'periode'],
+      order: [
+        ['event_id', 'DESC'],
+        ['periode', 'DESC'],
+      ],
       include: [
         {
           model: Event,
           as: 'event',
           required: false,
         },
+      ],
+    });
+  }
+
+  public findFormAnswerValue(condition: any) {
+    return FormAnswerValue.findAll({
+      where: condition,
+      order: [['created_date', 'DESC']],
+      include: [
         {
           model: Form,
           as: 'form',
@@ -164,18 +178,6 @@ export default class Respository {
   public detailFormAnswerValue(condition: any) {
     return FormAnswerValue.findOne({
       where: condition,
-      include: [
-        {
-          model: Event,
-          as: 'event',
-          required: false,
-        },
-        {
-          model: Form,
-          as: 'form',
-          required: false,
-        },
-      ],
     });
   }
 }

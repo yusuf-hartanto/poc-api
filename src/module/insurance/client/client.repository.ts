@@ -93,7 +93,7 @@ export default class Respository {
 
   public detailSurvey(condition: any) {
     return Model.findOne({
-      attributes: ['id', 'name', 'bod', 'age', 'contact_number', 'address'],
+      attributes: ['id', 'name', 'dob', 'age', 'contact_number', 'address'],
       where: {
         ...condition,
         status: { [Op.ne]: 9 },
