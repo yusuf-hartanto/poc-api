@@ -164,6 +164,18 @@ export default class Helper {
     };
   }
 
+  public async checkDirExport(type: string) {
+    const month: string = moment().format('YYYY-MM');
+    const path: string = `./public/${type}/${month}`;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
+    }
+    return {
+      dir: `/${type}/${month}`,
+      path: path,
+    };
+  }
+
   public async sendNotif(message: string) {
     await telegram.send(
       CHAT_ID_TELEGRAM,
@@ -367,6 +379,14 @@ export default class Helper {
       await this.sendNotif(`failed sendNotif update currency: ${err?.message}`);
     }
     return message;
+  }
+
+  public formatIDR(amount: number): string {
+    const roundedAmount = Math.round(amount);
+    const formattedAmount = roundedAmount
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return formattedAmount;
   }
 }
 

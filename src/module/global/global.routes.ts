@@ -22,5 +22,17 @@ router.get(
   auth.checkAccess('dashboard'),
   global.dashboard
 );
+router.get(
+  '/dashboard/excel',
+  auth.checkBearerToken,
+  auth.checkAccess('dashboard'),
+  global.dashboardExcel
+);
+router.get(
+  '/dashboard/pdf',
+  auth.checkBearerToken,
+  auth.checkAccess('dashboard'),
+  global.dashboardPDF
+);
 
 export default router;

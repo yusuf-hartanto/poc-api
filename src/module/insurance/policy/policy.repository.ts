@@ -5,33 +5,53 @@ import Model from './policy.model';
 import Detail from './policy.detail.model';
 
 export default class Respository {
-  public list(condition: any, benefit: string = '') {
-    let detailWhere = {};
-    if (benefit) detailWhere = { where: { benefit: benefit } };
-
-    return Model.findAll({
+  public list(data: any, withDetail: boolean = false, benefit: string = '') {
+    let query: Object = {
       where: {
-        ...condition,
+        ...data?.condition,
         status: { [Op.ne]: 9 },
       },
       order: [['created_date', 'DESC']],
-      include: [
-        {
-          model: Detail,
-          attributes: [
-            'id',
-            'policy_id',
-            'cash_value',
-            'benefit',
-            'start_date',
-            'end_date',
+    };
+    if (data?.keyword && data?.keyword != undefined) {
+      query = {
+        ...query,
+        where: {
+          ...data?.condition,
+          status: { [Op.ne]: 9 },
+          [Op.or]: [
+            { provider_company: { [Op.like]: `%${data?.keyword}%` } },
+            { product_name: { [Op.like]: `%${data?.keyword}%` } },
           ],
-          as: 'detail',
-          required: detailWhere ? true : false,
-          ...detailWhere,
         },
-      ],
-    });
+      };
+    }
+    if (withDetail) {
+      let detailWhere = {};
+      if (benefit) detailWhere = { where: { benefit: benefit } };
+
+      query = {
+        ...query,
+        include: [
+          {
+            model: Detail,
+            attributes: [
+              'id',
+              'policy_id',
+              'cash_value',
+              'benefit',
+              'start_date',
+              'end_date',
+            ],
+            as: 'detail',
+            required: detailWhere ? true : false,
+            ...detailWhere,
+          },
+        ],
+        distinct: true,
+      };
+    }
+    return Model.findAll(query);
   }
 
   public index(data: any, withDetail: boolean = false, benefit: string = '') {

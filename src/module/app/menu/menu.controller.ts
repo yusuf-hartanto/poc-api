@@ -34,7 +34,7 @@ export default class Controller {
       return helper.catchError(`menu index: ${err?.message}`, 500, res);
     }
   }
-  
+
   public async detail(req: Request, res: Response) {
     try {
       const id: string = req.params.id || '';
@@ -58,7 +58,8 @@ export default class Controller {
       const data: Object = helper.only(variable.fillable(), req?.body);
 
       let parent_id: string = req?.body?.parent_id || '';
-      if (!parent_id || parent_id == undefined) parent_id = '00000000-0000-0000-0000-000000000000';
+      if (!parent_id || parent_id == undefined)
+        parent_id = '00000000-0000-0000-0000-000000000000';
 
       await repository.create({
         payload: {
