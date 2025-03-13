@@ -472,7 +472,16 @@ export default class Controller {
       const title: string = `DATA ${flag.replace(/_/g, ' ').toUpperCase()}`;
       const urlPDF: string = `${dir}/${filename}`;
 
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage', // Avoids /dev/shm issues in Docker
+          '--disable-accelerated-2d-canvas',
+          '--disable-gpu', // Disable GPU hardware acceleration
+          '--remote-debugging-port=9222',
+        ],
+      });
       const page = await browser.newPage();
 
       const htmlContent = generateHtmlPDF(title, policy);
