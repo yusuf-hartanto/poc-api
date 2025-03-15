@@ -84,7 +84,7 @@ export default class Controller {
       const check = await repository.detail({ menu_id: id });
       if (!check) return response.failed('Data not found', 404, res);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
-      
+
       let parent_id: string = req?.body?.parent_id || '';
       if (!parent_id || parent_id == undefined)
         parent_id = '00000000-0000-0000-0000-000000000000';

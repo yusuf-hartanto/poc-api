@@ -65,7 +65,13 @@ export default class Helper {
     let result: any = {};
 
     keys.forEach((i) => {
-      if ((data[i] && data[i] !== undefined) || data[i] == 0) {
+      if (
+        (data[i] &&
+          data[i] !== undefined &&
+          data[i] !== '' &&
+          data[i] != 'null') ||
+        data[i] === 0
+      ) {
         result[i] = data[i];
       }
     });

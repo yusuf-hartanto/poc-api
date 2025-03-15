@@ -57,7 +57,7 @@ const fetchDataDashboard = async (req: Request) => {
     };
   }
 
-  if (flag && flag == 'total_premi') {
+  if (flag && flag != 'false' && flag == 'total_premi') {
     condition = {
       ...condition,
       policy_id: {
@@ -74,6 +74,7 @@ const fetchDataDashboard = async (req: Request) => {
   let benefit: string = '';
   if (
     flag &&
+    flag != 'false' &&
     ['up_jiwa', 'rs', 'penyakit_kritis', 'pensiun', 'dijamin'].includes(flag)
   ) {
     benefit = flag;
@@ -124,13 +125,13 @@ const generateDataExcel = (sheet: any, details: any) => {
   for (let i in details) {
     sheet.addRow([
       parseInt(i) + 1,
-      details[i]?.policy_number,
-      details[i]?.provider_company,
-      details[i]?.product_name,
-      details[i]?.policy_holder_name,
-      details[i]?.insured_holder_name,
-      details[i]?.beneficiary_holder_name,
-      details[i]?.issued_date,
+      details[i]?.policy_number || '',
+      details[i]?.provider_company || '',
+      details[i]?.product_name || '',
+      details[i]?.policy_holder_name || '',
+      details[i]?.insured_holder_name || '',
+      details[i]?.beneficiary_holder_name || '',
+      details[i]?.issued_date || '',
       details[i]?.payment_term
         ? `${details[i]?.payment_term} ${details[i]?.payment_term_unit}`
         : details[i]?.payment_term_unit,
@@ -192,13 +193,13 @@ const generateHtmlPDF = (title: string, details: any) => {
     html += `
       <tr>
         <td>${parseInt(i) + 1}</td>
-        <td>${details[i]?.policy_number}</td>
-        <td>${details[i]?.provider_company}</td>
-        <td>${details[i]?.product_name}</td>
-        <td>${details[i]?.policy_holder_name}</td>
-        <td>${details[i]?.insured_holder_name}</td>
-        <td>${details[i]?.beneficiary_holder_name}</td>
-        <td>${details[i]?.issued_date}</td>
+        <td>${details[i]?.policy_number || ''}</td>
+        <td>${details[i]?.provider_company || ''}</td>
+        <td>${details[i]?.product_name || ''}</td>
+        <td>${details[i]?.policy_holder_name || ''}</td>
+        <td>${details[i]?.insured_holder_name || ''}</td>
+        <td>${details[i]?.beneficiary_holder_name || ''}</td>
+        <td>${details[i]?.issued_date || ''}</td>
         <td>
           ${
             details[i]?.payment_term
@@ -434,8 +435,9 @@ export default class Controller {
 
       const { dir, path } = await helper.checkDirExport('excel');
 
-      const filename: string = `${flag}-${moment().format('DDMMYYYY')}.xlsx`;
-      const title: string = `DATA ${flag.replace(/_/g, ' ').toUpperCase()}`;
+      const name: string = flag && flag != 'false' ? flag : 'dashboard';
+      const filename: string = `${name}-${moment().format('DDMMYYYY')}.xlsx`;
+      const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
       const urlExcel: string = `${dir}/${filename}`;
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet(title);
@@ -468,8 +470,9 @@ export default class Controller {
 
       const { dir, path } = await helper.checkDirExport('pdf');
 
-      const filename: string = `${flag}-${moment().format('DDMMYYYY')}.pdf`;
-      const title: string = `DATA ${flag.replace(/_/g, ' ').toUpperCase()}`;
+      const name: string = flag && flag != 'false' ? flag : 'dashboard';
+      const filename: string = `${name}-${moment().format('DDMMYYYY')}.pdf`;
+      const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
       const urlPDF: string = `${dir}/${filename}`;
 
       const browser = await puppeteer.launch({
