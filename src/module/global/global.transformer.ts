@@ -55,7 +55,7 @@ export default class Transformer {
 
       let premiValue = parseFloat(data?.premi_value);
       const curr = data?.premi_currency;
-      if (curr != 'IDR') {
+      if (curr && curr != 'IDR') {
         const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
         if (rate)
           premiValue = parseFloat(rate?.getDataValue('value')) * premiValue;
@@ -68,7 +68,7 @@ export default class Transformer {
 
       let rateCurr = 1;
       const curr = dataBenefit?.premi_currency;
-      if (curr != 'IDR') {
+      if (curr && curr != 'IDR') {
         const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
         if (rate) rateCurr = parseFloat(rate?.getDataValue('value'));
       }

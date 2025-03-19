@@ -13,7 +13,6 @@ import { repository as RepoMenu } from '../app/menu/menu.repository';
 import { repository as RoleMenu } from '../app/role.menu/role.menu.repository';
 import { repository as repoPolicy } from '../insurance/policy/policy.repository';
 import { transformer as transformerPolicy } from '../insurance/policy/policy.transformer';
-import { transformer as transformerRoleMenu } from '../app/role.menu/role.menu.transformer';
 
 dotenv.config();
 
@@ -45,39 +44,31 @@ const fetchDataDashboard = async (req: Request) => {
   if (['administrator', 'agent'].includes(role)) {
     if (client && client != undefined) {
       condition = {
-        [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
+        policy_holder: client,
       };
     }
   } else {
     condition = {
-      [Op.or]: [
-        { policy_holder: req?.user?.client_id },
-        { insured_holder: req?.user?.client_id },
-      ],
+      policy_holder: req?.user?.client_id,
     };
   }
 
-  if (flag && flag != 'false' && flag == 'total_premi') {
-    condition = {
-      ...condition,
-      policy_id: {
-        [Op.in]: Sequelize.literal(`(
-          SELECT pc.policy_id
-          FROM insurance_policy pc
-          WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
-          AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
-        )`),
-      },
-    };
-  }
-
-  let benefit: string = '';
-  if (
-    flag &&
-    flag != 'false' &&
-    ['up_jiwa', 'rs', 'penyakit_kritis', 'pensiun', 'dijamin'].includes(flag)
-  ) {
-    benefit = flag;
+  let benefit: Array<any> = [];
+  if (flag && flag != 'false') {
+    benefit = flag.split(',');
+    if (flag.includes('total_premi')) {
+      condition = {
+        ...condition,
+        policy_id: {
+          [Op.in]: Sequelize.literal(`(
+            SELECT pc.policy_id
+            FROM insurance_policy pc
+            WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
+            AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+          )`),
+        },
+      };
+    }
   }
 
   const result = await repoPolicy.list(
@@ -85,9 +76,88 @@ const fetchDataDashboard = async (req: Request) => {
       keyword: keyword,
       condition: condition,
     },
-    false,
+    true,
     benefit
   );
+  return result;
+};
+
+const formatBenefit = (data: any) => {
+  let result: any = {
+    up_jiwa: '',
+    rs: '',
+    penyakit_kritis: '',
+    pensiun: '',
+    dijamin: '',
+  };
+
+  const upJiwa = data ? data.find((d: any) => d?.benefit == 'up_jiwa') : null;
+  if (upJiwa) {
+    if (upJiwa?.start_date && upJiwa?.end_date) {
+      result.up_jiwa = `${helper.formatIDR(upJiwa?.cash_value)} (${upJiwa?.start_date} s/d ${upJiwa?.end_date})`;
+    } else if (upJiwa?.start_date) {
+      result.up_jiwa = `${helper.formatIDR(upJiwa?.cash_value)} (${upJiwa?.start_date})`;
+    } else if (upJiwa?.end_date) {
+      result.up_jiwa = `${helper.formatIDR(upJiwa?.cash_value)} (${upJiwa?.end_date})`;
+    } else {
+      result.up_jiwa = helper.formatIDR(upJiwa?.cash_value) || '';
+    }
+  }
+
+  const RS = data ? data.find((d: any) => d?.benefit == 'rs') : null;
+  if (RS) {
+    if (RS?.start_date && RS?.end_date) {
+      result.rs = `${helper.formatIDR(upJiwa?.cash_value)} (${RS?.start_date} s/d ${RS?.end_date})`;
+    } else if (RS?.start_date) {
+      result.rs = `${helper.formatIDR(upJiwa?.cash_value)} (${RS?.start_date})`;
+    } else if (RS?.end_date) {
+      result.rs = `${helper.formatIDR(upJiwa?.cash_value)} (${RS?.end_date})`;
+    } else {
+      result.rs = helper.formatIDR(upJiwa?.cash_value);
+    }
+  }
+
+  const penyakitKritis = data
+    ? data.find((d: any) => d?.benefit == 'penyakit_kritis')
+    : null;
+  if (penyakitKritis) {
+    if (penyakitKritis?.start_date && penyakitKritis?.end_date) {
+      result.penyakit_kritis = `${helper.formatIDR(upJiwa?.cash_value)} (${penyakitKritis?.start_date} s/d ${penyakitKritis?.end_date})`;
+    } else if (penyakitKritis?.start_date) {
+      result.penyakit_kritis = `${helper.formatIDR(upJiwa?.cash_value)} (${penyakitKritis?.start_date})`;
+    } else if (penyakitKritis?.end_date) {
+      result.penyakit_kritis = `${helper.formatIDR(upJiwa?.cash_value)} (${penyakitKritis?.end_date})`;
+    } else {
+      result.penyakit_kritis = helper.formatIDR(upJiwa?.cash_value);
+    }
+  }
+
+  const pensiun = data ? data.find((d: any) => d?.benefit == 'pensiun') : null;
+  if (pensiun) {
+    if (pensiun?.start_date && pensiun?.end_date) {
+      result.pensiun = `${helper.formatIDR(upJiwa?.cash_value)} (${pensiun?.start_date} s/d ${pensiun?.end_date})`;
+    } else if (pensiun?.start_date) {
+      result.pensiun = `${helper.formatIDR(upJiwa?.cash_value)} (${pensiun?.start_date})`;
+    } else if (pensiun?.end_date) {
+      result.pensiun = `${helper.formatIDR(upJiwa?.cash_value)} (${pensiun?.end_date})`;
+    } else {
+      result.pensiun = helper.formatIDR(upJiwa?.cash_value);
+    }
+  }
+
+  const dijamin = data ? data.find((d: any) => d?.benefit == 'dijamin') : null;
+  if (dijamin) {
+    if (dijamin?.start_date && dijamin?.end_date) {
+      result.dijamin = `${helper.formatIDR(upJiwa?.cash_value)} (${dijamin?.start_date} s/d ${dijamin?.end_date})`;
+    } else if (dijamin?.start_date) {
+      result.dijamin = `${helper.formatIDR(upJiwa?.cash_value)} (${dijamin?.start_date})`;
+    } else if (dijamin?.end_date) {
+      result.dijamin = `${helper.formatIDR(upJiwa?.cash_value)} (${dijamin?.end_date})`;
+    } else {
+      result.dijamin = helper.formatIDR(upJiwa?.cash_value);
+    }
+  }
+
   return result;
 };
 
@@ -108,21 +178,77 @@ const generateHeaderExcel = (sheet: any, data: any) => {
 };
 
 const generateDataExcel = (sheet: any, details: any) => {
-  let headers = [
+  sheet.addRow([
     'No',
-    'Policy Number',
-    'Provider Company',
-    'Product Name',
-    'Policy Holder',
-    'Insured Holder',
-    'Beneficiary Holder',
+    'No Polis',
+    'Perusahaan',
+    'Produk',
+    'Pemegang Polis',
+    'Tertanggung',
+    'Penerima Manfaat',
     'Issued Date',
-    'Payment Term',
-    'Premi Value',
-    'Premi IDR',
+    'Currency',
+    'Premi',
+    'Premi Dirupiahkan',
+    'Masa Pembayaran',
+    'Masa Pertanggungan',
+    'Unit Link',
+    'Fund',
+    'Nilai Tunai',
+    'Beli di',
+    'Cuti Premi',
+    'Benefit',
+  ]);
+  sheet.getCell('S4').value = 'UP Jiwa';
+  sheet.getCell('T4').value = 'RS';
+  sheet.getCell('U4').value = 'Penyakit Kritis';
+  sheet.getCell('V4').value = 'Pensiun';
+  sheet.getCell('W4').value = 'Jatuh Tempo';
+
+  const rows: Array<string> = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
   ];
-  sheet.addRow(headers);
+  rows.forEach((r: string) => {
+    sheet.mergeCells(`${r}3`, `${r}4`);
+  });
+  sheet.mergeCells('S3', 'W3');
+
+  for (let row = 1; row <= 4; row++) {
+    sheet.getRow(row).eachCell((cell: any) => {
+      cell.font = { bold: true };
+      cell.alignment = { vertical: 'middle', horizontal: 'center' };
+    });
+    if (row > 2) {
+      sheet.getRow(row).eachCell((cell: any) => {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'FF00FF00' }, // Green color
+        };
+      });
+    }
+  }
+
   for (let i in details) {
+    const benefit: any = formatBenefit(details[i]?.detail);
+
     sheet.addRow([
       parseInt(i) + 1,
       details[i]?.policy_number || '',
@@ -132,16 +258,39 @@ const generateDataExcel = (sheet: any, details: any) => {
       details[i]?.insured_holder_name || '',
       details[i]?.beneficiary_holder_name || '',
       details[i]?.issued_date || '',
+      details[i]?.premi_currency || '',
+      helper.formatIDR(details[i]?.premi_value),
+      helper.formatIDR(details[i]?.total_premi),
       details[i]?.payment_term
-        ? `${details[i]?.payment_term} ${details[i]?.payment_term_unit}`
+        ? `${details[i]?.payment_term} ${details[i]?.payment_term_unit || 'tahun'}`
         : details[i]?.payment_term_unit,
-      `${details[i]?.premi_currency} ${helper.formatIDR(details[i]?.premi_value)}`,
-      `IDR ${helper.formatIDR(details[i]?.total_premi)}`,
+      details[i]?.insured_term
+        ? `${details[i]?.insured_term_unit} ${details[i]?.insured_term}`
+        : details[i]?.insured_term_unit || '',
+      details[i]?.unit_link == '1' ? 'Y' : 'N',
+      details[i]?.fund || '',
+      helper.formatIDR(details[i]?.cash_value),
+      details[i]?.seller_name || '',
+      ['Yes', 'Y'].includes(details[i]?.premi_off) ? 'Y' : 'N',
+      benefit?.up_jiwa,
+      benefit?.rs,
+      benefit?.penyakit_kritis,
+      benefit?.pensiun,
+      benefit?.dijamin,
     ]);
   }
-  sheet.getRow(3).eachCell((cell: any) => {
-    cell.font = { bold: true };
-  });
+
+  for (let row = 3; row <= details?.length + 4; row++) {
+    sheet.getRow(row).eachCell((cell: any) => {
+      cell.border = {
+        top: { style: 'thin', color: { argb: 'FF000000' } },
+        left: { style: 'thin', color: { argb: 'FF000000' } },
+        bottom: { style: 'thin', color: { argb: 'FF000000' } },
+        right: { style: 'thin', color: { argb: 'FF000000' } },
+      };
+    });
+  }
+
   return sheet;
 };
 
@@ -307,15 +456,12 @@ export default class Controller {
       if (['administrator', 'agent'].includes(role)) {
         if (client && client != undefined) {
           condition = {
-            [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
+            policy_holder: client,
           };
         }
       } else {
         condition = {
-          [Op.or]: [
-            { policy_holder: req?.user?.client_id },
-            { insured_holder: req?.user?.client_id },
-          ],
+          policy_holder: req?.user?.client_id,
         };
       }
 
@@ -352,40 +498,31 @@ export default class Controller {
       if (['administrator', 'agent'].includes(role)) {
         if (client && client != undefined) {
           condition = {
-            [Op.or]: [{ policy_holder: client }, { insured_holder: client }],
+            policy_holder: client,
           };
         }
       } else {
         condition = {
-          [Op.or]: [
-            { policy_holder: req?.user?.client_id },
-            { insured_holder: req?.user?.client_id },
-          ],
+          policy_holder: req?.user?.client_id,
         };
       }
 
-      if (flag && flag == 'total_premi') {
-        condition = {
-          ...condition,
-          policy_id: {
-            [Op.in]: Sequelize.literal(`(
-              SELECT pc.policy_id
-              FROM insurance_policy pc
-              WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
-              AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
-            )`),
-          },
-        };
-      }
-
-      let benefit: string = '';
-      if (
-        flag &&
-        ['up_jiwa', 'rs', 'penyakit_kritis', 'pensiun', 'dijamin'].includes(
-          flag
-        )
-      ) {
-        benefit = flag;
+      let benefit: Array<any> = [];
+      if (flag && flag != 'false') {
+        benefit = flag.split(',');
+        if (flag.includes('total_premi')) {
+          condition = {
+            ...condition,
+            policy_id: {
+              [Op.in]: Sequelize.literal(`(
+                SELECT pc.policy_id
+                FROM insurance_policy pc
+                WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
+                AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+              )`),
+            },
+          };
+        }
       }
 
       const { count, rows } = await repoPolicy.index(
@@ -435,16 +572,17 @@ export default class Controller {
 
       const { dir, path } = await helper.checkDirExport('excel');
 
-      const name: string = flag && flag != 'false' ? flag : 'dashboard';
+      const name: string =
+        flag && flag != 'false' ? flag.replace(/,/g, '-') : 'dashboard';
       const filename: string = `${name}-${moment().format('DDMMYYYY')}.xlsx`;
       const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
       const urlExcel: string = `${dir}/${filename}`;
       const workbook = new ExcelJS.Workbook();
-      const sheet = workbook.addWorksheet(title);
+      const sheet = workbook.addWorksheet('DATA DASHBOARD');
 
       generateHeaderExcel(sheet, {
         start: 'A',
-        end: 'K',
+        end: 'W',
         title: title,
       });
       generateDataExcel(sheet, policy);
@@ -470,7 +608,8 @@ export default class Controller {
 
       const { dir, path } = await helper.checkDirExport('pdf');
 
-      const name: string = flag && flag != 'false' ? flag : 'dashboard';
+      const name: string =
+        flag && flag != 'false' ? flag.replace(/,/g, '-') : 'dashboard';
       const filename: string = `${name}-${moment().format('DDMMYYYY')}.pdf`;
       const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
       const urlPDF: string = `${dir}/${filename}`;

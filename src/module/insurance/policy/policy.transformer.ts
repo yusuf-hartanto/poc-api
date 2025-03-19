@@ -13,7 +13,7 @@ export default class Transformer {
       let rateCurr = 1;
       let premiValue = parseFloat(policy?.premi_value);
       const curr = policy?.premi_currency;
-      if (curr != 'IDR') {
+      if (curr && curr != 'IDR') {
         const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
         if (rate) {
           rateCurr = parseFloat(rate?.getDataValue('value'));
@@ -35,6 +35,14 @@ export default class Transformer {
         ...policy,
         total_premi: premiValue,
         currency_value: rateCurr,
+        premi_currency:
+          policy?.premi_currency && policy?.premi_currency != undefined
+            ? policy?.premi_currency
+            : 'IDR',
+        payment_term_unit:
+          policy?.payment_term_unit && policy?.payment_term_unit != undefined
+            ? policy?.payment_term_unit
+            : 'tahun',
         policy_holder_name:
           clients.find(
             (c: any) => c?.getDataValue('id') == policy?.policy_holder
@@ -58,7 +66,7 @@ export default class Transformer {
     let rateCurr = 1;
     let premiValue = parseFloat(policy?.premi_value);
     const curr = policy?.premi_currency;
-    if (curr != 'IDR') {
+    if (curr && curr != 'IDR') {
       const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
       if (rate) {
         rateCurr = parseFloat(rate?.getDataValue('value'));
@@ -80,6 +88,14 @@ export default class Transformer {
       ...policy,
       total_premi: premiValue,
       currency_value: rateCurr,
+      premi_currency:
+        policy?.premi_currency && policy?.premi_currency != undefined
+          ? policy?.premi_currency
+          : 'IDR',
+      payment_term_unit:
+        policy?.payment_term_unit && policy?.payment_term_unit != undefined
+          ? policy?.payment_term_unit
+          : 'tahun',
       policy_holder_name:
         clients.find((c: any) => c?.getDataValue('id') == policy?.policy_holder)
           ?.name || null,

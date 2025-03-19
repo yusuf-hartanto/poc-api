@@ -5,7 +5,11 @@ import Model from './policy.model';
 import Detail from './policy.detail.model';
 
 export default class Respository {
-  public list(data: any, withDetail: boolean = false, benefit: string = '') {
+  public list(
+    data: any,
+    withDetail: boolean = false,
+    benefit: Array<any> = []
+  ) {
     let query: Object = {
       where: {
         ...data?.condition,
@@ -28,7 +32,15 @@ export default class Respository {
     }
     if (withDetail) {
       let detailWhere = {};
-      if (benefit) detailWhere = { where: { benefit: benefit } };
+      if (benefit && benefit?.length > 0) {
+        detailWhere = {
+          where: {
+            benefit: {
+              [Op.in]: benefit,
+            },
+          },
+        };
+      }
 
       query = {
         ...query,
@@ -54,7 +66,11 @@ export default class Respository {
     return Model.findAll(query);
   }
 
-  public index(data: any, withDetail: boolean = false, benefit: string = '') {
+  public index(
+    data: any,
+    withDetail: boolean = false,
+    benefit: Array<any> = []
+  ) {
     let query: Object = {
       where: {
         ...data?.condition,
@@ -79,7 +95,15 @@ export default class Respository {
     }
     if (withDetail) {
       let detailWhere = {};
-      if (benefit) detailWhere = { where: { benefit: benefit } };
+      if (benefit && benefit?.length > 0) {
+        detailWhere = {
+          where: {
+            benefit: {
+              [Op.in]: benefit,
+            },
+          },
+        };
+      }
 
       query = {
         ...query,
@@ -105,9 +129,17 @@ export default class Respository {
     return Model.findAndCountAll(query);
   }
 
-  public detail(condition: any, benefit: string = '') {
+  public detail(condition: any, benefit: Array<any> = []) {
     let detailWhere = {};
-    if (benefit) detailWhere = { where: { benefit: benefit } };
+    if (benefit && benefit?.length > 0) {
+      detailWhere = {
+        where: {
+          benefit: {
+            [Op.in]: benefit,
+          },
+        },
+      };
+    }
 
     return Model.findOne({
       where: {
