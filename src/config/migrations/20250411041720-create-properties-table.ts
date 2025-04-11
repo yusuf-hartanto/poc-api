@@ -14,7 +14,7 @@ export const up = async (queryInterface: QueryInterface) => {
       building_area decimal(12,2) DEFAULT NULL,
       currency varchar(250) DEFAULT NULL,
       purchase_value decimal(12,2) DEFAULT NULL,
-      doc_location varchar(250) DEFAULT NULL,
+      doc_location text DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
       \`status\` int(11) DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
