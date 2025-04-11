@@ -34,8 +34,9 @@ export default class Respository {
             ...(data?.condition[Op.and] ? data?.condition[Op.and] : []),
             {
               [Op.or]: [
+                { cin: { [Op.like]: `%${data?.keyword}%` } },
                 { name: { [Op.like]: `%${data?.keyword}%` } },
-                { relation_name: { [Op.like]: `%${data?.keyword}%` } },
+                { address: { [Op.like]: `%${data?.keyword}%` } },
               ],
             },
           ],
@@ -73,8 +74,9 @@ export default class Respository {
           ...relation,
           status: { [Op.ne]: 9 },
           [Op.or]: [
+            { cin: { [Op.like]: `%${data?.keyword}%` } },
             { name: { [Op.like]: `%${data?.keyword}%` } },
-            { relation_name: { [Op.like]: `%${data?.keyword}%` } },
+            { address: { [Op.like]: `%${data?.keyword}%` } },
           ],
         },
       };
@@ -91,9 +93,23 @@ export default class Respository {
     });
   }
 
+  public getLastCin() {
+    return Model.findOne({
+      order: [['cin', 'DESC']],
+    });
+  }
+
   public detailSurvey(condition: any) {
     return Model.findOne({
-      attributes: ['id', 'name', 'dob', 'age', 'contact_number', 'address'],
+      attributes: [
+        'id',
+        'cin',
+        'name',
+        'dob',
+        'age',
+        'contact_number',
+        'address',
+      ],
       where: {
         ...condition,
         status: { [Op.ne]: 9 },

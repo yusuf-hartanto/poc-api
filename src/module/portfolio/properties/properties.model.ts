@@ -3,40 +3,44 @@
 import { v4 as uuidv4 } from 'uuid';
 import { DataTypes } from 'sequelize';
 import conn from '../../../config/database';
+import Client from '../../insurance/client/client.model';
 
 const Model = conn.sequelize.define(
-  'client',
+  'properties',
   {
-    id: {
+    properties_id: {
       type: DataTypes.STRING,
       primaryKey: true,
       unique: true,
     },
-    cin: {
+    properties_holder: {
       type: DataTypes.STRING,
     },
-    name: {
+    properties_name: {
       type: DataTypes.STRING,
     },
-    ktp: {
-      type: DataTypes.STRING,
-    },
-    dob: {
-      type: DataTypes.DATEONLY,
-    },
-    age: {
-      type: DataTypes.INTEGER,
-    },
-    contact_number: {
+    type: {
       type: DataTypes.STRING,
     },
     address: {
       type: DataTypes.STRING,
     },
-    relation_id: {
+    land_area: {
+      type: DataTypes.DECIMAL,
+    },
+    building_area: {
+      type: DataTypes.DECIMAL,
+    },
+    currency: {
       type: DataTypes.STRING,
     },
-    relation_name: {
+    purchase_value: {
+      type: DataTypes.DECIMAL,
+    },
+    doc_location: {
+      type: DataTypes.STRING,
+    },
+    notes: {
       type: DataTypes.STRING,
     },
     status: {
@@ -64,6 +68,10 @@ const Model = conn.sequelize.define(
   }
 );
 
-Model.beforeCreate((client: { id: string }) => (client.id = uuidv4()));
+Model.beforeCreate(
+  (properties: { properties_id: string }) =>
+    (properties.properties_id = uuidv4())
+);
+Model.belongsTo(Client, { as: 'holder', foreignKey: 'properties_holder' });
 
 export default Model;

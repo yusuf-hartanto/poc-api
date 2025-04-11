@@ -1,5 +1,6 @@
 'use strict';
 
+import moment from 'moment';
 import dotenv from 'dotenv';
 import { Op } from 'sequelize';
 import { variable } from './client.variable';
@@ -12,6 +13,21 @@ import { repository as repoRole } from '../../app/role/role.repository';
 import { repository as repoResource } from '../../app/resource/resource.repository';
 
 dotenv.config();
+
+const generateCin = async () => {
+  let nextCin: string = moment().locale('id').format('YYMMDD');
+
+  const lastCin = await repository.getLastCin();
+  if (lastCin) {
+    const lastCinNumber =
+      parseInt(lastCin?.getDataValue('cin')?.substring(7, 10)) + 1;
+    nextCin = `${nextCin}${lastCinNumber.toString().padStart(4, '0')}`;
+  } else {
+    nextCin = nextCin + '0001';
+  }
+
+  return nextCin;
+};
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -124,10 +140,16 @@ export default class Controller {
       const relationName: string =
         relation_name && relation_name != undefined ? relation_name : null;
 
+      let cin: string = req?.body?.cin || '';
+      if (!cin || cin == '') {
+        cin = await generateCin();
+      }
+
       const data: Object = helper.only(variable.fillable(), req?.body);
       const client = await repository.create({
         payload: {
           ...data,
+          cin: cin,
           relation_id: relationId,
           relation_name: relationName,
           created_by: req?.user?.id,

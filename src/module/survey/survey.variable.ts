@@ -38,14 +38,7 @@ export default class Variable {
   }
 
   public formanswervalue() {
-    const field: Array<string> = [
-      'client_id',
-      'event_id',
-      'form_id',
-      'question_id',
-      'question',
-      'text_answer',
-    ];
+    const field: Array<string> = ['client_id', 'event_id', 'form_id'];
     return field;
   }
 }

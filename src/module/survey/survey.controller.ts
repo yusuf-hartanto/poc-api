@@ -124,35 +124,53 @@ export default class Controller {
 
   public async createAnswer(req: Request, res: Response) {
     try {
-      const { client_id, event_id, form_id, question_id } = req?.body;
-      const check = await repository.detailFormAnswerValue({
-        client_id,
-        event_id,
-        form_id,
-        question_id,
-        periode: moment().locale('id').format('YYYY-MM-DD'),
-      });
-
-      if (check) {
-        const data: Object = helper.only(
-          variable.formanswervalue(),
-          req?.body,
-          true
-        );
-        await repository.updateFormAnswerValue({
-          payload: { ...data, modified_by: req?.user?.id },
-          condition: {
+      const { client_id, event_id, form_id, answer } = req?.body;
+      if (answer && answer?.length > 0) {
+        for (let i in answer) {
+          let condition = {
             client_id,
             event_id,
             form_id,
-            question_id,
-          },
-        });
+            question_id: answer[i]?.question_id,
+            periode: moment().locale('id').format('YYYY-MM-DD'),
+          };
+
+          const check = await repository.detailFormAnswerValue(condition);
+
+          if (check) {
+            const data: Object = helper.only(
+              variable.formanswervalue(),
+              req?.body,
+              true
+            );
+            await repository.updateFormAnswerValue({
+              payload: {
+                ...data,
+                question_id: answer[i]?.question_id,
+                question: answer[i]?.question,
+                text_answer: answer[i]?.text_answer,
+                modified_by: req?.user?.id,
+              },
+              condition: condition,
+            });
+          } else {
+            const data: Object = helper.only(
+              variable.formanswervalue(),
+              req?.body
+            );
+            await repository.createFormAnswerValue({
+              payload: {
+                ...data,
+                question_id: answer[i]?.question_id,
+                question: answer[i]?.question,
+                text_answer: answer[i]?.text_answer,
+                created_by: req?.user?.id,
+              },
+            });
+          }
+        }
       } else {
-        const data: Object = helper.only(variable.formanswervalue(), req?.body);
-        await repository.createFormAnswerValue({
-          payload: { ...data, created_by: req?.user?.id },
-        });
+        return response.failed('answer is a required', 422, res);
       }
 
       return response.success('Data success saved', null, res);
