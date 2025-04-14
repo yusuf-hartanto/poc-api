@@ -8,6 +8,7 @@ export default class Variable {
       'ktp',
       'dob',
       'age',
+      'email',
       'contact_number',
       'address',
       'relation_id',

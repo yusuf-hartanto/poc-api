@@ -27,6 +27,10 @@ const Model = conn.sequelize.define(
     age: {
       type: DataTypes.INTEGER,
     },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     contact_number: {
       type: DataTypes.STRING,
     },
