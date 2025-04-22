@@ -1,22 +1,57 @@
 'use strict';
 
 import dotenv from 'dotenv';
+import moment from 'moment';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
 import { helperauth } from '../../helpers/auth.helper';
+import { repository as repoOtp } from './otp.repository';
 import { variable } from '../app/resource/resource.variable';
 import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
 import { repository as repoRole } from '../app/role/role.repository';
 
 dotenv.config();
+moment().locale('id');
 const date: string = helper.date();
 
+const verifyOtpSubmit = async (otp: number, email: string) => {
+  if (!otp) return { status: false, message: 'Code OTP is required' };
+
+  const check = await repoOtp.detail({ email: email });
+  if (!check) return { status: false, message: 'Code OTP not found' };
+
+  if (otp != check?.getDataValue('code'))
+    return { status: false, message: 'Code OTP incorrect' };
+
+  if (check?.getDataValue('status') != 1) {
+    const now = moment();
+    const expired = moment(check?.getDataValue('expired'));
+    if (expired.isBefore(now))
+      return { status: false, message: 'Code OTP expired' };
+    return { status: false, message: 'Code OTP need verify' };
+  }
+
+  return { status: true, message: 'success' };
+};
 export default class Controller {
   public async login(req: Request, res: Response) {
     const user = req?.user;
+
+    try {
+      const otp: number = req?.body?.otp || 0;
+      console.warn('login', otp, user?.getDataValue('email'));
+      const { status, message } = await verifyOtpSubmit(
+        otp,
+        user?.getDataValue('email')
+      );
+      if (!status) return response.failed(message, 400, res);
+    } catch (err: any) {
+      return helper.catchError(`login otp: ${err?.message}`, 500, res);
+    }
+
     const isMatch = await helper.compareIt(req?.body?.password, user?.password);
     if (isMatch) {
       const role = user?.getDataValue('role');
@@ -38,6 +73,7 @@ export default class Controller {
         await repository.update({
           payload: {
             token: token,
+            token_expired: helper.dateAdd(7, 'days'),
             total_login: totalLogin,
           },
           condition: { resource_id: user?.resource_id },
@@ -85,6 +121,14 @@ export default class Controller {
         access_token: refresh,
         refresh_token: req?.body?.refresh_token,
       };
+
+      await repository.update({
+        payload: {
+          token: refresh,
+          token_expired: helper.dateAdd(7, 'days'),
+        },
+        condition: { resource_id: req?.user?.id },
+      });
       response.success('New access token', data, res);
     } catch (err: any) {
       return helper.catchError(`refresh: ${err?.message}`, 500, res);
@@ -257,12 +301,97 @@ export default class Controller {
       const user = req?.user;
 
       await repository.update({
-        payload: { token: null },
+        payload: { token: null, token_expired: null },
         condition: { resource_id: user?.resource_id },
       });
       return response.success('logout success', null, res);
     } catch (err: any) {
       return helper.catchError(`logout: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async otp(req: Request, res: Response) {
+    try {
+      const date = helper.date();
+      const { email } = req?.body;
+
+      if (!email) return response.failed('Email is required', 422, res);
+      if (!helper.validateEmail(email))
+        return response.failed('Invalid email format', 400, res);
+
+      const code = helper.random(1000, 9999);
+      const expired = helper.dateAdd(3, 'minutes');
+      const check = await repoOtp.detail({ email: email });
+
+      if (check) {
+        await repoOtp.update({
+          payload: {
+            code: code,
+            status: 0,
+            expired: expired,
+            modified_date: date,
+          },
+          condition: { email: email },
+        });
+      } else {
+        await repoOtp.create({
+          payload: {
+            email: email,
+            code: code,
+            expired: expired,
+            created_date: date,
+          },
+        });
+      }
+
+      await helper.sendEmail({
+        to: email,
+        subject: 'OTP Email - Meta Advisor (metaadvisor.id)',
+        content: `
+          <h3>Hi ${email.split('@')[0]},</h3>
+          <p>Berikut kode OTP Anda:</p>
+          <h1>${code}</h1>
+          <p>Kode ini berlaku selama 3 menit.</p>
+          <p>Demi keamanan, jangan berikan kode OTP kepada siapa pun!</p>
+        `,
+      });
+
+      return response.success('send otp success', null, res);
+    } catch (err: any) {
+      return helper.catchError(`send otp: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async verifyOtp(req: Request, res: Response) {
+    try {
+      let status = 1;
+      const date = helper.date();
+      const { otp, email } = req?.body;
+
+      if (!otp) return response.failed('Code OTP is required', 422, res);
+
+      const check = await repoOtp.detail({ email: email, status: 0 });
+      if (!check) return response.failed('Data not found', 404, res);
+
+      if (otp != check?.getDataValue('code'))
+        return response.failed('Code OTP incorrect', 400, res);
+
+      const now = moment();
+      const expired = moment(check?.getDataValue('expired'));
+      if (expired.isBefore(now)) status = 3;
+
+      await repoOtp.update({
+        payload: {
+          status: status,
+          modified_date: date,
+        },
+        condition: { code: otp },
+      });
+
+      if (status == 3) return response.failed('Code OTP expired', 400, res);
+      return response.success('verify otp success', null, res);
+    } catch (err: any) {
+      return helper.catchError(`send otp: ${err?.message}`, 500, res);
     }
   }
 }

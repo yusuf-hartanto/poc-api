@@ -60,6 +60,10 @@ export default class Helper {
       .format('YYYY-MM-DD HH:mm:ss');
   }
 
+  public dateDiff(date: any, type: any) {
+    return moment(date).diff(moment(), type);
+  }
+
   public only(keys: Array<string>, data: any, isUpdate: boolean = false) {
     const date = moment().locale('id').format('YYYY-MM-DD HH:mm:ss');
     let result: any = {};

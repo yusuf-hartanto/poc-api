@@ -20,4 +20,7 @@ router.post(
 router.post('/forgot-password', controller.forgot);
 router.post('/reset-password', controller.reset);
 
+router.post('/otp', controller.otp);
+router.post('/verify-otp', controller.verifyOtp);
+
 export default router;

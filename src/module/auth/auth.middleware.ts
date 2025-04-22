@@ -1,6 +1,7 @@
 'use strict';
 
 import dotenv from 'dotenv';
+import moment from 'moment';
 import { Op } from 'sequelize';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
@@ -10,6 +11,7 @@ import { repository } from '../app/resource/resource.repository';
 import { repository as repoRoleMenu } from '../app/role.menu/role.menu.repository';
 
 dotenv.config();
+moment().locale('id');
 type RequestBody<T> = Request<{}, {}, T>;
 interface UserBody {
   username: string;
@@ -36,6 +38,25 @@ export default class Middleware {
         auth?.role_name == 'administrator' ? '' : 'administrator';
       const user = await repository.detail({ token }, admin);
       if (!user) return response.failed('Unauthorized', 401, res);
+
+      let checkExp = true;
+      if (user?.getDataValue('token_expired')) {
+        if (
+          helper.dateDiff(
+            moment(user?.getDataValue('token_expired')),
+            'seconds'
+          ) > 475200
+        )
+          checkExp = false;
+      }
+      if (checkExp) {
+        await repository.update({
+          payload: {
+            token_expired: helper.dateAdd(7, 'days'),
+          },
+          condition: { resource_id: user?.getDataValue('resource_id') },
+        });
+      }
 
       req.user = auth;
       next();
