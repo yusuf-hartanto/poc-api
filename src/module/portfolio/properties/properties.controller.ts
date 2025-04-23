@@ -1,16 +1,12 @@
 'use strict';
 
-import moment from 'moment';
 import dotenv from 'dotenv';
-import { Op } from 'sequelize';
 import { variable } from './properties.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
 import { repository } from './properties.repository';
 import { transformer } from './properties.transformer';
 import { response } from '../../../helpers/response';
-import { repository as repoRole } from '../../app/role/role.repository';
-import { repository as repoResource } from '../../app/resource/resource.repository';
 
 dotenv.config();
 

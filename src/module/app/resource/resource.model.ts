@@ -49,7 +49,7 @@ const Model = conn.sequelize.define(
     },
     status: {
       type: DataTypes.STRING(3),
-      defaultValue: 'NV',
+      defaultValue: 'A',
     },
     total_login: {
       type: DataTypes.INTEGER,
