@@ -129,6 +129,7 @@ export default class Controller {
           confirm_hash: confirm_hash,
           image_foto: image_foto,
           role_id: role_id?.value || null,
+          status: 'A',
           area_province_id: province_id?.value || null,
           area_regencies_id: regency_id?.value || null,
           created_by: req?.user?.id || null,
