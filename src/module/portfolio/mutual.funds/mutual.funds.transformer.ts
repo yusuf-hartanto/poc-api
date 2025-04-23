@@ -6,53 +6,47 @@ export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
     for (let i in data) {
-      let properties: any = data[i]?.dataValues;
+      let mutualFunds: any = data[i]?.dataValues;
 
       let rateCurr = 1;
-      let purchaseCurr = parseFloat(properties?.purchase_value);
-      const curr = properties?.currency;
+      let currentValueCurr = parseFloat(mutualFunds?.current_value);
+      const curr = mutualFunds?.currency;
       if (curr && curr != 'IDR') {
         const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
         if (rate) {
           rateCurr = parseFloat(rate?.getDataValue('value'));
-          purchaseCurr = rateCurr * purchaseCurr;
+          currentValueCurr = rateCurr * currentValueCurr;
         }
       }
 
       result.push({
-        ...properties,
+        ...mutualFunds,
         currency_rate: rateCurr,
-        currency_purchase: purchaseCurr,
-        doc_location: properties?.doc_location
-          ? properties?.doc_location.split(',')
-          : null,
+        currency_purchase: currentValueCurr,
       });
     }
     return result;
   }
 
   public async detail(data: any) {
-    const properties = data?.dataValues;
-    let result: any = properties;
+    const mutualFunds = data?.dataValues;
+    let result: any = mutualFunds;
 
     let rateCurr = 1;
-    let purchaseCurr = parseFloat(properties?.purchase_value);
-    const curr = properties?.currency;
+    let currentValueCurr = parseFloat(mutualFunds?.current_value);
+    const curr = mutualFunds?.currency;
     if (curr && curr != 'IDR') {
       const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
       if (rate) {
         rateCurr = parseFloat(rate?.getDataValue('value'));
-        purchaseCurr = rateCurr * purchaseCurr;
+        currentValueCurr = rateCurr * currentValueCurr;
       }
     }
 
     return {
       ...result,
       currency_rate: rateCurr,
-      currency_purchase: purchaseCurr,
-      doc_location: properties?.doc_location
-        ? properties?.doc_location.split(',')
-        : null,
+      currency_purchase: currentValueCurr,
     };
   }
 }

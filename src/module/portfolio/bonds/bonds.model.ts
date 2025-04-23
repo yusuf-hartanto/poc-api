@@ -6,54 +6,42 @@ import conn from '../../../config/database';
 import Client from '../../insurance/client/client.model';
 
 const Model = conn.sequelize.define(
-  'properties',
+  'bonds',
   {
-    properties_id: {
+    bonds_id: {
       type: DataTypes.STRING,
       primaryKey: true,
       unique: true,
     },
-    properties_holder: {
+    bonds_holder: {
       type: DataTypes.STRING,
     },
-    properties_name: {
+    bonds_name: {
       type: DataTypes.STRING,
     },
     type: {
       type: DataTypes.STRING,
     },
-    ownership: {
+    product_number: {
       type: DataTypes.STRING,
     },
-    certificate_number: {
+    issuer_name: {
       type: DataTypes.STRING,
     },
-    address: {
-      type: DataTypes.STRING,
+    issuer_date: {
+      type: DataTypes.DATEONLY,
     },
-    purchase_date: {
+    maturity_date: {
       type: DataTypes.DATEONLY,
     },
     currency: {
       type: DataTypes.STRING,
     },
-    purchase_value: {
+    amount: {
       type: DataTypes.DECIMAL,
     },
-    current_value: {
+    interest_rate: {
       type: DataTypes.DECIMAL,
-    },
-    land_area: {
-      type: DataTypes.DECIMAL,
-    },
-    building_area: {
-      type: DataTypes.DECIMAL,
-    },
-    location: {
-      type: DataTypes.STRING,
-    },
-    doc_location: {
-      type: DataTypes.STRING,
     },
     notes: {
       type: DataTypes.STRING,
@@ -84,9 +72,9 @@ const Model = conn.sequelize.define(
 );
 
 Model.beforeCreate(
-  (properties: { properties_id: string }) =>
-    (properties.properties_id = uuidv4())
+  (bonds: { bonds_id: string }) =>
+    (bonds.bonds_id = uuidv4())
 );
-Model.belongsTo(Client, { as: 'holder', foreignKey: 'properties_holder' });
+Model.belongsTo(Client, { as: 'holder', foreignKey: 'bonds_holder' });
 
 export default Model;

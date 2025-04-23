@@ -16,6 +16,7 @@ import { repository as repoRole } from '../app/role/role.repository';
 dotenv.config();
 moment().locale('id');
 const date: string = helper.date();
+const IS_OTP: string = process.env.IS_OTP || 'false';
 
 const verifyOtpSubmit = async (otp: number, email: string) => {
   if (!otp) return { status: false, message: 'Code OTP is required' };
@@ -48,16 +49,18 @@ export default class Controller {
   public async login(req: Request, res: Response) {
     const user = req?.user;
 
-    try {
-      const otp: number = req?.body?.otp || 0;
-      console.warn('login', otp, user?.getDataValue('email'));
-      const { status, message } = await verifyOtpSubmit(
-        otp,
-        user?.getDataValue('email')
-      );
-      if (!status) return response.failed(message, 400, res);
-    } catch (err: any) {
-      return helper.catchError(`login otp: ${err?.message}`, 500, res);
+    if (IS_OTP == 'true') {
+      try {
+        const otp: number = req?.body?.otp || 0;
+        console.warn('login', otp, user?.getDataValue('email'));
+        const { status, message } = await verifyOtpSubmit(
+          otp,
+          user?.getDataValue('email')
+        );
+        if (!status) return response.failed(message, 400, res);
+      } catch (err: any) {
+        return helper.catchError(`login otp: ${err?.message}`, 500, res);
+      } 
     }
 
     const isMatch = await helper.compareIt(req?.body?.password, user?.password);

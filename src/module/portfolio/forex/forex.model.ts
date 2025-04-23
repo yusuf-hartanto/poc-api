@@ -6,33 +6,27 @@ import conn from '../../../config/database';
 import Client from '../../insurance/client/client.model';
 
 const Model = conn.sequelize.define(
-  'properties',
+  'forex',
   {
-    properties_id: {
+    forex_id: {
       type: DataTypes.STRING,
       primaryKey: true,
       unique: true,
     },
-    properties_holder: {
+    forex_holder: {
       type: DataTypes.STRING,
     },
-    properties_name: {
+    forex_name: {
       type: DataTypes.STRING,
     },
-    type: {
+    broker: {
       type: DataTypes.STRING,
     },
-    ownership: {
+    account_number: {
       type: DataTypes.STRING,
     },
-    certificate_number: {
+    userid: {
       type: DataTypes.STRING,
-    },
-    address: {
-      type: DataTypes.STRING,
-    },
-    purchase_date: {
-      type: DataTypes.DATEONLY,
     },
     currency: {
       type: DataTypes.STRING,
@@ -42,18 +36,6 @@ const Model = conn.sequelize.define(
     },
     current_value: {
       type: DataTypes.DECIMAL,
-    },
-    land_area: {
-      type: DataTypes.DECIMAL,
-    },
-    building_area: {
-      type: DataTypes.DECIMAL,
-    },
-    location: {
-      type: DataTypes.STRING,
-    },
-    doc_location: {
-      type: DataTypes.STRING,
     },
     notes: {
       type: DataTypes.STRING,
@@ -84,9 +66,9 @@ const Model = conn.sequelize.define(
 );
 
 Model.beforeCreate(
-  (properties: { properties_id: string }) =>
-    (properties.properties_id = uuidv4())
+  (forex: { forex_id: string }) =>
+    (forex.forex_id = uuidv4())
 );
-Model.belongsTo(Client, { as: 'holder', foreignKey: 'properties_holder' });
+Model.belongsTo(Client, { as: 'holder', foreignKey: 'forex_holder' });
 
 export default Model;

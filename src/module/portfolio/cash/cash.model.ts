@@ -6,53 +6,50 @@ import conn from '../../../config/database';
 import Client from '../../insurance/client/client.model';
 
 const Model = conn.sequelize.define(
-  'properties',
+  'cash',
   {
-    properties_id: {
+    cash_id: {
       type: DataTypes.STRING,
       primaryKey: true,
       unique: true,
     },
-    properties_holder: {
+    cash_holder: {
       type: DataTypes.STRING,
     },
-    properties_name: {
+    cash_name: {
       type: DataTypes.STRING,
     },
     type: {
       type: DataTypes.STRING,
     },
-    ownership: {
+    product_number: {
       type: DataTypes.STRING,
     },
-    certificate_number: {
+    bank_name: {
       type: DataTypes.STRING,
     },
-    address: {
-      type: DataTypes.STRING,
+    start_date: {
+      type: DataTypes.DATEONLY,
     },
-    purchase_date: {
+    maturity_date: {
       type: DataTypes.DATEONLY,
     },
     currency: {
       type: DataTypes.STRING,
     },
-    purchase_value: {
+    amount: {
       type: DataTypes.DECIMAL,
     },
-    current_value: {
+    payor: {
       type: DataTypes.DECIMAL,
     },
-    land_area: {
+    payee: {
       type: DataTypes.DECIMAL,
     },
-    building_area: {
+    aro: {
       type: DataTypes.DECIMAL,
     },
     location: {
-      type: DataTypes.STRING,
-    },
-    doc_location: {
       type: DataTypes.STRING,
     },
     notes: {
@@ -84,9 +81,9 @@ const Model = conn.sequelize.define(
 );
 
 Model.beforeCreate(
-  (properties: { properties_id: string }) =>
-    (properties.properties_id = uuidv4())
+  (cash: { cash_id: string }) =>
+    (cash.cash_id = uuidv4())
 );
-Model.belongsTo(Client, { as: 'holder', foreignKey: 'properties_holder' });
+Model.belongsTo(Client, { as: 'holder', foreignKey: 'cash_holder' });
 
 export default Model;

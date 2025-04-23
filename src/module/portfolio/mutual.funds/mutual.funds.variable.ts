@@ -3,20 +3,16 @@
 export default class Variable {
   public fillable() {
     const field: Array<string> = [
-      'properties_holder',
-      'properties_name',
+      'mutual_funds_holder',
+      'mutual_funds_name',
       'type',
-      'ownership',
-      'certificate_number',
-      'address',
-      'land_area',
-      'building_area',
-      'currency',
-      'current_value',
+      'fund_manager',
       'purchase_date',
       'purchase_value',
-      'doc_location',
-      'location',
+      'maturity_date',
+      'currency',
+      'current_value',
+      'selling_agent',
       'notes',
       'status',
     ];

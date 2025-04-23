@@ -2,7 +2,11 @@
 
 import { Router } from 'express';
 import { auth } from '../auth/auth.middleware';
+import { cash } from '../portfolio/cash/cash.controller';
+import { bonds } from '../portfolio/bonds/bonds.controller';
+import { forex } from '../portfolio/forex/forex.controller';
 import { properties } from '../portfolio/properties/properties.controller';
+import { mutualfunds } from '../portfolio/mutual.funds/mutual.funds.controller';
 
 const router: Router = Router();
 
@@ -41,6 +45,154 @@ router.delete(
   auth.checkBearerToken,
   auth.checkAccess('properties'),
   properties.delete
+);
+
+router.get(
+  '/bonds/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.list
+);
+router.get(
+  '/bonds',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.index
+);
+router.get(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.detail
+);
+router.post(
+  '/bonds',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.create
+);
+router.put(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.update
+);
+router.delete(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.delete
+);
+
+router.get(
+  '/cash/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.list
+);
+router.get(
+  '/cash',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.index
+);
+router.get(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.detail
+);
+router.post(
+  '/cash',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.create
+);
+router.put(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.update
+);
+router.delete(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.delete
+);
+
+router.get(
+  '/mutual-funds/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.list
+);
+router.get(
+  '/mutual-funds',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.index
+);
+router.get(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.detail
+);
+router.post(
+  '/mutual-funds',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.create
+);
+router.put(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.update
+);
+router.delete(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.delete
+);
+
+router.get(
+  '/forex/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.list
+);
+router.get(
+  '/forex',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.index
+);
+router.get(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.detail
+);
+router.post(
+  '/forex',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.create
+);
+router.put(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.update
+);
+router.delete(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.delete
 );
 
 export default router;
