@@ -1,6 +1,7 @@
 'use strict';
 
 import dotenv from 'dotenv';
+import { helper } from './/helper';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 
 dotenv.config();
@@ -54,6 +55,33 @@ export default class HelperAuth {
       expiresIn: JWT_REFRESH_TOKEN_EXPIRED,
     });
     return Buffer.from(refresh).toString('base64');
+  }
+
+  public async hashToken(key: string) {
+    const hashed: string = await helper.hashIt(
+      `${key}_${JWT_TOKEN}_${helper.date()}`
+    );
+    return Buffer.from(hashed).toString('base64');
+  }
+
+  public newToken(payload: any) {
+    const jsonString = JSON.stringify(payload);
+    return Buffer.from(jsonString).toString('base64');
+  }
+
+  public newDecodeToken(token: string) {
+    const decode: string = Buffer.from(token, 'base64').toString('ascii');
+
+    let isJson: boolean = true;
+    try {
+      JSON.parse(decode);
+    } catch (e) {
+      isJson = false;
+    }
+
+    let payload: any = decode;
+    if (isJson) payload = JSON.parse(decode);
+    return payload;
   }
 }
 

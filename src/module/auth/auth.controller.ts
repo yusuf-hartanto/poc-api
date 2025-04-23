@@ -20,7 +20,7 @@ const date: string = helper.date();
 const verifyOtpSubmit = async (otp: number, email: string) => {
   if (!otp) return { status: false, message: 'Code OTP is required' };
 
-  const check = await repoOtp.detail({ email: email });
+  const check = await repoOtp.detail({ email: email, status: 1 });
   if (!check) return { status: false, message: 'Code OTP not found' };
 
   if (otp != check?.getDataValue('code'))
@@ -33,6 +33,14 @@ const verifyOtpSubmit = async (otp: number, email: string) => {
       return { status: false, message: 'Code OTP expired' };
     return { status: false, message: 'Code OTP need verify' };
   }
+
+  await repoOtp.update({
+    payload: {
+      status: 2,
+      modified_date: date,
+    },
+    condition: { email: email, code: otp },
+  });
 
   return { status: true, message: 'success' };
 };
@@ -54,19 +62,21 @@ export default class Controller {
 
     const isMatch = await helper.compareIt(req?.body?.password, user?.password);
     if (isMatch) {
-      const role = user?.getDataValue('role');
-      const payload: Object = {
-        id: user?.getDataValue('resource_id'),
-        username: user?.getDataValue('username'),
-        province_id: user?.getDataValue('area_province_id'),
-        regency_id: user?.getDataValue('area_regencies_id'),
-        client_id: user?.getDataValue('client_id'),
-        role_name: role?.getDataValue('role_name'),
-      };
-
       try {
-        const token: string = helperauth.token(payload);
-        const refresh: string = helperauth.refresh(payload);
+        const role = user?.getDataValue('role');
+        const payload: Object = {
+          id: user?.getDataValue('resource_id'),
+          username: user?.getDataValue('username'),
+          province_id: user?.getDataValue('area_province_id'),
+          regency_id: user?.getDataValue('area_regencies_id'),
+          client_id: user?.getDataValue('client_id'),
+          role_name: role?.getDataValue('role_name'),
+        };
+
+        const token: string = helperauth.newToken(payload);
+        const refresh: string = await helperauth.newToken({
+          id: user?.getDataValue('resource_id'),
+        });
         const getUser: Object = await transformer.detail(user);
         const totalLogin: Number = user?.total_login + 1;
 
@@ -105,26 +115,26 @@ export default class Controller {
     );
     if (!result) return response.failed('User not found', 404, res);
 
-    const payload = {
-      id: result?.getDataValue('resource_id'),
-      username: result?.getDataValue('username'),
-      province_id: result?.getDataValue('area_province_id'),
-      regency_id: result?.getDataValue('area_regencies_id'),
-      client_id: result?.getDataValue('client_id'),
-      role_name: result?.getDataValue('role')?.role_name,
-    };
-
     try {
-      const refresh: string = helperauth.token(payload);
+      const payload = {
+        id: result?.getDataValue('resource_id'),
+        username: result?.getDataValue('username'),
+        province_id: result?.getDataValue('area_province_id'),
+        regency_id: result?.getDataValue('area_regencies_id'),
+        client_id: result?.getDataValue('client_id'),
+        role_name: result?.getDataValue('role')?.role_name,
+      };
+
+      const newToken: string = helperauth.newToken(payload);
       const data: Object = {
         userdata: await transformer.detail(result),
-        access_token: refresh,
+        access_token: newToken,
         refresh_token: req?.body?.refresh_token,
       };
 
       await repository.update({
         payload: {
-          token: refresh,
+          token: newToken,
           token_expired: helper.dateAdd(7, 'days'),
         },
         condition: { resource_id: req?.user?.id },

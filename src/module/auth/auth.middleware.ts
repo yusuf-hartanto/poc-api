@@ -24,13 +24,13 @@ export default class Middleware {
     res: Response,
     next: NextFunction
   ) {
-    const authorization: string = req?.headers['authorization'] || '';
-    const token: string = await helperauth.decodeBearerToken(authorization);
-    if (token === '')
-      return response.failed('Auth Bearer is required', 422, res);
-
     try {
-      const auth = helperauth.decodeToken(token);
+      const authorization: string = req?.headers['authorization'] || '';
+      const token: string = await helperauth.decodeBearerToken(authorization);
+      if (token === '')
+        return response.failed('Auth Bearer is required', 422, res);
+
+      const auth = helperauth.newDecodeToken(token);
       if (typeof auth == 'string')
         return response.failed('Invalid token', 400, res);
 
@@ -41,13 +41,12 @@ export default class Middleware {
 
       let checkExp = true;
       if (user?.getDataValue('token_expired')) {
-        if (
-          helper.dateDiff(
-            moment(user?.getDataValue('token_expired')),
-            'seconds'
-          ) > 475200
-        )
-          checkExp = false;
+        const expired = helper.dateDiff(
+          moment(user?.getDataValue('token_expired')),
+          'seconds'
+        );
+        if (expired < 3600) return response.failed('Unauthorized', 401, res);
+        if (expired > 475200) checkExp = false;
       }
       if (checkExp) {
         await repository.update({
@@ -80,7 +79,11 @@ export default class Middleware {
     next: NextFunction
   ) {
     try {
-      req.user = helperauth.decodeRefreshToken(req?.body?.refresh_token);
+      const auth = helperauth.newDecodeToken(req?.body?.refresh_token);
+      if (typeof auth == 'string')
+        return response.failed('Invalid token', 400, res);
+
+      req.user = auth;
       next();
       return;
     } catch (err: any) {
@@ -110,14 +113,16 @@ export default class Middleware {
       const user = await repository.detail({ token }, '');
       if (!user) return response.failed('Unauthorized', 401, res);
 
-      req.user = helperauth.decodeToken(token);
+      const auth = helperauth.newDecodeToken(token);
+      if (typeof auth == 'string')
+        return response.failed('Invalid token', 400, res);
+
+      req.user = auth;
       next();
       return;
     } catch (err: any) {
       if (err?.name === 'TokenExpiredError') {
-        req.user = helperauth.decodeExpiredToken(token);
-        next();
-        return;
+        return response.failed(err?.message, 401, res);
       } else {
         return helper.catchError(
           `check expired token invalid: ${err?.message}`,
@@ -164,8 +169,10 @@ export default class Middleware {
     const token: string = await helperauth.decodeBearerToken(authorization);
 
     try {
-      const auth: any = helperauth.decodeToken(token);
-      req.user = auth;
+      const auth: any = helperauth.newDecodeToken(token);
+
+      if (typeof auth == 'string') req.user = null;
+      else req.user = auth;
 
       next();
       return;
