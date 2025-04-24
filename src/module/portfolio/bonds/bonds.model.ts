@@ -72,8 +72,7 @@ const Model = conn.sequelize.define(
 );
 
 Model.beforeCreate(
-  (bonds: { bonds_id: string }) =>
-    (bonds.bonds_id = uuidv4())
+  (bonds: { bonds_id: string }) => (bonds.bonds_id = uuidv4())
 );
 Model.belongsTo(Client, { as: 'holder', foreignKey: 'bonds_holder' });
 

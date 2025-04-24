@@ -22,7 +22,7 @@ export default class Transformer {
       result.push({
         ...mutualFunds,
         currency_rate: rateCurr,
-        currency_purchase: currentValueCurr,
+        currency_total: currentValueCurr,
       });
     }
     return result;
@@ -46,7 +46,7 @@ export default class Transformer {
     return {
       ...result,
       currency_rate: rateCurr,
-      currency_purchase: currentValueCurr,
+      currency_total: currentValueCurr,
     };
   }
 }

@@ -22,7 +22,7 @@ export default class Transformer {
       result.push({
         ...properties,
         currency_rate: rateCurr,
-        currency_purchase: purchaseCurr,
+        currency_total: purchaseCurr,
         doc_location: properties?.doc_location
           ? properties?.doc_location.split(',')
           : null,
@@ -49,7 +49,7 @@ export default class Transformer {
     return {
       ...result,
       currency_rate: rateCurr,
-      currency_purchase: purchaseCurr,
+      currency_total: purchaseCurr,
       doc_location: properties?.doc_location
         ? properties?.doc_location.split(',')
         : null,

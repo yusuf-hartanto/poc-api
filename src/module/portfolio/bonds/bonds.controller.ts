@@ -26,11 +26,7 @@ export default class Controller {
       const bonds = await transformer.list(result);
       return response.success('list data bonds', bonds, res);
     } catch (err: any) {
-      return helper.catchError(
-        `bonds all-data: ${err?.message}`,
-        500,
-        res
-      );
+      return helper.catchError(`bonds all-data: ${err?.message}`, 500, res);
     }
   }
 

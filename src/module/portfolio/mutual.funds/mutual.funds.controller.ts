@@ -77,7 +77,11 @@ export default class Controller {
       const mutualFunds = await transformer.detail(result);
       return response.success('Data mutual funds', mutualFunds, res);
     } catch (err: any) {
-      return helper.catchError(`mutual funds detail: ${err?.message}`, 500, res);
+      return helper.catchError(
+        `mutual funds detail: ${err?.message}`,
+        500,
+        res
+      );
     }
   }
 
@@ -93,7 +97,11 @@ export default class Controller {
 
       return response.success('Data success saved', null, res);
     } catch (err: any) {
-      return helper.catchError(`mutual funds create: ${err?.message}`, 500, res);
+      return helper.catchError(
+        `mutual funds create: ${err?.message}`,
+        500,
+        res
+      );
     }
   }
 
@@ -116,7 +124,11 @@ export default class Controller {
       });
       return response.success('Data success updated', null, res);
     } catch (err: any) {
-      return helper.catchError(`mutual funds update: ${err?.message}`, 500, res);
+      return helper.catchError(
+        `mutual funds update: ${err?.message}`,
+        500,
+        res
+      );
     }
   }
 
@@ -139,7 +151,11 @@ export default class Controller {
       });
       return response.success('Data success deleted', null, res);
     } catch (err: any) {
-      return helper.catchError(`mutual funds delete: ${err?.message}`, 500, res);
+      return helper.catchError(
+        `mutual funds delete: ${err?.message}`,
+        500,
+        res
+      );
     }
   }
 }

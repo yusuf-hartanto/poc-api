@@ -66,8 +66,7 @@ const Model = conn.sequelize.define(
 );
 
 Model.beforeCreate(
-  (forex: { forex_id: string }) =>
-    (forex.forex_id = uuidv4())
+  (forex: { forex_id: string }) => (forex.forex_id = uuidv4())
 );
 Model.belongsTo(Client, { as: 'holder', foreignKey: 'forex_holder' });
 

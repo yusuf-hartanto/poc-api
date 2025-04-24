@@ -26,11 +26,7 @@ export default class Controller {
       const forex = await transformer.list(result);
       return response.success('list data forex', forex, res);
     } catch (err: any) {
-      return helper.catchError(
-        `forex all-data: ${err?.message}`,
-        500,
-        res
-      );
+      return helper.catchError(`forex all-data: ${err?.message}`, 500, res);
     }
   }
 

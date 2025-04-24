@@ -60,7 +60,7 @@ export default class Controller {
         if (!status) return response.failed(message, 400, res);
       } catch (err: any) {
         return helper.catchError(`login otp: ${err?.message}`, 500, res);
-      } 
+      }
     }
 
     const isMatch = await helper.compareIt(req?.body?.password, user?.password);

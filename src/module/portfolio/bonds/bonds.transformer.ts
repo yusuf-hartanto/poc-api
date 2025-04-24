@@ -22,7 +22,7 @@ export default class Transformer {
       result.push({
         ...bonds,
         currency_rate: rateCurr,
-        currency_purchase: amountCurr,
+        currency_total: amountCurr,
       });
     }
     return result;
@@ -46,7 +46,7 @@ export default class Transformer {
     return {
       ...result,
       currency_rate: rateCurr,
-      currency_purchase: amountCurr,
+      currency_total: amountCurr,
     };
   }
 }

@@ -26,11 +26,7 @@ export default class Controller {
       const cash = await transformer.list(result);
       return response.success('list data cash', cash, res);
     } catch (err: any) {
-      return helper.catchError(
-        `cash all-data: ${err?.message}`,
-        500,
-        res
-      );
+      return helper.catchError(`cash all-data: ${err?.message}`, 500, res);
     }
   }
 
@@ -54,11 +50,7 @@ export default class Controller {
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
       const cash = await transformer.list(rows);
-      return response.success(
-        'Data cash',
-        { total: count, values: cash },
-        res
-      );
+      return response.success('Data cash', { total: count, values: cash }, res);
     } catch (err: any) {
       return helper.catchError(`cash index: ${err?.message}`, 500, res);
     }

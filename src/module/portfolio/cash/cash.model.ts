@@ -80,10 +80,7 @@ const Model = conn.sequelize.define(
   }
 );
 
-Model.beforeCreate(
-  (cash: { cash_id: string }) =>
-    (cash.cash_id = uuidv4())
-);
+Model.beforeCreate((cash: { cash_id: string }) => (cash.cash_id = uuidv4()));
 Model.belongsTo(Client, { as: 'holder', foreignKey: 'cash_holder' });
 
 export default Model;
