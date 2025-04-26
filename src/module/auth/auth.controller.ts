@@ -16,91 +16,55 @@ import { repository as repoRole } from '../app/role/role.repository';
 dotenv.config();
 moment().locale('id');
 const date: string = helper.date();
-const IS_OTP: string = process.env.IS_OTP || 'false';
 
-const verifyOtpSubmit = async (otp: number, email: string) => {
-  if (!otp) return { status: false, message: 'Code OTP is required' };
-
-  const check = await repoOtp.detail({ email: email, status: 1 });
-  if (!check) return { status: false, message: 'Code OTP not found' };
-
-  if (otp != check?.getDataValue('code'))
-    return { status: false, message: 'Code OTP incorrect' };
-
-  if (check?.getDataValue('status') != 1) {
-    const now = moment();
-    const expired = moment(check?.getDataValue('expired'));
-    if (expired.isBefore(now))
-      return { status: false, message: 'Code OTP expired' };
-    return { status: false, message: 'Code OTP need verify' };
-  }
-
-  await repoOtp.update({
-    payload: {
-      status: 2,
-      modified_date: date,
-    },
-    condition: { email: email, code: otp },
-  });
-
-  return { status: true, message: 'success' };
-};
 export default class Controller {
   public async login(req: Request, res: Response) {
     const user = req?.user;
 
-    if (IS_OTP == 'true') {
-      try {
-        const otp: number = req?.body?.otp || 0;
-        console.warn('login', otp, user?.getDataValue('email'));
-        const { status, message } = await verifyOtpSubmit(
-          otp,
-          user?.getDataValue('email')
-        );
-        if (!status) return response.failed(message, 400, res);
-      } catch (err: any) {
-        return helper.catchError(`login otp: ${err?.message}`, 500, res);
-      }
-    }
-
     const isMatch = await helper.compareIt(req?.body?.password, user?.password);
     if (isMatch) {
       try {
-        const role = user?.getDataValue('role');
-        const payload: Object = {
-          id: user?.getDataValue('resource_id'),
-          username: user?.getDataValue('username'),
-          province_id: user?.getDataValue('area_province_id'),
-          regency_id: user?.getDataValue('area_regencies_id'),
-          client_id: user?.getDataValue('client_id'),
-          role_name: role?.getDataValue('role_name'),
-        };
+        const date = helper.date();
+        const email: string = user?.getDataValue('email');
 
-        const token: string = helperauth.newToken(payload);
-        const refresh: string = await helperauth.newToken({
-          id: user?.getDataValue('resource_id'),
+        const code = helper.random(1000, 9999);
+        const expired = helper.dateAdd(3, 'minutes');
+        const check = await repoOtp.detail({ email });
+
+        if (check) {
+          await repoOtp.update({
+            payload: {
+              code: code,
+              status: 0,
+              expired: expired,
+              modified_date: date,
+            },
+            condition: { email: email },
+          });
+        } else {
+          await repoOtp.create({
+            payload: {
+              email: email,
+              code: code,
+              expired: expired,
+              created_date: date,
+            },
+          });
+        }
+
+        await helper.sendEmail({
+          to: email,
+          subject: 'OTP Email - Meta Advisor (metaadvisor.id)',
+          content: `
+            <h3>Hi ${email.split('@')[0]},</h3>
+            <p>Berikut kode OTP Anda:</p>
+            <h1>${code}</h1>
+            <p>Kode ini berlaku selama 3 menit.</p>
+            <p>Demi keamanan, jangan berikan kode OTP kepada siapa pun!</p>
+          `,
         });
-        const getUser: Object = await transformer.detail(user);
-        const totalLogin: Number = user?.total_login + 1;
 
-        await repository.update({
-          payload: {
-            token: token,
-            token_expired: helper.dateAdd(7, 'days'),
-            total_login: totalLogin,
-          },
-          condition: { resource_id: user?.resource_id },
-        });
-
-        const data: Object = {
-          userdata: {
-            ...getUser,
-            total_login: totalLogin,
-          },
-          access_token: token,
-          refresh_token: refresh,
-        };
-        return response.success('Login success', data, res);
+        return response.success('Login success', null, res);
       } catch (err: any) {
         return helper.catchError(`login: ${err?.message}`, 500, res);
       }
@@ -213,21 +177,30 @@ export default class Controller {
   }
 
   public async verify(req: Request, res: Response) {
-    if (!req?.query?.confirm_hash)
-      return response.failed('Confirm has is required', 422, res);
+    const { confirm_hash } = req.query;
+    const { password, password_confirmation } = req?.body;
+    if (!confirm_hash)
+      return response.failed('confirm hash is required', 422, res);
+    if (!password) return response.failed('password is required', 422, res);
+    if (!password_confirmation)
+      return response.failed('password confirmation is required', 422, res);
+    if (password != password_confirmation)
+      return response.failed('password confirmation does not match', 400, res);
 
     try {
-      const result = await repository.detail({
-        confirm_hash: req?.query?.confirm_hash,
-      });
+      const result = await repository.detail({ confirm_hash });
       if (!result) return response.failed('Data not found', 404, res);
 
       if (result?.getDataValue('status') === 'A')
         return response.failed('Account has been verified', 400, res);
 
+      const newPassword = await helper.hashIt(password);
       await repository.update({
-        payload: { status: 'A' },
-        condition: { confirm_hash: req?.query?.confirm_hash },
+        payload: {
+          status: 'A',
+          password: newPassword,
+        },
+        condition: { confirm_hash },
       });
 
       return response.success('Account verified', null, res);
@@ -274,14 +247,12 @@ export default class Controller {
   public async reset(req: Request, res: Response) {
     const { confirm_hash } = req?.query;
     if (!confirm_hash)
-      return response.failed('Confirm has is required', 422, res);
+      return response.failed('Confirm hash is required', 422, res);
     const { password } = req?.body;
     if (!password) return response.failed('Password is required', 422, res);
 
     try {
-      const result = await repository.detail({
-        confirm_hash: confirm_hash,
-      });
+      const result = await repository.detail({ confirm_hash });
       if (!result) return response.failed('Data not found', 404, res);
 
       let newPassword: any = null;
@@ -300,7 +271,7 @@ export default class Controller {
           password: newPassword,
           modified_date: date,
         },
-        condition: { confirm_hash: confirm_hash },
+        condition: { confirm_hash },
       });
 
       return response.success('success reset password', null, res);
@@ -323,68 +294,16 @@ export default class Controller {
     }
   }
 
-  public async otp(req: Request, res: Response) {
-    try {
-      const date = helper.date();
-      const { email } = req?.body;
-
-      if (!email) return response.failed('Email is required', 422, res);
-      if (!helper.validateEmail(email))
-        return response.failed('Invalid email format', 400, res);
-
-      const code = helper.random(1000, 9999);
-      const expired = helper.dateAdd(3, 'minutes');
-      const check = await repoOtp.detail({ email: email });
-
-      if (check) {
-        await repoOtp.update({
-          payload: {
-            code: code,
-            status: 0,
-            expired: expired,
-            modified_date: date,
-          },
-          condition: { email: email },
-        });
-      } else {
-        await repoOtp.create({
-          payload: {
-            email: email,
-            code: code,
-            expired: expired,
-            created_date: date,
-          },
-        });
-      }
-
-      await helper.sendEmail({
-        to: email,
-        subject: 'OTP Email - Meta Advisor (metaadvisor.id)',
-        content: `
-          <h3>Hi ${email.split('@')[0]},</h3>
-          <p>Berikut kode OTP Anda:</p>
-          <h1>${code}</h1>
-          <p>Kode ini berlaku selama 3 menit.</p>
-          <p>Demi keamanan, jangan berikan kode OTP kepada siapa pun!</p>
-        `,
-      });
-
-      return response.success('send otp success', null, res);
-    } catch (err: any) {
-      return helper.catchError(`send otp: ${err?.message}`, 500, res);
-    }
-  }
-
   public async verifyOtp(req: Request, res: Response) {
     try {
       let status = 1;
       const date = helper.date();
-      const { otp, email } = req?.body;
+      const { otp } = req?.body;
 
       if (!otp) return response.failed('Code OTP is required', 422, res);
 
-      const check = await repoOtp.detail({ email: email, status: 0 });
-      if (!check) return response.failed('Data not found', 404, res);
+      const check = await repoOtp.detail({ code: otp, status: 0 });
+      if (!check) return response.failed('Data otp not found', 404, res);
 
       if (otp != check?.getDataValue('code'))
         return response.failed('Code OTP incorrect', 400, res);
@@ -402,9 +321,50 @@ export default class Controller {
       });
 
       if (status == 3) return response.failed('Code OTP expired', 400, res);
-      return response.success('verify otp success', null, res);
+
+      const user = await repository.detail(
+        { email: check?.getDataValue('email') },
+        ''
+      );
+      if (!user) return response.failed('Data user not found', 404, res);
+
+      const role = user?.getDataValue('role');
+      const payload: Object = {
+        id: user?.getDataValue('resource_id'),
+        username: user?.getDataValue('username'),
+        province_id: user?.getDataValue('area_province_id'),
+        regency_id: user?.getDataValue('area_regencies_id'),
+        client_id: user?.getDataValue('client_id'),
+        role_name: role?.getDataValue('role_name'),
+      };
+
+      const token: string = helperauth.newToken(payload);
+      const refresh: string = await helperauth.newToken({
+        id: user?.getDataValue('resource_id'),
+      });
+      const getUser: Object = await transformer.detail(user);
+      const totalLogin: Number = user?.total_login + 1;
+
+      await repository.update({
+        payload: {
+          token: token,
+          token_expired: helper.dateAdd(7, 'days'),
+          total_login: totalLogin,
+        },
+        condition: { resource_id: user?.resource_id },
+      });
+
+      const data: Object = {
+        userdata: {
+          ...getUser,
+          total_login: totalLogin,
+        },
+        access_token: token,
+        refresh_token: refresh,
+      };
+      return response.success('verify otp success', data, res);
     } catch (err: any) {
-      return helper.catchError(`send otp: ${err?.message}`, 500, res);
+      return helper.catchError(`verify otp: ${err?.message}`, 500, res);
     }
   }
 }

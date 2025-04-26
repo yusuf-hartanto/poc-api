@@ -133,7 +133,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"adminuser\",\r\n    \"password\": \"adminuser\",\r\n    \"otp\": 4851\r\n}",
+              "raw": "{\r\n    \"username\": \"adminuser\",\r\n    \"password\": \"adminuser\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -189,15 +189,15 @@
                 },
                 {
                   "key": "Content-Length",
-                  "value": "6246"
+                  "value": "53"
                 },
                 {
                   "key": "ETag",
-                  "value": "W/\"1866-o4ZuLJz3UzR5seD8LwkDZnjrS+Q\""
+                  "value": "W/\"35-6FZTisw0KLtlYjX3Fuxm91Na1Jk\""
                 },
                 {
                   "key": "Date",
-                  "value": "Tue, 14 Jan 2025 03:01:02 GMT"
+                  "value": "Sat, 26 Apr 2025 22:19:24 GMT"
                 },
                 {
                   "key": "Connection",
@@ -209,7 +209,97 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n    \"status\": true,\n    \"message\": \"Login success\",\n    \"data\": {\n        \"userdata\": {\n            \"resource_id\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n            \"username\": \"adminuser\",\n            \"email\": \"admin@mail.com\",\n            \"full_name\": \"Super Admin\",\n            \"place_of_birth\": \"Bandung\",\n            \"date_of_birth\": \"2025-01-14\",\n            \"usia\": 1,\n            \"telepon\": \"085722800025\",\n            \"image_foto\": null,\n            \"status\": \"A\",\n            \"total_login\": 1,\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"area_regencies_id\": null,\n            \"created_by\": \"00000000-0000-0000-0000-000000000000\",\n            \"created_date\": \"2025-01-13T22:58:44.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null,\n            \"role\": {\n                \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n                \"role_name\": \"administrator\",\n                \"status\": 1\n            },\n            \"province\": {\n                \"id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"JAWA BARAT\"\n            },\n            \"regency\": null,\n            \"ability\": [\n                {\n                    \"menu_id\": \"cb49c2af-437d-444e-85ac-d6e9aeaa152b\",\n                    \"menu_name\": \"User\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"user\",\n                    \"type_menu\": null,\n                    \"seq_number\": 44,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"152ec805-ea1c-4e01-9649-0613ece7599c\",\n                    \"menu_name\": \"Form\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"form\",\n                    \"type_menu\": null,\n                    \"seq_number\": 32,\n                    \"parent_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"28319c97-144b-43d8-a714-f208fec5fbab\",\n                    \"menu_name\": \"Event\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"event\",\n                    \"type_menu\": null,\n                    \"seq_number\": 31,\n                    \"parent_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                    \"menu_name\": \"Survey\",\n                    \"menu_icon\": \"CheckSquare\",\n                    \"module_name\": \"#\",\n                    \"type_menu\": null,\n                    \"seq_number\": 3,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"1ea02aa7-d18b-4a8a-9606-eedc4037dec0\",\n                    \"menu_name\": \"Role Menu\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"role_menu\",\n                    \"type_menu\": null,\n                    \"seq_number\": 43,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"d3b9bcae-dd40-43af-9cb9-1ec1a0ae8198\",\n                    \"menu_name\": \"Client\",\n                    \"menu_icon\": \"Users\",\n                    \"module_name\": \"#\",\n                    \"type_menu\": null,\n                    \"seq_number\": 21,\n                    \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"30d7e09b-dfe8-492d-8ffb-76f7ea4f5398\",\n                    \"menu_name\": \"Role\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"role\",\n                    \"type_menu\": null,\n                    \"seq_number\": 42,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"2590841a-1775-446d-afaa-d9705141c392\",\n                    \"menu_name\": \"Dashboard\",\n                    \"menu_icon\": \"Home\",\n                    \"module_name\": \"dashboard\",\n                    \"type_menu\": null,\n                    \"seq_number\": 1,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"d6cef944-6019-433b-8e5f-02e0e2d07de2\",\n                    \"menu_name\": \"Record\",\n                    \"menu_icon\": \"Activity\",\n                    \"module_name\": \"record\",\n                    \"type_menu\": null,\n                    \"seq_number\": 23,\n                    \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"83000f68-b1c3-4ea4-985b-0013f6fcaa2e\",\n                    \"menu_name\": \"Menu\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"menu\",\n                    \"type_menu\": null,\n                    \"seq_number\": 41,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                    \"menu_name\": \"Insurance\",\n                    \"menu_icon\": \"Activity\",\n                    \"module_name\": \"#\",\n                    \"type_menu\": null,\n                    \"seq_number\": 2,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_name\": \"Control Panel\",\n                    \"menu_icon\": \"Users\",\n                    \"module_name\": \"#\",\n                    \"type_menu\": null,\n                    \"seq_number\": 4,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"ca5d8c40-4958-441c-af1a-035448e3c4ea\",\n                    \"menu_name\": \"Policy\",\n                    \"menu_icon\": \"Activity\",\n                    \"module_name\": \"policy\",\n                    \"type_menu\": null,\n                    \"seq_number\": 22,\n                    \"parent_id\": \"14a5a6ab-440c-4dfb-909d-3c331e05e22e\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"17f60e1c-b88e-4500-85f4-5780fe7daec7\",\n                    \"menu_name\": \"Global Param\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"global_param\",\n                    \"type_menu\": null,\n                    \"seq_number\": 45,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                }\n            ]\n        },\n        \"access_token\": \"ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBaQ0k2SWpObE1HUTVaVGcyTFdOaVlXVXRORFZsTnkxaU16Sm1MV0kzWW1ObVlUWTJOekEzTXlJc0luVnpaWEp1WVcxbElqb2lZV1J0YVc1MWMyVnlJaXdpY0hKdmRtbHVZMlZmYVdRaU9pSXhNbU0zWm1VNFppMDBaVEUwTFRRMll6Y3RZak0zT1MwMk5qTTNPVFEzT0RReE5EWWlMQ0p5WldkbGJtTjVYMmxrSWpwdWRXeHNMQ0p5YjJ4bFgyNWhiV1VpT2lKaFpHMXBibWx6ZEhKaGRHOXlJaXdpYVdGMElqb3hOek0yT0RJek5qWXhMQ0psZUhBaU9qRTNOVEkyTURNMk5qRjkuaWxQQ1l1eGdHbXl2NG11YVJVc2F1R0U5MUV2VmhFSnJ4bFVCWmVTUURuZw==\",\n        \"refresh_token\": \"ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBaQ0k2SWpObE1HUTVaVGcyTFdOaVlXVXRORFZsTnkxaU16Sm1MV0kzWW1ObVlUWTJOekEzTXlJc0luVnpaWEp1WVcxbElqb2lZV1J0YVc1MWMyVnlJaXdpY0hKdmRtbHVZMlZmYVdRaU9pSXhNbU0zWm1VNFppMDBaVEUwTFRRMll6Y3RZak0zT1MwMk5qTTNPVFEzT0RReE5EWWlMQ0p5WldkbGJtTjVYMmxrSWpwdWRXeHNMQ0p5YjJ4bFgyNWhiV1VpT2lKaFpHMXBibWx6ZEhKaGRHOXlJaXdpYVdGMElqb3hOek0yT0RJek5qWXhMQ0psZUhBaU9qRTNOamd6T0RNMk5qRjkuajUtVzJtSHVxbDVxNThqQmZQRUpDUXROSEYtX3ByeExGREhNWWFqSVJGTQ==\"\n    }\n}"
+              "body": "{\n    \"status\": true,\n    \"message\": \"Login success\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Verify OTP Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"otp\": 9246\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/verify-otp",
+              "host": ["{{url}}"],
+              "path": ["auth", "verify-otp"]
+            }
+          },
+          "response": [
+            {
+              "name": "Verify OTP Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"otp\": 9246\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/auth/verify-otp",
+                  "host": ["{{url}}"],
+                  "path": ["auth", "verify-otp"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "4362"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"110a-mwFT4rqk6S7Y+NHacj07W/BaD1o\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 26 Apr 2025 22:21:01 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"verify otp success\",\n    \"data\": {\n        \"userdata\": {\n            \"resource_id\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n            \"username\": \"adminuser\",\n            \"email\": \"admin@mail.com\",\n            \"full_name\": \"Super Admin\",\n            \"place_of_birth\": \"Bandung\",\n            \"date_of_birth\": \"2025-01-14\",\n            \"usia\": 0,\n            \"telepon\": \"085722800025\",\n            \"image_foto\": null,\n            \"status\": \"A\",\n            \"total_login\": 112,\n            \"client_id\": null,\n            \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n            \"area_regencies_id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n            \"token_expired\": \"2025-04-30T04:19:41.000Z\",\n            \"created_by\": \"00000000-0000-0000-0000-000000000000\",\n            \"created_date\": \"2025-01-13T22:58:44.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null,\n            \"role\": {\n                \"role_id\": \"c9892c4d-eeb8-406d-acac-95bcfa77aa52\",\n                \"role_name\": \"administrator\",\n                \"status\": 1\n            },\n            \"province\": {\n                \"id\": \"12c7fe8f-4e14-46c7-b379-663794784146\",\n                \"name\": \"JAWA BARAT\"\n            },\n            \"regency\": {\n                \"id\": \"39827e2d-edfa-4748-bd6c-614bdbbf5031\",\n                \"name\": \"KABUPATEN BANDUNG\",\n                \"area_province_id\": \"12c7fe8f-4e14-46c7-b379-663794784146\"\n            },\n            \"ability\": [\n                {\n                    \"menu_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_name\": \"Settings\",\n                    \"menu_icon\": \"tabler-smart-home\",\n                    \"module_name\": \"#\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 99,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"2590841a-1775-446d-afaa-d9705141c392\",\n                    \"menu_name\": \"Dashboard\",\n                    \"menu_icon\": \"tabler-dashboard\",\n                    \"module_name\": \"dashboard\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 1,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"30d7e09b-dfe8-492d-8ffb-76f7ea4f5398\",\n                    \"menu_name\": \"Role\",\n                    \"menu_icon\": \"\",\n                    \"module_name\": \"master/role\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 42,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"61464f68-5749-4617-be1d-dcc1bb6017a3\",\n                    \"menu_name\": \"Properties\",\n                    \"menu_icon\": \"tabler-building-estate\",\n                    \"module_name\": \"properties\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 4,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"73aebdcd-ddca-4cd7-a3b4-c9dce347ecaf\",\n                    \"menu_name\": \"Assesment\",\n                    \"menu_icon\": \"tabler-ad-2\",\n                    \"module_name\": \"assesment\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 3,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"7cde0257-b21e-4d1f-92a8-4930f74cd225\",\n                    \"menu_name\": \"Client\",\n                    \"menu_icon\": \"tabler-users-group\",\n                    \"module_name\": \"client\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 88,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"83000f68-b1c3-4ea4-985b-0013f6fcaa2e\",\n                    \"menu_name\": \"Menu\",\n                    \"menu_icon\": \"icon\",\n                    \"module_name\": \"master/menu\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 41,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"861de0ee-09da-455e-8294-bad944c826c8\",\n                    \"menu_name\": \"Insurance\",\n                    \"menu_icon\": \"tabler-script\",\n                    \"module_name\": \"insurance\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 2,\n                    \"parent_id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                },\n                {\n                    \"menu_id\": \"cb49c2af-437d-444e-85ac-d6e9aeaa152b\",\n                    \"menu_name\": \"User\",\n                    \"menu_icon\": \"Circle\",\n                    \"module_name\": \"master/user\",\n                    \"type_menu\": \"A\",\n                    \"seq_number\": 44,\n                    \"parent_id\": \"089263a4-5f9f-4204-9589-7edd4753d6ed\",\n                    \"menu_status\": 1,\n                    \"role_menu_status\": 1,\n                    \"role_menu_create\": 1,\n                    \"role_menu_edit\": 1,\n                    \"role_menu_delete\": 1,\n                    \"role_menu_approve\": 1\n                }\n            ]\n        },\n        \"access_token\": \"eyJpZCI6IjNlMGQ5ZTg2LWNiYWUtNDVlNy1iMzJmLWI3YmNmYTY2NzA3MyIsInVzZXJuYW1lIjoiYWRtaW51c2VyIiwicHJvdmluY2VfaWQiOiIxMmM3ZmU4Zi00ZTE0LTQ2YzctYjM3OS02NjM3OTQ3ODQxNDYiLCJyZWdlbmN5X2lkIjoiMzk4MjdlMmQtZWRmYS00NzQ4LWJkNmMtNjE0YmRiYmY1MDMxIiwiY2xpZW50X2lkIjpudWxsLCJyb2xlX25hbWUiOiJhZG1pbmlzdHJhdG9yIn0=\",\n        \"refresh_token\": \"eyJpZCI6IjNlMGQ5ZTg2LWNiYWUtNDVlNy1iMzJmLWI3YmNmYTY2NzA3MyJ9\"\n    }\n}"
             }
           ]
         },
@@ -327,39 +417,57 @@
           ]
         },
         {
-          "name": "Verify",
+          "name": "Verify Status And Set Password",
           "request": {
             "auth": {
               "type": "noauth"
             },
-            "method": "GET",
+            "method": "POST",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\": \"qwerty@1234\",\r\n    \"password_confirmation\": \"qwerty@1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
-              "raw": "{{url}}/auth/verify?confirm_hash=$2a$06$KjpUeJ62TjK8BjGylaj7meRrW/YMHn4KxEwEjBAJlEDJnJn2aIpvu",
+              "raw": "{{url}}/auth/verify?confirm_hash=$2a$06$z3fqQZvVaQ5PI2hMYK3u0e97C/7tbkDRELay1rCCdsCCTxu/cw/Hi",
               "host": ["{{url}}"],
               "path": ["auth", "verify"],
               "query": [
                 {
                   "key": "confirm_hash",
-                  "value": "$2a$06$KjpUeJ62TjK8BjGylaj7meRrW/YMHn4KxEwEjBAJlEDJnJn2aIpvu"
+                  "value": "$2a$06$z3fqQZvVaQ5PI2hMYK3u0e97C/7tbkDRELay1rCCdsCCTxu/cw/Hi"
                 }
               ]
             }
           },
           "response": [
             {
-              "name": "Verify",
+              "name": "Verify Status And Set Password",
               "originalRequest": {
-                "method": "GET",
+                "method": "POST",
                 "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"password\": \"qwerty@1234\",\r\n    \"password_confirmation\": \"qwerty@1234\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "raw": "{{url}}/auth/verify?confirm_hash=$2a$06$KjpUeJ62TjK8BjGylaj7meRrW/YMHn4KxEwEjBAJlEDJnJn2aIpvu",
+                  "raw": "{{url}}/auth/verify?confirm_hash=$2a$06$z3fqQZvVaQ5PI2hMYK3u0e97C/7tbkDRELay1rCCdsCCTxu/cw/Hi",
                   "host": ["{{url}}"],
                   "path": ["auth", "verify"],
                   "query": [
                     {
                       "key": "confirm_hash",
-                      "value": "$2a$06$KjpUeJ62TjK8BjGylaj7meRrW/YMHn4KxEwEjBAJlEDJnJn2aIpvu"
+                      "value": "$2a$06$z3fqQZvVaQ5PI2hMYK3u0e97C/7tbkDRELay1rCCdsCCTxu/cw/Hi"
                     }
                   ]
                 }
@@ -394,7 +502,7 @@
                 },
                 {
                   "key": "Date",
-                  "value": "Tue, 14 Jan 2025 04:35:33 GMT"
+                  "value": "Sat, 26 Apr 2025 22:30:48 GMT"
                 },
                 {
                   "key": "Connection",
@@ -647,378 +755,6 @@
               ],
               "cookie": [],
               "body": "{\n    \"status\": true,\n    \"message\": \"success reset password\",\n    \"data\": null\n}"
-            }
-          ]
-        },
-        {
-          "name": "Send OTP",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{url}}/auth/otp",
-              "host": ["{{url}}"],
-              "path": ["auth", "otp"]
-            }
-          },
-          "response": [
-            {
-              "name": "Send OTP",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}/auth/otp",
-                  "host": ["{{url}}"],
-                  "path": ["auth", "otp"]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express"
-                },
-                {
-                  "key": "Access-Control-Allow-Origin",
-                  "value": "*"
-                },
-                {
-                  "key": "Access-Control-Allow-Credentials",
-                  "value": "true"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "56"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"38-S09tX2pf70q8nOtvc/cvE91v5Z0\""
-                },
-                {
-                  "key": "Date",
-                  "value": "Tue, 22 Apr 2025 13:52:25 GMT"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"status\": true,\n    \"message\": \"send otp success\",\n    \"data\": null\n}"
-            }
-          ]
-        },
-        {
-          "name": "Verify OTP",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\",\r\n    \"otp\": 1047\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{url}}/auth/verify-otp",
-              "host": ["{{url}}"],
-              "path": ["auth", "verify-otp"]
-            }
-          },
-          "response": [
-            {
-              "name": "Verify OTP",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\",\r\n    \"otp\": 4439\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}/auth/verify-otp",
-                  "host": ["{{url}}"],
-                  "path": ["auth", "verify-otp"]
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express"
-                },
-                {
-                  "key": "Access-Control-Allow-Origin",
-                  "value": "*"
-                },
-                {
-                  "key": "Access-Control-Allow-Credentials",
-                  "value": "true"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "47"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"2f-CpHnIoB5lZh5X1LAjNr+OCtqzGo\""
-                },
-                {
-                  "key": "Date",
-                  "value": "Tue, 22 Apr 2025 13:57:15 GMT"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"status\": false,\n    \"message\": \"Code OTP incorrect\"\n}"
-            },
-            {
-              "name": "Verify OTP",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\",\r\n    \"otp\": 1047\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}/auth/verify-otp",
-                  "host": ["{{url}}"],
-                  "path": ["auth", "verify-otp"]
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express"
-                },
-                {
-                  "key": "Access-Control-Allow-Origin",
-                  "value": "*"
-                },
-                {
-                  "key": "Access-Control-Allow-Credentials",
-                  "value": "true"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "45"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"2d-h9K6jjuq7Q70TQFpoKNWQGZVV2U\""
-                },
-                {
-                  "key": "Date",
-                  "value": "Tue, 22 Apr 2025 13:58:04 GMT"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"status\": false,\n    \"message\": \"Code OTP expired\"\n}"
-            },
-            {
-              "name": "Verify OTP",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\",\r\n    \"otp\": 1047\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}/auth/verify-otp",
-                  "host": ["{{url}}"],
-                  "path": ["auth", "verify-otp"]
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express"
-                },
-                {
-                  "key": "Access-Control-Allow-Origin",
-                  "value": "*"
-                },
-                {
-                  "key": "Access-Control-Allow-Credentials",
-                  "value": "true"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "43"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"2b-I+G+fQ74Hq0oepNVdhh2xvDIbbs\""
-                },
-                {
-                  "key": "Date",
-                  "value": "Tue, 22 Apr 2025 13:58:38 GMT"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"status\": false,\n    \"message\": \"Data not found\"\n}"
-            },
-            {
-              "name": "Verify OTP",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"email\": \"yusuf.hartanto69@gmail.com\",\r\n    \"otp\": 5628\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}/auth/verify-otp",
-                  "host": ["{{url}}"],
-                  "path": ["auth", "verify-otp"]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express"
-                },
-                {
-                  "key": "Access-Control-Allow-Origin",
-                  "value": "*"
-                },
-                {
-                  "key": "Access-Control-Allow-Credentials",
-                  "value": "true"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "58"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"3a-c6TtjRP94wLLZG6LY4rafbWhgek\""
-                },
-                {
-                  "key": "Date",
-                  "value": "Tue, 22 Apr 2025 13:59:34 GMT"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"status\": true,\n    \"message\": \"verify otp success\",\n    \"data\": null\n}"
             }
           ]
         }
