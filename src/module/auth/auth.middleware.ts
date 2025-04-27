@@ -1,6 +1,7 @@
 'use strict';
 
 import dotenv from 'dotenv';
+import moment from 'moment';
 import { Op } from 'sequelize';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
@@ -10,6 +11,7 @@ import { repository } from '../app/resource/resource.repository';
 import { repository as repoRoleMenu } from '../app/role.menu/role.menu.repository';
 
 dotenv.config();
+moment().locale('id');
 type RequestBody<T> = Request<{}, {}, T>;
 interface UserBody {
   username: string;
@@ -22,13 +24,13 @@ export default class Middleware {
     res: Response,
     next: NextFunction
   ) {
-    const authorization: string = req?.headers['authorization'] || '';
-    const token: string = await helperauth.decodeBearerToken(authorization);
-    if (token === '')
-      return response.failed('Auth Bearer is required', 422, res);
-
     try {
-      const auth = helperauth.decodeToken(token);
+      const authorization: string = req?.headers['authorization'] || '';
+      const token: string = await helperauth.decodeBearerToken(authorization);
+      if (token === '')
+        return response.failed('Auth Bearer is required', 422, res);
+
+      const auth = helperauth.newDecodeToken(token);
       if (typeof auth == 'string')
         return response.failed('Invalid token', 400, res);
 
@@ -36,6 +38,24 @@ export default class Middleware {
         auth?.role_name == 'administrator' ? '' : 'administrator';
       const user = await repository.detail({ token }, admin);
       if (!user) return response.failed('Unauthorized', 401, res);
+
+      let checkExp = true;
+      if (user?.getDataValue('token_expired')) {
+        const expired = helper.dateDiff(
+          moment(user?.getDataValue('token_expired')),
+          'seconds'
+        );
+        if (expired < 3600) return response.failed('Unauthorized', 401, res);
+        if (expired > 475200) checkExp = false;
+      }
+      if (checkExp) {
+        await repository.update({
+          payload: {
+            token_expired: helper.dateAdd(7, 'days'),
+          },
+          condition: { resource_id: user?.getDataValue('resource_id') },
+        });
+      }
 
       req.user = auth;
       next();
@@ -59,7 +79,11 @@ export default class Middleware {
     next: NextFunction
   ) {
     try {
-      req.user = helperauth.decodeRefreshToken(req?.body?.refresh_token);
+      const auth = helperauth.newDecodeToken(req?.body?.refresh_token);
+      if (typeof auth == 'string')
+        return response.failed('Invalid token', 400, res);
+
+      req.user = auth;
       next();
       return;
     } catch (err: any) {
@@ -89,14 +113,16 @@ export default class Middleware {
       const user = await repository.detail({ token }, '');
       if (!user) return response.failed('Unauthorized', 401, res);
 
-      req.user = helperauth.decodeToken(token);
+      const auth = helperauth.newDecodeToken(token);
+      if (typeof auth == 'string')
+        return response.failed('Invalid token', 400, res);
+
+      req.user = auth;
       next();
       return;
     } catch (err: any) {
       if (err?.name === 'TokenExpiredError') {
-        req.user = helperauth.decodeExpiredToken(token);
-        next();
-        return;
+        return response.failed(err?.message, 401, res);
       } else {
         return helper.catchError(
           `check expired token invalid: ${err?.message}`,
@@ -143,8 +169,10 @@ export default class Middleware {
     const token: string = await helperauth.decodeBearerToken(authorization);
 
     try {
-      const auth: any = helperauth.decodeToken(token);
-      req.user = auth;
+      const auth: any = helperauth.newDecodeToken(token);
+
+      if (typeof auth == 'string') req.user = null;
+      else req.user = auth;
 
       next();
       return;
@@ -158,12 +186,13 @@ export default class Middleware {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { role_name } = req?.user;
-        console.warn(role_name);
         const role_menu: any = await repoRoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });
-        const ability = role_menu?.dataValues?.menu.find(
-          (rm: any) => rm?.menu?.menu_name.toLowerCase() === role.toLowerCase()
+        const ability = role_menu?.dataValues?.role_menu.find((rm: any) =>
+          req?.originalUrl
+            .split('?')[0]
+            .includes(rm?.menu?.menu_name.toLowerCase())
         );
 
         if (!ability && role_name !== 'administrator')

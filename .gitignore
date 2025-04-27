@@ -6,6 +6,10 @@
 /config/config.json
 # exclude everything
 /public/uploads/*
+/public/excel/*
+/public/pdf/*
 
 # exception to the rule
 !/public/uploads/.gitkeep
+!/public/excel/.gitkeep
+!/public/pdf/.gitkeep

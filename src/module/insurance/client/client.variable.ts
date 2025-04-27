@@ -3,10 +3,12 @@
 export default class Variable {
   public fillable() {
     const field: Array<string> = [
+      'cin',
       'name',
       'ktp',
       'dob',
       'age',
+      'email',
       'contact_number',
       'address',
       'relation_id',

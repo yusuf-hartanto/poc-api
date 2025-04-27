@@ -23,6 +23,10 @@ const Model = conn.sequelize.define(
     form_id: {
       type: DataTypes.STRING,
     },
+    periode: {
+      type: DataTypes.DATEONLY,
+      defaultValue: DataTypes.NOW,
+    },
     question_id: {
       type: DataTypes.STRING,
     },

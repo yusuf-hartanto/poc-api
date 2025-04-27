@@ -12,6 +12,9 @@ const Model = conn.sequelize.define(
       primaryKey: true,
       unique: true,
     },
+    cin: {
+      type: DataTypes.STRING,
+    },
     name: {
       type: DataTypes.STRING,
     },
@@ -23,6 +26,10 @@ const Model = conn.sequelize.define(
     },
     age: {
       type: DataTypes.INTEGER,
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
     },
     contact_number: {
       type: DataTypes.STRING,

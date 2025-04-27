@@ -69,6 +69,9 @@ const Model = conn.sequelize.define(
     token: {
       type: DataTypes.STRING,
     },
+    token_expired: {
+      type: DataTypes.DATE,
+    },
     created_by: {
       type: DataTypes.STRING,
     },

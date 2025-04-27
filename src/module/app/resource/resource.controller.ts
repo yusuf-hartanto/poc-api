@@ -22,7 +22,7 @@ export default class Controller {
       const admin: string = role == 'administrator' ? '' : 'administrator';
 
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(role))
+      if (!['administrator', 'agent'].includes(role))
         condition['client_id'] = req?.user?.client_id;
 
       const { count, rows } = await repository.index(
@@ -69,7 +69,7 @@ export default class Controller {
       const admin: string = role == 'administrator' ? '' : 'administrator';
 
       let condition: any = { resource_id: id };
-      if (!['administrastor', 'agent'].includes(role))
+      if (!['administrator', 'agent'].includes(role))
         condition['client_id'] = req?.user?.client_id;
 
       const result: Object | any = await repository.detail(condition, admin);
@@ -84,7 +84,7 @@ export default class Controller {
   public async create(req: Request, res: Response) {
     let confirm_hash: string = '';
     let message: string = '';
-    let username: string = '';
+    let username: string = req?.body?.username || '';
 
     try {
       const checkEmail = await repository.check({
@@ -94,11 +94,13 @@ export default class Controller {
       if (!req?.body?.password)
         return response.failed('Password is required', 422, res);
 
-      username = req?.body?.email.split('@')[0];
-      const checkUsername = await repository.check({
-        username: username,
-      });
-      if (checkUsername) username = username + helper.random(100, 999);
+      if (!username || username == undefined) {
+        username = req?.body?.email.split('@')[0];
+        const checkUsername = await repository.check({
+          username: username,
+        });
+        if (checkUsername) username = username + helper.random(100, 999);
+      }
 
       let role_id: any = null;
       let image_foto: any = null;
@@ -127,6 +129,7 @@ export default class Controller {
           confirm_hash: confirm_hash,
           image_foto: image_foto,
           role_id: role_id?.value || null,
+          status: 'A',
           area_province_id: province_id?.value || null,
           area_regencies_id: regency_id?.value || null,
           created_by: req?.user?.id || null,
@@ -145,7 +148,7 @@ export default class Controller {
         content: `
           <h3>Hi ${req?.body?.full_name},</h3>
           <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${process.env.BASE_URL_FE}/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+          <a href="${process.env.BASE_URL_FE}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
           <p>This is your username account: <b>${username}</b></p>
         `,
       });

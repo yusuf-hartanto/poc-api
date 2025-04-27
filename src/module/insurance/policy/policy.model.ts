@@ -70,6 +70,7 @@ const Model = conn.sequelize.define(
     },
     unit_link: {
       type: DataTypes.TINYINT,
+      defaultValue: 0,
     },
     fund: {
       type: DataTypes.STRING,

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', global.index);
 router.post('/sendmail', global.sendmail);
-router.get('/navigation', global.navigation);
+router.get('/navigation', auth.checkToken, global.navigation);
 router.post('/update-currency/:currency', global.updateCurrency);
 router.get(
   '/dashboard/summary',
@@ -21,6 +21,18 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('dashboard'),
   global.dashboard
+);
+router.get(
+  '/dashboard/excel',
+  auth.checkBearerToken,
+  auth.checkAccess('dashboard'),
+  global.dashboardExcel
+);
+router.get(
+  '/dashboard/pdf',
+  auth.checkBearerToken,
+  auth.checkAccess('dashboard'),
+  global.dashboardPDF
 );
 
 export default router;

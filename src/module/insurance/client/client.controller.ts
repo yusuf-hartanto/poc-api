@@ -1,5 +1,6 @@
 'use strict';
 
+import moment from 'moment';
 import dotenv from 'dotenv';
 import { Op } from 'sequelize';
 import { variable } from './client.variable';
@@ -13,11 +14,26 @@ import { repository as repoResource } from '../../app/resource/resource.reposito
 
 dotenv.config();
 
+const generateCin = async () => {
+  let nextCin: string = moment().locale('id').format('YYMMDD');
+
+  const lastCin = await repository.getLastCin();
+  if (lastCin) {
+    const lastCinNumber =
+      parseInt(lastCin?.getDataValue('cin')?.substring(7, 10)) + 1;
+    nextCin = `${nextCin}${lastCinNumber.toString().padStart(4, '0')}`;
+  } else {
+    nextCin = nextCin + '0001';
+  }
+
+  return nextCin;
+};
+
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+      if (!['administrator', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -28,7 +44,8 @@ export default class Controller {
       const result = await repository.list(condition);
       if (result?.length < 1)
         return response.failed('Data not found', 404, res);
-      return response.success('list data client', result, res);
+      const clients = await transformer.list(result);
+      return response.success('list data client', clients, res);
     } catch (err: any) {
       return helper.catchError(`client all-data: ${err?.message}`, 500, res);
     }
@@ -41,7 +58,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (!['administrastor', 'agent'].includes(req?.user?.role_name))
+      if (!['administrator', 'agent'].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { id: req?.user?.client_id },
@@ -56,9 +73,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      const clients = await transformer.list(rows);
       return response.success(
         'Data client',
-        { total: count, values: rows },
+        { total: count, values: clients },
         res
       );
     } catch (err: any) {
@@ -80,7 +98,7 @@ export default class Controller {
         relation: relation,
       });
       if (rows?.length < 1) return response.failed('Data not found', 404, res);
-      const clients = await transformer.relation(rows, { option });
+      const clients = await transformer.relation(rows, { option, relation });
       return response.success(
         'Data client',
         { total: count, values: clients },
@@ -99,7 +117,8 @@ export default class Controller {
 
       const result: Object | any = await repository.detail({ id });
       if (!result) return response.failed('Data not found', 404, res);
-      return response.success('Data client', result, res);
+      const client = await transformer.detail(result);
+      return response.success('Data client', client, res);
     } catch (err: any) {
       return helper.catchError(`client detail: ${err?.message}`, 500, res);
     }
@@ -107,8 +126,8 @@ export default class Controller {
 
   public async create(req: Request, res: Response) {
     let confirm_hash: string = '';
-    let username: string = '';
-    let pass: string = helper.makeid(10);
+    let username: string = req?.body?.username;
+    let pass: string = req?.body?.password;
     let relationId: string = '';
 
     try {
@@ -121,18 +140,23 @@ export default class Controller {
       const relationName: string =
         relation_name && relation_name != undefined ? relation_name : null;
 
+      let cin: string = req?.body?.cin || '';
+      if (!cin || cin == '') {
+        cin = await generateCin();
+      }
+
       const data: Object = helper.only(variable.fillable(), req?.body);
       const client = await repository.create({
         payload: {
           ...data,
+          cin: cin,
           relation_id: relationId,
           relation_name: relationName,
           created_by: req?.user?.id,
         },
       });
 
-      if (relationId == '00000000-0000-0000-0000-000000000000') {
-        username = name.toLowerCase().replace(/ /g, '');
+      if (username && pass) {
         const checkUsername = await repoResource.check({
           username: username,
         });
@@ -150,7 +174,7 @@ export default class Controller {
             client_id: client?.getDataValue('id') || null,
             role_id: role?.getDataValue('role_id') || null,
             username: username,
-            email: `${pass}@poc.com`,
+            email: `${pass}@${process.env.BASE_DOMAIN}`,
             password: password,
             full_name: name || null,
             date_of_birth: dob || null,

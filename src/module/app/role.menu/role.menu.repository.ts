@@ -15,13 +15,13 @@ export default class Respository {
       include: [
         {
           model: Model,
-          as: 'menu',
+          as: 'role_menu',
           required: false,
           include: [
             {
               model: Menu,
               as: 'menu',
-              required: false,
+              required: true,
               where: {
                 status: { [Op.ne]: 9 },
               },
@@ -41,13 +41,13 @@ export default class Respository {
       include: [
         {
           model: Model,
-          as: 'menu',
+          as: 'role_menu',
           required: false,
           include: [
             {
               model: Menu,
               as: 'menu',
-              required: false,
+              required: true,
               where: {
                 status: { [Op.ne]: 9 },
               },
@@ -86,13 +86,13 @@ export default class Respository {
       include: [
         {
           model: Model,
-          as: 'menu',
+          as: 'role_menu',
           required: false,
           include: [
             {
               model: Menu,
               as: 'menu',
-              required: false,
+              required: true,
               where: {
                 status: { [Op.ne]: 9 },
               },

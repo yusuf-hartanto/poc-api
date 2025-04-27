@@ -17,6 +17,7 @@ import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
 
 interface mail {
+  service: string;
   host: string;
   port: number;
   user: string;
@@ -31,11 +32,12 @@ const CHAT_ID_TELEGRAM: string = process.env.CHAT_ID_TELEGRAM || '';
 const telegram = new Telegram(process.env.TOKEN_TELEGRAM || '');
 const month: string = moment().format('YYYY-MM');
 const configMail: mail = {
+  service: process.env.MAIL_SERVICE || 'smtp.mailtrap.io',
   host: process.env.MAIL_HOST || 'smtp.mailtrap.io',
   port: +(process.env.MAIL_PORT || 2525),
   user: process.env.MAIL_USERNAME || 'fce06934e4832d',
   pass: process.env.MAIL_PASSWORD || '27ceb283c382c4',
-  sender: process.env.MAIL_SENDER || 'noreply@poc.mail.com',
+  sender: process.env.MAIL_SENDER || 'noreply@metaadvisor.id',
   secure: process.env.MAIL_ENCRYPTION == 'ssl' ? true : false,
   debug: process.env.MAIL_DEBUG == 'false',
 };
@@ -60,12 +62,22 @@ export default class Helper {
       .format('YYYY-MM-DD HH:mm:ss');
   }
 
+  public dateDiff(date: any, type: any) {
+    return moment(date).diff(moment(), type);
+  }
+
   public only(keys: Array<string>, data: any, isUpdate: boolean = false) {
     const date = moment().locale('id').format('YYYY-MM-DD HH:mm:ss');
     let result: any = {};
 
     keys.forEach((i) => {
-      if ((data[i] && data[i] !== undefined) || data[i] == 0) {
+      if (
+        (data[i] &&
+          data[i] !== undefined &&
+          data[i] !== '' &&
+          data[i] != 'null') ||
+        data[i] === 0
+      ) {
         result[i] = data[i];
       }
     });
@@ -164,6 +176,18 @@ export default class Helper {
     };
   }
 
+  public async checkDirExport(type: string) {
+    const month: string = moment().format('YYYY-MM');
+    const path: string = `./public/${type}/${month}`;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
+    }
+    return {
+      dir: `/${type}/${month}`,
+      path: path,
+    };
+  }
+
   public async sendNotif(message: string) {
     await telegram.send(
       CHAT_ID_TELEGRAM,
@@ -191,7 +215,7 @@ export default class Helper {
     let mailOptions: any;
     if (data?.attachments && data?.attachments?.length > 0) {
       mailOptions = {
-        from: configMail?.sender,
+        from: `Meta Advisor ${configMail?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -199,7 +223,7 @@ export default class Helper {
       };
     } else {
       mailOptions = {
-        from: configMail?.sender,
+        from: `Meta Advisor ${configMail?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -207,6 +231,7 @@ export default class Helper {
     }
 
     const transporter = nodemailer.createTransport({
+      service: configMail?.service,
       host: configMail?.host,
       port: configMail?.port,
       secure: configMail?.secure,
@@ -259,18 +284,37 @@ export default class Helper {
     try {
       await conn.sequelize.query(
         `
-          UPDATE app_resource SET usia = (
-            SELECT timestampdiff(YEAR, ar.date_of_birth, curdate()) AS usia
-            FROM app_resource ar
-            WHERE ar.resource_id = app_resource.resource_id
-          )
-          WHERE date_of_birth IS NOT NULL AND date_of_birth < curdate()
+          UPDATE app_resource AS ar
+          JOIN (
+              SELECT resource_id, TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS usia
+              FROM app_resource
+          ) AS subquery ON ar.resource_id = subquery.resource_id
+          SET ar.usia = subquery.usia;
         `,
         { type: QueryTypes.SELECT }
       );
       await this.sendNotif('success update usia');
     } catch (err: any) {
       await this.sendNotif(`failed update usia: ${err?.message}`);
+    }
+  }
+
+  public async updateClientAge() {
+    try {
+      await conn.sequelize.query(
+        `
+          UPDATE client AS cl
+          JOIN (
+              SELECT id, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age
+              FROM client
+          ) AS subquery ON cl.id = subquery.id
+          SET cl.age = subquery.age;
+        `,
+        { type: QueryTypes.SELECT }
+      );
+      await this.sendNotif('success update usia client');
+    } catch (err: any) {
+      await this.sendNotif(`failed update usia client: ${err?.message}`);
     }
   }
 
@@ -348,6 +392,14 @@ export default class Helper {
       await this.sendNotif(`failed sendNotif update currency: ${err?.message}`);
     }
     return message;
+  }
+
+  public formatIDR(amount: number): string {
+    const roundedAmount = Math.round(amount);
+    const formattedAmount = roundedAmount
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return formattedAmount;
   }
 }
 
