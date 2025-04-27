@@ -165,7 +165,7 @@ export default class Controller {
         content: `
           <h3>Hi ${req?.body?.full_name},</h3>
           <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${process.env.BASE_URL_FE}/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+          <a href="${process.env.BASE_URL_FE}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
