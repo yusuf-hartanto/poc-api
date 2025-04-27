@@ -188,7 +188,7 @@ export default class Controller {
       return response.failed('password confirmation does not match', 400, res);
 
     try {
-      const result = await repository.detail({ confirm_hash });
+      const result = await repository.detail({ confirm_hash }, '');
       if (!result) return response.failed('Data not found', 404, res);
 
       if (result?.getDataValue('status') === 'A')
@@ -214,9 +214,7 @@ export default class Controller {
       const { email } = req?.body;
       if (!email) return response.failed('Email is required', 422, res);
 
-      const result = await repository.detail({
-        email: email,
-      });
+      const result = await repository.detail({ email }, '');
       if (!result) return response.failed('Data not found', 404, res);
 
       const confirm_hash = await helper.hashIt(email, 6);
@@ -252,7 +250,7 @@ export default class Controller {
     if (!password) return response.failed('Password is required', 422, res);
 
     try {
-      const result = await repository.detail({ confirm_hash });
+      const result = await repository.detail({ confirm_hash }, '');
       if (!result) return response.failed('Data not found', 404, res);
 
       let newPassword: any = null;
