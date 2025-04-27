@@ -22,8 +22,26 @@ const Model = conn.sequelize.define(
     type: {
       type: DataTypes.STRING,
     },
+    ownership: {
+      type: DataTypes.STRING,
+    },
+    certificate_number: {
+      type: DataTypes.STRING,
+    },
     address: {
       type: DataTypes.STRING,
+    },
+    purchase_date: {
+      type: DataTypes.DATEONLY,
+    },
+    currency: {
+      type: DataTypes.STRING,
+    },
+    purchase_value: {
+      type: DataTypes.DECIMAL,
+    },
+    current_value: {
+      type: DataTypes.DECIMAL,
     },
     land_area: {
       type: DataTypes.DECIMAL,
@@ -31,11 +49,8 @@ const Model = conn.sequelize.define(
     building_area: {
       type: DataTypes.DECIMAL,
     },
-    currency: {
+    location: {
       type: DataTypes.STRING,
-    },
-    purchase_value: {
-      type: DataTypes.DECIMAL,
     },
     doc_location: {
       type: DataTypes.STRING,

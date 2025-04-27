@@ -17,6 +17,7 @@ import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
 
 interface mail {
+  service: string;
   host: string;
   port: number;
   user: string;
@@ -31,11 +32,12 @@ const CHAT_ID_TELEGRAM: string = process.env.CHAT_ID_TELEGRAM || '';
 const telegram = new Telegram(process.env.TOKEN_TELEGRAM || '');
 const month: string = moment().format('YYYY-MM');
 const configMail: mail = {
+  service: process.env.MAIL_SERVICE || 'smtp.mailtrap.io',
   host: process.env.MAIL_HOST || 'smtp.mailtrap.io',
   port: +(process.env.MAIL_PORT || 2525),
   user: process.env.MAIL_USERNAME || 'fce06934e4832d',
   pass: process.env.MAIL_PASSWORD || '27ceb283c382c4',
-  sender: process.env.MAIL_SENDER || 'noreply@poc.mail.com',
+  sender: process.env.MAIL_SENDER || 'noreply@metaadvisor.id',
   secure: process.env.MAIL_ENCRYPTION == 'ssl' ? true : false,
   debug: process.env.MAIL_DEBUG == 'false',
 };
@@ -58,6 +60,10 @@ export default class Helper {
       .subtract(num, type)
       .locale('id')
       .format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  public dateDiff(date: any, type: any) {
+    return moment(date).diff(moment(), type);
   }
 
   public only(keys: Array<string>, data: any, isUpdate: boolean = false) {
@@ -209,7 +215,7 @@ export default class Helper {
     let mailOptions: any;
     if (data?.attachments && data?.attachments?.length > 0) {
       mailOptions = {
-        from: configMail?.sender,
+        from: `Meta Advisor ${configMail?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -217,7 +223,7 @@ export default class Helper {
       };
     } else {
       mailOptions = {
-        from: configMail?.sender,
+        from: `Meta Advisor ${configMail?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -225,6 +231,7 @@ export default class Helper {
     }
 
     const transporter = nodemailer.createTransport({
+      service: configMail?.service,
       host: configMail?.host,
       port: configMail?.port,
       secure: configMail?.secure,
