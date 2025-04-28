@@ -2,7 +2,21 @@
 
 import { Router } from 'express';
 import { auth } from '../auth/auth.middleware';
+import { forex } from './forex/forex.controller';
+import { cash } from '../portfolio/cash/cash.controller';
+import { bonds } from '../portfolio/bonds/bonds.controller';
+import { stocks } from '../portfolio/stocks/stocks.controller';
+import { cryptoassets } from './crypto.assets/crypto.assets.controller';
 import { properties } from '../portfolio/properties/properties.controller';
+import { receivables } from '../portfolio/receivables/receivables.controller';
+import { mutualfunds } from '../portfolio/mutual.funds/mutual.funds.controller';
+import { collectibles } from '../portfolio/collectibles/collectibles.controller';
+import { preciousmetal } from '../portfolio/precious.metal/precious.metal.controller';
+import { sharesbusiness } from '../portfolio/shares.business/shares.business.controller';
+import { safedepositbox } from '../portfolio/safe.deposit.box/safe.deposit.box.controller';
+import { watchesjeweleries } from '../portfolio/watches.jeweleries/watches.jeweleries.controller';
+import { vehiclesmachineries } from '../portfolio/vehicles.machineries/vehicles.machineries.controller';
+import { intellectualproperties } from '../portfolio/intellectual.properties/intellectual.properties.controller';
 
 const router: Router = Router();
 
@@ -41,6 +55,524 @@ router.delete(
   auth.checkBearerToken,
   auth.checkAccess('properties'),
   properties.delete
+);
+
+router.get(
+  '/bonds/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.list
+);
+router.get(
+  '/bonds',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.index
+);
+router.get(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.detail
+);
+router.post(
+  '/bonds',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.create
+);
+router.put(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.update
+);
+router.delete(
+  '/bonds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.delete
+);
+
+router.get(
+  '/cash/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.list
+);
+router.get(
+  '/cash',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.index
+);
+router.get(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.detail
+);
+router.post(
+  '/cash',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.create
+);
+router.put(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.update
+);
+router.delete(
+  '/cash/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.delete
+);
+
+router.get(
+  '/mutual-funds/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.list
+);
+router.get(
+  '/mutual-funds',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.index
+);
+router.get(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.detail
+);
+router.post(
+  '/mutual-funds',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.create
+);
+router.put(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.update
+);
+router.delete(
+  '/mutual-funds/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.delete
+);
+
+router.get(
+  '/forex/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.list
+);
+router.get(
+  '/forex',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.index
+);
+router.get(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.detail
+);
+router.post(
+  '/forex',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.create
+);
+router.put(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.update
+);
+router.delete(
+  '/forex/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.delete
+);
+
+router.get(
+  '/collectibles/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.list
+);
+router.get(
+  '/collectibles',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.index
+);
+router.get(
+  '/collectibles/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.detail
+);
+router.post(
+  '/collectibles',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.create
+);
+router.put(
+  '/collectibles/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.update
+);
+router.delete(
+  '/collectibles/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.delete
+);
+
+router.get(
+  '/stocks/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.list
+);
+router.get(
+  '/stocks',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.index
+);
+router.get(
+  '/stocks/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.detail
+);
+router.post(
+  '/stocks',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.create
+);
+router.put(
+  '/stocks/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.update
+);
+router.delete(
+  '/stocks/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.delete
+);
+
+router.get(
+  '/precious-metal/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.list
+);
+router.get(
+  '/precious-metal',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.index
+);
+router.get(
+  '/precious-metal/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.detail
+);
+router.post(
+  '/precious-metal',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.create
+);
+router.put(
+  '/precious-metal/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.update
+);
+router.delete(
+  '/precious-metal/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.delete
+);
+
+router.get(
+  '/watches-jeweleries/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.list
+);
+router.get(
+  '/watches-jeweleries',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.index
+);
+router.get(
+  '/watches-jeweleries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.detail
+);
+router.post(
+  '/watches-jeweleries',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.create
+);
+router.put(
+  '/watches-jeweleries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.update
+);
+router.delete(
+  '/watches-jeweleries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.delete
+);
+
+router.get(
+  '/vehicles-machineries/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.list
+);
+router.get(
+  '/vehicles-machineries',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.index
+);
+router.get(
+  '/vehicles-machineries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.detail
+);
+router.post(
+  '/vehicles-machineries',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.create
+);
+router.put(
+  '/vehicles-machineries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.update
+);
+router.delete(
+  '/vehicles-machineries/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.delete
+);
+
+router.get(
+  '/shares-business/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.list
+);
+router.get(
+  '/shares-business',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.index
+);
+router.get(
+  '/shares-business/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.detail
+);
+router.post(
+  '/shares-business',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.create
+);
+router.put(
+  '/shares-business/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.update
+);
+router.delete(
+  '/shares-business/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.delete
+);
+
+router.get(
+  '/receivables/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.list
+);
+router.get(
+  '/receivables',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.index
+);
+router.get(
+  '/receivables/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.detail
+);
+router.post(
+  '/receivables',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.create
+);
+router.put(
+  '/receivables/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.update
+);
+router.delete(
+  '/receivables/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.delete
+);
+
+router.get(
+  '/crypto-assets/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.list
+);
+router.get(
+  '/crypto-assets',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.index
+);
+router.get(
+  '/crypto-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.detail
+);
+router.post(
+  '/crypto-assets',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.create
+);
+router.put(
+  '/crypto-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.update
+);
+router.delete(
+  '/crypto-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.delete
+);
+
+router.get(
+  '/safe-deposit-box/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.list
+);
+router.get(
+  '/safe-deposit-box',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.index
+);
+router.get(
+  '/safe-deposit-box/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.detail
+);
+router.post(
+  '/safe-deposit-box',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.create
+);
+router.put(
+  '/safe-deposit-box/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.update
+);
+router.delete(
+  '/safe-deposit-box/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.delete
+);
+
+router.get(
+  '/intellectual-properties/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.list
+);
+router.get(
+  '/intellectual-properties',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.index
+);
+router.get(
+  '/intellectual-properties/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.detail
+);
+router.post(
+  '/intellectual-properties',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.create
+);
+router.put(
+  '/intellectual-properties/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.update
+);
+router.delete(
+  '/intellectual-properties/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.delete
 );
 
 export default router;
