@@ -15,6 +15,9 @@ export default class Respository {
 
   public index(data: any) {
     let query: Object = {
+      where: {
+        status: { [Op.ne]: 9 },
+      },
       order: [['role_id', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
