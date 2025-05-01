@@ -48,7 +48,7 @@ jobs:
     - name: Replace ENV With Value
       id: replace-env
       run: |
-        apk add gettext
+        sudo apt install -y gettext
         envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
     
     - name: Set up QEMU
