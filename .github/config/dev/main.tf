@@ -165,13 +165,13 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
   ])
   runtime_platform {
     operating_system_family = "LINUX"
-    cpu_architecture        = "X86_64"
+    cpu_architecture        = "ARM64"
   }
 }
 
 resource "aws_ecs_service" "metaadvisor-api" {
   name            = local.name
-  cluster         = "arn:aws:ecs:ap-southeast-1:022499040607:cluster/alphact-ecs-production"
+  cluster         = "arn:aws:ecs:ap-southeast-3:022499040607:cluster/ecs-metaadvisor-dev"
   task_definition = aws_ecs_task_definition.metaadvisor-api_ecs_task.arn
   desired_count   = 1
   deployment_maximum_percent = 200
@@ -186,19 +186,19 @@ resource "aws_ecs_service" "metaadvisor-api" {
 
   capacity_provider_strategy {
     base              = 1
-    capacity_provider = "metaadvisor_absence_prod"
+    capacity_provider = "metaadvisor_dev"
     weight            = 100
   }
 
   load_balancer {
-    target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-1:022499040607:targetgroup/prod-web-hade/b253e6f9777a2708"
+    target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-3:022499040607:targetgroup/api-metaadvisor/d4bcf72f391415fa8"
     container_name  = local.name
     container_port  = 3000
   }
 
   service_connect_configuration {
     enabled = true
-    namespace = "production"
+    namespace = "development"
     service {
       discovery_name = var.ECS_SERVICE
       port_name      = var.ECS_SERVICE
