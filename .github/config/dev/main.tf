@@ -190,7 +190,7 @@ resource "aws_ecs_service" "metaadvisor-api" {
   }
 
   load_balancer {
-    target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-3:022499040607:targetgroup/api-metaadvisor/d4bcf72f391415fa8"
+    target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-3:022499040607:targetgroup/api-metaadvisor/d4bcf72f391415fa"
     container_name  = local.name
     container_port  = 3000
   }
