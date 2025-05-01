@@ -83,7 +83,7 @@ const localInitialize = () => {
     pass: process.env.MAIL_PASSWORD || 'password',
     sender: process.env.MAIL_SENDER || 'no-reply@mail.com',
     debug: process.env.MAIL_DEBUG == 'true',
-    secure: 'ssl',
+    secure: process.env.SECURE || '',
   };
   let telegramConfig: TelegramConfig = {
     token: process.env.TOKEN_TELEGRAM || 'token',
@@ -137,7 +137,7 @@ const setParameterStore = (data: any) => {
     pass: data?.MAIL?.PASSWORD || 'password',
     sender: data?.MAIL?.SENDER || 'no-reply@mail.com',
     debug: data?.MAIL?.DEBUG == 'true',
-    secure: 'ssl',
+    secure: data?.MAIL?.SECURE || '',
   };
   let telegramConfig: TelegramConfig = {
     token: data?.TELEGRAM?.TOKEN || 'token',
