@@ -170,7 +170,7 @@ const setParameterStore = (data: any) => {
 
 class Config {
   static async initialize() {
-    const APP_ENV: string = process.env.APP_ENV || 'development';
+    const APP_ENV: string = 'development';
     try {
       if (APP_ENV === 'development') {
         return localInitialize();
