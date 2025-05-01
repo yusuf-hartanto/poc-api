@@ -98,7 +98,7 @@ jobs:
     - name: Get Env
       id: get-env
       run: |
-        echo "IMAGE_TAG=`echo ${{ github.ref_name }}`" >> $GITHUB_ENV
+        echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
         echo "ECR_REPOSITORY=`echo ${{ env.ECR_REPOSITORY }}`" >> $GITHUB_ENV
         echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_ENV
 
