@@ -108,31 +108,31 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
       secrets = [
         {
           name = "DB_HOST",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_HOST"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_HOST"
         },
         {
           name = "DB_NAME",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_NAME"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_NAME"
         },
         {
           name = "DB_PORT",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_PORT"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_PORT"
         },
         {
           name = "DB_USER",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_USER"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_USER"
         },
         {
           name = "DB_PASSWORD",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_PASSWORD"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_PASSWORD"
         },
         {
           name = "DB_DEBUG",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_DEBUG"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_DEBUG"
         },
         {
           name = "PATH_ASSET",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/PATH_ASSET"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/PATH_ASSET"
         }
       ],
       healthCheck = {
