@@ -3,7 +3,7 @@
 import { Op } from 'sequelize';
 import Model from './param.global.model';
 
-export default class Respository {
+export default class Repository {
   public list(data: any) {
     let query: Object = {
       order: [['id', 'DESC']],
@@ -61,4 +61,5 @@ export default class Respository {
     });
   }
 }
-export const repository = new Respository();
+
+export const repository = new Repository();

@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import Model from './stocks.model';
 import Client from '../../insurance/client/client.model';
 
-export default class Respository {
+export default class Repository {
   public list(condition: any) {
     return Model.findAll({
       where: {
@@ -123,4 +123,5 @@ export default class Respository {
     });
   }
 }
-export const repository = new Respository();
+
+export const repository = new Repository();

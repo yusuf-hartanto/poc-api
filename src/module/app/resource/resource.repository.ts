@@ -2,11 +2,11 @@
 
 import { Op } from 'sequelize';
 import Model from './resource.model';
-import Role from '../role/role.model';
-import Regency from '../../area/regencies.model';
-import Province from '../../area/provinces.model';
+import AppRole from '../role/role.model';
+import AreaRegency from '../../area/regencies.model';
+import AreaProvince from '../../area/provinces.model';
 
-export default class Respository {
+export default class Repository {
   public list(data: any) {
     return Model.findAll({
       where: data?.condition,
@@ -46,7 +46,7 @@ export default class Respository {
       },
       include: [
         {
-          model: Role,
+          model: AppRole,
           attributes: ['role_id', 'role_name', 'status'],
           as: 'role',
           required: true,
@@ -55,13 +55,13 @@ export default class Respository {
           },
         },
         {
-          model: Province,
+          model: AreaProvince,
           attributes: ['id', 'name'],
           as: 'province',
           required: false,
         },
         {
-          model: Regency,
+          model: AreaRegency,
           attributes: ['id', 'name', 'area_province_id'],
           as: 'regency',
           required: false,
@@ -78,7 +78,7 @@ export default class Respository {
       },
       include: [
         {
-          model: Role,
+          model: AppRole,
           attributes: ['role_id', 'role_name', 'status'],
           as: 'role',
           required: true,
@@ -87,13 +87,13 @@ export default class Respository {
           },
         },
         {
-          model: Province,
+          model: AreaProvince,
           attributes: ['id', 'name'],
           as: 'province',
           required: false,
         },
         {
-          model: Regency,
+          model: AreaRegency,
           attributes: ['id', 'name', 'area_province_id'],
           as: 'regency',
           required: false,
@@ -110,7 +110,7 @@ export default class Respository {
       },
       include: [
         {
-          model: Role,
+          model: AppRole,
           attributes: ['role_id', 'role_name', 'status'],
           as: 'role',
           required: true,
@@ -130,7 +130,7 @@ export default class Respository {
       },
       include: [
         {
-          model: Role,
+          model: AppRole,
           attributes: ['role_id', 'role_name', 'status'],
           as: 'role',
           required: true,
@@ -153,4 +153,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();

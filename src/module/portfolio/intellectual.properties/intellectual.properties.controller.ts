@@ -1,13 +1,10 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './intellectual.properties.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './intellectual.properties.repository';
 import { response } from '../../../helpers/response';
-
-dotenv.config();
+import { variable } from './intellectual.properties.variable';
+import { repository } from './intellectual.properties.repository';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -161,4 +158,5 @@ export default class Controller {
     }
   }
 }
+
 export const intellectualproperties = new Controller();

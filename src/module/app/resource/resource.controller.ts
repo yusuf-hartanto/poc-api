@@ -1,6 +1,5 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { variable } from './resource.variable';
@@ -8,8 +7,8 @@ import { helper } from '../../../helpers/helper';
 import { repository } from './resource.repository';
 import { response } from '../../../helpers/response';
 import { transformer } from './resource.transformer';
+import { appConfig } from '../../../config/config.app';
 
-dotenv.config();
 const date: string = helper.date();
 
 export default class Controller {
@@ -111,10 +110,16 @@ export default class Controller {
       if (req?.body?.province_id)
         province_id = JSON.parse(req?.body?.province_id);
       if (req?.files && req?.files.image_foto) {
-        let checkFile = helper.checkExtention(req?.files?.image_foto);
+        const file = req?.files?.image_foto;
+        let checkFile = helper.checkExtention(file);
         if (checkFile != 'allowed') return response.failed(checkFile, 422, res);
 
-        image_foto = await helper.upload(req?.files.image_foto, 'resource');
+        image_foto = await helper.upload(
+          file,
+          'resource',
+          req?.user?.username,
+          appConfig?.assetType
+        );
       }
 
       confirm_hash = await helper.hashIt(username, 6);
@@ -144,11 +149,11 @@ export default class Controller {
     try {
       await helper.sendEmail({
         to: req?.body?.email,
-        subject: 'Welcome to POC',
+        subject: `Welcome to ${appConfig?.app}`,
         content: `
           <h3>Hi ${req?.body?.full_name},</h3>
           <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${process.env.BASE_URL_FE}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+          <a href="${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
@@ -179,10 +184,16 @@ export default class Controller {
         province_id = JSON.parse(req?.body?.province_id);
       if (req?.body?.regency_id) regency_id = JSON.parse(req?.body?.regency_id);
       if (req?.files && req?.files.image_foto) {
-        let checkFile = helper.checkExtention(req?.files?.image_foto);
+        const file = req?.files?.image_foto;
+        let checkFile = helper.checkExtention(file);
         if (checkFile != 'allowed') return response.failed(checkFile, 422, res);
 
-        image_foto = await helper.upload(req?.files.image_foto, 'resource');
+        image_foto = await helper.upload(
+          file,
+          'resource',
+          req?.user?.username,
+          appConfig?.assetType
+        );
       }
 
       let password: any = null;
@@ -245,4 +256,5 @@ export default class Controller {
     }
   }
 }
+
 export const resource = new Controller();

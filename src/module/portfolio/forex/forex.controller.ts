@@ -1,14 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import { variable } from './forex.variable';
 import { Request, Response } from 'express';
-import { helper } from '../../../helpers/helper';
 import { repository } from './forex.repository';
+import { helper } from '../../../helpers/helper';
 import { transformer } from './forex.transformer';
 import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -139,4 +136,5 @@ export default class Controller {
     }
   }
 }
+
 export const forex = new Controller();

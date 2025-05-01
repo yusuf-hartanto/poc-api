@@ -1,6 +1,5 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import moment from 'moment';
 import { Op } from 'sequelize';
 import { helper } from '../../helpers/helper';
@@ -10,7 +9,6 @@ import { Request, Response, NextFunction } from 'express';
 import { repository } from '../app/resource/resource.repository';
 import { repository as repoRoleMenu } from '../app/role.menu/role.menu.repository';
 
-dotenv.config();
 moment().locale('id');
 type RequestBody<T> = Request<{}, {}, T>;
 interface UserBody {

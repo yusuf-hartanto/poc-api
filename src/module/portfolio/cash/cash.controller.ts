@@ -1,14 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import { variable } from './cash.variable';
 import { Request, Response } from 'express';
-import { helper } from '../../../helpers/helper';
 import { repository } from './cash.repository';
 import { transformer } from './cash.transformer';
+import { helper } from '../../../helpers/helper';
 import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -135,4 +132,5 @@ export default class Controller {
     }
   }
 }
+
 export const cash = new Controller();

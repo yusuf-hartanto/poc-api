@@ -1,11 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import moment from 'moment';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
+import { appConfig } from '../../config/config.app';
 import { helperauth } from '../../helpers/auth.helper';
 import { repository as repoOtp } from './otp.repository';
 import { variable } from '../app/resource/resource.variable';
@@ -13,7 +13,6 @@ import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
 import { repository as repoRole } from '../app/role/role.repository';
 
-dotenv.config();
 moment().locale('id');
 const date: string = helper.date();
 
@@ -54,13 +53,13 @@ export default class Controller {
 
         await helper.sendEmail({
           to: email,
-          subject: 'OTP Email - Meta Advisor (metaadvisor.id)',
+          subject: `OTP Email - ${appConfig?.app}`,
           content: `
-            <h3>Hi ${email.split('@')[0]},</h3>
-            <p>Berikut kode OTP Anda:</p>
+            <h3>Hi ${user?.getDataValue('full_name')},</h3>
+            <p>Here is your OTP code:</p>
             <h1>${code}</h1>
-            <p>Kode ini berlaku selama 3 menit.</p>
-            <p>Demi keamanan, jangan berikan kode OTP kepada siapa pun!</p>
+            <p>This code is valid for 3 minutes.</p>
+            <p>For security reasons, do not give your OTP code to anyone!</p>
           `,
         });
 
@@ -161,11 +160,11 @@ export default class Controller {
     try {
       await helper.sendEmail({
         to: req?.body?.email,
-        subject: 'Welcome to POC',
+        subject: `Welcome to ${appConfig?.app}`,
         content: `
           <h3>Hi ${req?.body?.full_name},</h3>
           <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${process.env.BASE_URL_FE}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+          <a href="${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
@@ -232,7 +231,7 @@ export default class Controller {
         content: `
           <h3>Hi ${result?.getDataValue('full_name')},</h3>
           <p>Below this link to reset password your account:</p>
-          <a href="${process.env.BASE_URL_FE}/reset-password?confirm_hash=${confirm_hash}" target="_blank">Reset Password</a>
+          <a href="${appConfig?.baseUrlFe}/reset-password?confirm_hash=${confirm_hash}" target="_blank">Reset Password</a>
         `,
       });
 

@@ -1,13 +1,10 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './safe.deposit.box.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './safe.deposit.box.repository';
 import { response } from '../../../helpers/response';
-
-dotenv.config();
+import { variable } from './safe.deposit.box.variable';
+import { repository } from './safe.deposit.box.repository';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -145,4 +142,5 @@ export default class Controller {
     }
   }
 }
+
 export const safedepositbox = new Controller();

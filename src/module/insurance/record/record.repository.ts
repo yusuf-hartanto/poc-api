@@ -5,7 +5,7 @@ import Model from './record.model';
 import Policy from '../policy/policy.model';
 import Client from '../client/client.model';
 
-export default class Respository {
+export default class Repository {
   public list() {
     return Model.findAll({
       order: [['created_date', 'DESC']],
@@ -86,4 +86,5 @@ export default class Respository {
     });
   }
 }
-export const repository = new Respository();
+
+export const repository = new Repository();

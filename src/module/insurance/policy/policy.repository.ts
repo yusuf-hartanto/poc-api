@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import Model from './policy.model';
 import Detail from './policy.detail.model';
 
-export default class Respository {
+export default class Repository {
   public list(
     data: any,
     withDetail: boolean = false,
@@ -201,4 +201,5 @@ export default class Respository {
     });
   }
 }
-export const repository = new Respository();
+
+export const repository = new Repository();

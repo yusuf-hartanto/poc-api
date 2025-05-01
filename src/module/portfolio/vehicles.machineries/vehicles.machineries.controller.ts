@@ -1,14 +1,12 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './vehicles.machineries.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
+import { response } from '../../../helpers/response';
+import { appConfig } from '../../../config/config.app';
+import { variable } from './vehicles.machineries.variable';
 import { repository } from './vehicles.machineries.repository';
 import { transformer } from './vehicles.machineries.transformer';
-import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -20,7 +18,9 @@ const uploadImages = async (req: Request) => {
         if (checkFile == 'allowed') {
           const path_image = await helper.upload(
             images[i],
-            'vehicles_machineries'
+            'vehicles_machineries',
+            req?.user?.username,
+            appConfig?.assetType
           );
           dataFiles.push(path_image);
         }
@@ -28,7 +28,12 @@ const uploadImages = async (req: Request) => {
     } else {
       let checkFile = helper.checkExtention(images);
       if (checkFile == 'allowed') {
-        const path_image = await helper.upload(images, 'vehicles_machineries');
+        const path_image = await helper.upload(
+          images,
+          'vehicles_machineries',
+          req?.user?.username,
+          appConfig?.assetType
+        );
         dataFiles.push(path_image);
       }
     }
@@ -205,4 +210,5 @@ export default class Controller {
     }
   }
 }
+
 export const vehiclesmachineries = new Controller();

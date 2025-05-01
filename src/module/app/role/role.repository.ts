@@ -3,7 +3,7 @@
 import { Op } from 'sequelize';
 import Model from './role.model';
 
-export default class Respository {
+export default class Repository {
   public list() {
     return Model.findAll({
       where: {
@@ -54,4 +54,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();

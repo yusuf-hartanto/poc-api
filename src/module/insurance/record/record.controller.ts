@@ -61,4 +61,5 @@ export default class Controller {
     }
   }
 }
+
 export const record = new Controller();

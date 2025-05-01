@@ -5,42 +5,23 @@ import path from 'path';
 import axios from 'axios';
 import sharp from 'sharp';
 import moment from 'moment';
-import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
-import nodemailer from 'nodemailer';
-import conn from '../config/database';
-import { Op, QueryTypes } from 'sequelize';
 import { Response } from 'express';
+import nodemailer from 'nodemailer';
+import { Op, QueryTypes } from 'sequelize';
 import { response } from '../helpers/response';
+import { s3Service } from '../utils/s3.service';
+import { awsConfig } from '../config/config.aws';
+import { appConfig } from '../config/config.app';
+import { mailConfig } from '../config/config.mail';
+import { sequelize } from '../database/connection';
+import { teleConfig } from '../config/config.telegram';
 import Telegram, { Telegram_ParseModes } from 'tele-sender';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
 
-interface mail {
-  service: string;
-  host: string;
-  port: number;
-  user: string;
-  pass: string;
-  sender: string;
-  secure: boolean;
-  debug: boolean;
-}
-
-dotenv.config();
-const CHAT_ID_TELEGRAM: string = process.env.CHAT_ID_TELEGRAM || '';
-const telegram = new Telegram(process.env.TOKEN_TELEGRAM || '');
+const telegram = new Telegram(teleConfig?.token || '');
 const month: string = moment().format('YYYY-MM');
-const configMail: mail = {
-  service: process.env.MAIL_SERVICE || 'smtp.mailtrap.io',
-  host: process.env.MAIL_HOST || 'smtp.mailtrap.io',
-  port: +(process.env.MAIL_PORT || 2525),
-  user: process.env.MAIL_USERNAME || 'fce06934e4832d',
-  pass: process.env.MAIL_PASSWORD || '27ceb283c382c4',
-  sender: process.env.MAIL_SENDER || 'noreply@metaadvisor.id',
-  secure: process.env.MAIL_ENCRYPTION == 'ssl' ? true : false,
-  debug: process.env.MAIL_DEBUG == 'false',
-};
 
 export default class Helper {
   public date() {
@@ -67,7 +48,7 @@ export default class Helper {
   }
 
   public only(keys: Array<string>, data: any, isUpdate: boolean = false) {
-    const date = moment().locale('id').format('YYYY-MM-DD HH:mm:ss');
+    const date = this.date();
     let result: any = {};
 
     keys.forEach((i) => {
@@ -122,17 +103,51 @@ export default class Helper {
     return `file extension allowed *${allowedExt[type]?.join(', ')}.`;
   }
 
-  public async upload(file: any, folder: string = '') {
+  public async upload(
+    file: any,
+    folder: string = '',
+    username: string = 'system',
+    type: string = 'local'
+  ) {
+    const filename: string = file?.name.replace(/ /g, '');
+    if (type == 'S3') {
+      let uploadResult: string = '';
+      try {
+        const fileBuffer = fs.readFileSync(path.resolve(file?.tempFilePath));
+
+        await s3Service.uploadFileS3({
+          bucketName: awsConfig?.bucket,
+          key: `${folder}/${month}/${filename}`,
+          body: fileBuffer,
+          contentType: file?.mimetype,
+          metadata: {
+            uploadedBy: username,
+            description: `File ${folder}`,
+          },
+        });
+        uploadResult = `https://${awsConfig?.bucket}/${folder}/${month}/${filename}`;
+      } catch (err: any) {
+        console.warn(`upload ${type} error: ${err?.message}`);
+        telegram.send(
+          teleConfig?.chatId,
+          err?.message,
+          Telegram_ParseModes.MarkdownV2
+        );
+        return err?.message;
+      }
+      return uploadResult;
+    }
+
     const upload_path: string = `./public/uploads/${folder}/${month}`;
     if (!fs.existsSync(upload_path)) {
       fs.mkdirSync(upload_path, { recursive: true });
     }
-    const name: string = file?.name.replace(/ /g, '');
-    let uploadPath: string = `${upload_path}/${name}`;
+    let uploadPath: string = `${upload_path}/${filename}`;
     await file.mv(uploadPath, function (err: any) {
       if (err) {
+        console.warn(`upload ${type} error: ${err?.message}`);
         telegram.send(
-          CHAT_ID_TELEGRAM,
+          teleConfig?.chatId,
           err?.message,
           Telegram_ParseModes.MarkdownV2
         );
@@ -190,21 +205,21 @@ export default class Helper {
 
   public async sendNotif(message: string) {
     await telegram.send(
-      CHAT_ID_TELEGRAM,
+      teleConfig?.chatId,
       message,
       Telegram_ParseModes.MarkdownV2
     );
   }
 
   public async catchError(message: string, code: number, res: Response) {
-    const msg: string = `poc - ${message}`;
+    const msg: string = `${appConfig?.app} - ${message}`;
     await this.sendNotif(msg);
     return response.failed(msg, code, res);
   }
 
   public async sendEmail(data: Object | any) {
     let tls = {};
-    if (configMail?.secure) {
+    if (mailConfig?.secure) {
       tls = {
         tls: {
           ciphers: 'SSLv3',
@@ -215,7 +230,7 @@ export default class Helper {
     let mailOptions: any;
     if (data?.attachments && data?.attachments?.length > 0) {
       mailOptions = {
-        from: `Meta Advisor ${configMail?.sender}`,
+        from: `Meta Advisor ${mailConfig?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -223,7 +238,7 @@ export default class Helper {
       };
     } else {
       mailOptions = {
-        from: `Meta Advisor ${configMail?.sender}`,
+        from: `Meta Advisor ${mailConfig?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -231,15 +246,15 @@ export default class Helper {
     }
 
     const transporter = nodemailer.createTransport({
-      service: configMail?.service,
-      host: configMail?.host,
-      port: configMail?.port,
-      secure: configMail?.secure,
+      service: mailConfig?.service,
+      host: mailConfig?.host,
+      port: mailConfig?.port,
+      secure: mailConfig?.secure,
       auth: {
-        user: configMail?.user,
-        pass: configMail?.pass,
+        user: mailConfig?.user,
+        pass: mailConfig?.pass,
       },
-      logger: configMail?.debug,
+      logger: mailConfig?.debug,
       ...tls,
     });
 
@@ -247,7 +262,7 @@ export default class Helper {
       if (error) {
         console.warn(`Email error: ${error}`);
         await telegram.send(
-          CHAT_ID_TELEGRAM,
+          teleConfig?.chatId,
           error,
           Telegram_ParseModes.MarkdownV2
         );
@@ -282,7 +297,7 @@ export default class Helper {
 
   public async updateUsia() {
     try {
-      await conn.sequelize.query(
+      await sequelize.query(
         `
           UPDATE app_resource AS ar
           JOIN (
@@ -301,7 +316,7 @@ export default class Helper {
 
   public async updateClientAge() {
     try {
-      await conn.sequelize.query(
+      await sequelize.query(
         `
           UPDATE client AS cl
           JOIN (
