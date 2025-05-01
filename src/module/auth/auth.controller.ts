@@ -62,6 +62,9 @@ export default class Controller {
             <p>For security reasons, do not give your OTP code to anyone!</p>
           `,
         });
+        await helper.sendNotif(
+          `Hi ${user?.getDataValue('full_name')}, Here is your OTP code: ${code} This code is valid for 3 minutes. For security reasons, do not give your OTP code to anyone!`
+        );
 
         return response.success('Login success', null, res);
       } catch (err: any) {
@@ -105,6 +108,7 @@ export default class Controller {
         },
         condition: { resource_id: req?.user?.id },
       });
+      console.warn('refresh token', data);
       response.success('New access token', data, res);
     } catch (err: any) {
       return helper.catchError(`refresh: ${err?.message}`, 500, res);
@@ -168,6 +172,9 @@ export default class Controller {
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
+      await helper.sendNotif(
+        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: <b>${username}`
+      );
     } catch (err: any) {
       message = `<br /> error send email: ${err?.message}`;
     }
@@ -234,6 +241,9 @@ export default class Controller {
           <a href="${appConfig?.baseUrlFe}/reset-password?confirm_hash=${confirm_hash}" target="_blank">Reset Password</a>
         `,
       });
+      await helper.sendNotif(
+        `Reset Password. Hi ${result?.getDataValue('full_name')}, Below this link to reset password your account: ${appConfig?.baseUrlFe}/reset-password?confirm_hash=${confirm_hash}`
+      );
 
       return response.success('success forgot password', null, res);
     } catch (err: any) {
@@ -359,6 +369,7 @@ export default class Controller {
         access_token: token,
         refresh_token: refresh,
       };
+      console.warn('login success', data);
       return response.success('verify otp success', data, res);
     } catch (err: any) {
       return helper.catchError(`verify otp: ${err?.message}`, 500, res);

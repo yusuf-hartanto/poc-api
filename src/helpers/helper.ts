@@ -8,6 +8,7 @@ import moment from 'moment';
 import bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import nodemailer from 'nodemailer';
+import TelegramBot from 'tele-sender';
 import { Op, QueryTypes } from 'sequelize';
 import { response } from '../helpers/response';
 import { s3Service } from '../utils/s3.service';
@@ -16,11 +17,9 @@ import { appConfig } from '../config/config.app';
 import { mailConfig } from '../config/config.mail';
 import { sequelize } from '../database/connection';
 import { teleConfig } from '../config/config.telegram';
-import Telegram, { Telegram_ParseModes } from 'tele-sender';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
 
-const telegram = new Telegram(teleConfig?.token || '');
 const month: string = moment().format('YYYY-MM');
 
 export default class Helper {
@@ -128,11 +127,7 @@ export default class Helper {
         uploadResult = `https://${awsConfig?.bucket}/${folder}/${month}/${filename}`;
       } catch (err: any) {
         console.warn(`upload ${type} error: ${err?.message}`);
-        telegram.send(
-          teleConfig?.chatId,
-          err?.message,
-          Telegram_ParseModes.MarkdownV2
-        );
+        await this.sendNotif(err?.message);
         return err?.message;
       }
       return uploadResult;
@@ -143,14 +138,11 @@ export default class Helper {
       fs.mkdirSync(upload_path, { recursive: true });
     }
     let uploadPath: string = `${upload_path}/${filename}`;
-    await file.mv(uploadPath, function (err: any) {
+    await file.mv(uploadPath, async function (err: any) {
       if (err) {
         console.warn(`upload ${type} error: ${err?.message}`);
-        telegram.send(
-          teleConfig?.chatId,
-          err?.message,
-          Telegram_ParseModes.MarkdownV2
-        );
+        const telegram = new TelegramBot(teleConfig?.token);
+        await telegram.send(teleConfig?.chatId, err?.message);
         return err?.message;
       }
     });
@@ -204,11 +196,8 @@ export default class Helper {
   }
 
   public async sendNotif(message: string) {
-    await telegram.send(
-      teleConfig?.chatId,
-      message,
-      Telegram_ParseModes.MarkdownV2
-    );
+    const telegram = new TelegramBot(teleConfig?.token);
+    return await telegram.send(teleConfig?.chatId, message);
   }
 
   public async catchError(message: string, code: number, res: Response) {
@@ -261,11 +250,7 @@ export default class Helper {
     transporter.sendMail(mailOptions, async (error: any, info: any) => {
       if (error) {
         console.warn(`Email error: ${error}`);
-        await telegram.send(
-          teleConfig?.chatId,
-          error,
-          Telegram_ParseModes.MarkdownV2
-        );
+        await this.sendNotif(error);
       } else {
         console.warn(`Email sent: ${info?.response}`);
       }
