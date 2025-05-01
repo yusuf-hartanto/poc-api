@@ -82,12 +82,28 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
       ],
       environment = [
         {
-          name = "AWS_S3_REGION",
+          name = "AWS_REGION",
           value = "ap-southeast-3"
         },
         {
           name = "TZ",
           value = "Asia/Jakarta"
+        },
+        {
+          name = "PORT",
+          value = "3000"
+        },
+        {
+          name = "APP",
+          value = "Meta Advisor"
+        },
+        {
+          name = "APP_ENV",
+          value = "development"
+        },
+        {
+          name = "ASSET_TYPE",
+          value = "s3"
         }
       ],
       secrets = [
