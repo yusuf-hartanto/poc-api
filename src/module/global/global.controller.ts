@@ -447,6 +447,19 @@ export default class Controller {
     }
   };
 
+  
+  public sendtele = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { message } = req?.body;
+      if (!message)
+        return response.failed('message is a required', 422, res);
+      const tele = await helper.sendNotif(message || '-');
+      return response.success('Send telegram success', tele, res);
+    } catch (err: any) {
+      return helper.catchError(`sendtele: ${err?.message}`, 500, res);
+    }
+  }
+
   public async summary(req: Request, res: Response) {
     try {
       const client: any = req?.query?.client;
