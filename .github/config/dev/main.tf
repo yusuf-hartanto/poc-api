@@ -76,8 +76,7 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
         {
           name  = "${var.ECS_SERVICE}"
           protocol = "tcp",
-          containerPort = 3000,
-          hostPort = 0
+          containerPort = 3000
         }
       ],
       environment = [
