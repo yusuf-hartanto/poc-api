@@ -45,6 +45,16 @@ jobs:
         paths: |
           /development/metaadvisor-api
 
+    - name: Get Env
+      id: get-env
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+        echo "ECR_REPOSITORY=`echo ${{ env.ECR_REPOSITORY }}`" >> $GITHUB_ENV
+        echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_ENV
+        echo "IMG_REG=`echo ${{ env.ECR_REGISTRY }}`" >> $GITHUB_ENV
+
     - name: Replace ENV With Value
       id: replace-env
       run: |
