@@ -8,15 +8,15 @@ export const up = async (queryInterface: QueryInterface) => {
       id varchar(50) NOT NULL,
       policy_id varchar(50) NOT NULL,
       client_id varchar(50) NOT NULL,
-      notification_date longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+      notification_date text DEFAULT NULL,
       notification_type varchar(255) DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY unique_id (id)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+      UNIQUE (id)
+    );
   `);
 };
 

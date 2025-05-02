@@ -1,8 +1,11 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
+import Config from '../../config/parameter';
+import { initializeDatabase } from '../connection';
 import { Op, QueryInterface, Sequelize } from 'sequelize';
 import Model from '../../module/app/role.menu/role.menu.model';
+import { initializeModels } from '../../module/models/models.index';
 import { repository as repoRole } from '../../module/app/role/role.repository';
 import { repository as repoMenu } from '../../module/app/menu/menu.repository';
 import { repository as repoResource } from '../../module/app/resource/resource.repository';
@@ -12,6 +15,10 @@ type Migration = (
   sequelize: Sequelize
 ) => Promise<void>;
 export const up: Migration = async () => {
+  const dataConfig = await Config.initialize();
+  const sequelize = await initializeDatabase(dataConfig?.database);
+  initializeModels(sequelize);
+
   const menus = await repoMenu.list();
   const role = await repoRole.detail({
     role_name: { [Op.like]: '%administrator%' },

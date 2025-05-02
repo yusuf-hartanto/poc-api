@@ -17,14 +17,14 @@ export const up = async (queryInterface: QueryInterface) => {
       location varchar(250) DEFAULT NULL,
       doc_location varchar(250) DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (precious_metal_id) USING BTREE,
-      UNIQUE KEY unique_precious_metal_id (precious_metal_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (precious_metal_id),
+      UNIQUE (precious_metal_id)
+    );
   `);
 };
 

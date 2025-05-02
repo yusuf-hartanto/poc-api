@@ -17,14 +17,14 @@ export const up = async (queryInterface: QueryInterface) => {
       amount decimal(12,2) DEFAULT NULL,
       interest_rate decimal(12,2) DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (bonds_id) USING BTREE,
-      UNIQUE KEY unique_bonds_id (bonds_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (bonds_id),
+      UNIQUE (bonds_id)
+    );
   `);
 };
 

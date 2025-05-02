@@ -8,8 +8,8 @@ export const up = async (queryInterface: QueryInterface) => {
       id varchar(50) NOT NULL,
       name varchar(255) DEFAULT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY unique_id (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      UNIQUE (id)
+    );
   `);
 };
 

@@ -10,17 +10,17 @@ export const up = async (queryInterface: QueryInterface) => {
       question varchar(255) DEFAULT NULL,
       parent_id varchar(50) DEFAULT NULL,
       type varchar(20) DEFAULT NULL,
-      nourut int(11) DEFAULT NULL,
+      nourut int DEFAULT NULL,
       url_image1 varchar(255) DEFAULT NULL,
       url_image2 varchar(255) DEFAULT NULL,
-      is_active int(1) DEFAULT 1 COMMENT '1:active;0:not active',
+      is_active int DEFAULT 1,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (question_id),
-      UNIQUE KEY unique_question_id (question_id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      UNIQUE (question_id)
+    );
   `);
 };
 

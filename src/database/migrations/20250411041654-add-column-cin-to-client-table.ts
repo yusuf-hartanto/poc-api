@@ -4,7 +4,7 @@ import { QueryInterface } from 'sequelize';
 
 export const up = async (queryInterface: QueryInterface) => {
   await queryInterface.sequelize.query(
-    `ALTER TABLE client ADD cin varchar(100) DEFAULT NULL AFTER id;`
+    `ALTER TABLE client ADD cin varchar(100) DEFAULT NULL;`
   );
 };
 

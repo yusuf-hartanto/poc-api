@@ -9,8 +9,8 @@ export const up = async (queryInterface: QueryInterface) => {
       area_province_id varchar(50) DEFAULT NULL,
       name varchar(255) DEFAULT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY unique_id (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      UNIQUE (id)
+    );
   `);
 };
 

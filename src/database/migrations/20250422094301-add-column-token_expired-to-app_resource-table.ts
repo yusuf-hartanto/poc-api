@@ -4,7 +4,7 @@ import { QueryInterface } from 'sequelize';
 
 export const up = async (queryInterface: QueryInterface) => {
   await queryInterface.sequelize.query(
-    `ALTER TABLE app_resource ADD token_expired datetime DEFAULT NULL AFTER token;`
+    `ALTER TABLE app_resource ADD token_expired timestamp DEFAULT NULL;`
   );
 };
 

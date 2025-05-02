@@ -5,9 +5,9 @@ import { QueryInterface } from 'sequelize';
 export const up = async (queryInterface: QueryInterface) => {
   await queryInterface.sequelize.query(`
     ALTER TABLE insurance_policy
-    ADD COLUMN unit_link int(1) NOT NULL AFTER status,
-    ADD COLUMN fund longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin AFTER unit_link,
-    ADD COLUMN cash_value decimal(12,2) DEFAULT NULL AFTER fund;
+    ADD COLUMN unit_link int DEFAULT NULL,
+    ADD COLUMN fund text DEFAULT NULL,
+    ADD COLUMN cash_value decimal(12,2) DEFAULT NULL;
   `);
 };
 

@@ -1,14 +1,21 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
-import { QueryInterface, Sequelize } from 'sequelize';
+import Config from '../../config/parameter';
+import { initializeDatabase } from '../connection';
 import Model from '../../module/app/role/role.model';
+import { QueryInterface, Sequelize } from 'sequelize';
+import { initializeModels } from '../../module/models/models.index';
 
 type Migration = (
   queryInterface: QueryInterface,
   sequelize: Sequelize
 ) => Promise<void>;
 export const up: Migration = async () => {
+  const dataConfig = await Config.initialize();
+  const sequelize = await initializeDatabase(dataConfig?.database);
+  initializeModels(sequelize);
+
   await Model.bulkCreate([
     {
       role_id: uuidv4(),

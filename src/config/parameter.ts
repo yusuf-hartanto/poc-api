@@ -20,6 +20,7 @@ interface AppConfig {
 }
 
 interface DatabaseConfig {
+  dialect: string;
   host: string;
   port: number;
   database: string;
@@ -62,6 +63,7 @@ interface AWSConfig {
 
 const localInitialize = () => {
   let dbConfg: DatabaseConfig = {
+    dialect: process.env.DB_DIALECT || 'mysql',
     host: process.env.DB_HOST || '127.0.0.1',
     port: +(process.env.DB_PORT || 3306),
     database: process.env.DB_NAME || 'local',
@@ -116,6 +118,7 @@ const localInitialize = () => {
 
 const setParameterStore = (data: any) => {
   let dbConfg: DatabaseConfig = {
+    dialect: data?.DATABASE?.DIALECT || 'mysql',
     host: data?.DATABASE?.HOST || '127.0.0.1',
     port: +(data?.DATABASE?.PORT || 3306),
     database: data?.DATABASE?.NAME || 'local',

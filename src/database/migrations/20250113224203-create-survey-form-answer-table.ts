@@ -8,15 +8,15 @@ export const up = async (queryInterface: QueryInterface) => {
       answer_id varchar(50) NOT NULL,
       question_id varchar(50) NOT NULL,
       text_answer varchar(255) DEFAULT NULL,
-      alert_answer longtext,
-      nourut int(11) DEFAULT NULL,
+      alert_answer text DEFAULT NULL,
+      nourut int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (answer_id),
-      UNIQUE KEY unique_answer_id (answer_id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      UNIQUE (answer_id)
+    );
   `);
 };
 

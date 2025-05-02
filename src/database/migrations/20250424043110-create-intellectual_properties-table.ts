@@ -14,14 +14,14 @@ export const up = async (queryInterface: QueryInterface) => {
       appraised_name varchar(250) DEFAULT NULL,
       contract_number varchar(250) DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (intellectual_properties_id) USING BTREE,
-      UNIQUE KEY unique_intellectual_properties_id (intellectual_properties_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (intellectual_properties_id),
+      UNIQUE (intellectual_properties_id)
+    );
   `);
 };
 

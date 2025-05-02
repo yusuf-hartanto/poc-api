@@ -13,12 +13,12 @@ export const up = async (queryInterface: QueryInterface) => {
       question varchar(255) DEFAULT NULL,
       text_answer varchar(255) DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY unique_id (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      UNIQUE (id)
+    );
   `);
 };
 

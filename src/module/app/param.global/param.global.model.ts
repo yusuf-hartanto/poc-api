@@ -5,7 +5,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export class ParamGlobal extends Model {
   public id!: string;
-  public menu_param_keyname!: string;
+  public param_key!: string;
   public param_value!: string;
   public param_desc!: string;
   public status!: number;
