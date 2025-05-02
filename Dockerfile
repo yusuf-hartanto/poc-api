@@ -23,4 +23,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Define the default command
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]
