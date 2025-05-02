@@ -13,6 +13,9 @@ COPY . .
 COPY wait-for-it.sh /usr/bin/wait-for-it
 RUN chmod +x /usr/bin/wait-for-it
 
+# Install dependency tools
+RUN apk add --no-cache curl telnet net-tools
+
 # Install dependencies
 RUN npm install
 
