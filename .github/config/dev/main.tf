@@ -59,6 +59,7 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
       image = "${var.IMAGE}",
       essential = true,
       memoryReservation = 512,
+      command = ["bash", "-c", "npm run db:migrate"],
       logConfiguration = {
         logDriver = "awslogs",
         options = {
@@ -106,7 +107,7 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
         },
         {
           name = "DB_DIALECT",
-          value = "mysql"
+          value = "postgres"
         }
       ],
       secrets = [
