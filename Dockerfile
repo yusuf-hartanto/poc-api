@@ -15,7 +15,7 @@ RUN chmod +x /usr/bin/wait-for-it
 
 # Install dependency tools
 RUN apk update && \
-    apk add --no-cache curl telnet net-tools
+    apk add --no-cache curl busybox-extras net-tools
 
 # Install dependencies
 RUN npm install
