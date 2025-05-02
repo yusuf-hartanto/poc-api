@@ -103,6 +103,10 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
         {
           name = "ASSET_TYPE",
           value = "s3"
+        },
+        {
+          name = "DB_DIALECT",
+          value = "mysql"
         }
       ],
       secrets = [
@@ -195,6 +199,13 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
           valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/AWS_BUCKET_NAME"
         }
       ],
+      healthCheck = {
+        retries = 3
+        command = ["CMD-SHELL","curl -f http://localhost:3000/health || exit 1"]
+        timeout = 5
+        interval = 30
+        startPeriod = 15
+        },
       tags = [
         {
           key = "Organization",
