@@ -19,8 +19,8 @@ RUN npm install
 # Build the application
 RUN npm run build
 
-# Expose port 5000
-EXPOSE 5000
+# Expose port 3000
+EXPOSE 3000
 
 # Define the default command
 CMD ["npm", "start"]
