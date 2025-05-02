@@ -13,3 +13,5 @@
 !/public/uploads/.gitkeep
 !/public/excel/.gitkeep
 !/public/pdf/.gitkeep
+
+.github/backup
