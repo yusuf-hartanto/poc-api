@@ -108,31 +108,91 @@ resource "aws_ecs_task_definition" "metaadvisor-api_ecs_task" {
       secrets = [
         {
           name = "DB_HOST",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_HOST"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_HOST"
         },
         {
           name = "DB_NAME",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_NAME"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_NAME"
         },
         {
           name = "DB_PORT",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_PORT"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_PORT"
         },
         {
           name = "DB_USER",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_USER"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_USER"
         },
         {
           name = "DB_PASSWORD",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_PASSWORD"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_PASSWORD"
         },
         {
           name = "DB_DEBUG",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/DB_DEBUG"
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/DB_DEBUG"
         },
         {
-          name = "PATH_ASSET",
-          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor/PATH_ASSET"
+          name = "JWT_TOKEN",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/JWT_TOKEN"
+        },
+        {
+          name = "JWT_REFRESH_TOKEN",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/JWT_REFRESH_TOKEN"
+        },
+        {
+          name = "JWT_TOKEN_EXPIRED",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/JWT_TOKEN_EXPIRED"
+        },
+        {
+          name = "JWT_REFRESH_TOKEN_EXPIRED",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/JWT_REFRESH_TOKEN_EXPIRED"
+        },
+        {
+          name = "MAIL_DEBUG",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_DEBUG"
+        },
+        {
+          name = "MAIL_SENDER",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_SENDER"
+        },
+        {
+          name = "MAIL_SERVICE",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_SERVICE"
+        },
+        {
+          name = "MAIL_HOST",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_HOST"
+        },
+        {
+          name = "MAIL_USERNAME",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_USERNAME"
+        },
+        {
+          name = "MAIL_PASSWORD",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_PASSWORD"
+        },
+        {
+          name = "MAIL_PORT",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/MAIL_PORT"
+        },
+        {
+          name = "TOKEN_TELEGRAM",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/TOKEN_TELEGRAM"
+        },
+        {
+          name = "CHAT_ID_TELEGRAM",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/CHAT_ID_TELEGRAM"
+        },
+        {
+          name = "BASE_DOMAIN",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/BASE_DOMAIN"
+        },
+        {
+          name = "BASE_URL_FE",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/BASE_URL_FE"
+        },
+        {
+          name = "AWS_BUCKET_NAME",
+          valueFrom = "arn:aws:ssm:ap-southeast-3:022499040607:parameter/development/metaadvisor-api/AWS_BUCKET_NAME"
         }
       ],
       healthCheck = {
