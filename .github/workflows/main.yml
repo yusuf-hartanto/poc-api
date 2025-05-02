@@ -19,61 +19,61 @@ jobs:
     name: Build image
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.ref_name }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-    
-    - name: aws-ssm-to-env
-      uses: eliasjcjunior/aws-ssm-parameters-action@main
-      with:
-        recursive: true
-        split-env: true
-        upper-case: true
-        with-decryption: true
-        paths: |
-          /development/metaadvisor-api
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Get Env
-      id: get-env
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: |
-        echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
-        echo "ECR_REPOSITORY=`echo ${{ env.ECR_REPOSITORY }}`" >> $GITHUB_ENV
-        echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_ENV
-        echo "IMG_REG=`echo ${{ env.ECR_REGISTRY }}`" >> $GITHUB_ENV
+      - name: aws-ssm-to-env
+        uses: eliasjcjunior/aws-ssm-parameters-action@main
+        with:
+          recursive: true
+          split-env: true
+          upper-case: true
+          with-decryption: true
+          paths: |
+            /development/metaadvisor-api
 
-    - name: Replace ENV With Value
-      id: replace-env
-      run: |
-        sudo apt install -y gettext
-        envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
-    
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
+      - name: Get Env
+        id: get-env
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=`echo ${{ env.ECR_REPOSITORY }}`" >> $GITHUB_ENV
+          echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_ENV
+          echo "IMG_REG=`echo ${{ env.ECR_REGISTRY }}`" >> $GITHUB_ENV
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      - name: Replace ENV With Value
+        id: replace-env
+        run: |
+          sudo apt install -y gettext
+          envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
 
-    - name: Docker Build and Push
-      uses: docker/build-push-action@v3
-      with:
-        context: .
-        push: true
-        platforms: linux/arm64
-        tags: |
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          platforms: linux/arm64
+          tags: |
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY}}:${{ env.IMAGE_TAG }}
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.ENVIRONMENT }}-${{ env.IMAGE_TAG }}
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.ENVIRONMENT }}-latest

@@ -157,6 +157,9 @@ export default class Controller {
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
+      await helper.sendNotif(
+        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: <b>${username}`
+      );
     } catch (err: any) {
       message = `<br /> error send email: ${err?.message}`;
     }

@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      
+
 jobs:
   build-and-push:
     env:
@@ -14,61 +14,61 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Log in to AWS ECR
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-      run: |
-        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        aws configure set region $AWS_REGION
-        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+      - name: Log in to AWS ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set region $AWS_REGION
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-    - name: Create Docker Buildx Builder
-      run: |
-        docker buildx create --name mybuilder --use
-        docker buildx inspect --bootstrap
+      - name: Create Docker Buildx Builder
+        run: |
+          docker buildx create --name mybuilder --use
+          docker buildx inspect --bootstrap
 
-    - name: Get-env
-      id: build-env
-      env:
-        ENVIRONMENT: dev
-      run: |
-        echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_OUTPUT
-        echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_OUTPUT
-        echo "ECR_REGISTRY=`echo ${{ secrets.ECR_REGISTRY }}`" >> $GITHUB_ENV
-        echo "ECR_REPOSITORY=`echo ${{ secrets.ECR_REPOSITORY }}`" >> $GITHUB_ENV
+      - name: Get-env
+        id: build-env
+        env:
+          ENVIRONMENT: dev
+        run: |
+          echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_OUTPUT
+          echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_OUTPUT
+          echo "ECR_REGISTRY=`echo ${{ secrets.ECR_REGISTRY }}`" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=`echo ${{ secrets.ECR_REPOSITORY }}`" >> $GITHUB_ENV
 
-    - name: Build and Push Docker Image
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        platforms: linux/arm64
-        labels: |
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/arm64
+          labels: |
             app-poc-api
-        tags: |
+          tags: |
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ steps.build-env.outputs.IMAGE_TAG }}
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-${{ steps.build-env.outputs.IMAGE_TAG }}
             ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ steps.build-env.outputs.ENVIRONMENT }}-latest
 
-    - name: Verify Image in ECR
-      env:
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-      run: |
-        aws ecr describe-images \
-          --repository-name $ECR_REPOSITORY \
-          --region $AWS_REGION
-    
+      - name: Verify Image in ECR
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+        run: |
+          aws ecr describe-images \
+            --repository-name $ECR_REPOSITORY \
+            --region $AWS_REGION
+
     outputs:
       ENVIRONMENT: ${{ steps.build-env.outputs.ENVIRONMENT }}
       IMAGE_TAG: ${{ steps.build-env.outputs.IMAGE_TAG }}
@@ -78,65 +78,65 @@ jobs:
     needs: [build-and-push]
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.ref_name }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-    
-    - name: Get instance-id
-      id: instance-id
-      run: |
-        echo "INSTANCE_ID=`aws ec2 describe-instances --filter Name=tag:Name,Values=Alphact-app-poc-1a --query 'Reservations[].Instances[].InstanceId' --output text`" >> $GITHUB_ENV
-    
-    - name: Get Env
-      id: get-env
-      env:
-        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY}}
-        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-      run: |
-        echo "Get environment to passing into github env"
-        echo "ECR_REGISTRY=`echo ${ECR_REGISTRY}`" >> $GITHUB_ENV
-        echo "ECR_REPOSITORY=`echo ${ECR_REPOSITORY}`" >> $GITHUB_ENV
-        echo "ENVIRONMENT=`echo ${{ needs.build-and-push.outputs.ENVIRONMENT }}`" >> $GITHUB_ENV
-        echo "IMAGE_TAG=`echo ${{ needs.build-and-push.outputs.IMAGE_TAG }}`" >> $GITHUB_ENV
-        echo "DB_HOST=`echo ${{ secrets.DB_HOST }}`" >> $GITHUB_ENV
-        echo "DB_NAME=`echo ${{ secrets.DB_NAME }}`" >> $GITHUB_ENV
-        echo "DB_USER=`echo ${{ secrets.DB_USER }}`" >> $GITHUB_ENV
-        echo "DB_PASSWORD=`echo ${{ secrets.DB_PASSWORD }}`" >> $GITHUB_ENV
-        echo "TOKEN_TELEGRAM=`echo ${{ secrets.TOKEN_TELEGRAM }}`" >> $GITHUB_ENV
-        echo "CHAT_ID_TELEGRAM=`echo ${{ secrets.CHAT_ID_TELEGRAM }}`" >> $GITHUB_ENV
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Replace ENV With Value
-      id: replace-env
-      run: |
-        sudo apt install -y gettext
-        envsubst < docker-compose.yml > docker-compose.yml.temp && rm docker-compose.yml && mv docker-compose.yml.temp docker-compose.yml
-    
-    - name: Encode docker-compose.yml
-      id: encode_file
-      run: |
-        base64 docker-compose.yml | tr -d '\n' > docker-compose.yml.b64
-        echo "DOCKER_COMPOSE_YML=$(cat docker-compose.yml.b64)" >> $GITHUB_ENV
-    
-    - name: Deploy to EC2
-      run: |
-        cat <<EOF > ssm-params.json
-        {
-          "commands": [
-            "sudo -u heimdall bash -c 'cd /home/heimdall/apps && mkdir -p poc-app-api && cd poc-app-api && echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && chown heimdall:heimdall docker-compose.yml && aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && docker-compose down && docker image prune -a --force --filter=\"label=app-poc-api\" && docker-compose up -d'"
-          ]
-        }
-        EOF
+      - name: Get instance-id
+        id: instance-id
+        run: |
+          echo "INSTANCE_ID=`aws ec2 describe-instances --filter Name=tag:Name,Values=Alphact-app-poc-1a --query 'Reservations[].Instances[].InstanceId' --output text`" >> $GITHUB_ENV
 
-        aws ssm send-command \
-        --instance-ids "${{ env.INSTANCE_ID }}" \
-        --document-name "AWS-RunShellScript" \
-        --parameters file://ssm-params.json \
-        --region ${{ secrets.AWS_REGION }}
+      - name: Get Env
+        id: get-env
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY}}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+        run: |
+          echo "Get environment to passing into github env"
+          echo "ECR_REGISTRY=`echo ${ECR_REGISTRY}`" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=`echo ${ECR_REPOSITORY}`" >> $GITHUB_ENV
+          echo "ENVIRONMENT=`echo ${{ needs.build-and-push.outputs.ENVIRONMENT }}`" >> $GITHUB_ENV
+          echo "IMAGE_TAG=`echo ${{ needs.build-and-push.outputs.IMAGE_TAG }}`" >> $GITHUB_ENV
+          echo "DB_HOST=`echo ${{ secrets.DB_HOST }}`" >> $GITHUB_ENV
+          echo "DB_NAME=`echo ${{ secrets.DB_NAME }}`" >> $GITHUB_ENV
+          echo "DB_USER=`echo ${{ secrets.DB_USER }}`" >> $GITHUB_ENV
+          echo "DB_PASSWORD=`echo ${{ secrets.DB_PASSWORD }}`" >> $GITHUB_ENV
+          echo "TOKEN_TELEGRAM=`echo ${{ secrets.TOKEN_TELEGRAM }}`" >> $GITHUB_ENV
+          echo "CHAT_ID_TELEGRAM=`echo ${{ secrets.CHAT_ID_TELEGRAM }}`" >> $GITHUB_ENV
+
+      - name: Replace ENV With Value
+        id: replace-env
+        run: |
+          sudo apt install -y gettext
+          envsubst < docker-compose.yml > docker-compose.yml.temp && rm docker-compose.yml && mv docker-compose.yml.temp docker-compose.yml
+
+      - name: Encode docker-compose.yml
+        id: encode_file
+        run: |
+          base64 docker-compose.yml | tr -d '\n' > docker-compose.yml.b64
+          echo "DOCKER_COMPOSE_YML=$(cat docker-compose.yml.b64)" >> $GITHUB_ENV
+
+      - name: Deploy to EC2
+        run: |
+          cat <<EOF > ssm-params.json
+          {
+            "commands": [
+              "sudo -u heimdall bash -c 'cd /home/heimdall/apps && mkdir -p poc-app-api && cd poc-app-api && echo \"${{ env.DOCKER_COMPOSE_YML }}\" | base64 -d > docker-compose.yml && chown heimdall:heimdall docker-compose.yml && aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }} && docker-compose down && docker image prune -a --force --filter=\"label=app-poc-api\" && docker-compose up -d'"
+            ]
+          }
+          EOF
+
+          aws ssm send-command \
+          --instance-ids "${{ env.INSTANCE_ID }}" \
+          --document-name "AWS-RunShellScript" \
+          --parameters file://ssm-params.json \
+          --region ${{ secrets.AWS_REGION }}
