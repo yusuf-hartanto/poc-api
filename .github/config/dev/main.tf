@@ -3,7 +3,7 @@ terraform {
       encrypt   = true
       bucket = "terraform-metaadvisor"
       region = "ap-southeast-3"
-      key = "terraform-metaadvisor/Production/AWS-ECS/metaadvisor-api/terraform.tfstate"
+      key = "terraform-metaadvisor/Dev/AWS-ECS/metaadvisor-api/terraform.tfstate"
       profile = "default"
   }
 }
@@ -24,7 +24,7 @@ locals {
   tags = {
     Name       = local.name
     Organization = "metaadvisor"
-    Env = "production"
+    Env = "development"
     Terraform = "true"
   }
 }
@@ -294,7 +294,7 @@ resource "aws_appautoscaling_target" "metaadvisor-api" {
 }
 
 resource "aws_appautoscaling_policy" "metaadvisor-api" {
-  name               = "prod-memory-metaadvisor-api"
+  name               = "dev-memory-metaadvisor-api"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.metaadvisor-api.resource_id
   scalable_dimension = aws_appautoscaling_target.metaadvisor-api.scalable_dimension
@@ -312,7 +312,7 @@ resource "aws_appautoscaling_policy" "metaadvisor-api" {
 }
 
 resource "aws_appautoscaling_policy" "github_runner_cpu" {
-  name = "prod-cpu-metaadvisor-api"
+  name = "dev-cpu-metaadvisor-api"
   policy_type = "TargetTrackingScaling"
   resource_id = aws_appautoscaling_target.metaadvisor-api.resource_id
   scalable_dimension = aws_appautoscaling_target.metaadvisor-api.scalable_dimension
