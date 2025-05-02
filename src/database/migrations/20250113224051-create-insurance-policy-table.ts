@@ -11,26 +11,26 @@ export const up = async (queryInterface: QueryInterface) => {
       product_name varchar(250) NOT NULL,
       policy_holder varchar(50) DEFAULT NULL,
       insured_holder varchar(50) DEFAULT NULL,
-      beneficiary_holder longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+      beneficiary_holder text DEFAULT NULL,
       issued_date date DEFAULT NULL,
       premi_currency varchar(250) DEFAULT NULL,
       premi_value decimal(12,2) DEFAULT NULL,
       premi_off varchar(100) DEFAULT NULL,
-      payment_term int(11) DEFAULT NULL,
+      payment_term int DEFAULT NULL,
       payment_term_unit varchar(100) DEFAULT NULL,
-      insured_term int(11) DEFAULT NULL,
+      insured_term int DEFAULT NULL,
       insured_term_unit varchar(100) DEFAULT NULL,
       due_date date DEFAULT NULL,
       seller_name varchar(250) DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` INT(1) NULL,
+      status int NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (policy_id),
-      UNIQUE KEY unique_policy_id (policy_id)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+      UNIQUE (policy_id)
+    );
   `);
 };
 

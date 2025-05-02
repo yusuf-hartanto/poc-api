@@ -2,9 +2,12 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { datasurvey } from '../data/survey';
+import Config from '../../config/parameter';
+import { initializeDatabase } from '../connection';
 import Model from '../../module/survey/event.model';
 import { QueryInterface, Sequelize } from 'sequelize';
 import ModelForm from '../../module/survey/form.model';
+import { initializeModels } from '../../module/models/models.index';
 import ModelFormAnswer from '../../module/survey/form.answer.model';
 import { repository as repoResource } from '../../module/app/resource/resource.repository';
 
@@ -13,6 +16,10 @@ type Migration = (
   sequelize: Sequelize
 ) => Promise<void>;
 export const up: Migration = async () => {
+  const dataConfig = await Config.initialize();
+  const sequelize = await initializeDatabase(dataConfig?.database);
+  initializeModels(sequelize);
+
   const formId: string = uuidv4();
   const events = datasurvey.event();
   const forms = datasurvey.form();

@@ -17,9 +17,9 @@ export function initAppOtp(sequelize: Sequelize) {
   AppOtp.init(
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true,
+        unique: true,
       },
       email: {
         type: DataTypes.STRING,

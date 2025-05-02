@@ -4,7 +4,7 @@ import { QueryInterface } from 'sequelize';
 
 export const up = async (queryInterface: QueryInterface) => {
   await queryInterface.sequelize.query(
-    `ALTER TABLE client ADD ktp varchar(20) DEFAULT NULL AFTER name;`
+    `ALTER TABLE client ADD ktp varchar(20) DEFAULT NULL;`
   );
 };
 

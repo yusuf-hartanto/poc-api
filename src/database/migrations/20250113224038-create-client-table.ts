@@ -8,19 +8,19 @@ export const up = async (queryInterface: QueryInterface) => {
       id varchar(50) NOT NULL,
       name varchar(250) NOT NULL,
       bod date DEFAULT NULL,
-      age int(11) DEFAULT NULL,
-      contact_number longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+      age int DEFAULT NULL,
+      contact_number text DEFAULT NULL,
       address varchar(255) DEFAULT NULL,
       relation_id varchar(50) DEFAULT NULL,
       relation_name varchar(100) DEFAULT NULL,
-      \`status\` INT(1) NULL,
+      status int NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
+      modified_date timestamp DEFAULT NULL,
       PRIMARY KEY (id),
-      UNIQUE KEY unique_id (id)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+      UNIQUE (id)
+    );
   `);
 };
 

@@ -9,14 +9,14 @@ export const up = async (queryInterface: QueryInterface) => {
       name varchar(250) DEFAULT NULL,
       location varchar(250) DEFAULT NULL,
       address varchar(250) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (sdb_id) USING BTREE,
-      UNIQUE KEY unique_sdb_id (sdb_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (sdb_id),
+      UNIQUE (sdb_id)
+    );
   `);
 };
 

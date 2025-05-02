@@ -10,7 +10,7 @@ export const up = async (queryInterface: QueryInterface) => {
       cash_name varchar(250) DEFAULT NULL,
       type varchar(250) DEFAULT NULL,
       product_number varchar(50) DEFAULT NULL,
-      bank_name varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+      bank_name varchar(250) DEFAULT NULL,
       start_date date DEFAULT NULL,
       maturity_date date DEFAULT NULL,
       currency varchar(250) DEFAULT NULL,
@@ -20,14 +20,14 @@ export const up = async (queryInterface: QueryInterface) => {
       aro decimal(12,2) DEFAULT NULL,
       location text DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (cash_id) USING BTREE,
-      UNIQUE KEY unique_cash_id (cash_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (cash_id),
+      UNIQUE (cash_id)
+    );
   `);
 };
 

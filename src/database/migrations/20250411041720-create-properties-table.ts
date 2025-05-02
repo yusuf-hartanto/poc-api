@@ -16,12 +16,12 @@ export const up = async (queryInterface: QueryInterface) => {
       purchase_value decimal(12,2) DEFAULT NULL,
       doc_location text DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL
+    );
   `);
 };
 

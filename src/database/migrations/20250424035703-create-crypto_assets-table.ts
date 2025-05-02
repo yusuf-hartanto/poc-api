@@ -17,14 +17,14 @@ export const up = async (queryInterface: QueryInterface) => {
       purchase_value decimal(12,2) DEFAULT NULL,
       current_value decimal(12,2) DEFAULT NULL,
       notes varchar(255) DEFAULT NULL,
-      \`status\` int(11) DEFAULT NULL,
+      status int DEFAULT NULL,
       created_by varchar(50) DEFAULT NULL,
-      created_date datetime DEFAULT NULL,
+      created_date timestamp DEFAULT NULL,
       modified_by varchar(50) DEFAULT NULL,
-      modified_date datetime DEFAULT NULL,
-      PRIMARY KEY (crypto_assets_id) USING BTREE,
-      UNIQUE KEY unique_crypto_assets_id (crypto_assets_id) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+      modified_date timestamp DEFAULT NULL,
+      PRIMARY KEY (crypto_assets_id),
+      UNIQUE (crypto_assets_id)
+    );
   `);
 };
 

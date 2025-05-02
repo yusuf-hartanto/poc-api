@@ -70,6 +70,7 @@ import {
   initVehiclesMachineries,
   associateVehiclesMachineries,
 } from '../portfolio/vehicles.machineries/vehicles.machineries.model';
+import { initParamGlobal } from '../app/param.global/param.global.model';
 import {
   initIntellectualProperties,
   associateIntellectualProperties,
@@ -90,6 +91,7 @@ export function initializeModels(sequelize: Sequelize) {
   initCurrency(sequelize);
   initProperties(sequelize);
   initSurveyForm(sequelize);
+  initParamGlobal(sequelize);
   initReceivables(sequelize);
   initMutualFunds(sequelize);
   initSurveyEvent(sequelize);

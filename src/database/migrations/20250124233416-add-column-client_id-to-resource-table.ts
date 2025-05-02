@@ -4,7 +4,7 @@ import { QueryInterface } from 'sequelize';
 
 export const up = async (queryInterface: QueryInterface) => {
   await queryInterface.sequelize.query(
-    `ALTER TABLE app_resource ADD client_id varchar(50) DEFAULT NULL AFTER total_login;`
+    `ALTER TABLE app_resource ADD client_id varchar(50) DEFAULT NULL;`
   );
 };
 
