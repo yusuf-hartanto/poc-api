@@ -141,8 +141,10 @@ export default class Helper {
     await file.mv(uploadPath, async function (err: any) {
       if (err) {
         console.warn(`upload ${type} error: ${err?.message}`);
-        const telegram = new TelegramBot(teleConfig?.token);
-        await telegram.send(teleConfig?.chatId, err?.message);
+        if (teleConfig?.token) {
+          const telegram = new TelegramBot(teleConfig?.token);
+          await telegram.send(teleConfig?.chatId, err?.message);
+        }
         return err?.message;
       }
     });
@@ -196,6 +198,7 @@ export default class Helper {
   }
 
   public async sendNotif(message: string) {
+    if (!teleConfig?.token) return 'token not found';
     const telegram = new TelegramBot(teleConfig?.token);
     return await telegram.send(teleConfig?.chatId, message);
   }

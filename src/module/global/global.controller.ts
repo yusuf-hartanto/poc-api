@@ -9,6 +9,7 @@ import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
 import { transformer } from './global.transformer';
 import { appConfig } from '../../config/config.app';
+import { sequelize } from '../../database/connection';
 import { repository as RepoMenu } from '../app/menu/menu.repository';
 import { repository as RoleMenu } from '../app/role.menu/role.menu.repository';
 import { repository as repoPolicy } from '../insurance/policy/policy.repository';
@@ -654,6 +655,31 @@ export default class Controller {
         res
       );
     }
+  }
+
+  public async health(req: Request, res: Response) {
+    const health: any = {
+      status: 'success',
+      uptime: process.uptime(),
+      timestamp: Date.now(),
+      database: 'unknown',
+    };
+
+    try {
+      await sequelize.query('SELECT 1');
+      health.database = 'connected';
+    } catch (err: any) {
+      health.status = 'failed';
+      health.database = 'disconnected';
+      health.error = err?.message;
+    }
+
+    return response.success(
+      'health check',
+      health,
+      res,
+      health.status == 'success'
+    );
   }
 }
 

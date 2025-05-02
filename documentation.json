@@ -113,13 +113,7 @@
             {
               "listen": "test",
               "script": {
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);\r",
-                  "if (jsonData.data) {\r",
-                  "    postman.setEnvironmentVariable(\"access_token\", jsonData.data.access_token);\r",
-                  "    postman.setEnvironmentVariable(\"refresh_token\", jsonData.data.refresh_token);\r",
-                  "}"
-                ],
+                "exec": [""],
                 "type": "text/javascript",
                 "packages": {}
               }
@@ -133,7 +127,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"adminuser\",\r\n    \"password\": \"adminuser\"\r\n}",
+              "raw": "{\r\n    \"username\": \"yusuf.hartanto\",\r\n    \"password\": \"adminuser\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -215,6 +209,22 @@
         },
         {
           "name": "Verify OTP Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);\r",
+                  "if (jsonData.data) {\r",
+                  "    postman.setEnvironmentVariable(\"access_token\", jsonData.data.access_token);\r",
+                  "    postman.setEnvironmentVariable(\"refresh_token\", jsonData.data.refresh_token);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
           "request": {
             "auth": {
               "type": "noauth"
@@ -223,7 +233,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"otp\": 9246\r\n}",
+              "raw": "{\r\n    \"otp\": 4707\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1111,6 +1121,223 @@
               ],
               "cookie": [],
               "body": "{\n    \"status\": true,\n    \"message\": \"success update currency\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Send Telegram",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"message\": \"Test telegram\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/sendtele",
+              "host": ["{{url}}"],
+              "path": ["sendtele"]
+            }
+          },
+          "response": [
+            {
+              "name": "Send Telegram",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"message\": \"Test telegram\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/sendtele",
+                  "host": ["{{url}}"],
+                  "path": ["sendtele"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "61"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d-i1eOYUHdIWf2y/3/DAqw7aI+YiI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 01 May 2025 14:37:42 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Send telegram success\",\n    \"data\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/health",
+              "host": ["{{url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": [
+            {
+              "name": "Health Check",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/health",
+                  "host": ["{{url}}"],
+                  "path": ["health"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "137"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"89-ylCpzcO251Gk0e/P9SRSdNhic1c\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 02 May 2025 04:17:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"health check\",\n    \"data\": {\n        \"status\": \"success\",\n        \"uptime\": 15.7457131,\n        \"timestamp\": 1746159442738,\n        \"database\": \"connected\"\n    }\n}"
+            },
+            {
+              "name": "Health Check",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/health",
+                  "host": ["{{url}}"],
+                  "path": ["health"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "177"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"b1-7h1yf6EySBtKavMDQMSzXj9gLd0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 02 May 2025 04:19:06 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": false,\n    \"message\": \"health check\",\n    \"data\": {\n        \"status\": \"failed\",\n        \"uptime\": 23.4268902,\n        \"timestamp\": 1746159546251,\n        \"database\": \"disconnected\",\n        \"error\": \"Unknown database 'devpocc'\"\n    }\n}"
             }
           ]
         }
