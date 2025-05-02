@@ -1,14 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './crypto.assets.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
+import { variable } from './crypto.assets.variable';
+import { response } from '../../../helpers/response';
 import { repository } from './crypto.assets.repository';
 import { transformer } from './crypto.assets.transformer';
-import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -163,4 +160,5 @@ export default class Controller {
     }
   }
 }
+
 export const cryptoassets = new Controller();

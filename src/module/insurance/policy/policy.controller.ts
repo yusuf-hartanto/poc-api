@@ -159,4 +159,5 @@ export default class Controller {
     }
   }
 }
+
 export const policy = new Controller();

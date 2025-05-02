@@ -94,4 +94,5 @@ export default class Controller {
     }
   }
 }
+
 export const roleMenu = new Controller();

@@ -6,7 +6,7 @@ import Event from './event.model';
 import FormAnswer from './form.answer.model';
 import FormAnswerValue from './form.answer.value.model';
 
-export default class Respository {
+export default class Repository {
   public list() {
     return Event.findAll({
       where: {
@@ -182,4 +182,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();

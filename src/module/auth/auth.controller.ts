@@ -1,11 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import moment from 'moment';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
+import { appConfig } from '../../config/config.app';
 import { helperauth } from '../../helpers/auth.helper';
 import { repository as repoOtp } from './otp.repository';
 import { variable } from '../app/resource/resource.variable';
@@ -13,7 +13,6 @@ import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
 import { repository as repoRole } from '../app/role/role.repository';
 
-dotenv.config();
 moment().locale('id');
 const date: string = helper.date();
 
@@ -54,15 +53,18 @@ export default class Controller {
 
         await helper.sendEmail({
           to: email,
-          subject: 'OTP Email - Meta Advisor (metaadvisor.id)',
+          subject: `OTP Email - ${appConfig?.app}`,
           content: `
-            <h3>Hi ${email.split('@')[0]},</h3>
-            <p>Berikut kode OTP Anda:</p>
+            <h3>Hi ${user?.getDataValue('full_name')},</h3>
+            <p>Here is your OTP code:</p>
             <h1>${code}</h1>
-            <p>Kode ini berlaku selama 3 menit.</p>
-            <p>Demi keamanan, jangan berikan kode OTP kepada siapa pun!</p>
+            <p>This code is valid for 3 minutes.</p>
+            <p>For security reasons, do not give your OTP code to anyone!</p>
           `,
         });
+        await helper.sendNotif(
+          `Hi ${user?.getDataValue('full_name')}, Here is your OTP code: ${code} This code is valid for 3 minutes. For security reasons, do not give your OTP code to anyone!`
+        );
 
         return response.success('Login success', null, res);
       } catch (err: any) {
@@ -106,6 +108,7 @@ export default class Controller {
         },
         condition: { resource_id: req?.user?.id },
       });
+      console.warn('refresh token', data);
       response.success('New access token', data, res);
     } catch (err: any) {
       return helper.catchError(`refresh: ${err?.message}`, 500, res);
@@ -161,14 +164,17 @@ export default class Controller {
     try {
       await helper.sendEmail({
         to: req?.body?.email,
-        subject: 'Welcome to POC',
+        subject: `Welcome to ${appConfig?.app}`,
         content: `
           <h3>Hi ${req?.body?.full_name},</h3>
           <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${process.env.BASE_URL_FE}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+          <a href="${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
           <p>This is your username account: <b>${username}</b></p>
         `,
       });
+      await helper.sendNotif(
+        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: <b>${username}`
+      );
     } catch (err: any) {
       message = `<br /> error send email: ${err?.message}`;
     }
@@ -232,9 +238,12 @@ export default class Controller {
         content: `
           <h3>Hi ${result?.getDataValue('full_name')},</h3>
           <p>Below this link to reset password your account:</p>
-          <a href="${process.env.BASE_URL_FE}/reset-password?confirm_hash=${confirm_hash}" target="_blank">Reset Password</a>
+          <a href="${appConfig?.baseUrlFe}/reset-password?confirm_hash=${confirm_hash}" target="_blank">Reset Password</a>
         `,
       });
+      await helper.sendNotif(
+        `Reset Password. Hi ${result?.getDataValue('full_name')}, Below this link to reset password your account: ${appConfig?.baseUrlFe}/reset-password?confirm_hash=${confirm_hash}`
+      );
 
       return response.success('success forgot password', null, res);
     } catch (err: any) {
@@ -360,6 +369,7 @@ export default class Controller {
         access_token: token,
         refresh_token: refresh,
       };
+      console.warn('login success', data);
       return response.success('verify otp success', data, res);
     } catch (err: any) {
       return helper.catchError(`verify otp: ${err?.message}`, 500, res);

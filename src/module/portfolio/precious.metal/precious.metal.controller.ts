@@ -1,14 +1,12 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './precious.metal.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
+import { response } from '../../../helpers/response';
+import { variable } from './precious.metal.variable';
+import { appConfig } from '../../../config/config.app';
 import { repository } from './precious.metal.repository';
 import { transformer } from './precious.metal.transformer';
-import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -18,14 +16,24 @@ const uploadImages = async (req: Request) => {
       for (let i in images) {
         let checkFile = helper.checkExtention(images[i]);
         if (checkFile == 'allowed') {
-          const path_image = await helper.upload(images[i], 'precious_metal');
+          const path_image = await helper.upload(
+            images[i],
+            'precious_metal',
+            req?.user?.username,
+            appConfig.assetType
+          );
           dataFiles.push(path_image);
         }
       }
     } else {
       let checkFile = helper.checkExtention(images);
       if (checkFile == 'allowed') {
-        const path_image = await helper.upload(images, 'precious_metal');
+        const path_image = await helper.upload(
+          images,
+          'precious_metal',
+          req?.user?.username,
+          appConfig.assetType
+        );
         dataFiles.push(path_image);
       }
     }
@@ -194,4 +202,5 @@ export default class Controller {
     }
   }
 }
+
 export const preciousmetal = new Controller();

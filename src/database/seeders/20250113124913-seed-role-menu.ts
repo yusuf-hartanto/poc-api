@@ -18,7 +18,7 @@ export const up: Migration = async () => {
   });
   const resource = await repoResource.detail({ username: 'adminuser' }, '');
 
-  let bulkInsert: Array<Object> = [];
+  let bulkInsert = [];
   for (let i in menus) {
     bulkInsert.push({
       role_menu_id: uuidv4(),

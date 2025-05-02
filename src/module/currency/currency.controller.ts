@@ -19,4 +19,5 @@ export default class Controller {
     }
   }
 }
+
 export const currency = new Controller();

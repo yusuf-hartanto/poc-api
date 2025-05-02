@@ -2,8 +2,8 @@
 
 import { variable } from './menu.variable';
 import { Request, Response } from 'express';
-import { helper } from '../../../helpers/helper';
 import { repository } from './menu.repository';
+import { helper } from '../../../helpers/helper';
 import { response } from '../../../helpers/response';
 
 export default class Controller {
@@ -127,4 +127,5 @@ export default class Controller {
     }
   }
 }
+
 export const menu = new Controller();

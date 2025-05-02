@@ -1,14 +1,11 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './mutual.funds.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
+import { variable } from './mutual.funds.variable';
+import { response } from '../../../helpers/response';
 import { repository } from './mutual.funds.repository';
 import { transformer } from './mutual.funds.transformer';
-import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -159,4 +156,5 @@ export default class Controller {
     }
   }
 }
+
 export const mutualfunds = new Controller();
