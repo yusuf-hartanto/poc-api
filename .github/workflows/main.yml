@@ -125,17 +125,6 @@ jobs:
           export TF_VAR_ENVIRONMENT=$ENVIRONMENT
           export TF_VAR_ECS_SERVICE=$ECS_SERVICE
           export TF_VAR_IMAGE=$IMAGE
-          echo "Running terraform init..."
-          OUTPUT=$(terraform init 2>&1)
-          EXIT_CODE=$?
-
-          echo "$OUTPUT"
-
-          if [[ $EXIT_CODE -ne 0 ]] || echo "$OUTPUT" | grep -q "Error migrating the backend"; then
-            echo "Detected terraform init error or migration needed, retrying with -migrate-state..."
-            terraform init -migrate-state
-          else
-            echo "terraform init completed successfully."
-          fi
+          terraform init 
           terraform plan -no-color
           terraform apply -auto-approve
