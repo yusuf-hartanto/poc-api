@@ -1,6 +1,5 @@
 'use strict';
 
-import dotenv from 'dotenv';
 import moment from 'moment';
 import ExcelJS from 'exceljs';
 import puppeteer from 'puppeteer';
@@ -9,12 +8,12 @@ import { Request, Response } from 'express';
 import { helper } from '../../helpers/helper';
 import { response } from '../../helpers/response';
 import { transformer } from './global.transformer';
+import { appConfig } from '../../config/config.app';
+import { sequelize } from '../../database/connection';
 import { repository as RepoMenu } from '../app/menu/menu.repository';
 import { repository as RoleMenu } from '../app/role.menu/role.menu.repository';
 import { repository as repoPolicy } from '../insurance/policy/policy.repository';
 import { transformer as transformerPolicy } from '../insurance/policy/policy.transformer';
-
-dotenv.config();
 
 const nestedChildren = (
   data: any,
@@ -374,14 +373,17 @@ const formatNavigationRole = (data: any) => {
   if (data?.dataValues?.role_menu?.length > 0) {
     result = data?.dataValues?.role_menu.map((rm: any) => rm?.menu);
   }
-  console.warn(result);
   const navigation = nestedChildren(result);
   return navigation;
 };
 
 export default class Controller {
   public index(req: Request, res: Response) {
-    return response.success('Hello from the POC RESTful API  !!!!!', null, res);
+    return response.success(
+      `Hello from the ${appConfig?.app} RESTful API  !!!!!`,
+      null,
+      res
+    );
   }
 
   public async navigation(req: Request, res: Response) {
@@ -393,8 +395,7 @@ export default class Controller {
         const result = await RoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });
-        if (result?.length < 1)
-          return response.failed('Data not found', 404, res);
+        if (!result) return response.failed('Data not found', 404, res);
         navigation = formatNavigationRole(result);
       } else {
         const result = await RepoMenu.list();
@@ -444,6 +445,17 @@ export default class Controller {
       return response.success('Send email success', null, res);
     } catch (err: any) {
       return helper.catchError(`sendmail: ${err?.message}`, 500, res);
+    }
+  };
+
+  public sendtele = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { message } = req?.body;
+      if (!message) return response.failed('message is a required', 422, res);
+      const tele = await helper.sendNotif(message || '-');
+      return response.success('Send telegram success', tele, res);
+    } catch (err: any) {
+      return helper.catchError(`sendtele: ${err?.message}`, 500, res);
     }
   };
 
@@ -643,6 +655,31 @@ export default class Controller {
         res
       );
     }
+  }
+
+  public async health(req: Request, res: Response) {
+    const health: any = {
+      status: 'success',
+      uptime: process.uptime(),
+      timestamp: Date.now(),
+      database: 'unknown',
+    };
+
+    try {
+      await sequelize.query('SELECT 1');
+      health.database = 'connected';
+    } catch (err: any) {
+      health.status = 'failed';
+      health.database = 'disconnected';
+      health.error = err?.message;
+    }
+
+    return response.success(
+      'health check',
+      health,
+      res,
+      health.status == 'success'
+    );
   }
 }
 

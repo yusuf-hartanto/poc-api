@@ -2,8 +2,8 @@
 
 import { Router } from 'express';
 import { role } from './role/role.controller';
-import { menu } from './menu/menu.controller';
 import { auth } from '../auth/auth.middleware';
+import { menu } from './menu/menu.controller';
 import { resource } from './resource/resource.controller';
 import { roleMenu } from './role.menu/role.menu.controller';
 import { paramGlobal } from './param.global/param.global.controller';

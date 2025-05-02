@@ -1,62 +1,81 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
-import { DataTypes } from 'sequelize';
-import conn from '../../config/database';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
-const Model = conn.sequelize.define(
-  'survey_event',
-  {
-    id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      unique: true,
-    },
-    form_id: {
-      type: DataTypes.STRING,
-    },
-    event: {
-      type: DataTypes.STRING,
-    },
-    desc: {
-      type: DataTypes.STRING,
-    },
-    start_period: {
-      type: DataTypes.DATE,
-    },
-    end_period: {
-      type: DataTypes.DATE,
-    },
-    is_active: {
-      type: DataTypes.TINYINT,
-      defaultValue: 1,
-    },
-    is_random: {
-      type: DataTypes.TINYINT,
-    },
-    created_by: {
-      type: DataTypes.STRING,
-    },
-    created_date: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    modified_by: {
-      type: DataTypes.STRING,
-    },
-    modified_date: {
-      type: DataTypes.DATE,
-    },
-  },
-  {
-    createdAt: false,
-    updatedAt: false,
-    freezeTableName: true,
-  }
-);
+export class SurveyEvent extends Model {
+  public id!: string;
+  public form_id!: string;
+  public event!: string;
+  public desc!: string;
+  public start_period!: Date;
+  public end_period!: Date;
+  public is_active!: number;
+  public is_random!: number;
+  public created_by!: string;
+  public created_date!: Date;
+  public modified_by!: string;
+  public modified_date!: Date;
+}
 
-Model.beforeCreate(
-  (survey_event: { id: string }) => (survey_event.id = uuidv4())
-);
+export function initSurveyEvent(sequelize: Sequelize) {
+  SurveyEvent.init(
+    {
+      id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        unique: true,
+      },
+      form_id: {
+        type: DataTypes.STRING,
+      },
+      event: {
+        type: DataTypes.STRING,
+      },
+      desc: {
+        type: DataTypes.STRING,
+      },
+      start_period: {
+        type: DataTypes.DATE,
+      },
+      end_period: {
+        type: DataTypes.DATE,
+      },
+      is_active: {
+        type: DataTypes.TINYINT,
+        defaultValue: 1,
+      },
+      is_random: {
+        type: DataTypes.TINYINT,
+      },
+      created_by: {
+        type: DataTypes.STRING,
+      },
+      created_date: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      modified_by: {
+        type: DataTypes.STRING,
+      },
+      modified_date: {
+        type: DataTypes.DATE,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'SurveyEvent',
+      tableName: 'survey_event',
+      timestamps: false,
+    }
+  );
 
-export default Model;
+  SurveyEvent.beforeCreate((survey_event) => {
+    survey_event?.setDataValue('id', uuidv4());
+  });
+  return SurveyEvent;
+}
+
+export function associateSurveyEvent() {}
+
+export default SurveyEvent;

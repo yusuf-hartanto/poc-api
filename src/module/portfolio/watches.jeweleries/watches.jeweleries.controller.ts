@@ -1,14 +1,12 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './watches.jeweleries.variable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
+import { response } from '../../../helpers/response';
+import { appConfig } from '../../../config/config.app';
+import { variable } from './watches.jeweleries.variable';
 import { repository } from './watches.jeweleries.repository';
 import { transformer } from './watches.jeweleries.transformer';
-import { response } from '../../../helpers/response';
-
-dotenv.config();
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -20,7 +18,9 @@ const uploadImages = async (req: Request) => {
         if (checkFile == 'allowed') {
           const path_image = await helper.upload(
             images[i],
-            'watches_jeweleries'
+            'watches_jeweleries',
+            req?.user?.username,
+            appConfig?.assetType
           );
           dataFiles.push(path_image);
         }
@@ -28,7 +28,12 @@ const uploadImages = async (req: Request) => {
     } else {
       let checkFile = helper.checkExtention(images);
       if (checkFile == 'allowed') {
-        const path_image = await helper.upload(images, 'watches_jeweleries');
+        const path_image = await helper.upload(
+          images,
+          'watches_jeweleries',
+          req?.user?.username,
+          appConfig?.assetType
+        );
         dataFiles.push(path_image);
       }
     }
@@ -205,4 +210,5 @@ export default class Controller {
     }
   }
 }
+
 export const watchesjeweleries = new Controller();

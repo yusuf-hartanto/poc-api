@@ -1,14 +1,12 @@
 'use strict';
 
-import dotenv from 'dotenv';
-import { variable } from './receivablesvariable';
 import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
-import { repository } from './receivables.repository';
-import { transformer } from './receivables.transformer';
+import { variable } from './receivablesvariable';
 import { response } from '../../../helpers/response';
-
-dotenv.config();
+import { repository } from './receivables.repository';
+import { appConfig } from '../../../config/config.app';
+import { transformer } from './receivables.transformer';
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -18,14 +16,24 @@ const uploadImages = async (req: Request) => {
       for (let i in images) {
         let checkFile = helper.checkExtention(images[i]);
         if (checkFile == 'allowed') {
-          const path_image = await helper.upload(images[i], 'receivables');
+          const path_image = await helper.upload(
+            images[i],
+            'receivables',
+            req?.user?.username,
+            appConfig?.assetType
+          );
           dataFiles.push(path_image);
         }
       }
     } else {
       let checkFile = helper.checkExtention(images);
       if (checkFile == 'allowed') {
-        const path_image = await helper.upload(images, 'receivables');
+        const path_image = await helper.upload(
+          images,
+          'receivables',
+          req?.user?.username,
+          appConfig?.assetType
+        );
         dataFiles.push(path_image);
       }
     }
@@ -172,4 +180,5 @@ export default class Controller {
     }
   }
 }
+
 export const receivables = new Controller();

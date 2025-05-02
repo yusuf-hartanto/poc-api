@@ -3,7 +3,7 @@
 import { Op } from 'sequelize';
 import Model from './safe.deposit.box.model';
 
-export default class Respository {
+export default class Repository {
   public list(condition: any) {
     return Model.findAll({
       where: {
@@ -70,4 +70,5 @@ export default class Respository {
     });
   }
 }
-export const repository = new Respository();
+
+export const repository = new Repository();

@@ -1,53 +1,70 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
-import { DataTypes } from 'sequelize';
-import conn from '../../../config/database';
+import Client from '../../insurance/client/client.model';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
-const Model = conn.sequelize.define(
-  'safe_deposit_box',
-  {
-    sdb_id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      unique: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-    },
-    location: {
-      type: DataTypes.STRING,
-    },
-    address: {
-      type: DataTypes.STRING,
-    },
-    status: {
-      type: DataTypes.TINYINT,
-      defaultValue: 1,
-    },
-    created_by: {
-      type: DataTypes.STRING,
-    },
-    created_date: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    modified_by: {
-      type: DataTypes.STRING,
-    },
-    modified_date: {
-      type: DataTypes.DATE,
-    },
-  },
-  {
-    createdAt: false,
-    updatedAt: false,
-    freezeTableName: true,
-  }
-);
+export class SafeDepositBox extends Model {
+  public sdb_id!: string;
+  public name!: string;
+  public location!: string;
+  public address!: string;
+  public status!: number;
+  public created_by!: string;
+  public created_date!: Date;
+  public modified_by!: string;
+  public modified_date!: Date;
+}
 
-Model.beforeCreate(
-  (safe_deposit_box: { sdb_id: string }) => (safe_deposit_box.sdb_id = uuidv4())
-);
+export function initSafeDepositBox(sequelize: Sequelize) {
+  SafeDepositBox.init(
+    {
+      sdb_id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        unique: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+      },
+      location: {
+        type: DataTypes.STRING,
+      },
+      address: {
+        type: DataTypes.STRING,
+      },
+      status: {
+        type: DataTypes.TINYINT,
+        defaultValue: 1,
+      },
+      created_by: {
+        type: DataTypes.STRING,
+      },
+      created_date: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      modified_by: {
+        type: DataTypes.STRING,
+      },
+      modified_date: {
+        type: DataTypes.DATE,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'SafeDepositBox',
+      tableName: 'safe_deposit_box',
+      timestamps: false,
+    }
+  );
 
-export default Model;
+  SafeDepositBox.beforeCreate((safe_deposit_box) => {
+    safe_deposit_box?.setDataValue('sdb_id', uuidv4());
+  });
+  return SafeDepositBox;
+}
+
+export function associateSafeDepositBox() {}
+
+export default SafeDepositBox;

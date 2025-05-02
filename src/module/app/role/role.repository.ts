@@ -3,7 +3,7 @@
 import { Op } from 'sequelize';
 import Model from './role.model';
 
-export default class Respository {
+export default class Repository {
   public list() {
     return Model.findAll({
       where: {
@@ -15,6 +15,9 @@ export default class Respository {
 
   public index(data: any) {
     let query: Object = {
+      where: {
+        status: { [Op.ne]: 9 },
+      },
       order: [['role_id', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
@@ -51,4 +54,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();

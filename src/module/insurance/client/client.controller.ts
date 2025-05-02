@@ -1,7 +1,6 @@
 'use strict';
 
 import moment from 'moment';
-import dotenv from 'dotenv';
 import { Op } from 'sequelize';
 import { variable } from './client.variable';
 import { Request, Response } from 'express';
@@ -9,10 +8,9 @@ import { helper } from '../../../helpers/helper';
 import { repository } from './client.repository';
 import { transformer } from './client.transformer';
 import { response } from '../../../helpers/response';
+import { appConfig } from '../../../config/config.app';
 import { repository as repoRole } from '../../app/role/role.repository';
 import { repository as repoResource } from '../../app/resource/resource.repository';
-
-dotenv.config();
 
 const generateCin = async () => {
   let nextCin: string = moment().locale('id').format('YYMMDD');
@@ -174,7 +172,7 @@ export default class Controller {
             client_id: client?.getDataValue('id') || null,
             role_id: role?.getDataValue('role_id') || null,
             username: username,
-            email: `${pass}@${process.env.BASE_DOMAIN}`,
+            email: `${pass}@${appConfig?.baseDomain}`,
             password: password,
             full_name: name || null,
             date_of_birth: dob || null,
@@ -239,4 +237,5 @@ export default class Controller {
     }
   }
 }
+
 export const client = new Controller();

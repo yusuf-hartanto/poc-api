@@ -5,7 +5,7 @@ import Model from './role.menu.model';
 import Role from '../role/role.model';
 import Menu from '../menu/menu.model';
 
-export default class Respository {
+export default class Repository {
   public list() {
     return Role.findAll({
       where: {
@@ -114,4 +114,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();

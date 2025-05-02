@@ -130,4 +130,5 @@ export default class Controller {
     }
   }
 }
+
 export const paramGlobal = new Controller();

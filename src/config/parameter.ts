@@ -1,0 +1,190 @@
+'use strict';
+
+import dotenv from 'dotenv';
+import parameterStore from '../utils/parameter.store';
+
+dotenv.config();
+
+interface AppConfig {
+  app: string;
+  appEnv: string;
+  port: number;
+  assetType: string;
+  baseDomain: string;
+  baseUrlFe: string;
+  database: DatabaseConfig;
+  jwt: JWTConfig;
+  mail: EmailConfig;
+  telegram: TelegramConfig;
+  aws: AWSConfig;
+}
+
+interface DatabaseConfig {
+  dialect: string;
+  host: string;
+  port: number;
+  database: string;
+  username: string;
+  password: string;
+  debug: boolean;
+}
+
+interface JWTConfig {
+  secret: string;
+  expiresIn: number;
+  secretRefresh: string;
+  expiresInRefresh: number;
+}
+
+interface EmailConfig {
+  service: string;
+  host: string;
+  port: number;
+  user: string;
+  pass: string;
+  sender: string;
+  debug: boolean;
+  secure: string;
+}
+
+interface TelegramConfig {
+  token: string;
+  chatId: string;
+}
+
+interface AWSConfig {
+  region: string;
+  username: string;
+  bucket: string;
+  accessKeyId: string;
+  secretAccessKey: string;
+  prefix: string;
+}
+
+const localInitialize = () => {
+  let dbConfg: DatabaseConfig = {
+    dialect: process.env.DB_DIALECT || 'mysql',
+    host: process.env.DB_HOST || '127.0.0.1',
+    port: +(process.env.DB_PORT || 3306),
+    database: process.env.DB_NAME || 'local',
+    username: process.env.DB_USER || 'username',
+    password: process.env.DB_PASSWORD || '',
+    debug: process.env.DB_DEBUG == 'true',
+  };
+  let jwtConfig: JWTConfig = {
+    secret: process.env.JWT_TOKEN || 'token',
+    expiresIn: +(process.env.JWT_TOKEN_EXPIRED || 3600),
+    secretRefresh: process.env.JWT_REFRESH_TOKEN || 'refresh',
+    expiresInRefresh: +(process.env.JWT_REFRESH_TOKEN_EXPIRED || 3600),
+  };
+  let emailConfig: EmailConfig = {
+    service: process.env.MAIL_SERVICE || 'mail',
+    host: process.env.MAIL_HOST || 'smtp',
+    port: +(process.env.MAIL_PORT || 587),
+    user: process.env.MAIL_USERNAME || 'username',
+    pass: process.env.MAIL_PASSWORD || 'password',
+    sender: process.env.MAIL_SENDER || 'no-reply@mail.com',
+    debug: process.env.MAIL_DEBUG == 'true',
+    secure: process.env.SECURE || '',
+  };
+  let telegramConfig: TelegramConfig = {
+    token: process.env.TOKEN_TELEGRAM || 'token',
+    chatId: process.env.CHAT_ID_TELEGRAM || 'chat_id',
+  };
+  let awsConfig: AWSConfig = {
+    region: process.env.AWS_REGION || 'ap-southeast-3',
+    username: process.env.AWS_USERNAME || 'username',
+    bucket: process.env.AWS_BUCKET_NAME || 'bucket',
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'key_id',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'secret',
+    prefix: process.env.AWS_PARAMETER_STORE_PREFIX || 'prefix',
+  };
+
+  let config: AppConfig = {
+    app: process.env.APP || 'Meta Advisor',
+    appEnv: process.env.APP_ENV || 'development',
+    port: +(process.env.PORT || 5000),
+    assetType: process.env.ASSET_TYPE || 'local',
+    baseDomain: process.env.BASE_DOMAIN || 'localhost',
+    baseUrlFe: process.env.BASE_URL_FE || 'http://localhost:3000',
+    database: dbConfg,
+    jwt: jwtConfig,
+    mail: emailConfig,
+    telegram: telegramConfig,
+    aws: awsConfig,
+  };
+  return config;
+};
+
+const setParameterStore = (data: any) => {
+  let dbConfg: DatabaseConfig = {
+    dialect: data?.DATABASE?.DIALECT || 'mysql',
+    host: data?.DATABASE?.HOST || '127.0.0.1',
+    port: +(data?.DATABASE?.PORT || 3306),
+    database: data?.DATABASE?.NAME || 'local',
+    username: data?.DATABASE?.USER || 'username',
+    password: data?.DATABASE?.PASSWORD || '',
+    debug: data?.DATABASE?.DEBUG == 'true',
+  };
+  let jwtConfig: JWTConfig = {
+    secret: data?.JWT?.TOKEN || 'token',
+    expiresIn: +(data?.JWT?.TOKEN_EXPIRED || 3600),
+    secretRefresh: data?.JWT?.REFRESH_TOKEN || 'refresh',
+    expiresInRefresh: +(data?.JWT?.REFRESH_TOKEN_EXPIRED || 3600),
+  };
+  let emailConfig: EmailConfig = {
+    service: data?.MAIL?.SERVICE || 'mail',
+    host: data?.MAIL?.HOST || 'smtp',
+    port: +(data?.MAIL?.PORT || 587),
+    user: data?.MAIL?.USERNAME || 'username',
+    pass: data?.MAIL?.PASSWORD || 'password',
+    sender: data?.MAIL?.SENDER || 'no-reply@mail.com',
+    debug: data?.MAIL?.DEBUG == 'true',
+    secure: data?.MAIL?.SECURE || '',
+  };
+  let telegramConfig: TelegramConfig = {
+    token: data?.TELEGRAM?.TOKEN || 'token',
+    chatId: data?.TELEGRAM?.CHAT_ID || 'chat_id',
+  };
+  let awsConfig: AWSConfig = {
+    region: data?.AWS?.REGION || 'ap-southeast-3',
+    username: data?.AWS?.USERNAME || 'username',
+    bucket: data?.AWS?.BUCKET_NAME || 'bucket',
+    accessKeyId: data?.AWS?.ACCESS_KEY_ID || 'key_id',
+    secretAccessKey: data?.AWS?.SECRET_ACCESS_KEY || 'secret',
+    prefix: data?.AWS?.PARAMETER_STORE_PREFIX || 'prefix',
+  };
+
+  let config: AppConfig = {
+    app: data?.APP || 'Meta Advisor',
+    appEnv: data?.APP_ENV || 'development',
+    port: +(data?.PORT || 5000),
+    assetType: data?.ASSET_TYPE || 'local',
+    baseDomain: data?.BASE_DOMAIN || 'localhost',
+    baseUrlFe: data?.BASE_URL_FE || 'http://localhost:3000',
+    database: dbConfg,
+    jwt: jwtConfig,
+    mail: emailConfig,
+    telegram: telegramConfig,
+    aws: awsConfig,
+  };
+  return config;
+};
+
+class Config {
+  static async initialize() {
+    const APP_ENV: string = 'development';
+    try {
+      if (APP_ENV === 'development') {
+        return localInitialize();
+      }
+
+      const res = await parameterStore.getObject<AppConfig>('api');
+      console.warn('Retrieve parameter store successfully.');
+      return setParameterStore(res);
+    } catch (err: any) {
+      console.warn('Failed to initialize:', err?.message);
+    }
+  }
+}
+export default Config;

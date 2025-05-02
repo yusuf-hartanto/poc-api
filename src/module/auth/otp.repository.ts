@@ -2,7 +2,7 @@
 
 import Model from './otp.model';
 
-export default class Respository {
+export default class Repository {
   public detail(condition: any) {
     return Model.findOne({
       where: condition,
@@ -27,4 +27,4 @@ export default class Respository {
   }
 }
 
-export const repository = new Respository();
+export const repository = new Repository();
