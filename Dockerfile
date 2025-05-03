@@ -1,8 +1,6 @@
 # Use the official Node.js image to build the application
 FROM node:22-alpine
 
-ENV MAIL_PORT=${MAIL_PORT}
-
 # Set the working directory
 WORKDIR /usr/src/app
 
