@@ -61,9 +61,8 @@ jobs:
           sudo apt install -y gettext
           env
           set -a
-          source <(env)
           set +a
           ls -lrth
           envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
           ls -lrth
-          # cat Dockerfile
+          cat Dockerfile
