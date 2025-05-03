@@ -285,17 +285,34 @@ export default class Helper {
 
   public async updateUsia() {
     try {
-      await sequelize.query(
-        `
+      if (process.env.DB_DIALECT == 'postgres') {
+        await sequelize.query(
+          `
           UPDATE app_resource AS ar
-          JOIN (
-              SELECT resource_id, TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS usia
+          SET usia = subquery.usia
+          FROM (
+              SELECT resource_id, DATE_PART('year', AGE(CURRENT_DATE, date_of_birth)) AS usia
               FROM app_resource
-          ) AS subquery ON ar.resource_id = subquery.resource_id
-          SET ar.usia = subquery.usia;
-        `,
-        { type: QueryTypes.SELECT }
-      );
+          ) AS subquery
+          WHERE ar.resource_id = subquery.resource_id;
+          `,
+          { type: QueryTypes.SELECT }
+        );
+      }
+      if (process.env.DB_DIALECT == 'mysql') {
+        await sequelize.query(
+          `
+            UPDATE app_resource AS ar
+            JOIN (
+                SELECT resource_id, TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS usia
+
+                FROM app_resource
+            ) AS subquery ON ar.resource_id = subquery.resource_id
+            SET ar.usia = subquery.usia;
+          `,
+          { type: QueryTypes.SELECT }
+        );
+      }
       await this.sendNotif('success update usia');
     } catch (err: any) {
       await this.sendNotif(`failed update usia: ${err?.message}`);
@@ -304,17 +321,33 @@ export default class Helper {
 
   public async updateClientAge() {
     try {
-      await sequelize.query(
-        `
-          UPDATE client AS cl
-          JOIN (
-              SELECT id, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age
-              FROM client
-          ) AS subquery ON cl.id = subquery.id
-          SET cl.age = subquery.age;
-        `,
-        { type: QueryTypes.SELECT }
-      );
+      if (process.env.DB_DIALECT == 'postgres') {
+        await sequelize.query(
+          `
+            UPDATE client AS cl
+            SET age = subquery.age
+            FROM (
+                SELECT id, DATE_PART('year', AGE(CURRENT_DATE, dob)) AS age
+                FROM client
+            ) AS subquery
+            WHERE cl.id = subquery.id;
+          `,
+          { type: QueryTypes.SELECT }
+        );
+      }
+      if (process.env.DB_DIALECT == 'mysql') {
+        await sequelize.query(
+          `
+            UPDATE client AS cl
+            JOIN (
+                SELECT id, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age
+                FROM client
+            ) AS subquery ON cl.id = subquery.id
+            SET cl.age = subquery.age;
+          `,
+          { type: QueryTypes.SELECT }
+        );
+      }
       await this.sendNotif('success update usia client');
     } catch (err: any) {
       await this.sendNotif(`failed update usia client: ${err?.message}`);
