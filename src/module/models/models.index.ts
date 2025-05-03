@@ -9,27 +9,25 @@ import { initCurrency } from '../currency/currency.model';
 import { initRecord } from '../insurance/record/record.model';
 import { initClient } from '../insurance/client/client.model';
 import { initSurveyFormAnswer } from '../survey/form.answer.model';
-import { initPolicyDetail } from '../insurance/policy/policy.model';
 import { initCash, associateCash } from '../portfolio/cash/cash.model';
 import { initAppRole, associateAppRole } from '../app/role/role.model';
+import { initParamGlobal } from '../app/param.global/param.global.model';
 import { initForex, associateForex } from '../portfolio/forex/forex.model';
 import { initBonds, associateBonds } from '../portfolio/bonds/bonds.model';
+import { initPolicyDetail } from '../insurance/policy/policy.detail.model';
 import { initSurveyFormAnswerValue } from '../survey/form.answer.value.model';
 import { initStocks, associateStocks } from '../portfolio/stocks/stocks.model';
 import { initAreaRegency, associateAreaRegency } from '../area/regencies.model';
+import { initSafeDepositBox } from '../portfolio/safe.deposit.box/safe.deposit.box.model';
 import {
   initAreaProvince,
   associateAreaProvince,
 } from '../area/provinces.model';
-import {
-  initPolicy,
-  associatePolicy,
-} from '../insurance/policy/policy.detail.model';
+import { initPolicy, associatePolicy } from '../insurance/policy/policy.model';
 import {
   initAppRoleMenu,
   associateAppRoleMenu,
 } from '../app/role.menu/role.menu.model';
-import { initSafeDepositBox } from '../portfolio/safe.deposit.box/safe.deposit.box.model';
 import {
   initAppResourceModel,
   associateAppResource,
@@ -70,7 +68,6 @@ import {
   initVehiclesMachineries,
   associateVehiclesMachineries,
 } from '../portfolio/vehicles.machineries/vehicles.machineries.model';
-import { initParamGlobal } from '../app/param.global/param.global.model';
 import {
   initIntellectualProperties,
   associateIntellectualProperties,

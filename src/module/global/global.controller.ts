@@ -56,14 +56,21 @@ const fetchDataDashboard = async (req: Request) => {
   if (flag && flag != 'false') {
     benefit = flag.split(',');
     if (flag.includes('total_premi')) {
+      let query = '';
+      if (process.env.DB_DIALECT == 'postgres') {
+        query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+      }
+      if (process.env.DB_DIALECT == 'mysql') {
+        query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+      }
       condition = {
         ...condition,
         policy_id: {
           [Op.in]: Sequelize.literal(`(
-            SELECT pc.policy_id
-            FROM insurance_policy pc
-            WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
-            AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+            SELECT "Policy".policy_id
+            FROM insurance_policy AS "Policy"
+            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+            ${query}
           )`),
         },
       };
@@ -477,14 +484,21 @@ export default class Controller {
         };
       }
 
+      let query = '';
+      if (process.env.DB_DIALECT == 'postgres') {
+        query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+      }
+      if (process.env.DB_DIALECT == 'mysql') {
+        query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+      }
       const jatuhTempo = await repoPolicy.list({
         ...condition,
         policy_id: {
           [Op.in]: Sequelize.literal(`(
-            SELECT pc.policy_id
-            FROM insurance_policy pc
-            WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
-            AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+            SELECT "Policy".policy_id
+            FROM insurance_policy AS "Policy"
+            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+            ${process}
           )`),
         },
       });
@@ -523,14 +537,21 @@ export default class Controller {
       if (flag && flag != 'false') {
         benefit = flag.split(',');
         if (flag.includes('total_premi')) {
+          let query = '';
+          if (process.env.DB_DIALECT == 'postgres') {
+            query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+          }
+          if (process.env.DB_DIALECT == 'mysql') {
+            query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+          }
           condition = {
             ...condition,
             policy_id: {
               [Op.in]: Sequelize.literal(`(
-                SELECT pc.policy_id
-                FROM insurance_policy pc
-                WHERE pc.premi_off = 'N' AND pc.payment_term_unit LIKE '%tahun%'
-                AND NOW() <= DATE_ADD(pc.issued_date, INTERVAL pc.payment_term YEAR)
+                SELECT "Policy".policy_id
+                FROM insurance_policy AS "Policy"
+                WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+                ${query}
               )`),
             },
           };
