@@ -61,9 +61,6 @@ jobs:
           sudo apt install -y gettext
           envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
