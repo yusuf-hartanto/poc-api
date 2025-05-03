@@ -45,6 +45,11 @@ jobs:
           paths: |
             /development/metaadvisor-api
 
+      - name: Verify Environment Variables
+        run: |
+          echo "Environment Variables:"
+          printenv
+
       - name: Get Env
         id: get-env
         env:
