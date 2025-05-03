@@ -63,5 +63,5 @@ jobs:
           set -a
           source <(env)
           set +a
-          # envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
-     
+          envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
+          cat Dockerfile
