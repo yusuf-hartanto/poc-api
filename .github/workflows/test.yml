@@ -1,0 +1,67 @@
+name: Build and Deploy to AWS - ECS Development
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  APP_NAME: metaadvisor-api
+  AWS_REGION: ap-southeast-3
+  ECR_REGISTRY: 022499040607.dkr.ecr.ap-southeast-3.amazonaws.com
+  ECR_REPOSITORY: metaadvisor-api
+  ECS_SERVICE: dev-metaadvisor-api
+  ECS_CLUSTER: ecs-metaadvisor-dev
+  ENVIRONMENT: dev
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: aws-ssm-to-env
+        uses: eliasjcjunior/aws-ssm-parameters-action@main
+        with:
+          recursive: true
+          split-env: true
+          upper-case: true
+          with-decryption: true
+          paths: |
+            /development/metaadvisor-api
+
+      - name: Get Env
+        id: get-env
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          echo "IMAGE_TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=`echo ${{ env.ECR_REPOSITORY }}`" >> $GITHUB_ENV
+          echo "ENVIRONMENT=`echo ${{ env.ENVIRONMENT }}`" >> $GITHUB_ENV
+          echo "IMG_REG=`echo ${{ env.ECR_REGISTRY }}`" >> $GITHUB_ENV
+
+      - name: Replace ENV With Value
+        id: replace-env
+        run: |
+          sudo apt install -y gettext
+          env
+          set -a
+          source <(env)
+          set +a
+          # envsubst < Dockerfile > Dockerfile.temp && rm Dockerfile && mv Dockerfile.temp Dockerfile
+     
