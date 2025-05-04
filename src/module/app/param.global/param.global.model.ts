@@ -59,7 +59,7 @@ export function initParamGlobal(sequelize: Sequelize) {
   );
 
   ParamGlobal.beforeCreate((app_param_global) => {
-    app_param_global?.setDataValue('menu_id', uuidv4());
+    app_param_global?.setDataValue('id', uuidv4());
   });
   return ParamGlobal;
 }
