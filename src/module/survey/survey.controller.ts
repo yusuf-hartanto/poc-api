@@ -22,7 +22,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       const event = await transformer.list(rows);
       return response.success(
         'Data event',
@@ -41,7 +42,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const result: Object | any = await repository.detail({ id });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       const event = await transformer.detail(result);
       return response.success('Data event', event, res);
     } catch (err: any) {
@@ -59,10 +60,10 @@ export default class Controller {
         !['administrator', 'agent'].includes(req?.user?.role_name) &&
         req?.user?.client_id != id
       )
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
 
       const result: Object | any = await repoClient.detailSurvey({ id });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       const client = await transformer.detailClient(result);
       return response.success('Data client', client, res);
     } catch (err: any) {
@@ -190,7 +191,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
 
       const data: Object = helper.only(variable.event(), req?.body, true);
       await repository.update({
@@ -256,7 +257,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           is_active: 9,

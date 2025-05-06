@@ -82,7 +82,7 @@ export default class Controller {
       },
       ''
     );
-    if (!result) return response.failed('User not found', 404, res);
+    if (!result) return response.success('User not found', null, res, false);
 
     try {
       const payload = {
@@ -195,7 +195,7 @@ export default class Controller {
 
     try {
       const result = await repository.detail({ confirm_hash }, '');
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
 
       if (result?.getDataValue('status') === 'A')
         return response.failed('Account has been verified', 400, res);
@@ -221,7 +221,7 @@ export default class Controller {
       if (!email) return response.failed('Email is required', 422, res);
 
       const result = await repository.detail({ email }, '');
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
 
       const confirm_hash = await helper.hashIt(email, 6);
       await repository.update({
@@ -260,7 +260,7 @@ export default class Controller {
 
     try {
       const result = await repository.detail({ confirm_hash }, '');
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
 
       let newPassword: any = null;
       const isMatch: boolean = await helper.compareIt(
@@ -291,10 +291,12 @@ export default class Controller {
     try {
       const user = req?.user;
 
-      await repository.update({
-        payload: { token: null, token_expired: null },
-        condition: { resource_id: user?.resource_id },
-      });
+      if (user && user?.id) {
+        await repository.update({
+          payload: { token: null, token_expired: null },
+          condition: { resource_id: user?.id },
+        });
+      }
       return response.success('logout success', null, res);
     } catch (err: any) {
       return helper.catchError(`logout: ${err?.message}`, 500, res);
@@ -310,7 +312,8 @@ export default class Controller {
       if (!otp) return response.failed('Code OTP is required', 422, res);
 
       const check = await repoOtp.detail({ code: otp, status: 0 });
-      if (!check) return response.failed('Data otp not found', 404, res);
+      if (!check)
+        return response.success('Data OTP not found', null, res, false);
 
       if (otp != check?.getDataValue('code'))
         return response.failed('Code OTP incorrect', 400, res);
@@ -333,7 +336,8 @@ export default class Controller {
         { email: check?.getDataValue('email') },
         ''
       );
-      if (!user) return response.failed('Data user not found', 404, res);
+      if (!user)
+        return response.success('Data user not found', null, res, false);
 
       const role = user?.getDataValue('role');
       const payload: Object = {

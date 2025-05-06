@@ -12,7 +12,7 @@ export default class Controller {
       const key: string = req.params.key || '';
 
       const result: Object | any = await repository.detail({ key });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       return response.success('Data currency', result, res);
     } catch (err: any) {
       return helper.catchError(`currency detail: ${err?.message}`, 500, res);

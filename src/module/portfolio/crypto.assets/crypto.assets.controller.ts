@@ -19,7 +19,7 @@ export default class Controller {
 
       const result = await repository.list(condition);
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       const cryptoAssets = await transformer.list(result);
       return response.success('list data crypto assets', cryptoAssets, res);
     } catch (err: any) {
@@ -49,7 +49,8 @@ export default class Controller {
         keyword: keyword,
         condition: condition,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       const cryptoAssets = await transformer.list(rows);
       return response.success(
         'Data crypto assets',
@@ -74,7 +75,7 @@ export default class Controller {
       const result: Object | any = await repository.detail({
         crypto_assets_id: id,
       });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       const cryptoAssets = await transformer.detail(result);
       return response.success('Data crypto assets', cryptoAssets, res);
     } catch (err: any) {
@@ -113,7 +114,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ crypto_assets_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
 
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
@@ -141,7 +142,7 @@ export default class Controller {
 
       const date: string = helper.date();
       const check = await repository.detail({ crypto_assets_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 9,

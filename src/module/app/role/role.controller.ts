@@ -13,7 +13,7 @@ export default class Controller {
     try {
       const result = await repository.list();
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('list data role', result, res);
     } catch (err: any) {
       return helper.catchError(`role all-data: ${err?.message}`, 500, res);
@@ -30,7 +30,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success('Data role', { total: count, values: rows }, res);
     } catch (err: any) {
       return helper.catchError(`role index: ${err?.message}`, 500, res);
@@ -60,7 +61,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ role_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
         payload: { ...data, modified_by: req?.user?.id },
@@ -79,7 +80,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ role_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 9,

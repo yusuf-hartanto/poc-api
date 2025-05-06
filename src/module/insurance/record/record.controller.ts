@@ -17,7 +17,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success(
         'Data record',
         { total: count, values: rows },
@@ -35,7 +36,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const result: Object | any = await repository.detail({ record_id: id });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       return response.success('Data record', result, res);
     } catch (err: any) {
       return helper.catchError(`record detail: ${err?.message}`, 500, res);

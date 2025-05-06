@@ -148,7 +148,7 @@ export default class Middleware {
         },
         ''
       );
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
 
       if (result?.getDataValue('status') === 'A') {
         req.user = result;

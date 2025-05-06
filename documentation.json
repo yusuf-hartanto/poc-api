@@ -127,7 +127,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"yusuf.hartanto\",\r\n    \"password\": \"adminuser\"\r\n}",
+              "raw": "{\r\n    \"username\": \"adminuser\",\r\n    \"password\": \"adminuser\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -765,6 +765,85 @@
               ],
               "cookie": [],
               "body": "{\n    \"status\": true,\n    \"message\": \"success reset password\",\n    \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJpZCI6IjNlMGQ5ZTg2LWNiYWUtNDVlNy1iMzJmLWI3YmNmYTY2NzA3MyIsInVzZXJuYW1lIjoiYWRtaW51c2VyIiwicHJvdmluY2VfaWQiOiIxMmM3ZmU4Zi00ZTE0LTQ2YzctYjM3OS02NjM3OTQ3ODQxNDYiLCJyZWdlbmN5X2lkIjoiMzk4MjdlMmQtZWRmYS00NzQ4LWJkNmMtNjE0YmRiYmY1MDMxIiwiY2xpZW50X2lkIjpudWxsLCJyb2xlX25hbWUiOiJhZG1pbmlzdHJhdG9yIn0=",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/auth/logout",
+              "host": ["{{url}}"],
+              "path": ["auth", "logout"]
+            }
+          },
+          "response": [
+            {
+              "name": "Logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/auth/logout",
+                  "host": ["{{url}}"],
+                  "path": ["auth", "logout"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "54"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"36-1OdQZViB0+3xe6clohjWr5ml3Ro\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 06 May 2025 03:14:54 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"logout success\",\n    \"data\": null\n}"
             }
           ]
         }

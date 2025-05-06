@@ -11,7 +11,7 @@ export default class Controller {
     try {
       const result = await repository.list({});
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('list data safe deposit box', result, res);
     } catch (err: any) {
       return helper.catchError(
@@ -33,7 +33,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success(
         'Data safe deposit box',
         { total: count, values: rows },
@@ -57,7 +58,7 @@ export default class Controller {
       const result: Object | any = await repository.detail({
         sdb_id: id,
       });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       return response.success('Data safe deposit box', result, res);
     } catch (err: any) {
       return helper.catchError(
@@ -95,7 +96,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ sdb_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
 
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
@@ -123,7 +124,7 @@ export default class Controller {
 
       const date: string = helper.date();
       const check = await repository.detail({ sdb_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 9,

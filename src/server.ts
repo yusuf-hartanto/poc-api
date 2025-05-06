@@ -63,11 +63,18 @@ async function bootstrap() {
   app.use(cors(options));
   app.use(routes);
 
-  cron.schedule('1 0 * * *', async () => {
-    await helper.updateUsia();
-    await helper.updateClientAge();
-    await helper.fetchLatestCurrency();
-  });
+  cron.schedule(
+    '1 0 * * *',
+    async () => {
+      await helper.updateUsia();
+      await helper.updateClientAge();
+      await helper.fetchLatestCurrency();
+    },
+    {
+      scheduled: true,
+      timezone: 'Asia/Jakarta',
+    }
+  );
 
   app.listen(dataConfig?.port, () => {
     console.log(`⚡️[server]: Server is running on port: ${dataConfig?.port}`);

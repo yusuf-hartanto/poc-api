@@ -13,7 +13,7 @@ export default class Controller {
     try {
       const result = await repository.list();
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       const roleMenu = transformer.list(result);
       return response.success('list data role', roleMenu, res);
     } catch (err: any) {
@@ -31,7 +31,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       const roleMenu = transformer.list(rows);
       const total: any = count;
       return response.success(

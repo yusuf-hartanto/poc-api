@@ -16,7 +16,7 @@ export default class Controller {
         param_key: req?.query?.param_key || null,
       });
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('list data param global', result, res);
     } catch (err: any) {
       return helper.catchError(`param global list: ${err?.message}`, 500, res);
@@ -33,7 +33,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success(
         'Data param global',
         { total: count, values: rows },
@@ -50,7 +51,7 @@ export default class Controller {
       const result: Object | any = await repository.detail({
         param_key: { [Op.like]: `%${key}%` },
       });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       return response.success('Data param global', result, res);
     } catch (err: any) {
       return helper.catchError(
@@ -88,7 +89,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
         payload: { ...data, modified_by: req?.user?.id },
@@ -111,7 +112,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 9,

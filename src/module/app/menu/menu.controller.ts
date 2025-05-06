@@ -11,7 +11,7 @@ export default class Controller {
     try {
       const result = await repository.list();
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('list data menu', result, res);
     } catch (err: any) {
       return helper.catchError(`menu all-data: ${err?.message}`, 500, res);
@@ -28,7 +28,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success('Data menu', { total: count, values: rows }, res);
     } catch (err: any) {
       return helper.catchError(`menu index: ${err?.message}`, 500, res);
@@ -42,7 +43,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const result: Object | any = await repository.detail({ menu_id: id });
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       return response.success('Data menu', result, res);
     } catch (err: any) {
       return helper.catchError(`menu detail: ${err?.message}`, 500, res);
@@ -82,7 +83,7 @@ export default class Controller {
         return response.failed(`id ${id} is not valid`, 400, res);
 
       const check = await repository.detail({ menu_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
 
       let parent_id: string = req?.body?.parent_id || '';
@@ -112,7 +113,7 @@ export default class Controller {
 
       const date: string = helper.date();
       const check = await repository.detail({ menu_id: id });
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 9,

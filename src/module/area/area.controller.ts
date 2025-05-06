@@ -10,7 +10,7 @@ export default class Controller {
     try {
       const result = await repository.province();
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('Data province', result, res);
     } catch (err: any) {
       return helper.catchError(`province: ${err?.message}`, 500, res);
@@ -27,7 +27,8 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
       });
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       return response.success(
         'Data regency',
         { total: count, values: rows },
@@ -48,7 +49,7 @@ export default class Controller {
         area_province_id: id,
       });
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       return response.success('Data regency', result, res);
     } catch (err: any) {
       return helper.catchError(`regency: ${err?.message}`, 500, res);

@@ -33,7 +33,8 @@ export default class Controller {
         condition,
         admin
       );
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       const users = await transformer.list(rows, false);
       return response.success(
         'Data resource',
@@ -72,7 +73,7 @@ export default class Controller {
         condition['client_id'] = req?.user?.client_id;
 
       const result: Object | any = await repository.detail(condition, admin);
-      if (!result) return response.failed('Data not found', 404, res);
+      if (!result) return response.success('Data not found', null, res, false);
       const getUser: Object = await transformer.detail(result, false);
       return response.success('Data resource', getUser, res);
     } catch (err: any) {
@@ -176,7 +177,7 @@ export default class Controller {
       const admin: string =
         req?.user?.role_name == 'administrator' ? '' : 'administrator';
       const check = await repository.check({ resource_id: id }, admin);
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
 
       let role_id: any = null;
       let province_id: any = null;
@@ -244,7 +245,7 @@ export default class Controller {
       const admin: string =
         req?.user?.role_name == 'administrator' ? '' : 'administrator';
       const check = await repository.detail({ resource_id: id }, admin);
-      if (!check) return response.failed('Data not found', 404, res);
+      if (!check) return response.success('Data not found', null, res, false);
       await repository.update({
         payload: {
           status: 'D',

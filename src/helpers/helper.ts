@@ -19,6 +19,7 @@ import { sequelize } from '../database/connection';
 import { teleConfig } from '../config/config.telegram';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
+import Client from '../module/insurance/client/client.model';
 
 const month: string = moment().format('YYYY-MM');
 
@@ -300,20 +301,22 @@ export default class Helper {
         );
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        await sequelize.query(
+        await Client.sequelize?.query(
           `
-            UPDATE app_resource AS ar
-            JOIN (
-                SELECT resource_id, TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS usia
-
-                FROM app_resource
-            ) AS subquery ON ar.resource_id = subquery.resource_id
-            SET ar.usia = subquery.usia;
-          `,
-          { type: QueryTypes.SELECT }
+          UPDATE app_resource AS ar
+          JOIN (
+              SELECT 
+                  resource_id, 
+                  TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS calculated_age
+              FROM app_resource
+          ) AS subquery ON ar.resource_id = subquery.resource_id
+          SET ar.usia = subquery.calculated_age;
+        `,
+          {
+            type: QueryTypes.UPDATE,
+          }
         );
       }
-      await this.sendNotif('success update usia');
     } catch (err: any) {
       await this.sendNotif(`failed update usia: ${err?.message}`);
     }
@@ -336,19 +339,22 @@ export default class Helper {
         );
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        await sequelize.query(
+        await Client.sequelize?.query(
           `
-            UPDATE client AS cl
-            JOIN (
-                SELECT id, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age
-                FROM client
-            ) AS subquery ON cl.id = subquery.id
-            SET cl.age = subquery.age;
-          `,
-          { type: QueryTypes.SELECT }
+          UPDATE client AS cl
+          JOIN (
+            SELECT 
+              id, 
+              TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS calculated_age
+            FROM client
+          ) AS subquery ON cl.id = subquery.id
+          SET cl.age = subquery.calculated_age;
+        `,
+          {
+            type: QueryTypes.UPDATE,
+          }
         );
       }
-      await this.sendNotif('success update usia client');
     } catch (err: any) {
       await this.sendNotif(`failed update usia client: ${err?.message}`);
     }
@@ -377,7 +383,7 @@ export default class Helper {
   }
 
   public async fetchLatestCurrency(currency: string = 'USD') {
-    let message: string = 'success update currency';
+    let message: string = '';
     try {
       const response = await axios.get(
         `https://api.exchangerate-api.com/v4/latest/${currency}`
@@ -423,7 +429,7 @@ export default class Helper {
     }
 
     try {
-      await this.sendNotif(message);
+      if (message) await this.sendNotif(message);
     } catch (err: any) {
       await this.sendNotif(`failed sendNotif update currency: ${err?.message}`);
     }

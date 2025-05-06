@@ -58,20 +58,25 @@ const fetchDataDashboard = async (req: Request) => {
     if (flag.includes('total_premi')) {
       let query = '';
       if (process.env.DB_DIALECT == 'postgres') {
-        query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+        query = `(
+            SELECT "Policy".policy_id
+            FROM insurance_policy AS "Policy"
+            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+            AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
+          )`;
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+        query = `(
+            SELECT Policy.policy_id
+            FROM insurance_policy AS Policy
+            WHERE Policy.premi_off = 'N' AND Policy.payment_term_unit LIKE '%tahun%'
+            AND NOW() <= DATE_ADD(Policy.issued_date, INTERVAL Policy.payment_term YEAR)
+          )`;
       }
       condition = {
         ...condition,
         policy_id: {
-          [Op.in]: Sequelize.literal(`(
-            SELECT "Policy".policy_id
-            FROM insurance_policy AS "Policy"
-            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
-            ${query}
-          )`),
+          [Op.in]: Sequelize.literal(query),
         },
       };
     }
@@ -402,12 +407,13 @@ export default class Controller {
         const result = await RoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });
-        if (!result) return response.failed('Data not found', 404, res);
+        if (!result)
+          return response.success('Data not found', null, res, false);
         navigation = formatNavigationRole(result);
       } else {
         const result = await RepoMenu.list();
         if (result?.length < 1)
-          return response.failed('Data not found', 404, res);
+          return response.success('Data not found', null, res, false);
         navigation = nestedChildren(result);
       }
 
@@ -486,20 +492,25 @@ export default class Controller {
 
       let query = '';
       if (process.env.DB_DIALECT == 'postgres') {
-        query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+        query = `(
+            SELECT "Policy".policy_id
+            FROM insurance_policy AS "Policy"
+            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+            AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
+          )`;
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+        query = `(
+            SELECT Policy.policy_id
+            FROM insurance_policy AS Policy
+            WHERE Policy.premi_off = 'N' AND Policy.payment_term_unit LIKE '%tahun%'
+            AND NOW() <= DATE_ADD(Policy.issued_date, INTERVAL Policy.payment_term YEAR)
+          )`;
       }
       const jatuhTempo = await repoPolicy.list({
         ...condition,
         policy_id: {
-          [Op.in]: Sequelize.literal(`(
-            SELECT "Policy".policy_id
-            FROM insurance_policy AS "Policy"
-            WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
-            ${process}
-          )`),
+          [Op.in]: Sequelize.literal(query),
         },
       });
 
@@ -539,20 +550,25 @@ export default class Controller {
         if (flag.includes('total_premi')) {
           let query = '';
           if (process.env.DB_DIALECT == 'postgres') {
-            query = `AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)`;
+            query = `(
+                SELECT "Policy".policy_id
+                FROM insurance_policy AS "Policy"
+                WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
+                AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
+              )`;
           }
           if (process.env.DB_DIALECT == 'mysql') {
-            query = `AND NOW() <= DATE_ADD("Policy".issued_date, INTERVAL "Policy".payment_term YEAR)`;
+            query = `(
+                SELECT Policy.policy_id
+                FROM insurance_policy AS Policy
+                WHERE Policy.premi_off = 'N' AND Policy.payment_term_unit LIKE '%tahun%'
+                AND NOW() <= DATE_ADD(Policy.issued_date, INTERVAL Policy.payment_term YEAR)
+              )`;
           }
           condition = {
             ...condition,
             policy_id: {
-              [Op.in]: Sequelize.literal(`(
-                SELECT "Policy".policy_id
-                FROM insurance_policy AS "Policy"
-                WHERE "Policy".premi_off = 'N' AND "Policy".payment_term_unit LIKE '%tahun%'
-                ${query}
-              )`),
+              [Op.in]: Sequelize.literal(query),
             },
           };
         }
@@ -568,7 +584,8 @@ export default class Controller {
         true,
         benefit
       );
-      if (rows?.length < 1) return response.failed('Data not found', 404, res);
+      if (rows?.length < 1)
+        return response.success('Data not found', null, res, false);
       const policy = await transformerPolicy.list(rows);
       return response.success(
         'Data dashboard',
@@ -600,7 +617,7 @@ export default class Controller {
 
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       const policy = await transformerPolicy.list(result);
 
       const { dir, path } = await helper.checkDirExport('excel');
@@ -636,7 +653,7 @@ export default class Controller {
 
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
-        return response.failed('Data not found', 404, res);
+        return response.success('Data not found', null, res, false);
       const policy = await transformerPolicy.list(result);
 
       const { dir, path } = await helper.checkDirExport('pdf');

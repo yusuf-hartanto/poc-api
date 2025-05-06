@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/register', validation.register, controller.register);
 router.post('/verify', controller.verify);
 router.post('/login', auth.checkVerify, controller.login);
-router.post('/logout', auth.checkBearerToken, controller.logout);
+router.post('/logout', auth.checkToken, controller.logout);
 router.post(
   '/refresh-token',
   auth.checkExpiredToken,
