@@ -11,8 +11,6 @@ export class Forex extends Model {
   public broker!: string;
   public account_number!: string;
   public userid!: string;
-  public coin_name!: string;
-  public coin_amount!: number;
   public currency!: string;
   public purchase_value!: number;
   public current_value!: number;
@@ -46,12 +44,6 @@ export function initForex(sequelize: Sequelize) {
       },
       userid: {
         type: DataTypes.STRING,
-      },
-      coin_name: {
-        type: DataTypes.STRING,
-      },
-      coin_amount: {
-        type: DataTypes.DECIMAL,
       },
       currency: {
         type: DataTypes.STRING,

@@ -1,6 +1,8 @@
 'use strict';
 
 import { v4 as uuidv4 } from 'uuid';
+import SurveyForm from './form.model';
+import SurveyEvent from './event.model';
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export class SurveyFormAnswerValue extends Model {
@@ -76,6 +78,17 @@ export function initSurveyFormAnswerValue(sequelize: Sequelize) {
   return SurveyFormAnswerValue;
 }
 
-export function associateSurveyFormAnswerValue() {}
+export function associateSurveyFormAnswerValue() {
+  SurveyFormAnswerValue.belongsTo(SurveyEvent, {
+    as: 'event',
+    targetKey: 'id',
+    foreignKey: 'event_id',
+  });
+  SurveyFormAnswerValue.belongsTo(SurveyForm, {
+    as: 'form',
+    targetKey: 'question_id',
+    foreignKey: 'form_id',
+  });
+}
 
 export default SurveyFormAnswerValue;

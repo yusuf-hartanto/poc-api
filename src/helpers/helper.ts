@@ -17,9 +17,10 @@ import { appConfig } from '../config/config.app';
 import { mailConfig } from '../config/config.mail';
 import { sequelize } from '../database/connection';
 import { teleConfig } from '../config/config.telegram';
+import Client from '../module/insurance/client/client.model';
+import AppResource from '../module/app/resource/resource.model';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
-import Client from '../module/insurance/client/client.model';
 
 const month: string = moment().format('YYYY-MM');
 
@@ -301,7 +302,7 @@ export default class Helper {
         );
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        await Client.sequelize?.query(
+        await AppResource.sequelize?.query(
           `
           UPDATE app_resource AS ar
           JOIN (

@@ -15,15 +15,18 @@ import { initParamGlobal } from '../app/param.global/param.global.model';
 import { initForex, associateForex } from '../portfolio/forex/forex.model';
 import { initBonds, associateBonds } from '../portfolio/bonds/bonds.model';
 import { initPolicyDetail } from '../insurance/policy/policy.detail.model';
-import { initSurveyFormAnswerValue } from '../survey/form.answer.value.model';
+import { initPolicy, associatePolicy } from '../insurance/policy/policy.model';
 import { initStocks, associateStocks } from '../portfolio/stocks/stocks.model';
 import { initAreaRegency, associateAreaRegency } from '../area/regencies.model';
 import { initSafeDepositBox } from '../portfolio/safe.deposit.box/safe.deposit.box.model';
 import {
+  initSurveyFormAnswerValue,
+  associateSurveyFormAnswerValue,
+} from '../survey/form.answer.value.model';
+import {
   initAreaProvince,
   associateAreaProvince,
 } from '../area/provinces.model';
-import { initPolicy, associatePolicy } from '../insurance/policy/policy.model';
 import {
   initAppRoleMenu,
   associateAppRoleMenu,
@@ -128,5 +131,6 @@ export function initializeModels(sequelize: Sequelize) {
   associateSharesBusiness();
   associateWatchesJeweleries();
   associateVehiclesMachineries();
+  associateSurveyFormAnswerValue();
   associateIntellectualProperties();
 }

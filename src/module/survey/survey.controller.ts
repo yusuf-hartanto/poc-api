@@ -67,7 +67,11 @@ export default class Controller {
       const client = await transformer.detailClient(result);
       return response.success('Data client', client, res);
     } catch (err: any) {
-      return helper.catchError(`client detail: ${err?.message}`, 500, res);
+      return helper.catchError(
+        `survey client detail: ${err?.message}`,
+        500,
+        res
+      );
     }
   }
 
