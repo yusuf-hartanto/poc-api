@@ -10,7 +10,7 @@ import { transformer } from './collectibles.transformer';
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
-      const clientId: any = req?.query?.client_id;
+      const clientId: any = req?.query?.client;
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
@@ -36,7 +36,7 @@ export default class Controller {
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
-      const clientId: any = req?.query?.client_id;
+      const clientId: any = req?.query?.client;
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
