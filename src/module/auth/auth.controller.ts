@@ -173,7 +173,7 @@ export default class Controller {
         `,
       });
       await helper.sendNotif(
-        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: <b>${username}`
+        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: ${username}`
       );
     } catch (err: any) {
       message = `<br /> error send email: ${err?.message}`;

@@ -190,10 +190,10 @@ export default class Middleware {
         const ability = role_menu?.dataValues?.role_menu.find((rm: any) =>
           req?.originalUrl
             .split('?')[0]
-            .includes(rm?.menu?.menu_name.toLowerCase())
+            .includes(rm?.menu?.module_name.toLowerCase())
         );
 
-        if (!ability && role_name !== 'administrator')
+        if (!ability && role_name != 'administrator')
           return response.failed(`Sorry! You don't have access.`, 400, res);
 
         next();

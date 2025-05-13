@@ -287,8 +287,9 @@ export default class Helper {
 
   public async updateUsia() {
     try {
+      let result: any;
       if (process.env.DB_DIALECT == 'postgres') {
-        await sequelize.query(
+        result = await AppResource.sequelize?.query(
           `
           UPDATE app_resource AS ar
           SET usia = subquery.usia
@@ -302,7 +303,7 @@ export default class Helper {
         );
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        await AppResource.sequelize?.query(
+        result = await AppResource.sequelize?.query(
           `
           UPDATE app_resource AS ar
           JOIN (
@@ -318,6 +319,7 @@ export default class Helper {
           }
         );
       }
+      await this.sendNotif(`success update usia: ${result}`);
     } catch (err: any) {
       await this.sendNotif(`failed update usia: ${err?.message}`);
     }
@@ -325,8 +327,9 @@ export default class Helper {
 
   public async updateClientAge() {
     try {
+      let result: any;
       if (process.env.DB_DIALECT == 'postgres') {
-        await sequelize.query(
+        result = await Client.sequelize?.query(
           `
             UPDATE client AS cl
             SET age = subquery.age
@@ -340,7 +343,7 @@ export default class Helper {
         );
       }
       if (process.env.DB_DIALECT == 'mysql') {
-        await Client.sequelize?.query(
+        result = await Client.sequelize?.query(
           `
           UPDATE client AS cl
           JOIN (
@@ -356,6 +359,7 @@ export default class Helper {
           }
         );
       }
+      await this.sendNotif(`success update usia client: ${result}`);
     } catch (err: any) {
       await this.sendNotif(`failed update usia client: ${err?.message}`);
     }

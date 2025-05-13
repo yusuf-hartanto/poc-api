@@ -148,19 +148,20 @@ export default class Controller {
     }
 
     try {
-      await helper.sendEmail({
-        to: req?.body?.email,
-        subject: `Welcome to ${appConfig?.app}`,
-        content: `
-          <h3>Hi ${req?.body?.full_name},</h3>
-          <p>Congratulation to join as a member, below this link to activation your account:</p>
-          <a href="${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
-          <p>This is your username account: <b>${username}</b></p>
-        `,
-      });
-      await helper.sendNotif(
-        `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: <b>${username}`
-      );
+      // status already A
+      // await helper.sendEmail({
+      //   to: req?.body?.email,
+      //   subject: `Welcome to ${appConfig?.app}`,
+      //   content: `
+      //     <h3>Hi ${req?.body?.full_name},</h3>
+      //     <p>Congratulation to join as a member, below this link to activation your account:</p>
+      //     <a href="${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}" target="_blank">Activation</a>
+      //     <p>This is your username account: <b>${username}</b></p>
+      //   `,
+      // });
+      // await helper.sendNotif(
+      //   `Welcome to ${appConfig?.app}. Hi ${req?.body?.full_name}, Congratulation to join as a member, below this link to activation your account: ${appConfig?.baseUrlFe}/auth/account-verification?confirm_hash=${confirm_hash}. This is your username account: ${username}`
+      // );
     } catch (err: any) {
       message = `<br /> error send email: ${err?.message}`;
     }
