@@ -136,6 +136,7 @@ export default class Repository {
         'age',
         'contact_number',
         'address',
+        'email',
       ],
       where: {
         ...condition,

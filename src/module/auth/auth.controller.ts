@@ -12,6 +12,7 @@ import { variable } from '../app/resource/resource.variable';
 import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
 import { repository as repoRole } from '../app/role/role.repository';
+import { repository as repoClient } from '../insurance/client/client.repository';
 
 moment().locale('id');
 const date: string = helper.date();
@@ -68,21 +69,27 @@ export default class Controller {
         );
 
         // send email agent
-        const client = await repository.detail({
-          agent_id: user?.getDataValue('resource_id'),
-        });
-        if (client && client?.getDataValue('email')) {
-          await helper.sendEmail({
-            to: email,
-            subject: `OTP Email - ${appConfig?.app}`,
-            content: `
-              <h3>Hi ${client?.getDataValue('email')},</h3>
-              <p>Here is your OTP code:</p>
-              <h1>${code}</h1>
-              <p>This code is valid for ${otpExpired} minutes.</p>
-              <p>For security reasons, do not give your OTP code to anyone!</p>
-            `,
+        const clientId = user?.getDataValue('client_id');
+        if (clientId && clientId != undefined) {
+          const client: any = await repoClient.detail({
+            id: clientId,
           });
+          if (client) {
+            const agentEmail = client?.resource?.getDataValue('email');
+            if (agentEmail) {
+              await helper.sendEmail({
+                to: agentEmail,
+                subject: `OTP Email - ${appConfig?.app}`,
+                content: `
+                  <h3>Hi ${user?.getDataValue('full_name')},</h3>
+                  <p>Here is your OTP code:</p>
+                  <h1>${code}</h1>
+                  <p>This code is valid for ${otpExpired} minutes.</p>
+                  <p>For security reasons, do not give your OTP code to anyone!</p>
+                `,
+              });
+            }
+          }
         }
 
         return response.success('Login success', null, res);

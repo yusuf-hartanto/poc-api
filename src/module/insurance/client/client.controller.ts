@@ -201,7 +201,7 @@ export default class Controller {
             client_id: client?.getDataValue('id') || null,
             role_id: role?.getDataValue('role_id') || null,
             username: username,
-            email: `${pass}@${appConfig?.baseDomain}`,
+            email: req?.body?.email || `${pass}@${appConfig?.baseDomain}`,
             password: password,
             full_name: name || null,
             date_of_birth: dob || null,
