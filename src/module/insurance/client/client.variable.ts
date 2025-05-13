@@ -13,6 +13,9 @@ export default class Variable {
       'address',
       'relation_id',
       'relation_name',
+      'relation_name',
+      'flag_client',
+      'agent_id',
     ];
     return field;
   }

@@ -30,14 +30,23 @@ const generateCin = async () => {
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
+      const { role_name } = req?.user;
+
       let condition: any = {};
-      if (!['administrator', 'agent'].includes(req?.user?.role_name))
-        condition = {
-          [Op.or]: [
-            { id: req?.user?.client_id },
-            { relation_id: req?.user?.client_id },
-          ],
-        };
+      if (role_name != 'administrator') {
+        if (role_name == 'agent') {
+          condition = {
+            agent_id: req?.user?.id,
+          };
+        } else {
+          condition = {
+            [Op.or]: [
+              { id: req?.user?.client_id },
+              { relation_id: req?.user?.client_id },
+            ],
+          };
+        }
+      }
 
       const result = await repository.list(condition);
       if (result?.length < 1)
@@ -54,15 +63,23 @@ export default class Controller {
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
+      const { role_name } = req?.user;
 
       let condition: any = {};
-      if (!['administrator', 'agent'].includes(req?.user?.role_name))
-        condition = {
-          [Op.or]: [
-            { id: req?.user?.client_id },
-            { relation_id: req?.user?.client_id },
-          ],
-        };
+      if (role_name != 'administrator') {
+        if (role_name == 'agent') {
+          condition = {
+            agent_id: req?.user?.id,
+          };
+        } else {
+          condition = {
+            [Op.or]: [
+              { id: req?.user?.client_id },
+              { relation_id: req?.user?.client_id },
+            ],
+          };
+        }
+      }
 
       const { count, rows } = await repository.index({
         limit: parseInt(limit),
@@ -90,11 +107,21 @@ export default class Controller {
       const keyword: any = req?.query?.q;
       const option: any = req?.query?.option;
       const relation: any = req?.query?.relation;
+      const flagClient: any = req?.query?.flag_client;
+
+      let agentId: string = '';
+      const { role_name } = req?.user;
+      if (role_name != 'administrator') {
+        agentId = req?.user?.id;
+      }
+
       const { count, rows } = await repository.relation({
         limit: parseInt(limit),
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
         relation: relation,
+        flag_client: flagClient,
+        agent_id: agentId,
       });
       if (rows?.length < 1)
         return response.success('Data not found', null, res, false);

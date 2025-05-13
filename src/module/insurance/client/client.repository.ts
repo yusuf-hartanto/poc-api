@@ -2,6 +2,7 @@
 
 import { Op } from 'sequelize';
 import Model from './client.model';
+import AppResource from '../../app/resource/resource.model';
 
 export default class Repository {
   public list(condition: any) {
@@ -47,20 +48,33 @@ export default class Repository {
   }
 
   public relation(data: any) {
-    let relation = {};
+    let condition = {};
     if (data?.relation && data?.relation != undefined) {
-      relation = {
+      condition = {
         id: data?.relation,
       };
     } else {
-      relation = {
-        relation_id: '00000000-0000-0000-0000-000000000000',
+      if (data?.agent_id && data?.agent_id != undefined) {
+        condition = {
+          ...condition,
+          agent_id: data?.agent_id,
+        };
+      } else {
+        condition = {
+          relation_id: '00000000-0000-0000-0000-000000000000',
+        };
+      }
+    }
+    if (data?.flag_client && data?.flag_client != undefined) {
+      condition = {
+        ...condition,
+        flag_client: data?.flag_client,
       };
     }
 
     let query: Object = {
       where: {
-        ...relation,
+        ...condition,
         status: { [Op.ne]: 9 },
       },
       order: [['created_date', 'DESC']],
@@ -71,7 +85,7 @@ export default class Repository {
       query = {
         ...query,
         where: {
-          ...relation,
+          ...condition,
           status: { [Op.ne]: 9 },
           [Op.or]: [
             { cin: { [Op.like]: `%${data?.keyword}%` } },
@@ -90,6 +104,19 @@ export default class Repository {
         ...condition,
         status: { [Op.ne]: 9 },
       },
+      include: [
+        {
+          model: AppResource,
+          attributes: [
+            'resource_id',
+            'email',
+            'full_name',
+            'telepon',
+            'client_id',
+          ],
+          as: 'resource',
+        },
+      ],
     });
   }
 

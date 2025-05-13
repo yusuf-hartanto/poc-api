@@ -2,6 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import AppResource from '../../app/resource/resource.model';
 
 export class Client extends Model {
   public id!: string;
@@ -65,6 +66,13 @@ export function initClient(sequelize: Sequelize) {
         type: DataTypes.TINYINT,
         defaultValue: 1,
       },
+      flag_client: {
+        type: DataTypes.TINYINT,
+        defaultValue: 0,
+      },
+      agent_id: {
+        type: DataTypes.STRING,
+      },
       created_by: {
         type: DataTypes.STRING,
       },
@@ -93,6 +101,8 @@ export function initClient(sequelize: Sequelize) {
   return Client;
 }
 
-export function associateClient() {}
+export function associateClient() {
+  Client.belongsTo(AppResource, { as: 'resource', foreignKey: 'agent_id' });
+}
 
 export default Client;

@@ -5,6 +5,7 @@ import AppRole from '../role/role.model';
 import AreaProvince from '../../area/provinces.model';
 import AreaRegency from '../../area/regencies.model';
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import Client from '../../insurance/client/client.model';
 
 export class AppResource extends Model {
   public resource_id!: string;
@@ -132,6 +133,7 @@ export function associateAppResource() {
     foreignKey: 'role_id',
   });
   AppResource.belongsTo(AreaRegency, { as: 'regency', foreignKey: 'role_id' });
+  AppResource.hasMany(Client, { as: 'client', foreignKey: 'agent_id' });
 }
 
 export default AppResource;

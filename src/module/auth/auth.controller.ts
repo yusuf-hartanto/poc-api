@@ -15,6 +15,7 @@ import { repository as repoRole } from '../app/role/role.repository';
 
 moment().locale('id');
 const date: string = helper.date();
+const otpExpired: number = 15;
 
 export default class Controller {
   public async login(req: Request, res: Response) {
@@ -27,7 +28,7 @@ export default class Controller {
         const email: string = user?.getDataValue('email');
 
         const code = helper.random(1000, 9999);
-        const expired = helper.dateAdd(3, 'minutes');
+        const expired = helper.dateAdd(otpExpired, 'minutes');
         const check = await repoOtp.detail({ email });
 
         if (check) {
@@ -58,13 +59,31 @@ export default class Controller {
             <h3>Hi ${user?.getDataValue('full_name')},</h3>
             <p>Here is your OTP code:</p>
             <h1>${code}</h1>
-            <p>This code is valid for 3 minutes.</p>
+            <p>This code is valid for ${otpExpired} minutes.</p>
             <p>For security reasons, do not give your OTP code to anyone!</p>
           `,
         });
         await helper.sendNotif(
-          `Hi ${user?.getDataValue('full_name')}, Here is your OTP code: ${code} This code is valid for 3 minutes. For security reasons, do not give your OTP code to anyone!`
+          `Hi ${user?.getDataValue('full_name')}, Here is your OTP code: ${code} This code is valid for ${otpExpired} minutes. For security reasons, do not give your OTP code to anyone!`
         );
+
+        // send email agent
+        const client = await repository.detail({
+          agent_id: user?.getDataValue('resource_id'),
+        });
+        if (client && client?.getDataValue('email')) {
+          await helper.sendEmail({
+            to: email,
+            subject: `OTP Email - ${appConfig?.app}`,
+            content: `
+              <h3>Hi ${client?.getDataValue('email')},</h3>
+              <p>Here is your OTP code:</p>
+              <h1>${code}</h1>
+              <p>This code is valid for ${otpExpired} minutes.</p>
+              <p>For security reasons, do not give your OTP code to anyone!</p>
+            `,
+          });
+        }
 
         return response.success('Login success', null, res);
       } catch (err: any) {
