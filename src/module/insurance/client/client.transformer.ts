@@ -22,31 +22,41 @@ const nestedChild = async (data: any) => {
   return result;
 };
 
-const nestedChildOption = async (result: any, data: any) => {
-  const client = await repository.list({
-    relation_id: data?.id,
-  });
+const nestedChildOption = async (result: any, data: any, flag_client: any) => {
+  let condition: Object = { relation_id: data?.id };
+  if (flag_client && flag_client != undefined) {
+    condition = {
+      ...condition,
+      flag_client: flag_client,
+    };
+  }
+  const client = await repository.list(condition);
 
   if (client && client?.length > 0) {
     for (let i in client) {
       result.push(client[i]?.dataValues);
 
-      await nestedChildOption(result, client[i]?.dataValues);
+      await nestedChildOption(result, client[i]?.dataValues, flag_client);
     }
   }
   return result;
 };
 
-const nestedParentOption = async (result: any, data: any) => {
-  const client = await repository.list({
-    id: data?.relation_id,
-  });
+const nestedParentOption = async (result: any, data: any, flag_client: any) => {
+  let condition: Object = { id: data?.relation_id };
+  if (flag_client && flag_client != undefined) {
+    condition = {
+      ...condition,
+      flag_client: flag_client,
+    };
+  }
+  const client = await repository.list(condition);
 
   if (client && client?.length > 0) {
     for (let i in client) {
       result.push(client[i]?.dataValues);
 
-      await nestedParentOption(result, client[i]?.dataValues);
+      await nestedParentOption(result, client[i]?.dataValues, flag_client);
     }
   }
   return result;
@@ -102,8 +112,12 @@ export default class Transformer {
       if (flag && flag?.option == 1) {
         result.push(data[i]?.dataValues);
 
-        await nestedParentOption(result, data[i]?.dataValues);
-        await nestedChildOption(result, data[i]?.dataValues);
+        await nestedParentOption(
+          result,
+          data[i]?.dataValues,
+          flag?.flag_client
+        );
+        await nestedChildOption(result, data[i]?.dataValues, flag?.flag_client);
       } else {
         const child = await nestedChild(data[i]?.dataValues);
 

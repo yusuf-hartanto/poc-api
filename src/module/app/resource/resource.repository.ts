@@ -14,7 +14,7 @@ export default class Repository {
     });
   }
 
-  public index(data: any, condition: any, admin: string = 'administrator') {
+  public index(data: any, condition: any, conditionRole: Object = {}) {
     let query: Object = {
       where: {
         ...condition,
@@ -51,7 +51,7 @@ export default class Repository {
           as: 'role',
           required: true,
           where: {
-            role_name: { [Op.ne]: admin },
+            ...conditionRole,
           },
         },
         {

@@ -59,10 +59,6 @@ export default class Repository {
           ...condition,
           agent_id: data?.agent_id,
         };
-      } else {
-        condition = {
-          relation_id: '00000000-0000-0000-0000-000000000000',
-        };
       }
     }
     if (data?.flag_client && data?.flag_client != undefined) {

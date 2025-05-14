@@ -107,7 +107,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
       const option: any = req?.query?.option;
       const relation: any = req?.query?.relation;
-      const flagClient: any = req?.query?.flag_client;
+      const flag_client: any = req?.query?.flag_client;
 
       let agentId: string = '';
       const { role_name } = req?.user;
@@ -120,12 +120,16 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
         relation: relation,
-        flag_client: flagClient,
+        flag_client: flag_client,
         agent_id: agentId,
       });
       if (rows?.length < 1)
         return response.success('Data not found', null, res, false);
-      const clients = await transformer.relation(rows, { option, relation });
+      const clients = await transformer.relation(rows, {
+        option,
+        relation,
+        flag_client,
+      });
       return response.success(
         'Data client',
         { total: count, values: clients },

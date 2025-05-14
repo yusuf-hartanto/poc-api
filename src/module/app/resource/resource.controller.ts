@@ -8,21 +8,46 @@ import { repository } from './resource.repository';
 import { response } from '../../../helpers/response';
 import { transformer } from './resource.transformer';
 import { appConfig } from '../../../config/config.app';
+import { repository as repoClient } from '../../insurance/client/client.repository';
 
 const date: string = helper.date();
 
 export default class Controller {
   public async index(req: Request, res: Response) {
     try {
-      const role: string = req?.user?.role_name;
+      const { role_name } = req?.user;
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
-      const admin: string = role == 'administrator' ? '' : 'administrator';
+      const role: any = req?.query?.role;
+
+      let conditionRole: Object = { role_name: { [Op.ne]: '' } };
+      if (role_name != 'administrator') {
+        conditionRole = { role_name: { [Op.ne]: 'administrator' } };
+
+        if (role && role != undefined && !'administrator'.includes(role)) {
+          conditionRole = { role_name: { [Op.like]: `%${role}%` } };
+        }
+      } else if (role && role != undefined) {
+        conditionRole = { role_name: { [Op.like]: `%${role}%` } };
+      }
 
       let condition: any = {};
-      if (!['administrator', 'agent'].includes(role))
+      if (role_name != 'administrator') {
         condition['client_id'] = req?.user?.client_id;
+
+        let clientIds: Array<String> = [];
+        const resClient = await repoClient.list({ agent_id: req?.user?.id });
+        if (resClient) clientIds = resClient.map((c) => c?.dataValues?.id);
+        if (role_name.includes('agent')) {
+          condition = {
+            [Op.or]: [
+              { resource_id: req?.user?.id },
+              { client_id: { [Op.in]: clientIds } },
+            ],
+          };
+        }
+      }
 
       const { count, rows } = await repository.index(
         {
@@ -31,7 +56,7 @@ export default class Controller {
           keyword: keyword,
         },
         condition,
-        admin
+        conditionRole
       );
       if (rows?.length < 1)
         return response.success('Data not found', null, res, false);
