@@ -7,6 +7,7 @@ import { response } from '../../helpers/response';
 import { helperauth } from '../../helpers/auth.helper';
 import { Request, Response, NextFunction } from 'express';
 import { repository } from '../app/resource/resource.repository';
+import { NOT_FOUND, REQUIRED, ROLE_ADMIN } from '../../utils/constant';
 import { repository as repoRoleMenu } from '../app/role.menu/role.menu.repository';
 
 moment().locale('id');
@@ -26,14 +27,13 @@ export default class Middleware {
       const authorization: string = req?.headers['authorization'] || '';
       const token: string = await helperauth.decodeBearerToken(authorization);
       if (token === '')
-        return response.failed('Auth Bearer is required', 422, res);
+        return response.failed(`Auth Bearer ${REQUIRED}`, 422, res);
 
       const auth = helperauth.newDecodeToken(token);
       if (typeof auth == 'string')
         return response.failed('Invalid token', 400, res);
 
-      const admin: string =
-        auth?.role_name == 'administrator' ? '' : 'administrator';
+      const admin: string = auth?.role_name == ROLE_ADMIN ? '' : ROLE_ADMIN;
       const user = await repository.detail({ token }, admin);
       if (!user) return response.failed('Unauthorized', 401, res);
 
@@ -105,7 +105,7 @@ export default class Middleware {
     const authorization: string = req?.headers['authorization'] || '';
     const token: string = helperauth.decodeBearerToken(authorization);
     if (token === '')
-      return response.failed('Auth Bearer is Required', 422, res);
+      return response.failed(`Auth Bearer ${REQUIRED}`, 422, res);
 
     try {
       const user = await repository.detail({ token }, '');
@@ -140,7 +140,7 @@ export default class Middleware {
       const username: string = req?.body?.username;
       const password: string = req?.body?.password;
       if (!username || !password)
-        return response.failed('Username or password is required', 422, res);
+        return response.failed(`Username or password ${REQUIRED}`, 422, res);
 
       const result = await repository.detail(
         {
@@ -148,7 +148,7 @@ export default class Middleware {
         },
         ''
       );
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
 
       if (result?.getDataValue('status') === 'A') {
         req.user = result;
@@ -193,7 +193,7 @@ export default class Middleware {
           return req?.originalUrl.split('?')[0].includes(moduleName);
         });
 
-        if (!ability && role_name != 'administrator')
+        if (!ability && role_name != ROLE_ADMIN)
           return response.failed(`Sorry! You don't have access.`, 400, res);
 
         next();

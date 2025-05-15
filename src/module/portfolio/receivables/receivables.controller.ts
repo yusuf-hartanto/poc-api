@@ -7,6 +7,16 @@ import { response } from '../../../helpers/response';
 import { repository } from './receivables.repository';
 import { appConfig } from '../../../config/config.app';
 import { transformer } from './receivables.transformer';
+import {
+  INVALID,
+  NOT_FOUND,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -50,14 +60,14 @@ export default class Controller {
 
       let condition: any = {};
       if (clientId != undefined) condition = { receivables_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { receivables_holder: req?.user?.client_id };
 
       const result = await repository.list(condition);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const receivables = await transformer.list(result);
-      return response.success('list data receivables', receivables, res);
+      return response.success(SUCCESS_RETRIEVED, receivables, res);
     } catch (err: any) {
       return helper.catchError(
         `receivables all-data: ${err?.message}`,
@@ -76,7 +86,7 @@ export default class Controller {
 
       let condition: any = {};
       if (clientId != undefined) condition = { receivables_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { receivables_holder: req?.user?.client_id };
 
       const { count, rows } = await repository.index({
@@ -86,10 +96,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const receivables = await transformer.list(rows);
       return response.success(
-        'Data receivables',
+        SUCCESS_RETRIEVED,
         { total: count, values: receivables },
         res
       );
@@ -102,14 +112,14 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({
         receivables_id: id,
       });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const receivables = await transformer.detail(result);
-      return response.success('Data receivables', receivables, res);
+      return response.success(SUCCESS_RETRIEVED, receivables, res);
     } catch (err: any) {
       return helper.catchError(`receivables detail: ${err?.message}`, 500, res);
     }
@@ -127,7 +137,7 @@ export default class Controller {
         },
       });
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`receivables create: ${err?.message}`, 500, res);
     }
@@ -137,10 +147,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ receivables_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const docLocation: any = await uploadImages(req);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
@@ -152,7 +162,7 @@ export default class Controller {
         },
         condition: { receivables_id: id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`receivables update: ${err?.message}`, 500, res);
     }
@@ -162,11 +172,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ receivables_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -175,7 +185,7 @@ export default class Controller {
         },
         condition: { receivables_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`receivables delete: ${err?.message}`, 500, res);
     }

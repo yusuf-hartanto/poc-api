@@ -7,15 +7,21 @@ import { response } from '../../../helpers/response';
 import { helper } from '../../../helpers/helper';
 import { repository } from './role.menu.repository';
 import { transformer } from './role.menu.transformer';
+import {
+  NOT_FOUND,
+  REQUIRED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       const result = await repository.list();
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const roleMenu = transformer.list(result);
-      return response.success('list data role', roleMenu, res);
+      return response.success(SUCCESS_RETRIEVED, roleMenu, res);
     } catch (err: any) {
       return helper.catchError(`role menu all-data: ${err?.message}`, 500, res);
     }
@@ -32,11 +38,11 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const roleMenu = transformer.list(rows);
       const total: any = count;
       return response.success(
-        'Data role menu',
+        SUCCESS_RETRIEVED,
         { total: total?.length, values: roleMenu },
         res
       );
@@ -58,7 +64,7 @@ export default class Controller {
       const date: string = helper.date();
       const body: Array<{ role_id: any; menu: Array<Menu> }> = req?.body;
       if (body?.length === 0)
-        return response.failed('request body is required', 422, res);
+        return response.failed(`request body ${REQUIRED}`, 422, res);
 
       let insert: Array<object> = [];
       let role_id: Array<number> = [];
@@ -89,7 +95,7 @@ export default class Controller {
         });
       }
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`role menu create: ${err?.message}`, 500, res);
     }

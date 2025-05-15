@@ -7,6 +7,16 @@ import { variable } from './shares.business.variable';
 import { appConfig } from '../../../config/config.app';
 import { repository } from './shares.business.repository';
 import { transformer } from './shares.business.transformer';
+import {
+  INVALID,
+  NOT_FOUND,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
@@ -51,14 +61,14 @@ export default class Controller {
       let condition: any = {};
       if (clientId != undefined)
         condition = { shares_business_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { shares_business_holder: req?.user?.client_id };
 
       const result = await repository.list(condition);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const sharesBusiness = await transformer.list(result);
-      return response.success('list data shares business', sharesBusiness, res);
+      return response.success(SUCCESS_RETRIEVED, sharesBusiness, res);
     } catch (err: any) {
       return helper.catchError(
         `shares business all-data: ${err?.message}`,
@@ -78,7 +88,7 @@ export default class Controller {
       let condition: any = {};
       if (clientId != undefined)
         condition = { shares_business_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { shares_business_holder: req?.user?.client_id };
 
       const { count, rows } = await repository.index({
@@ -88,10 +98,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const sharesBusiness = await transformer.list(rows);
       return response.success(
-        'Data shares business',
+        SUCCESS_RETRIEVED,
         { total: count, values: sharesBusiness },
         res
       );
@@ -108,14 +118,14 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({
         shares_business_id: id,
       });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const sharesBusiness = await transformer.detail(result);
-      return response.success('Data shares business', sharesBusiness, res);
+      return response.success(SUCCESS_RETRIEVED, sharesBusiness, res);
     } catch (err: any) {
       return helper.catchError(
         `shares business detail: ${err?.message}`,
@@ -137,7 +147,7 @@ export default class Controller {
         },
       });
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `shares business create: ${err?.message}`,
@@ -151,10 +161,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ shares_business_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const docLocation: any = await uploadImages(req);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
@@ -166,7 +176,7 @@ export default class Controller {
         },
         condition: { shares_business_id: id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `shares business update: ${err?.message}`,
@@ -180,11 +190,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ shares_business_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -193,7 +203,7 @@ export default class Controller {
         },
         condition: { shares_business_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `shares business delete: ${err?.message}`,

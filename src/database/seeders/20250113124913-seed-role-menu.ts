@@ -2,6 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import Config from '../../config/parameter';
+import { ROLE_ADMIN } from '../../utils/constant';
 import { initializeDatabase } from '../connection';
 import { Op, QueryInterface, Sequelize } from 'sequelize';
 import Model from '../../module/app/role.menu/role.menu.model';
@@ -21,7 +22,7 @@ export const up: Migration = async () => {
 
   const menus = await repoMenu.list();
   const role = await repoRole.detail({
-    role_name: { [Op.like]: '%administrator%' },
+    role_name: { [Op.like]: `%${ROLE_ADMIN}%` },
   });
   const resource = await repoResource.detail({ username: 'adminuser' }, '');
 

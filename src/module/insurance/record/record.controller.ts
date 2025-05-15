@@ -5,6 +5,13 @@ import { Request, Response } from 'express';
 import { helper } from '../../../helpers/helper';
 import { repository } from './record.repository';
 import { response } from '../../../helpers/response';
+import {
+  ALREADY_EXIST,
+  INVALID,
+  NOT_FOUND,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async index(req: Request, res: Response) {
@@ -18,9 +25,9 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       return response.success(
-        'Data record',
+        SUCCESS_RETRIEVED,
         { total: count, values: rows },
         res
       );
@@ -33,11 +40,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({ record_id: id });
-      if (!result) return response.success('Data not found', null, res, false);
-      return response.success('Data record', result, res);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(`record detail: ${err?.message}`, 500, res);
     }
@@ -48,7 +55,7 @@ export default class Controller {
       const check = await repository.detail({
         record_name: req?.body?.record_name,
       });
-      if (check) return response.failed('Data already exists', 400, res);
+      if (check) return response.failed(ALREADY_EXIST, 400, res);
       const data: Object = helper.only(variable.fillable(), req?.body);
       await repository.create({
         payload: {
@@ -56,7 +63,7 @@ export default class Controller {
           created_by: req?.user?.id,
         },
       });
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`record create: ${err?.message}`, 500, res);
     }

@@ -2,6 +2,7 @@
 
 import dotenv from 'dotenv';
 import parameterStore from '../utils/parameter.store';
+import { APP_NAME, DEVELOPMENT, MYSQL } from '../utils/constant';
 
 dotenv.config();
 
@@ -63,7 +64,7 @@ interface AWSConfig {
 
 const localInitialize = () => {
   let dbConfg: DatabaseConfig = {
-    dialect: process.env.DB_DIALECT || 'mysql',
+    dialect: process.env.DB_DIALECT || MYSQL,
     host: process.env.DB_HOST || '127.0.0.1',
     port: +(process.env.DB_PORT || 3306),
     database: process.env.DB_NAME || 'local',
@@ -101,8 +102,8 @@ const localInitialize = () => {
   };
 
   let config: AppConfig = {
-    app: process.env.APP || 'Meta Advisor',
-    appEnv: process.env.APP_ENV || 'development',
+    app: process.env.APP || APP_NAME,
+    appEnv: process.env.APP_ENV || DEVELOPMENT,
     port: +(process.env.PORT || 5000),
     assetType: process.env.ASSET_TYPE || 'local',
     baseDomain: process.env.BASE_DOMAIN || 'localhost',
@@ -118,7 +119,7 @@ const localInitialize = () => {
 
 const setParameterStore = (data: any) => {
   let dbConfg: DatabaseConfig = {
-    dialect: data?.DATABASE?.DIALECT || 'mysql',
+    dialect: data?.DATABASE?.DIALECT || MYSQL,
     host: data?.DATABASE?.HOST || '127.0.0.1',
     port: +(data?.DATABASE?.PORT || 3306),
     database: data?.DATABASE?.NAME || 'local',
@@ -156,8 +157,8 @@ const setParameterStore = (data: any) => {
   };
 
   let config: AppConfig = {
-    app: data?.APP || 'Meta Advisor',
-    appEnv: data?.APP_ENV || 'development',
+    app: data?.APP || APP_NAME,
+    appEnv: data?.APP_ENV || DEVELOPMENT,
     port: +(data?.PORT || 5000),
     assetType: data?.ASSET_TYPE || 'local',
     baseDomain: data?.BASE_DOMAIN || 'localhost',
@@ -173,9 +174,9 @@ const setParameterStore = (data: any) => {
 
 class Config {
   static async initialize() {
-    const APP_ENV: string = 'development';
+    const APP_ENV: string = DEVELOPMENT;
     try {
-      if (APP_ENV === 'development') {
+      if (APP_ENV === DEVELOPMENT) {
         return localInitialize();
       }
 

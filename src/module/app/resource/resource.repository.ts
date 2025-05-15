@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import Model from './resource.model';
 import AppRole from '../role/role.model';
 import AreaRegency from '../../area/regencies.model';
+import { ROLE_ADMIN } from '../../../utils/constant';
 import AreaProvince from '../../area/provinces.model';
 
 export default class Repository {
@@ -70,7 +71,7 @@ export default class Repository {
     });
   }
 
-  public detail(condition: any, admin: string = 'administrator') {
+  public detail(condition: any, admin: string = ROLE_ADMIN) {
     return Model.findOne({
       where: {
         ...condition,
@@ -102,7 +103,7 @@ export default class Repository {
     });
   }
 
-  public check(condition: any, admin: string = 'administrator') {
+  public check(condition: any, admin: string = ROLE_ADMIN) {
     return Model.findOne({
       where: {
         ...condition,
@@ -135,7 +136,7 @@ export default class Repository {
           as: 'role',
           required: true,
           where: {
-            role_name: 'administrator',
+            role_name: ROLE_ADMIN,
           },
         },
       ],

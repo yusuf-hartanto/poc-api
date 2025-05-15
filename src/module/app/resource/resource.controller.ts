@@ -9,6 +9,18 @@ import { response } from '../../../helpers/response';
 import { transformer } from './resource.transformer';
 import { appConfig } from '../../../config/config.app';
 import { repository as repoClient } from '../../insurance/client/client.repository';
+import {
+  ALREADY_EXIST,
+  INVALID,
+  NOT_FOUND,
+  REQUIRED,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 const date: string = helper.date();
 
@@ -22,10 +34,10 @@ export default class Controller {
       const role: any = req?.query?.role;
 
       let conditionRole: Object = { role_name: { [Op.ne]: '' } };
-      if (role_name != 'administrator') {
-        conditionRole = { role_name: { [Op.ne]: 'administrator' } };
+      if (role_name != ROLE_ADMIN) {
+        conditionRole = { role_name: { [Op.ne]: ROLE_ADMIN } };
 
-        if (role && role != undefined && !'administrator'.includes(role)) {
+        if (role && role != undefined && !ROLE_ADMIN.includes(role)) {
           conditionRole = { role_name: { [Op.like]: `%${role}%` } };
         }
       } else if (role && role != undefined) {
@@ -33,13 +45,13 @@ export default class Controller {
       }
 
       let condition: any = {};
-      if (role_name != 'administrator') {
+      if (role_name != ROLE_ADMIN) {
         condition['client_id'] = req?.user?.client_id;
 
         let clientIds: Array<String> = [];
         const resClient = await repoClient.list({ agent_id: req?.user?.id });
         if (resClient) clientIds = resClient.map((c) => c?.dataValues?.id);
-        if (role_name.includes('agent')) {
+        if (role_name.includes(ROLE_AGENT)) {
           condition = {
             [Op.or]: [
               { resource_id: req?.user?.id },
@@ -59,10 +71,10 @@ export default class Controller {
         conditionRole
       );
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const users = await transformer.list(rows, false);
       return response.success(
-        'Data resource',
+        SUCCESS_RETRIEVED,
         { total: count, values: users },
         res
       );
@@ -89,18 +101,18 @@ export default class Controller {
       const role: string = req?.user?.role_name;
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
-      const admin: string = role == 'administrator' ? '' : 'administrator';
+      const admin: string = role == ROLE_ADMIN ? '' : ROLE_ADMIN;
 
       let condition: any = { resource_id: id };
-      if (!['administrator', 'agent'].includes(role))
+      if (![ROLE_ADMIN, ROLE_AGENT].includes(role))
         condition['client_id'] = req?.user?.client_id;
 
       const result: Object | any = await repository.detail(condition, admin);
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const getUser: Object = await transformer.detail(result, false);
-      return response.success('Data resource', getUser, res);
+      return response.success(SUCCESS_RETRIEVED, getUser, res);
     } catch (err: any) {
       return helper.catchError(`resource detail: ${err?.message}`, 500, res);
     }
@@ -115,9 +127,9 @@ export default class Controller {
       const checkEmail = await repository.check({
         email: { [Op.like]: `%${req?.body?.email}%` },
       });
-      if (checkEmail) return response.failed('Data already exists', 400, res);
+      if (checkEmail) return response.failed(ALREADY_EXIST, 400, res);
       if (!req?.body?.password)
-        return response.failed('Password is required', 422, res);
+        return response.failed(`Password ${REQUIRED}`, 422, res);
 
       if (!username || username == undefined) {
         username = req?.body?.email.split('@')[0];
@@ -167,7 +179,7 @@ export default class Controller {
         },
       });
 
-      message = 'Data success saved';
+      message = SUCCESS_SAVED;
     } catch (err: any) {
       return helper.catchError(`resource create: ${err?.message}`, 500, res);
     }
@@ -198,12 +210,12 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const admin: string =
-        req?.user?.role_name == 'administrator' ? '' : 'administrator';
+        req?.user?.role_name == ROLE_ADMIN ? '' : ROLE_ADMIN;
       const check = await repository.check({ resource_id: id }, admin);
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       let role_id: any = null;
       let province_id: any = null;
@@ -256,7 +268,7 @@ export default class Controller {
         condition: { resource_id: id },
       });
 
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`resource update: ${err?.message}`, 500, res);
     }
@@ -266,12 +278,12 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const admin: string =
-        req?.user?.role_name == 'administrator' ? '' : 'administrator';
+        req?.user?.role_name == ROLE_ADMIN ? '' : ROLE_ADMIN;
       const check = await repository.detail({ resource_id: id }, admin);
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 'D',
@@ -280,7 +292,7 @@ export default class Controller {
         },
         condition: { resource_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`resource delete: ${err?.message}`, 500, res);
     }

@@ -13,6 +13,12 @@ import { repository } from '../app/resource/resource.repository';
 import { transformer } from '../app/resource/resource.transformer';
 import { repository as repoRole } from '../app/role/role.repository';
 import { repository as repoClient } from '../insurance/client/client.repository';
+import {
+  ALREADY_EXIST,
+  NOT_FOUND,
+  REQUIRED,
+  ROLE_CLIENT,
+} from '../../utils/constant';
 
 moment().locale('id');
 const date: string = helper.date();
@@ -108,7 +114,7 @@ export default class Controller {
       },
       ''
     );
-    if (!result) return response.success('User not found', null, res, false);
+    if (!result) return response.success(NOT_FOUND, null, res, false);
 
     try {
       const payload = {
@@ -150,7 +156,7 @@ export default class Controller {
       const checkEmail = await repository.check({
         email: { [Op.like]: `%${req?.body?.email}%` },
       });
-      if (checkEmail) return response.failed('Data already exists', 400, res);
+      if (checkEmail) return response.failed(ALREADY_EXIST, 400, res);
 
       if (!username || username == undefined) {
         username = req?.body?.email.split('@')[0];
@@ -165,7 +171,7 @@ export default class Controller {
       const only: Object = helper.only(variable.fillable(), req?.body);
 
       const role = await repoRole.detail({
-        role_name: { [Op.like]: '%client%' },
+        role_name: { [Op.like]: `%${ROLE_CLIENT}%` },
       });
 
       const { province_id, regency_id } = req?.body;
@@ -212,16 +218,16 @@ export default class Controller {
     const { confirm_hash } = req.query;
     const { password, password_confirmation } = req?.body;
     if (!confirm_hash)
-      return response.failed('confirm hash is required', 422, res);
-    if (!password) return response.failed('password is required', 422, res);
+      return response.failed(`confirm hash ${REQUIRED}`, 422, res);
+    if (!password) return response.failed(`password ${REQUIRED}`, 422, res);
     if (!password_confirmation)
-      return response.failed('password confirmation is required', 422, res);
+      return response.failed(`password confirmation ${REQUIRED}`, 422, res);
     if (password != password_confirmation)
       return response.failed('password confirmation does not match', 400, res);
 
     try {
       const result = await repository.detail({ confirm_hash }, '');
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
 
       if (result?.getDataValue('status') === 'A')
         return response.failed('Account has been verified', 400, res);
@@ -244,10 +250,10 @@ export default class Controller {
   public async forgot(req: Request, res: Response) {
     try {
       const { email } = req?.body;
-      if (!email) return response.failed('Email is required', 422, res);
+      if (!email) return response.failed(`Email ${REQUIRED}`, 422, res);
 
       const result = await repository.detail({ email }, '');
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
 
       const confirm_hash = await helper.hashIt(email, 6);
       await repository.update({
@@ -280,13 +286,13 @@ export default class Controller {
   public async reset(req: Request, res: Response) {
     const { confirm_hash } = req?.query;
     if (!confirm_hash)
-      return response.failed('Confirm hash is required', 422, res);
+      return response.failed(`Confirm hash ${REQUIRED}`, 422, res);
     const { password } = req?.body;
-    if (!password) return response.failed('Password is required', 422, res);
+    if (!password) return response.failed(`Password ${REQUIRED}`, 422, res);
 
     try {
       const result = await repository.detail({ confirm_hash }, '');
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
 
       let newPassword: any = null;
       const isMatch: boolean = await helper.compareIt(
@@ -335,7 +341,7 @@ export default class Controller {
       const date = helper.date();
       const { otp } = req?.body;
 
-      if (!otp) return response.failed('Code OTP is required', 422, res);
+      if (!otp) return response.failed(`Code OTP ${REQUIRED}`, 422, res);
 
       const check = await repoOtp.detail({ code: otp, status: 0 });
       if (!check)
@@ -362,8 +368,7 @@ export default class Controller {
         { email: check?.getDataValue('email') },
         ''
       );
-      if (!user)
-        return response.success('Data user not found', null, res, false);
+      if (!user) return response.success(NOT_FOUND, null, res, false);
 
       const role = user?.getDataValue('role');
       const payload: Object = {

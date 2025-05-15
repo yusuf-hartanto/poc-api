@@ -11,6 +11,17 @@ import { response } from '../../../helpers/response';
 import { appConfig } from '../../../config/config.app';
 import { repository as repoRole } from '../../app/role/role.repository';
 import { repository as repoResource } from '../../app/resource/resource.repository';
+import {
+  INVALID,
+  NOT_FOUND,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  ROLE_CLIENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 const generateCin = async () => {
   let nextCin: string = moment().locale('id').format('YYMMDD');
@@ -33,8 +44,8 @@ export default class Controller {
       const { role_name } = req?.user;
 
       let condition: any = {};
-      if (role_name != 'administrator') {
-        if (role_name == 'agent') {
+      if (role_name != ROLE_ADMIN) {
+        if (role_name == ROLE_AGENT) {
           condition = {
             agent_id: req?.user?.id,
           };
@@ -50,9 +61,9 @@ export default class Controller {
 
       const result = await repository.list(condition);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const clients = await transformer.list(result);
-      return response.success('list data client', clients, res);
+      return response.success(SUCCESS_RETRIEVED, clients, res);
     } catch (err: any) {
       return helper.catchError(`client all-data: ${err?.message}`, 500, res);
     }
@@ -66,8 +77,8 @@ export default class Controller {
       const { role_name } = req?.user;
 
       let condition: any = {};
-      if (role_name != 'administrator') {
-        if (role_name == 'agent') {
+      if (role_name != ROLE_ADMIN) {
+        if (role_name == ROLE_AGENT) {
           condition = {
             agent_id: req?.user?.id,
           };
@@ -88,10 +99,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const clients = await transformer.list(rows);
       return response.success(
-        'Data client',
+        SUCCESS_RETRIEVED,
         { total: count, values: clients },
         res
       );
@@ -111,7 +122,7 @@ export default class Controller {
 
       let agentId: string = '';
       const { role_name } = req?.user;
-      if (role_name != 'administrator') {
+      if (role_name != ROLE_ADMIN) {
         agentId = req?.user?.id;
       }
 
@@ -124,14 +135,14 @@ export default class Controller {
         agent_id: agentId,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const clients = await transformer.relation(rows, {
         option,
         relation,
         flag_client,
       });
       return response.success(
-        'Data client',
+        SUCCESS_RETRIEVED,
         { total: count, values: clients },
         res
       );
@@ -144,12 +155,12 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({ id });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const client = await transformer.detail(result);
-      return response.success('Data client', client, res);
+      return response.success(SUCCESS_RETRIEVED, client, res);
     } catch (err: any) {
       return helper.catchError(`client detail: ${err?.message}`, 500, res);
     }
@@ -194,7 +205,7 @@ export default class Controller {
         if (checkUsername) username = username + helper.random(100, 999);
 
         const role = await repoRole.detail({
-          role_name: { [Op.like]: '%client%' },
+          role_name: { [Op.like]: `%${ROLE_CLIENT}%` },
         });
 
         // create resource
@@ -218,7 +229,7 @@ export default class Controller {
         });
       }
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`client create: ${err?.message}`, 500, res);
     }
@@ -228,10 +239,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
@@ -241,7 +252,7 @@ export default class Controller {
         },
         condition: { id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`client update: ${err?.message}`, 500, res);
     }
@@ -251,11 +262,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -264,7 +275,7 @@ export default class Controller {
         },
         condition: { id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`client delete: ${err?.message}`, 500, res);
     }

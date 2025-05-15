@@ -14,6 +14,21 @@ import { repository as RepoMenu } from '../app/menu/menu.repository';
 import { repository as RoleMenu } from '../app/role.menu/role.menu.repository';
 import { repository as repoPolicy } from '../insurance/policy/policy.repository';
 import { transformer as transformerPolicy } from '../insurance/policy/policy.transformer';
+import {
+  INS_DIJAMIN,
+  INS_PENSIUN,
+  INS_PENYAKIT_KRITIS,
+  INS_RS,
+  INS_TOTAL_PREMI,
+  INS_UP_JIWA,
+  MYSQL,
+  NOT_FOUND,
+  POSTGRES,
+  REQUIRED,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_RETRIEVED,
+} from '../../utils/constant';
 
 const nestedChildren = (
   data: any,
@@ -40,7 +55,7 @@ const fetchDataDashboard = async (req: Request) => {
   const flag: any = req?.query?.flag;
 
   let condition: any = {};
-  if (['administrator', 'agent'].includes(role)) {
+  if ([ROLE_ADMIN, ROLE_AGENT].includes(role)) {
     if (client && client != undefined) {
       condition = {
         policy_holder: client,
@@ -57,7 +72,7 @@ const fetchDataDashboard = async (req: Request) => {
     benefit = flag.split(',');
     if (flag.includes('total_premi')) {
       let query = '';
-      if (process.env.DB_DIALECT == 'postgres') {
+      if (process.env.DB_DIALECT == POSTGRES) {
         query = `(
             SELECT "Policy".policy_id
             FROM insurance_policy AS "Policy"
@@ -65,7 +80,7 @@ const fetchDataDashboard = async (req: Request) => {
             AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
           )`;
       }
-      if (process.env.DB_DIALECT == 'mysql') {
+      if (process.env.DB_DIALECT == MYSQL) {
         query = `(
             SELECT Policy.policy_id
             FROM insurance_policy AS Policy
@@ -102,7 +117,7 @@ const formatBenefit = (data: any) => {
     dijamin: '',
   };
 
-  const upJiwa = data ? data.find((d: any) => d?.benefit == 'up_jiwa') : null;
+  const upJiwa = data ? data.find((d: any) => d?.benefit == INS_UP_JIWA) : null;
   if (upJiwa) {
     if (upJiwa?.start_date && upJiwa?.end_date) {
       result.up_jiwa = `${helper.formatIDR(upJiwa?.cash_value)} (${upJiwa?.start_date} s/d ${upJiwa?.end_date})`;
@@ -115,7 +130,7 @@ const formatBenefit = (data: any) => {
     }
   }
 
-  const RS = data ? data.find((d: any) => d?.benefit == 'rs') : null;
+  const RS = data ? data.find((d: any) => d?.benefit == INS_RS) : null;
   if (RS) {
     if (RS?.start_date && RS?.end_date) {
       result.rs = `${helper.formatIDR(upJiwa?.cash_value)} (${RS?.start_date} s/d ${RS?.end_date})`;
@@ -129,7 +144,7 @@ const formatBenefit = (data: any) => {
   }
 
   const penyakitKritis = data
-    ? data.find((d: any) => d?.benefit == 'penyakit_kritis')
+    ? data.find((d: any) => d?.benefit == INS_PENYAKIT_KRITIS)
     : null;
   if (penyakitKritis) {
     if (penyakitKritis?.start_date && penyakitKritis?.end_date) {
@@ -143,7 +158,9 @@ const formatBenefit = (data: any) => {
     }
   }
 
-  const pensiun = data ? data.find((d: any) => d?.benefit == 'pensiun') : null;
+  const pensiun = data
+    ? data.find((d: any) => d?.benefit == INS_PENSIUN)
+    : null;
   if (pensiun) {
     if (pensiun?.start_date && pensiun?.end_date) {
       result.pensiun = `${helper.formatIDR(upJiwa?.cash_value)} (${pensiun?.start_date} s/d ${pensiun?.end_date})`;
@@ -156,7 +173,9 @@ const formatBenefit = (data: any) => {
     }
   }
 
-  const dijamin = data ? data.find((d: any) => d?.benefit == 'dijamin') : null;
+  const dijamin = data
+    ? data.find((d: any) => d?.benefit == INS_DIJAMIN)
+    : null;
   if (dijamin) {
     if (dijamin?.start_date && dijamin?.end_date) {
       result.dijamin = `${helper.formatIDR(upJiwa?.cash_value)} (${dijamin?.start_date} s/d ${dijamin?.end_date})`;
@@ -407,17 +426,16 @@ export default class Controller {
         const result = await RoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
         });
-        if (!result)
-          return response.success('Data not found', null, res, false);
+        if (!result) return response.success(NOT_FOUND, null, res, false);
         navigation = formatNavigationRole(result);
       } else {
         const result = await RepoMenu.list();
         if (result?.length < 1)
-          return response.success('Data not found', null, res, false);
+          return response.success(NOT_FOUND, null, res, false);
         navigation = nestedChildren(result);
       }
 
-      return response.success('Data navigation', navigation, res);
+      return response.success(SUCCESS_RETRIEVED, navigation, res);
     } catch (err: any) {
       return helper.catchError(`navigation: ${err?.message}`, 500, res);
     }
@@ -426,9 +444,9 @@ export default class Controller {
   public sendmail = async (req: Request, res: Response): Promise<void> => {
     try {
       const { email, subject, content } = req?.body;
-      if (!email) return response.failed('email is required', 422, res);
-      if (!subject) return response.failed('subject is required', 422, res);
-      if (!content) return response.failed('content is required', 422, res);
+      if (!email) return response.failed(`email ${REQUIRED}`, 422, res);
+      if (!subject) return response.failed(`subject ${REQUIRED}`, 422, res);
+      if (!content) return response.failed(`content ${REQUIRED}`, 422, res);
 
       let attachments: Array<Object> = [];
       if (req?.files && req?.files?.attachs) {
@@ -464,7 +482,7 @@ export default class Controller {
   public sendtele = async (req: Request, res: Response): Promise<void> => {
     try {
       const { message } = req?.body;
-      if (!message) return response.failed('message is a required', 422, res);
+      if (!message) return response.failed(`message ${REQUIRED}`, 422, res);
       const tele = await helper.sendNotif(message || '-');
       return response.success('Send telegram success', tele, res);
     } catch (err: any) {
@@ -478,7 +496,7 @@ export default class Controller {
       const role: string = req?.user?.role_name;
 
       let condition: any = {};
-      if (['administrator', 'agent'].includes(role)) {
+      if ([ROLE_ADMIN, ROLE_AGENT].includes(role)) {
         if (client && client != undefined) {
           condition = {
             policy_holder: client,
@@ -491,7 +509,7 @@ export default class Controller {
       }
 
       let query = '';
-      if (process.env.DB_DIALECT == 'postgres') {
+      if (process.env.DB_DIALECT == POSTGRES) {
         query = `(
             SELECT "Policy".policy_id
             FROM insurance_policy AS "Policy"
@@ -499,7 +517,7 @@ export default class Controller {
             AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
           )`;
       }
-      if (process.env.DB_DIALECT == 'mysql') {
+      if (process.env.DB_DIALECT == MYSQL) {
         query = `(
             SELECT Policy.policy_id
             FROM insurance_policy AS Policy
@@ -516,7 +534,7 @@ export default class Controller {
 
       const benefit = await repoPolicy.list(condition);
       const result = await transformer.summary(jatuhTempo, benefit);
-      return response.success('Data summary', result, res);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(`summary: ${err?.message}`, 500, res);
     }
@@ -532,7 +550,7 @@ export default class Controller {
       const flag: any = req?.query?.flag;
 
       let condition: any = {};
-      if (['administrator', 'agent'].includes(role)) {
+      if ([ROLE_ADMIN, ROLE_AGENT].includes(role)) {
         if (client && client != undefined) {
           condition = {
             policy_holder: client,
@@ -547,9 +565,9 @@ export default class Controller {
       let benefit: Array<any> = [];
       if (flag && flag != 'false') {
         benefit = flag.split(',');
-        if (flag.includes('total_premi')) {
+        if (flag.includes(INS_TOTAL_PREMI)) {
           let query = '';
-          if (process.env.DB_DIALECT == 'postgres') {
+          if (process.env.DB_DIALECT == POSTGRES) {
             query = `(
                 SELECT "Policy".policy_id
                 FROM insurance_policy AS "Policy"
@@ -557,7 +575,7 @@ export default class Controller {
                 AND NOW() <= ("Policy".issued_date + ("Policy".payment_term || ' years')::interval)
               )`;
           }
-          if (process.env.DB_DIALECT == 'mysql') {
+          if (process.env.DB_DIALECT == MYSQL) {
             query = `(
                 SELECT Policy.policy_id
                 FROM insurance_policy AS Policy
@@ -585,10 +603,10 @@ export default class Controller {
         benefit
       );
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const policy = await transformerPolicy.list(rows);
       return response.success(
-        'Data dashboard',
+        SUCCESS_RETRIEVED,
         {
           total: count,
           values: policy,
@@ -603,7 +621,7 @@ export default class Controller {
   public async updateCurrency(req: Request, res: Response) {
     try {
       const currency: string = req.params.currency || '';
-      if (!currency) return response.failed('currency is required', 422, res);
+      if (!currency) return response.failed(`currency ${REQUIRED}`, 422, res);
       const result = await helper.fetchLatestCurrency(currency);
       return response.success(result, null, res);
     } catch (err: any) {
@@ -617,7 +635,7 @@ export default class Controller {
 
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const policy = await transformerPolicy.list(result);
 
       const { dir, path } = await helper.checkDirExport('excel');
@@ -653,7 +671,7 @@ export default class Controller {
 
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const policy = await transformerPolicy.list(result);
 
       const { dir, path } = await helper.checkDirExport('pdf');

@@ -8,6 +8,18 @@ import { repository } from './survey.repository';
 import { response } from '../../helpers/response';
 import { transformer } from './survey.transformer';
 import { repository as repoClient } from '../insurance/client/client.repository';
+import {
+  ALREADY_EXIST,
+  INVALID,
+  NOT_FOUND,
+  REQUIRED,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../utils/constant';
 
 const date: string = helper.date();
 
@@ -23,10 +35,10 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const event = await transformer.list(rows);
       return response.success(
-        'Data event',
+        SUCCESS_RETRIEVED,
         { total: count, values: event },
         res
       );
@@ -39,12 +51,12 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({ id });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const event = await transformer.detail(result);
-      return response.success('Data event', event, res);
+      return response.success(SUCCESS_RETRIEVED, event, res);
     } catch (err: any) {
       return helper.catchError(`event detail: ${err?.message}`, 500, res);
     }
@@ -54,18 +66,18 @@ export default class Controller {
     try {
       let id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       if (
-        !['administrator', 'agent'].includes(req?.user?.role_name) &&
+        ![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name) &&
         req?.user?.client_id != id
       )
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
 
       const result: Object | any = await repoClient.detailSurvey({ id });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const client = await transformer.detailClient(result);
-      return response.success('Data client', client, res);
+      return response.success(SUCCESS_RETRIEVED, client, res);
     } catch (err: any) {
       return helper.catchError(
         `survey client detail: ${err?.message}`,
@@ -80,7 +92,7 @@ export default class Controller {
       const check = await repository.detail({
         event: req?.body?.event,
       });
-      if (check) return response.failed('Event already exists', 400, res);
+      if (check) return response.failed(ALREADY_EXIST, 400, res);
       const data: Object = helper.only(variable.event(), req?.body);
       await repository.create({
         payload: { ...data, created_by: req?.user?.id },
@@ -121,7 +133,7 @@ export default class Controller {
         }
       }
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`event create: ${err?.message}`, 500, res);
     }
@@ -175,10 +187,10 @@ export default class Controller {
           }
         }
       } else {
-        return response.failed('answer is a required', 422, res);
+        return response.failed(`answer ${REQUIRED}`, 422, res);
       }
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `event create answer: ${err?.message}`,
@@ -192,10 +204,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const data: Object = helper.only(variable.event(), req?.body, true);
       await repository.update({
@@ -248,7 +260,7 @@ export default class Controller {
           }
         }
       }
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`event update: ${err?.message}`, 500, res);
     }
@@ -258,10 +270,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           is_active: 9,
@@ -270,7 +282,7 @@ export default class Controller {
         },
         condition: { id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`event delete: ${err?.message}`, 500, res);
     }

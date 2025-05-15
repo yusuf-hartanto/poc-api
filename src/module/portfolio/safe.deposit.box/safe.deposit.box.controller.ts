@@ -5,14 +5,22 @@ import { helper } from '../../../helpers/helper';
 import { response } from '../../../helpers/response';
 import { variable } from './safe.deposit.box.variable';
 import { repository } from './safe.deposit.box.repository';
+import {
+  NOT_FOUND,
+  SUCCESS_RETRIEVED,
+  INVALID,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+  SUCCESS_DELETED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       const result = await repository.list({});
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
-      return response.success('list data safe deposit box', result, res);
+        return response.success(NOT_FOUND, null, res, false);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box all-data: ${err?.message}`,
@@ -34,9 +42,9 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       return response.success(
-        'Data safe deposit box',
+        SUCCESS_RETRIEVED,
         { total: count, values: rows },
         res
       );
@@ -53,13 +61,13 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({
         sdb_id: id,
       });
-      if (!result) return response.success('Data not found', null, res, false);
-      return response.success('Data safe deposit box', result, res);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box detail: ${err?.message}`,
@@ -79,7 +87,7 @@ export default class Controller {
         },
       });
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box create: ${err?.message}`,
@@ -93,10 +101,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ sdb_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
@@ -106,7 +114,7 @@ export default class Controller {
         },
         condition: { sdb_id: id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box update: ${err?.message}`,
@@ -120,11 +128,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ sdb_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -133,7 +141,7 @@ export default class Controller {
         },
         condition: { sdb_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box delete: ${err?.message}`,

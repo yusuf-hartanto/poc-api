@@ -6,6 +6,16 @@ import { variable } from './collectibles.variable';
 import { response } from '../../../helpers/response';
 import { repository } from './collectibles.repository';
 import { transformer } from './collectibles.transformer';
+import {
+  INVALID,
+  NOT_FOUND,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -14,14 +24,14 @@ export default class Controller {
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { collectibles_holder: req?.user?.client_id };
 
       const result = await repository.list(condition);
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const collectibles = await transformer.list(result);
-      return response.success('list data collectibles', collectibles, res);
+      return response.success(SUCCESS_RETRIEVED, collectibles, res);
     } catch (err: any) {
       return helper.catchError(
         `collectibles all-data: ${err?.message}`,
@@ -40,7 +50,7 @@ export default class Controller {
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
-      else if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = { collectibles_holder: req?.user?.client_id };
 
       const { count, rows } = await repository.index({
@@ -50,10 +60,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const collectibles = await transformer.list(rows);
       return response.success(
-        'Data collectibles',
+        SUCCESS_RETRIEVED,
         { total: count, values: collectibles },
         res
       );
@@ -66,14 +76,14 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({
         collectibles_id: id,
       });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const collectibles = await transformer.detail(result);
-      return response.success('Data collectibles', collectibles, res);
+      return response.success(SUCCESS_RETRIEVED, collectibles, res);
     } catch (err: any) {
       return helper.catchError(
         `collectibles detail: ${err?.message}`,
@@ -93,7 +103,7 @@ export default class Controller {
         },
       });
 
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `collectibles create: ${err?.message}`,
@@ -107,10 +117,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ collectibles_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const data: Object = helper.only(variable.fillable(), req?.body, true);
       await repository.update({
@@ -120,7 +130,7 @@ export default class Controller {
         },
         condition: { collectibles_id: id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `collectibles update: ${err?.message}`,
@@ -134,11 +144,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ collectibles_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -147,7 +157,7 @@ export default class Controller {
         },
         condition: { collectibles_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(
         `collectibles delete: ${err?.message}`,

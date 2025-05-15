@@ -5,14 +5,23 @@ import { Request, Response } from 'express';
 import { repository } from './menu.repository';
 import { helper } from '../../../helpers/helper';
 import { response } from '../../../helpers/response';
+import {
+  ALREADY_EXIST,
+  INVALID,
+  NOT_FOUND,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
       const result = await repository.list();
       if (result?.length < 1)
-        return response.success('Data not found', null, res, false);
-      return response.success('list data menu', result, res);
+        return response.success(NOT_FOUND, null, res, false);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(`menu all-data: ${err?.message}`, 500, res);
     }
@@ -29,8 +38,12 @@ export default class Controller {
         keyword: keyword,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
-      return response.success('Data menu', { total: count, values: rows }, res);
+        return response.success(NOT_FOUND, null, res, false);
+      return response.success(
+        SUCCESS_RETRIEVED,
+        { total: count, values: rows },
+        res
+      );
     } catch (err: any) {
       return helper.catchError(`menu index: ${err?.message}`, 500, res);
     }
@@ -40,11 +53,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({ menu_id: id });
-      if (!result) return response.success('Data not found', null, res, false);
-      return response.success('Data menu', result, res);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
+      return response.success(SUCCESS_RETRIEVED, result, res);
     } catch (err: any) {
       return helper.catchError(`menu detail: ${err?.message}`, 500, res);
     }
@@ -55,7 +68,7 @@ export default class Controller {
       const check = await repository.detail({
         menu_name: req?.body?.menu_name,
       });
-      if (check) return response.failed('Data already exists', 400, res);
+      if (check) return response.failed(ALREADY_EXIST, 400, res);
       const data: Object = helper.only(variable.fillable(), req?.body);
 
       let parent_id: string = req?.body?.parent_id || '';
@@ -70,7 +83,7 @@ export default class Controller {
           created_by: req?.user?.id,
         },
       });
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`menu create: ${err?.message}`, 500, res);
     }
@@ -80,10 +93,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ menu_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       const data: Object = helper.only(variable.fillable(), req?.body, true);
 
       let parent_id: string = req?.body?.parent_id || '';
@@ -99,7 +112,7 @@ export default class Controller {
         },
         condition: { menu_id: id },
       });
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`menu update: ${err?.message}`, 500, res);
     }
@@ -109,11 +122,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ menu_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -122,7 +135,7 @@ export default class Controller {
         },
         condition: { menu_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`menu delete: ${err?.message}`, 500, res);
     }

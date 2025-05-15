@@ -3,6 +3,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import Config from '../../config/parameter';
 import { helper } from '../../helpers/helper';
+import { ROLE_ADMIN } from '../../utils/constant';
 import { initializeDatabase } from '../connection';
 import { Op, QueryInterface, Sequelize } from 'sequelize';
 import Model from '../../module/app/resource/resource.model';
@@ -21,7 +22,7 @@ export const up: Migration = async () => {
 
   const password = await helper.hashIt('adminuser');
   const role = await repoRole.detail({
-    role_name: { [Op.like]: '%administrator%' },
+    role_name: { [Op.like]: `%${ROLE_ADMIN}%` },
   });
   const province = await repoArea.provinceDetail({
     name: { [Op.like]: '%JAWA BARAT%' },

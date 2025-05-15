@@ -7,6 +7,16 @@ import { helper } from '../../../helpers/helper';
 import { repository } from './policy.repository';
 import { transformer } from './policy.transformer';
 import { response } from '../../../helpers/response';
+import {
+  INVALID,
+  NOT_FOUND,
+  ROLE_ADMIN,
+  ROLE_AGENT,
+  SUCCESS_DELETED,
+  SUCCESS_RETRIEVED,
+  SUCCESS_SAVED,
+  SUCCESS_UPDATED,
+} from '../../../utils/constant';
 
 export default class Controller {
   public async index(req: Request, res: Response) {
@@ -16,7 +26,7 @@ export default class Controller {
       const keyword: any = req?.query?.q;
 
       let condition: any = {};
-      if (!['administrator', 'agent'].includes(req?.user?.role_name))
+      if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
         condition = {
           [Op.or]: [
             { policy_holder: req?.user?.client_id },
@@ -31,10 +41,10 @@ export default class Controller {
         condition: condition,
       });
       if (rows?.length < 1)
-        return response.success('Data not found', null, res, false);
+        return response.success(NOT_FOUND, null, res, false);
       const policy = await transformer.list(rows);
       return response.success(
-        'Data policy',
+        SUCCESS_RETRIEVED,
         {
           total: count,
           values: policy,
@@ -50,12 +60,12 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const result: Object | any = await repository.detail({ policy_id: id });
-      if (!result) return response.success('Data not found', null, res, false);
+      if (!result) return response.success(NOT_FOUND, null, res, false);
       const policy = await transformer.detail(result);
-      return response.success('Data policy', policy, res);
+      return response.success(SUCCESS_RETRIEVED, policy, res);
     } catch (err: any) {
       return helper.catchError(`policy detail: ${err?.message}`, 500, res);
     }
@@ -85,7 +95,7 @@ export default class Controller {
           });
         }
       }
-      return response.success('Data success saved', null, res);
+      return response.success(SUCCESS_SAVED, null, res);
     } catch (err: any) {
       return helper.catchError(`policy create: ${err?.message}`, 500, res);
     }
@@ -95,10 +105,10 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const check = await repository.detail({ policy_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
 
       const data: Object = helper.only(variable.policy(), req?.body, true);
       await repository.update({
@@ -131,7 +141,7 @@ export default class Controller {
           });
         }
       }
-      return response.success('Data success updated', null, res);
+      return response.success(SUCCESS_UPDATED, null, res);
     } catch (err: any) {
       return helper.catchError(`policy update: ${err?.message}`, 500, res);
     }
@@ -141,11 +151,11 @@ export default class Controller {
     try {
       const id: string = req.params.id || '';
       if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} is not valid`, 400, res);
+        return response.failed(`id ${id} ${INVALID}`, 400, res);
 
       const date: string = helper.date();
       const check = await repository.detail({ policy_id: id });
-      if (!check) return response.success('Data not found', null, res, false);
+      if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({
         payload: {
           status: 9,
@@ -154,7 +164,7 @@ export default class Controller {
         },
         condition: { policy_id: id },
       });
-      return response.success('Data success deleted', null, res);
+      return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`policy delete: ${err?.message}`, 500, res);
     }

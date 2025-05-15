@@ -15,9 +15,9 @@ import { s3Service } from '../utils/s3.service';
 import { awsConfig } from '../config/config.aws';
 import { appConfig } from '../config/config.app';
 import { mailConfig } from '../config/config.mail';
-import { sequelize } from '../database/connection';
 import { teleConfig } from '../config/config.telegram';
 import Client from '../module/insurance/client/client.model';
+import { APP_NAME, MYSQL, POSTGRES } from '../utils/constant';
 import AppResource from '../module/app/resource/resource.model';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 import { repository as repoCurr } from '../module/currency/currency.repository';
@@ -224,7 +224,7 @@ export default class Helper {
     let mailOptions: any;
     if (data?.attachments && data?.attachments?.length > 0) {
       mailOptions = {
-        from: `Meta Advisor ${mailConfig?.sender}`,
+        from: `${APP_NAME} ${mailConfig?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -232,7 +232,7 @@ export default class Helper {
       };
     } else {
       mailOptions = {
-        from: `Meta Advisor ${mailConfig?.sender}`,
+        from: `${APP_NAME} ${mailConfig?.sender}`,
         to: data?.to,
         subject: data?.subject,
         html: data?.content,
@@ -269,26 +269,10 @@ export default class Helper {
       .toLowerCase();
   }
 
-  public conditionArea(data: any) {
-    let condition: object = {};
-    if (data?.role_name == 'admin kota') {
-      condition = {
-        area_province_id: data?.province_id,
-        area_regencies_id: data?.regency_id,
-        role_id: { [Op.not]: 1 },
-      };
-    } else if (data?.role_name == 'admin provinsi')
-      condition = {
-        area_province_id: data?.province_id,
-        role_id: { [Op.not]: 1 },
-      };
-    return condition;
-  }
-
   public async updateUsia() {
     try {
       let result: any;
-      if (process.env.DB_DIALECT == 'postgres') {
+      if (process.env.DB_DIALECT == POSTGRES) {
         result = await AppResource.sequelize?.query(
           `
           UPDATE app_resource AS ar
@@ -302,7 +286,7 @@ export default class Helper {
           { type: QueryTypes.SELECT }
         );
       }
-      if (process.env.DB_DIALECT == 'mysql') {
+      if (process.env.DB_DIALECT == MYSQL) {
         result = await AppResource.sequelize?.query(
           `
           UPDATE app_resource AS ar
@@ -328,7 +312,7 @@ export default class Helper {
   public async updateClientAge() {
     try {
       let result: any;
-      if (process.env.DB_DIALECT == 'postgres') {
+      if (process.env.DB_DIALECT == POSTGRES) {
         result = await Client.sequelize?.query(
           `
             UPDATE client AS cl
@@ -342,7 +326,7 @@ export default class Helper {
           { type: QueryTypes.SELECT }
         );
       }
-      if (process.env.DB_DIALECT == 'mysql') {
+      if (process.env.DB_DIALECT == MYSQL) {
         result = await Client.sequelize?.query(
           `
           UPDATE client AS cl
