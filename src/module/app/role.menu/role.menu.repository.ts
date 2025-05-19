@@ -37,7 +37,7 @@ export default class Repository {
       order: [['role_id', 'DESC']],
       offset: data?.offset,
       limit: data?.limit,
-      group: 'app_role.role_id',
+      group: ['role_id'],
       include: [
         {
           model: Model,
