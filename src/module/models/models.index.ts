@@ -18,23 +18,22 @@ import { initClient, associateClient } from '../insurance/client/client.model';
 import { initPolicy, associatePolicy } from '../insurance/policy/policy.model';
 import { initStocks, associateStocks } from '../portfolio/stocks/stocks.model';
 import { initAreaRegency, associateAreaRegency } from '../area/regencies.model';
-import { initSafeDepositBox } from '../portfolio/safe.deposit.box/safe.deposit.box.model';
-import {
-  initSurveyFormAnswerValue,
-  associateSurveyFormAnswerValue,
-} from '../survey/form.answer.value.model';
 import {
   initAreaProvince,
   associateAreaProvince,
 } from '../area/provinces.model';
 import {
+  initAppResourceModel,
+  associateAppResource,
+} from '../app/resource/resource.model';
+import {
   initAppRoleMenu,
   associateAppRoleMenu,
 } from '../app/role.menu/role.menu.model';
 import {
-  initAppResourceModel,
-  associateAppResource,
-} from '../app/resource/resource.model';
+  initSurveyFormAnswerValue,
+  associateSurveyFormAnswerValue,
+} from '../survey/form.answer.value.model';
 import {
   initProperties,
   associateProperties,
@@ -63,6 +62,10 @@ import {
   initSharesBusiness,
   associateSharesBusiness,
 } from '../portfolio/shares.business/shares.business.model';
+import {
+  initSafeDepositBox,
+  associateSafeDepositBox,
+} from '../portfolio/safe.deposit.box/safe.deposit.box.model';
 import {
   initWatchesJeweleries,
   associateWatchesJeweleries,
@@ -130,6 +133,7 @@ export function initializeModels(sequelize: Sequelize) {
   associateCryptoAssets();
   associatePreciousMetal();
   associateSharesBusiness();
+  associateSafeDepositBox();
   associateWatchesJeweleries();
   associateVehiclesMachineries();
   associateSurveyFormAnswerValue();

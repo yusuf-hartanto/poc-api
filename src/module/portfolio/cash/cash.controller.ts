@@ -20,11 +20,12 @@ import {
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
+      const { role_name } = req?.user;
       const clientId: any = req?.query?.client;
 
       let condition: any = {};
       if (clientId != undefined) condition = { cash_holder: clientId };
-      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
         condition = { cash_holder: req?.user?.client_id };
 
       const result = await repository.list(condition);
@@ -39,6 +40,7 @@ export default class Controller {
 
   public async index(req: Request, res: Response) {
     try {
+      const { role_name } = req?.user;
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
@@ -46,7 +48,7 @@ export default class Controller {
 
       let condition: any = {};
       if (clientId != undefined) condition = { cash_holder: clientId };
-      else if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
         condition = { cash_holder: req?.user?.client_id };
 
       const { count, rows } = await repository.index({
@@ -54,6 +56,7 @@ export default class Controller {
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
         condition: condition,
+        role_name: role_name,
       });
       if (rows?.length < 1)
         return response.success(NOT_FOUND, null, res, false);

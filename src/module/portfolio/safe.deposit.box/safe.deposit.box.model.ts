@@ -24,6 +24,9 @@ export function initSafeDepositBox(sequelize: Sequelize) {
         primaryKey: true,
         unique: true,
       },
+      sdb_holder: {
+        type: DataTypes.STRING,
+      },
       name: {
         type: DataTypes.STRING,
       },
@@ -32,6 +35,10 @@ export function initSafeDepositBox(sequelize: Sequelize) {
       },
       address: {
         type: DataTypes.STRING,
+      },
+      flag_sdb: {
+        type: DataTypes.TINYINT,
+        defaultValue: 1,
       },
       status: {
         type: DataTypes.TINYINT,
@@ -65,6 +72,11 @@ export function initSafeDepositBox(sequelize: Sequelize) {
   return SafeDepositBox;
 }
 
-export function associateSafeDepositBox() {}
+export function associateSafeDepositBox() {
+  SafeDepositBox.belongsTo(Client, {
+    as: 'holder',
+    foreignKey: 'sdb_holder',
+  });
+}
 
 export default SafeDepositBox;

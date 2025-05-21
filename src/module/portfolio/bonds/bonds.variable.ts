@@ -6,6 +6,7 @@ export default class Variable {
       'bonds_holder',
       'bonds_name',
       'type',
+      'broker',
       'product_number',
       'issuer_name',
       'issuer_date',

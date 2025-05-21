@@ -2,6 +2,8 @@
 
 import { Op } from 'sequelize';
 import Model from './safe.deposit.box.model';
+import { ROLE_CLIENT } from '../../../utils/constant';
+import Client from '../../insurance/client/client.model';
 
 export default class Repository {
   public list(condition: any) {
@@ -11,10 +13,28 @@ export default class Repository {
         status: { [Op.ne]: 9 },
       },
       order: [['created_date', 'DESC']],
+      include: [
+        {
+          model: Client,
+          attributes: [
+            'id',
+            'cin',
+            'name',
+            'dob',
+            'age',
+            'contact_number',
+            'address',
+            'email',
+          ],
+          as: 'holder',
+          required: false,
+        },
+      ],
     });
   }
 
   public index(data: any) {
+    let requiredClient = false;
     let query: Object = {
       where: {
         ...data?.condition,
@@ -25,6 +45,9 @@ export default class Repository {
       limit: data?.limit,
     };
     if (data?.keyword && data?.keyword != undefined) {
+      if (data?.role_name && data?.role_name != ROLE_CLIENT) {
+        requiredClient = true;
+      }
       query = {
         ...query,
         where: {
@@ -35,14 +58,33 @@ export default class Repository {
             {
               [Op.or]: [
                 { name: { [Op.like]: `%${data?.keyword}%` } },
-                { location: { [Op.like]: `%${data?.keyword}%` } },
+                { '$holder.name$': { [Op.like]: `%${data?.keyword}%` } },
               ],
             },
           ],
         },
       };
     }
-    return Model.findAndCountAll(query);
+    return Model.findAndCountAll({
+      ...query,
+      include: [
+        {
+          model: Client,
+          attributes: [
+            'id',
+            'cin',
+            'name',
+            'dob',
+            'age',
+            'contact_number',
+            'address',
+            'email',
+          ],
+          as: 'holder',
+          required: requiredClient,
+        },
+      ],
+    });
   }
 
   public detail(condition: any) {
@@ -50,6 +92,23 @@ export default class Repository {
       where: {
         ...condition,
         status: { [Op.ne]: 9 },
+        include: [
+          {
+            model: Client,
+            attributes: [
+              'id',
+              'cin',
+              'name',
+              'dob',
+              'age',
+              'contact_number',
+              'address',
+              'email',
+            ],
+            as: 'holder',
+            required: false,
+          },
+        ],
       },
     });
   }

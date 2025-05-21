@@ -60,7 +60,11 @@ export default class Helper {
           data[i] != 'null') ||
         data[i] === 0
       ) {
-        result[i] = data[i];
+        result[i] = data[i]
+          .toString()
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/&amp;/g, '&');
       }
     });
     if (isUpdate) {

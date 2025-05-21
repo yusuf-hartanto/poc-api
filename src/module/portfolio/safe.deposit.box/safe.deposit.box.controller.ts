@@ -12,12 +12,27 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
   SUCCESS_DELETED,
+  ROLE_ADMIN,
+  ROLE_AGENT,
 } from '../../../utils/constant';
 
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
-      const result = await repository.list({});
+      const { role_name } = req?.user;
+      const flagSDB: any = req?.query?.flag_sdb;
+      const clientId: any = req?.query?.client;
+
+      let condition: any = {};
+      if (clientId != undefined) condition = { sdb_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { sdb_holder: req?.user?.client_id };
+
+      if (flagSDB || flagSDB == '0') {
+        condition = { ...condition, flag_sdb: flagSDB };
+      }
+
+      const result = await repository.list(condition);
       if (result?.length < 1)
         return response.success(NOT_FOUND, null, res, false);
       return response.success(SUCCESS_RETRIEVED, result, res);
@@ -32,14 +47,28 @@ export default class Controller {
 
   public async index(req: Request, res: Response) {
     try {
+      const { role_name } = req?.user;
       const limit: any = req?.query?.perPage || 10;
       const offset: any = req?.query?.page || 1;
       const keyword: any = req?.query?.q;
+      const flagSDB: any = req?.query?.flag_sdb;
+      const clientId: any = req?.query?.client;
+
+      let condition: any = {};
+      if (clientId != undefined) condition = { sdb_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { sdb_holder: req?.user?.client_id };
+
+      if (flagSDB || flagSDB == '0') {
+        condition = { ...condition, flag_sdb: flagSDB };
+      }
 
       const { count, rows } = await repository.index({
         limit: parseInt(limit),
         offset: parseInt(limit) * (parseInt(offset) - 1),
         keyword: keyword,
+        condition: condition,
+        role_name: role_name,
       });
       if (rows?.length < 1)
         return response.success(NOT_FOUND, null, res, false);

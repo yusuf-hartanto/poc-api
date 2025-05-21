@@ -41,6 +41,9 @@ export function initBonds(sequelize: Sequelize) {
       type: {
         type: DataTypes.STRING,
       },
+      broker: {
+        type: DataTypes.STRING,
+      },
       product_number: {
         type: DataTypes.STRING,
       },

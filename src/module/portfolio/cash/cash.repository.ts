@@ -3,6 +3,7 @@
 import { Op } from 'sequelize';
 import Model from './cash.model';
 import Client from '../../insurance/client/client.model';
+import { ROLE_CLIENT } from '../../../utils/constant';
 
 export default class Repository {
   public list(condition: any) {
@@ -33,6 +34,7 @@ export default class Repository {
   }
 
   public index(data: any) {
+    let requiredClient = false;
     let query: Object = {
       where: {
         ...data?.condition,
@@ -43,6 +45,9 @@ export default class Repository {
       limit: data?.limit,
     };
     if (data?.keyword && data?.keyword != undefined) {
+      if (data?.role_name && data?.role_name != ROLE_CLIENT) {
+        requiredClient = true;
+      }
       query = {
         ...query,
         where: {
@@ -53,7 +58,7 @@ export default class Repository {
             {
               [Op.or]: [
                 { cash_name: { [Op.like]: `%${data?.keyword}%` } },
-                { product_number: { [Op.like]: `%${data?.keyword}%` } },
+                { '$holder.name$': { [Op.like]: `%${data?.keyword}%` } },
               ],
             },
           ],
@@ -76,7 +81,7 @@ export default class Repository {
             'email',
           ],
           as: 'holder',
-          required: false,
+          required: requiredClient,
         },
       ],
     });
