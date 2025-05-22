@@ -10,7 +10,6 @@ import { transformer } from './survey.transformer';
 import { repository as repoClient } from '../insurance/client/client.repository';
 import {
   ALREADY_EXIST,
-  INVALID,
   NOT_FOUND,
   REQUIRED,
   ROLE_ADMIN,
@@ -26,14 +25,8 @@ const date: string = helper.date();
 export default class Controller {
   public async index(req: Request, res: Response) {
     try {
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
-      const { count, rows } = await repository.index({
-        limit: parseInt(limit),
-        offset: parseInt(limit) * (parseInt(offset) - 1),
-        keyword: keyword,
-      });
+      const query = helper.fetchQueryIndex(req);
+      const { count, rows } = await repository.index(query);
       if (rows?.length < 1)
         return response.success(NOT_FOUND, null, res, false);
       const event = await transformer.list(rows);
@@ -49,10 +42,7 @@ export default class Controller {
 
   public async detail(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const result: Object | any = await repository.detail({ id });
       if (!result) return response.success(NOT_FOUND, null, res, false);
       const event = await transformer.detail(result);
@@ -64,10 +54,7 @@ export default class Controller {
 
   public async clientSurvey(req: Request, res: Response) {
     try {
-      let id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      let id: string = req?.params?.id || '';
       if (
         ![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name) &&
         req?.user?.client_id != id
@@ -202,10 +189,7 @@ export default class Controller {
 
   public async update(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const check = await repository.detail({ id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
 
@@ -268,10 +252,7 @@ export default class Controller {
 
   public async delete(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const check = await repository.detail({ id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
       await repository.update({

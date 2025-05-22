@@ -420,8 +420,7 @@ export default class Controller {
   public async navigation(req: Request, res: Response) {
     try {
       let navigation: any;
-
-      const role_name: string = req?.user?.role_name;
+      const { role_name } = req?.user;
       if (role_name && role_name != undefined) {
         const result = await RoleMenu.detailRole({
           role_name: { [Op.like]: `%${role_name}%` },
@@ -492,11 +491,11 @@ export default class Controller {
 
   public async summary(req: Request, res: Response) {
     try {
-      const client: any = req?.query?.client;
-      const role: string = req?.user?.role_name;
+      const { client } = req?.query;
+      const { role_name } = req?.user;
 
       let condition: any = {};
-      if ([ROLE_ADMIN, ROLE_AGENT].includes(role)) {
+      if ([ROLE_ADMIN, ROLE_AGENT].includes(role_name)) {
         if (client && client != undefined) {
           condition = {
             policy_holder: client,
@@ -542,15 +541,13 @@ export default class Controller {
 
   public async dashboard(req: Request, res: Response) {
     try {
-      const client: any = req?.query?.client;
-      const role: string = req?.user?.role_name;
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
+      const { client } = req?.query;
+      const { role_name } = req?.user;
       const flag: any = req?.query?.flag;
+      const queryReq = helper.fetchQueryIndex(req);
 
       let condition: any = {};
-      if ([ROLE_ADMIN, ROLE_AGENT].includes(role)) {
+      if ([ROLE_ADMIN, ROLE_AGENT].includes(role_name)) {
         if (client && client != undefined) {
           condition = {
             policy_holder: client,
@@ -594,9 +591,7 @@ export default class Controller {
 
       const { count, rows } = await repoPolicy.index(
         {
-          limit: parseInt(limit),
-          offset: parseInt(limit) * (parseInt(offset) - 1),
-          keyword: keyword,
+          ...queryReq,
           condition: condition,
         },
         true,
@@ -620,7 +615,7 @@ export default class Controller {
 
   public async updateCurrency(req: Request, res: Response) {
     try {
-      const currency: string = req.params.currency || '';
+      const currency: string = req?.params?.currency || '';
       if (!currency) return response.failed(`currency ${REQUIRED}`, 422, res);
       const result = await helper.fetchLatestCurrency(currency);
       return response.success(result, null, res);
@@ -632,7 +627,6 @@ export default class Controller {
   public async dashboardExcel(req: Request, res: Response) {
     try {
       const flag: any = req?.query?.flag;
-
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
         return response.success(NOT_FOUND, null, res, false);
@@ -668,7 +662,6 @@ export default class Controller {
   public async dashboardPDF(req: Request, res: Response) {
     try {
       const flag: any = req?.query?.flag;
-
       const result = await fetchDataDashboard(req);
       if (result?.length < 1)
         return response.success(NOT_FOUND, null, res, false);

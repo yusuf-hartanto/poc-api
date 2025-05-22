@@ -12,7 +12,6 @@ import { appConfig } from '../../../config/config.app';
 import { repository as repoRole } from '../../app/role/role.repository';
 import { repository as repoResource } from '../../app/resource/resource.repository';
 import {
-  INVALID,
   NOT_FOUND,
   ROLE_ADMIN,
   ROLE_AGENT,
@@ -71,10 +70,8 @@ export default class Controller {
 
   public async index(req: Request, res: Response) {
     try {
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
       const { role_name } = req?.user;
+      const query = helper.fetchQueryIndex(req);
 
       let condition: any = {};
       if (role_name != ROLE_ADMIN) {
@@ -93,9 +90,7 @@ export default class Controller {
       }
 
       const { count, rows } = await repository.index({
-        limit: parseInt(limit),
-        offset: parseInt(limit) * (parseInt(offset) - 1),
-        keyword: keyword,
+        ...query,
         condition: condition,
       });
       if (rows?.length < 1)
@@ -113,12 +108,8 @@ export default class Controller {
 
   public async relation(req: Request, res: Response) {
     try {
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
-      const option: any = req?.query?.option;
-      const relation: any = req?.query?.relation;
-      const flag_client: any = req?.query?.flag_client;
+      const { option, relation, flag_client } = req?.query;
+      const query = helper.fetchQueryIndex(req);
 
       let agentId: string = '';
       const { role_name } = req?.user;
@@ -127,9 +118,7 @@ export default class Controller {
       }
 
       const { count, rows } = await repository.relation({
-        limit: parseInt(limit),
-        offset: parseInt(limit) * (parseInt(offset) - 1),
-        keyword: keyword,
+        ...query,
         relation: relation,
         flag_client: flag_client,
         agent_id: agentId,
@@ -153,10 +142,7 @@ export default class Controller {
 
   public async detail(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const result: Object | any = await repository.detail({ id });
       if (!result) return response.success(NOT_FOUND, null, res, false);
       const client = await transformer.detail(result);
@@ -237,10 +223,7 @@ export default class Controller {
 
   public async update(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const check = await repository.detail({ id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
 
@@ -260,10 +243,7 @@ export default class Controller {
 
   public async delete(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const date: string = helper.date();
       const check = await repository.detail({ id });
       if (!check) return response.success(NOT_FOUND, null, res, false);

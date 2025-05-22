@@ -7,7 +7,6 @@ import { response } from '../../../helpers/response';
 import { repository } from './collectibles.repository';
 import { transformer } from './collectibles.transformer';
 import {
-  INVALID,
   NOT_FOUND,
   ROLE_ADMIN,
   ROLE_AGENT,
@@ -20,13 +19,13 @@ import {
 export default class Controller {
   public async list(req: Request, res: Response) {
     try {
-      const { role_name } = req?.user;
+      const { role_name, client_id } = req?.user;
       const clientId: any = req?.query?.client;
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
       else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
-        condition = { collectibles_holder: req?.user?.client_id };
+        condition = { collectibles_holder: client_id };
 
       const result = await repository.list(condition);
       if (result?.length < 1)
@@ -44,21 +43,17 @@ export default class Controller {
 
   public async index(req: Request, res: Response) {
     try {
-      const { role_name } = req?.user;
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
+      const { role_name, client_id } = req?.user;
       const clientId: any = req?.query?.client;
+      const query = helper.fetchQueryIndex(req);
 
       let condition: any = {};
       if (clientId != undefined) condition = { collectibles_holder: clientId };
       else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
-        condition = { collectibles_holder: req?.user?.client_id };
+        condition = { collectibles_holder: client_id };
 
       const { count, rows } = await repository.index({
-        limit: parseInt(limit),
-        offset: parseInt(limit) * (parseInt(offset) - 1),
-        keyword: keyword,
+        ...query,
         condition: condition,
         role_name: role_name,
       });
@@ -77,10 +72,7 @@ export default class Controller {
 
   public async detail(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const result: Object | any = await repository.detail({
         collectibles_id: id,
       });
@@ -118,10 +110,7 @@ export default class Controller {
 
   public async update(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const check = await repository.detail({ collectibles_id: id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
 
@@ -145,10 +134,7 @@ export default class Controller {
 
   public async delete(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const date: string = helper.date();
       const check = await repository.detail({ collectibles_id: id });
       if (!check) return response.success(NOT_FOUND, null, res, false);

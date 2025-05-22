@@ -10,8 +10,7 @@ import { NOT_FOUND, SUCCESS_RETRIEVED } from '../../utils/constant';
 export default class Controller {
   public async detail(req: Request, res: Response) {
     try {
-      const key: string = req.params.key || '';
-
+      const key: string = req?.params?.key || '';
       const result: Object | any = await repository.detail({ key });
       if (!result) return response.success(NOT_FOUND, null, res, false);
       return response.success(SUCCESS_RETRIEVED, result, res);

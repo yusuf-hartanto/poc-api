@@ -11,7 +11,6 @@ import { appConfig } from '../../../config/config.app';
 import { repository as repoClient } from '../../insurance/client/client.repository';
 import {
   ALREADY_EXIST,
-  INVALID,
   NOT_FOUND,
   REQUIRED,
   ROLE_ADMIN,
@@ -28,10 +27,8 @@ export default class Controller {
   public async index(req: Request, res: Response) {
     try {
       const { role_name } = req?.user;
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
       const role: any = req?.query?.role;
+      const query = helper.fetchQueryIndex(req);
 
       let conditionRole: Object = { role_name: { [Op.ne]: '' } };
       if (role_name != ROLE_ADMIN) {
@@ -62,11 +59,7 @@ export default class Controller {
       }
 
       const { count, rows } = await repository.index(
-        {
-          limit: parseInt(limit),
-          offset: parseInt(limit) * (parseInt(offset) - 1),
-          keyword: keyword,
-        },
+        query,
         condition,
         conditionRole
       );
@@ -85,7 +78,7 @@ export default class Controller {
 
   public async check(req: Request, res: Response) {
     try {
-      const username: string = req.params.username;
+      const username: string = req?.params?.username;
       const result: Object | any = await repository.detail({
         username: username,
       });
@@ -99,10 +92,7 @@ export default class Controller {
   public async detail(req: Request, res: Response) {
     try {
       const role: string = req?.user?.role_name;
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const admin: string = role == ROLE_ADMIN ? '' : ROLE_ADMIN;
 
       let condition: any = { resource_id: id };
@@ -208,10 +198,7 @@ export default class Controller {
 
   public async update(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const admin: string =
         req?.user?.role_name == ROLE_ADMIN ? '' : ROLE_ADMIN;
       const check = await repository.check({ resource_id: id }, admin);
@@ -276,10 +263,7 @@ export default class Controller {
 
   public async delete(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const admin: string =
         req?.user?.role_name == ROLE_ADMIN ? '' : ROLE_ADMIN;
       const check = await repository.detail({ resource_id: id }, admin);

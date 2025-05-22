@@ -108,12 +108,8 @@ export default class Controller {
   }
 
   public async refresh(req: Request, res: Response) {
-    const result = await repository.detail(
-      {
-        resource_id: req?.user?.id,
-      },
-      ''
-    );
+    const { id } = req?.user;
+    const result = await repository.detail({ resource_id: id }, '');
     if (!result) return response.success(NOT_FOUND, null, res, false);
 
     try {
@@ -322,7 +318,6 @@ export default class Controller {
   public async logout(req: Request, res: Response) {
     try {
       const user = req?.user;
-
       if (user && user?.id) {
         await repository.update({
           payload: { token: null, token_expired: null },

@@ -6,10 +6,10 @@ import axios from 'axios';
 import sharp from 'sharp';
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
-import { Response } from 'express';
 import nodemailer from 'nodemailer';
 import TelegramBot from 'tele-sender';
-import { Op, QueryTypes } from 'sequelize';
+import { QueryTypes } from 'sequelize';
+import { Request, Response } from 'express';
 import { response } from '../helpers/response';
 import { s3Service } from '../utils/s3.service';
 import { awsConfig } from '../config/config.aws';
@@ -435,6 +435,18 @@ export default class Helper {
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return formattedAmount;
+  }
+
+  public fetchQueryIndex(req: Request) {
+    const limit: any = req?.query?.perPage || 10;
+    const offset: any = req?.query?.page || 1;
+    const keyword: any = req?.query?.q;
+
+    return {
+      limit: parseInt(limit),
+      offset: parseInt(limit) * (parseInt(offset) - 1),
+      keyword,
+    };
   }
 }
 

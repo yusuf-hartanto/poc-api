@@ -8,7 +8,6 @@ import { repository } from './policy.repository';
 import { transformer } from './policy.transformer';
 import { response } from '../../../helpers/response';
 import {
-  INVALID,
   NOT_FOUND,
   ROLE_ADMIN,
   ROLE_AGENT,
@@ -21,9 +20,7 @@ import {
 export default class Controller {
   public async index(req: Request, res: Response) {
     try {
-      const limit: any = req?.query?.perPage || 10;
-      const offset: any = req?.query?.page || 1;
-      const keyword: any = req?.query?.q;
+      const query = helper.fetchQueryIndex(req);
 
       let condition: any = {};
       if (![ROLE_ADMIN, ROLE_AGENT].includes(req?.user?.role_name))
@@ -35,9 +32,7 @@ export default class Controller {
         };
 
       const { count, rows } = await repository.index({
-        limit: parseInt(limit),
-        offset: parseInt(limit) * (parseInt(offset) - 1),
-        keyword: keyword,
+        ...query,
         condition: condition,
       });
       if (rows?.length < 1)
@@ -58,10 +53,7 @@ export default class Controller {
 
   public async detail(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const result: Object | any = await repository.detail({ policy_id: id });
       if (!result) return response.success(NOT_FOUND, null, res, false);
       const policy = await transformer.detail(result);
@@ -103,10 +95,7 @@ export default class Controller {
 
   public async update(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const check = await repository.detail({ policy_id: id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
 
@@ -149,10 +138,7 @@ export default class Controller {
 
   public async delete(req: Request, res: Response) {
     try {
-      const id: string = req.params.id || '';
-      if (!helper.isValidUUID(id))
-        return response.failed(`id ${id} ${INVALID}`, 400, res);
-
+      const id: string = req?.params?.id || '';
       const date: string = helper.date();
       const check = await repository.detail({ policy_id: id });
       if (!check) return response.success(NOT_FOUND, null, res, false);
