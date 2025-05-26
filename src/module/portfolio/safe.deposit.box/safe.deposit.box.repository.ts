@@ -92,24 +92,24 @@ export default class Repository {
       where: {
         ...condition,
         status: { [Op.ne]: 9 },
-        include: [
-          {
-            model: Client,
-            attributes: [
-              'id',
-              'cin',
-              'name',
-              'dob',
-              'age',
-              'contact_number',
-              'address',
-              'email',
-            ],
-            as: 'holder',
-            required: false,
-          },
-        ],
       },
+      include: [
+        {
+          model: Client,
+          attributes: [
+            'id',
+            'cin',
+            'name',
+            'dob',
+            'age',
+            'contact_number',
+            'address',
+            'email',
+          ],
+          as: 'holder',
+          required: false,
+        },
+      ],
     });
   }
 
