@@ -8,6 +8,7 @@ import { bonds } from '../portfolio/bonds/bonds.controller';
 import { stocks } from '../portfolio/stocks/stocks.controller';
 import { cryptoassets } from './crypto.assets/crypto.assets.controller';
 import { properties } from '../portfolio/properties/properties.controller';
+import { digitalassets } from './digital.assets/digital.assets.controller';
 import { receivables } from '../portfolio/receivables/receivables.controller';
 import { mutualfunds } from '../portfolio/mutual.funds/mutual.funds.controller';
 import { collectibles } from '../portfolio/collectibles/collectibles.controller';
@@ -573,6 +574,43 @@ router.delete(
   auth.checkBearerToken,
   auth.checkAccess('intellectual-properties'),
   intellectualproperties.delete
+);
+
+router.get(
+  '/digital-assets/all-data',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.list
+);
+router.get(
+  '/digital-assets',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.index
+);
+router.get(
+  '/digital-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.detail
+);
+router.post(
+  '/digital-assets',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.create
+);
+router.put(
+  '/digital-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.update
+);
+router.delete(
+  '/digital-assets/:id',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.delete
 );
 
 export default router;

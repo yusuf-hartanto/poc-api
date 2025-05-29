@@ -4620,7 +4620,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"dob\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"dob\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\",\r\n    \"email\": \"jhon.panjaitan@yopmail.com\",\r\n    \"username\": \"jpanjaitan\",\r\n    \"password\": \"jpanjaitan\",\r\n    \"flag_client\": 1,\r\n    \"agent_id\": \"699dcc45-35d9-4b9a-92f6-504779e28698\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -4717,7 +4717,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"bod\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"Jatihandap, Kab. Bandung, Jawa Barat\"\r\n}",
+                  "raw": "{\r\n    \"name\": \"Jhon Panjaitan\",\r\n    \"krp\": \"3402131513910007\",\r\n    \"dob\": \"1980-01-01\",\r\n    \"age\": 45,\r\n    \"contact_number\": \"0983282672892\",\r\n    \"address\": \"jatihandap, kab. bandung, jawa barat\",\r\n    \"email\": \"jhon.panjaitan@yopmail.com\",\r\n    \"flag_client\": 1,\r\n    \"agent_id\": \"699dcc45-35d9-4b9a-92f6-504779e28698\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8299,15 +8299,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "789"
+                      "value": "917"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"315-5i6CWsUJw4OYFFH8/zFOuBCyu78\""
+                      "value": "W/\"395-LiOO1ZZOgLgPHMuk6Jm2zywT90E\""
                     },
                     {
                       "key": "Date",
-                      "value": "Wed, 23 Apr 2025 07:58:00 GMT"
+                      "value": "Wed, 21 May 2025 07:14:07 GMT"
                     },
                     {
                       "key": "Connection",
@@ -8319,7 +8319,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"list data bonds\",\n    \"data\": [\n        {\n            \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n            \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n            \"bonds_name\": \"SBN\",\n            \"type\": \"Bonds\",\n            \"product_number\": \"PN1234568\",\n            \"issuer_name\": \"SBN Syariah\",\n            \"issuer_date\": \"2025-01-02\",\n            \"maturity_date\": \"2025-01-01\",\n            \"currency\": \"USD\",\n            \"amount\": \"1000.00\",\n            \"interest_rate\": \"1.50\",\n            \"notes\": \"notes\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-04-23T07:57:41.000Z\",\n            \"modified_by\": null,\n            \"modified_date\": null,\n            \"holder\": {\n                \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                \"cin\": \"2502020006\",\n                \"name\": \"Aldi Dewangga\",\n                \"dob\": \"2025-02-02\",\n                \"age\": 0,\n                \"contact_number\": \"\",\n                \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\"\n            },\n            \"currency_rate\": 16855,\n            \"currency_purchase\": 16855000\n        }\n    ]\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": [\n        {\n            \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n            \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n            \"bonds_name\": \"SBN\",\n            \"type\": \"Bonds\",\n            \"broker\": \"Bibit\",\n            \"product_number\": \"PN1234568\",\n            \"issuer_name\": \"SBN Syariah\",\n            \"issuer_date\": \"2025-01-02\",\n            \"maturity_date\": \"2025-01-01\",\n            \"currency\": \"USD\",\n            \"amount\": \"1000.00\",\n            \"interest_rate\": \"1.50\",\n            \"notes\": \"notes\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-04-23T07:57:41.000Z\",\n            \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"modified_date\": \"2025-04-23T08:00:35.000Z\",\n            \"holder\": {\n                \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                \"cin\": \"2502020006\",\n                \"name\": \"Aldi Dewangga\",\n                \"dob\": \"2025-02-02\",\n                \"age\": 0,\n                \"contact_number\": \"\",\n                \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\",\n                \"email\": \"dewangga2458@gmail.com\"\n            },\n            \"currency_rate\": 16552.06,\n            \"currency_total\": 16552060.000000002\n        }\n    ]\n}"
                 }
               ]
             },
@@ -8427,15 +8427,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "805"
+                      "value": "938"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"325-kVhr399N02WEB9qrw2/9ufP5qd4\""
+                      "value": "W/\"3aa-cNRG7g2i256HcBhVoPSvOBNSBb0\""
                     },
                     {
                       "key": "Date",
-                      "value": "Wed, 23 Apr 2025 07:58:37 GMT"
+                      "value": "Wed, 21 May 2025 07:14:20 GMT"
                     },
                     {
                       "key": "Connection",
@@ -8447,7 +8447,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data bonds\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n                \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                \"bonds_name\": \"SBN\",\n                \"type\": \"Bonds\",\n                \"product_number\": \"PN1234568\",\n                \"issuer_name\": \"SBN Syariah\",\n                \"issuer_date\": \"2025-01-02\",\n                \"maturity_date\": \"2025-01-01\",\n                \"currency\": \"USD\",\n                \"amount\": \"1000.00\",\n                \"interest_rate\": \"1.50\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-04-23T07:57:41.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null,\n                \"holder\": {\n                    \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                    \"cin\": \"2502020006\",\n                    \"name\": \"Aldi Dewangga\",\n                    \"dob\": \"2025-02-02\",\n                    \"age\": 0,\n                    \"contact_number\": \"\",\n                    \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\"\n                },\n                \"currency_rate\": 16855,\n                \"currency_purchase\": 16855000\n            }\n        ]\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n                \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                \"bonds_name\": \"SBN\",\n                \"type\": \"Bonds\",\n                \"broker\": \"Bibit\",\n                \"product_number\": \"PN1234568\",\n                \"issuer_name\": \"SBN Syariah\",\n                \"issuer_date\": \"2025-01-02\",\n                \"maturity_date\": \"2025-01-01\",\n                \"currency\": \"USD\",\n                \"amount\": \"1000.00\",\n                \"interest_rate\": \"1.50\",\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-04-23T07:57:41.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-04-23T08:00:35.000Z\",\n                \"holder\": {\n                    \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                    \"cin\": \"2502020006\",\n                    \"name\": \"Aldi Dewangga\",\n                    \"dob\": \"2025-02-02\",\n                    \"age\": 0,\n                    \"contact_number\": \"\",\n                    \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\",\n                    \"email\": \"dewangga2458@gmail.com\"\n                },\n                \"currency_rate\": 16552.06,\n                \"currency_total\": 16552060.000000002\n            }\n        ]\n    }\n}"
                 }
               ]
             },
@@ -8535,15 +8535,15 @@
                     },
                     {
                       "key": "Content-Length",
-                      "value": "782"
+                      "value": "915"
                     },
                     {
                       "key": "ETag",
-                      "value": "W/\"30e-ZgezUBlNwH6BZpLJketGagXd22E\""
+                      "value": "W/\"393-TSjEgGdSdugV+x2qtiaXdWRRceM\""
                     },
                     {
                       "key": "Date",
-                      "value": "Wed, 23 Apr 2025 07:59:00 GMT"
+                      "value": "Wed, 21 May 2025 07:14:30 GMT"
                     },
                     {
                       "key": "Connection",
@@ -8555,7 +8555,7 @@
                     }
                   ],
                   "cookie": [],
-                  "body": "{\n    \"status\": true,\n    \"message\": \"Data bonds\",\n    \"data\": {\n        \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n        \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n        \"bonds_name\": \"SBN\",\n        \"type\": \"Bonds\",\n        \"product_number\": \"PN1234568\",\n        \"issuer_name\": \"SBN Syariah\",\n        \"issuer_date\": \"2025-01-02\",\n        \"maturity_date\": \"2025-01-01\",\n        \"currency\": \"USD\",\n        \"amount\": \"1000.00\",\n        \"interest_rate\": \"1.50\",\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-04-23T07:57:41.000Z\",\n        \"modified_by\": null,\n        \"modified_date\": null,\n        \"holder\": {\n            \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n            \"cin\": \"2502020006\",\n            \"name\": \"Aldi Dewangga\",\n            \"dob\": \"2025-02-02\",\n            \"age\": 0,\n            \"contact_number\": \"\",\n            \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\"\n        },\n        \"currency_rate\": 16855,\n        \"currency_purchase\": 16855000\n    }\n}"
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": {\n        \"bonds_id\": \"b11658ac-d176-46ff-b024-9d50c3d801ef\",\n        \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n        \"bonds_name\": \"SBN\",\n        \"type\": \"Bonds\",\n        \"broker\": \"Bibit\",\n        \"product_number\": \"PN1234568\",\n        \"issuer_name\": \"SBN Syariah\",\n        \"issuer_date\": \"2025-01-02\",\n        \"maturity_date\": \"2025-01-01\",\n        \"currency\": \"USD\",\n        \"amount\": \"1000.00\",\n        \"interest_rate\": \"1.50\",\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-04-23T07:57:41.000Z\",\n        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"modified_date\": \"2025-04-23T08:00:35.000Z\",\n        \"holder\": {\n            \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n            \"cin\": \"2502020006\",\n            \"name\": \"Aldi Dewangga\",\n            \"dob\": \"2025-02-02\",\n            \"age\": 0,\n            \"contact_number\": \"\",\n            \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\",\n            \"email\": \"dewangga2458@gmail.com\"\n        },\n        \"currency_rate\": 16552.06,\n        \"currency_total\": 16552060.000000002\n    }\n}"
                 }
               ]
             },
@@ -8576,7 +8576,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\r\n    \"bonds_name\": \"SBN\",\r\n    \"type\": \"Bonds\",\r\n    \"product_number\": \"PN1234568\",\r\n    \"issuer_name\": \"SBN Syariah\",\r\n    \"issuer_date\": \"2025-01-02\",\r\n    \"maturity_date\": \"2025-01-01\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"interest_rate\": 1.5,\r\n    \"notes\": \"notes\"\r\n}",
+                  "raw": "{\r\n    \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\r\n    \"bonds_name\": \"SBN\",\r\n    \"type\": \"Bonds\",\r\n    \"broker\": \"Bibit\",\r\n    \"product_number\": \"PN1234568\",\r\n    \"issuer_name\": \"SBN Syariah & Konvensional\",\r\n    \"issuer_date\": \"2025-01-02\",\r\n    \"maturity_date\": \"2025-01-01\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"interest_rate\": 1.5,\r\n    \"notes\": \"notes\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -8673,7 +8673,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\r\n    \"bonds_name\": \"SBN\",\r\n    \"type\": \"Bonds\",\r\n    \"product_number\": \"PN1234568\",\r\n    \"issuer_name\": \"SBN Syariah\",\r\n    \"issuer_date\": \"2025-01-02\",\r\n    \"maturity_date\": \"2025-01-01\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"interest_rate\": 1.5,\r\n    \"notes\": \"notes\"\r\n}",
+                  "raw": "{\r\n    \"bonds_holder\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\r\n    \"bonds_name\": \"SBN\",\r\n    \"type\": \"Bonds\",\r\n    \"broker\": \"Bibit\",\r\n    \"product_number\": \"PN1234568\",\r\n    \"issuer_name\": \"SBN Syariah\",\r\n    \"issuer_date\": \"2025-01-02\",\r\n    \"maturity_date\": \"2025-01-01\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"interest_rate\": 1.5,\r\n    \"notes\": \"notes\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -17074,7 +17074,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{url}}/portfolio/safe-deposit-box?page=1&perPage=10&q=",
+                  "raw": "{{url}}/portfolio/safe-deposit-box?page=1&perPage=10&q=dewa&flag_sdb=1",
                   "host": ["{{url}}"],
                   "path": ["portfolio", "safe-deposit-box"],
                   "query": [
@@ -17088,7 +17088,11 @@
                     },
                     {
                       "key": "q",
-                      "value": ""
+                      "value": "dewa"
+                    },
+                    {
+                      "key": "flag_sdb",
+                      "value": "1"
                     }
                   ]
                 }
@@ -18238,6 +18242,898 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Digital Assets",
+          "item": [
+            {
+              "name": "All Data",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets/all-data",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "digital-assets", "all-data"]
+                }
+              },
+              "response": [
+                {
+                  "name": "All Data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets/all-data",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "digital-assets", "all-data"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "967"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c7-CBGroze/ikwukxLtmhoSMXyMDMU\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:49:43 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": [\n        {\n            \"digital_assets_id\": \"f21bfbee-fe4d-42fb-a8f2-09d2100b133c\",\n            \"digital_assets_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n            \"digital_assets_name\": \"Wahyudi\",\n            \"type\": \"NFT\",\n            \"selling_agent\": \"NFT\",\n            \"serial_number\": \"SN342842398\",\n            \"account_number\": \"824723842\",\n            \"userid\": \"Wahyudi\",\n            \"currency\": \"USD\",\n            \"purchase_value\": \"999.00\",\n            \"current_value\": \"998.00\",\n            \"location\": \"Bandung\",\n            \"doc_location\": [\n                \"/uploads/digital_assets/2025-05/yh.jpg\"\n            ],\n            \"notes\": \"notes\",\n            \"status\": 1,\n            \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"created_date\": \"2025-05-29T07:41:47.000Z\",\n            \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n            \"modified_date\": \"2025-05-29T07:49:10.000Z\",\n            \"holder\": {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"cin\": \"2501140004\",\n                \"name\": \"Yusuf Hartanto\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 33,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                \"email\": \"-\"\n            },\n            \"currency_rate\": 16552.06,\n            \"currency_total\": 16535507.940000001\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Data",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets?page=1&perPage=10&q=a",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "digital-assets"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    },
+                    {
+                      "key": "q",
+                      "value": "a"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets?page=1&perPage=10&q=a",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "digital-assets"],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "perPage",
+                          "value": "10"
+                        },
+                        {
+                          "key": "q",
+                          "value": "a"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "988"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3dc-1BB+jilnAXpolFHav7XFBXVpe34\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:48:27 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"digital_assets_id\": \"f21bfbee-fe4d-42fb-a8f2-09d2100b133c\",\n                \"digital_assets_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"digital_assets_name\": \"Wahyudi\",\n                \"type\": \"NFT\",\n                \"selling_agent\": \"NFT\",\n                \"serial_number\": \"SN342842398\",\n                \"account_number\": \"824723842\",\n                \"userid\": \"Wahyudi\",\n                \"currency\": \"USD\",\n                \"purchase_value\": \"999.00\",\n                \"current_value\": \"998.00\",\n                \"location\": \"Bandung\",\n                \"doc_location\": [\n                    \"/uploads/digital_assets/2025-05/yh.jpg\"\n                ],\n                \"notes\": \"notes\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-05-29T07:41:47.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-05-29T07:47:02.000Z\",\n                \"holder\": {\n                    \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                    \"cin\": \"2501140004\",\n                    \"name\": \"Yusuf Hartanto\",\n                    \"dob\": \"1992-03-05\",\n                    \"age\": 33,\n                    \"contact_number\": \"085811866445\",\n                    \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                    \"email\": \"-\"\n                },\n                \"currency_rate\": 16552.06,\n                \"currency_total\": 16535507.940000001\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Detail",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "digital-assets",
+                    "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "digital-assets",
+                        "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "965"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3c5-LuSa+xmDuZyPpgNV3OfZFJKP5rU\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:48:44 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully retrieved\",\n    \"data\": {\n        \"digital_assets_id\": \"f21bfbee-fe4d-42fb-a8f2-09d2100b133c\",\n        \"digital_assets_holder\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n        \"digital_assets_name\": \"Wahyudi\",\n        \"type\": \"NFT\",\n        \"selling_agent\": \"NFT\",\n        \"serial_number\": \"SN342842398\",\n        \"account_number\": \"824723842\",\n        \"userid\": \"Wahyudi\",\n        \"currency\": \"USD\",\n        \"purchase_value\": \"999.00\",\n        \"current_value\": \"998.00\",\n        \"location\": \"Bandung\",\n        \"doc_location\": [\n            \"/uploads/digital_assets/2025-05/yh.jpg\"\n        ],\n        \"notes\": \"notes\",\n        \"status\": 1,\n        \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"created_date\": \"2025-05-29T07:41:47.000Z\",\n        \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n        \"modified_date\": \"2025-05-29T07:47:02.000Z\",\n        \"holder\": {\n            \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n            \"cin\": \"2501140004\",\n            \"name\": \"Yusuf Hartanto\",\n            \"dob\": \"1992-03-05\",\n            \"age\": 33,\n            \"contact_number\": \"085811866445\",\n            \"address\": \"Kab. Bantul, DI Yogyakarta\",\n            \"email\": \"-\"\n        },\n        \"currency_rate\": 16552.06,\n        \"currency_total\": 16535507.940000001\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "digital_assets_holder",
+                      "value": "77588f9d-d292-4c00-b7fb-5e9fa08f445c",
+                      "type": "text"
+                    },
+                    {
+                      "key": "digital_assets_name",
+                      "value": "Wahyudi",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type",
+                      "value": "NFT",
+                      "type": "text"
+                    },
+                    {
+                      "key": "selling_agent",
+                      "value": "NFT",
+                      "type": "text"
+                    },
+                    {
+                      "key": "serial_number",
+                      "value": "SN342842398",
+                      "type": "text"
+                    },
+                    {
+                      "key": "account_number",
+                      "value": "824723842",
+                      "type": "text"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "Wahyudi",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD",
+                      "type": "text"
+                    },
+                    {
+                      "key": "purchase_value",
+                      "value": "999",
+                      "type": "text"
+                    },
+                    {
+                      "key": "current_value",
+                      "value": "998",
+                      "type": "text"
+                    },
+                    {
+                      "key": "notes",
+                      "value": "notes",
+                      "type": "text"
+                    },
+                    {
+                      "key": "images",
+                      "type": "file",
+                      "src": "/C:/Users/ASUS/Downloads/yh.jpg"
+                    },
+                    {
+                      "key": "location",
+                      "value": "Bandung",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "digital-assets"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "digital_assets_holder",
+                          "value": "77588f9d-d292-4c00-b7fb-5e9fa08f445c",
+                          "type": "text"
+                        },
+                        {
+                          "key": "digital_assets_name",
+                          "value": "Wahyudi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "type",
+                          "value": "NFT",
+                          "type": "text"
+                        },
+                        {
+                          "key": "selling_agent",
+                          "value": "NFT",
+                          "type": "text"
+                        },
+                        {
+                          "key": "serial_number",
+                          "value": "SN342842398",
+                          "type": "text"
+                        },
+                        {
+                          "key": "account_number",
+                          "value": "824723842",
+                          "type": "text"
+                        },
+                        {
+                          "key": "userid",
+                          "value": "Wahyudi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "currency",
+                          "value": "USD",
+                          "type": "text"
+                        },
+                        {
+                          "key": "purchase_value",
+                          "value": "999",
+                          "type": "text"
+                        },
+                        {
+                          "key": "current_value",
+                          "value": "998",
+                          "type": "text"
+                        },
+                        {
+                          "key": "notes",
+                          "value": "notes",
+                          "type": "text"
+                        },
+                        {
+                          "key": "images",
+                          "type": "file",
+                          "src": "/C:/Users/ASUS/Downloads/yh.jpg"
+                        },
+                        {
+                          "key": "location",
+                          "value": "Bandung",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "digital-assets"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "63"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"3f-yNQg8TQke/rrTKu21dugyw5EnBA\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:41:47 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully saved\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "digital_assets_holder",
+                      "value": "77588f9d-d292-4c00-b7fb-5e9fa08f445c",
+                      "type": "text"
+                    },
+                    {
+                      "key": "digital_assets_name",
+                      "value": "Wahyudi",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type",
+                      "value": "NFT",
+                      "type": "text"
+                    },
+                    {
+                      "key": "selling_agent",
+                      "value": "NFT",
+                      "type": "text"
+                    },
+                    {
+                      "key": "serial_number",
+                      "value": "SN342842398",
+                      "type": "text"
+                    },
+                    {
+                      "key": "account_number",
+                      "value": "824723842",
+                      "type": "text"
+                    },
+                    {
+                      "key": "userid",
+                      "value": "Wahyudi",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD",
+                      "type": "text"
+                    },
+                    {
+                      "key": "purchase_value",
+                      "value": "999",
+                      "type": "text"
+                    },
+                    {
+                      "key": "current_value",
+                      "value": "998",
+                      "type": "text"
+                    },
+                    {
+                      "key": "notes",
+                      "value": "notes",
+                      "type": "text"
+                    },
+                    {
+                      "key": "images",
+                      "type": "file",
+                      "src": "/C:/Users/ASUS/Downloads/yh.jpg"
+                    },
+                    {
+                      "key": "location",
+                      "value": "Bandung",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "digital-assets",
+                    "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Update",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "digital_assets_holder",
+                          "value": "77588f9d-d292-4c00-b7fb-5e9fa08f445c",
+                          "type": "text"
+                        },
+                        {
+                          "key": "digital_assets_name",
+                          "value": "Wahyudi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "type",
+                          "value": "NFT",
+                          "type": "text"
+                        },
+                        {
+                          "key": "selling_agent",
+                          "value": "NFT",
+                          "type": "text"
+                        },
+                        {
+                          "key": "serial_number",
+                          "value": "SN342842398",
+                          "type": "text"
+                        },
+                        {
+                          "key": "account_number",
+                          "value": "824723842",
+                          "type": "text"
+                        },
+                        {
+                          "key": "userid",
+                          "value": "Wahyudi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "currency",
+                          "value": "USD",
+                          "type": "text"
+                        },
+                        {
+                          "key": "purchase_value",
+                          "value": "999",
+                          "type": "text"
+                        },
+                        {
+                          "key": "current_value",
+                          "value": "998",
+                          "type": "text"
+                        },
+                        {
+                          "key": "notes",
+                          "value": "notes",
+                          "type": "text"
+                        },
+                        {
+                          "key": "images",
+                          "type": "file",
+                          "src": "/C:/Users/ASUS/Downloads/yh.jpg"
+                        },
+                        {
+                          "key": "location",
+                          "value": "Bandung",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "digital-assets",
+                        "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "65"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"41-n4EoybRSPZuuw4qb8SgsiZxfN1I\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:46:10 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully updated\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "digital-assets",
+                    "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets/f21bfbee-fe4d-42fb-a8f2-09d2100b133c",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "digital-assets",
+                        "f21bfbee-fe4d-42fb-a8f2-09d2100b133c"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "65"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"41-Rwrewe8EcPUoLPx41WTUQ9UitMY\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Thu, 29 May 2025 07:49:10 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully deleted\",\n    \"data\": null\n}"
                 }
               ]
             }

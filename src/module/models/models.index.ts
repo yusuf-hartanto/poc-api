@@ -59,6 +59,10 @@ import {
   associatePreciousMetal,
 } from '../portfolio/precious.metal/precious.metal.model';
 import {
+  initDigitalAssets,
+  associateDigitalAssets,
+} from '../portfolio/digital.assets/digital.assets.model';
+import {
   initSharesBusiness,
   associateSharesBusiness,
 } from '../portfolio/shares.business/shares.business.model';
@@ -104,6 +108,7 @@ export function initializeModels(sequelize: Sequelize) {
   initPolicyDetail(sequelize);
   initCollectibles(sequelize);
   initCryptoAssets(sequelize);
+  initDigitalAssets(sequelize);
   initPreciousMetal(sequelize);
   initSharesBusiness(sequelize);
   initSafeDepositBox(sequelize);
@@ -131,6 +136,7 @@ export function initializeModels(sequelize: Sequelize) {
   associateAreaProvince();
   associateCollectibles();
   associateCryptoAssets();
+  associateDigitalAssets();
   associatePreciousMetal();
   associateSharesBusiness();
   associateSafeDepositBox();

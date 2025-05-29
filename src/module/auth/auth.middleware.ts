@@ -195,20 +195,25 @@ export default class Middleware {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { role_name } = req?.user;
-        const role_menu: any = await repoRoleMenu.detailRole({
-          role_name: { [Op.like]: `%${role_name}%` },
-        });
-        const ability = role_menu?.dataValues?.role_menu.find((rm: any) => {
-          let moduleName: string = rm?.menu?.module_name.toLowerCase();
-          if (moduleName.includes('user')) moduleName = 'resource';
-          return req?.originalUrl.split('?')[0].includes(moduleName);
-        });
+        if (role_name != ROLE_ADMIN) {
+          const role_menu: any = await repoRoleMenu.detailRole({
+            role_name: { [Op.like]: `%${role_name}%` },
+          });
+          const ability = role_menu?.dataValues?.role_menu.find((rm: any) => {
+            let moduleName: string = rm?.menu?.module_name.toLowerCase();
+            if (moduleName.includes('user')) moduleName = 'resource';
+            return req?.originalUrl.split('?')[0].includes(moduleName);
+          });
 
-        if (!ability && role_name != ROLE_ADMIN)
-          return response.failed(`Sorry! You don't have access.`, 400, res);
+          if (!ability && role_name != ROLE_ADMIN)
+            return response.failed(`Sorry! You don't have access.`, 400, res);
 
-        next();
-        return;
+          next();
+          return;
+        } else {
+          next();
+          return;
+        }
       } catch (err: any) {
         return helper.catchError(`check access: ${err?.message}`, 400, res);
       }
