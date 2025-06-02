@@ -1,5 +1,6 @@
 'use strict';
 
+import { Op } from 'sequelize';
 import { repository } from './client.repository';
 
 const nestedChild = async (data: any) => {
@@ -22,8 +23,16 @@ const nestedChild = async (data: any) => {
   return result;
 };
 
-const nestedChildOption = async (result: any, data: any, flag_client: any) => {
-  let condition: Object = { relation_id: data?.id };
+const nestedChildOption = async (
+  result: any,
+  data: any,
+  flag_client: any,
+  cins: any
+) => {
+  let condition: Object = {
+    relation_id: data?.id,
+    cin: { [Op.notIn]: cins },
+  };
   if (flag_client && flag_client != undefined) {
     condition = {
       ...condition,
@@ -35,15 +44,23 @@ const nestedChildOption = async (result: any, data: any, flag_client: any) => {
   if (client && client?.length > 0) {
     for (let i in client) {
       result.push(client[i]?.dataValues);
-
-      await nestedChildOption(result, client[i]?.dataValues, flag_client);
+      cins.push(client[i]?.dataValues?.cin);
+      await nestedChildOption(result, client[i]?.dataValues, flag_client, cins);
     }
   }
   return result;
 };
 
-const nestedParentOption = async (result: any, data: any, flag_client: any) => {
-  let condition: Object = { id: data?.relation_id };
+const nestedParentOption = async (
+  result: any,
+  data: any,
+  flag_client: any,
+  cins: any
+) => {
+  let condition: Object = {
+    id: data?.relation_id,
+    cin: { [Op.notIn]: cins },
+  };
   if (flag_client && flag_client != undefined) {
     condition = {
       ...condition,
@@ -55,8 +72,13 @@ const nestedParentOption = async (result: any, data: any, flag_client: any) => {
   if (client && client?.length > 0) {
     for (let i in client) {
       result.push(client[i]?.dataValues);
-
-      await nestedParentOption(result, client[i]?.dataValues, flag_client);
+      cins.push(client[i]?.dataValues?.cin);
+      await nestedParentOption(
+        result,
+        client[i]?.dataValues,
+        flag_client,
+        cins
+      );
     }
   }
   return result;
@@ -108,6 +130,7 @@ export default class Transformer {
 
   public async relation(data: any, flag: any) {
     let result: Array<object> = [];
+    let cins = data.map((d: any) => d?.dataValues?.cin);
     for (let i in data) {
       if (flag && flag?.option == 1) {
         result.push(data[i]?.dataValues);
@@ -115,9 +138,15 @@ export default class Transformer {
         await nestedParentOption(
           result,
           data[i]?.dataValues,
-          flag?.flag_client
+          flag?.flag_client,
+          cins
         );
-        await nestedChildOption(result, data[i]?.dataValues, flag?.flag_client);
+        await nestedChildOption(
+          result,
+          data[i]?.dataValues,
+          flag?.flag_client,
+          cins
+        );
       } else {
         const child = await nestedChild(data[i]?.dataValues);
 

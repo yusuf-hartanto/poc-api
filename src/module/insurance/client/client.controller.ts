@@ -108,15 +108,18 @@ export default class Controller {
 
   public async relation(req: Request, res: Response) {
     try {
-      const { option, relation, flag_client } = req?.query;
+      const { option, relation, flag_client, agent_id } = req?.query;
       const query = helper.fetchQueryIndex(req);
 
-      let agentId: string = '';
+      let agentId: any = '';
       const { role_name } = req?.user;
       if (role_name != ROLE_ADMIN) {
         agentId = req?.user?.id;
+      } else if (agent_id) {
+        agentId = agent_id;
       }
 
+      let total: number;
       const { count, rows } = await repository.relation({
         ...query,
         relation: relation,
@@ -125,14 +128,17 @@ export default class Controller {
       });
       if (rows?.length < 1)
         return response.success(NOT_FOUND, null, res, false);
+
+      total = count;
       const clients = await transformer.relation(rows, {
         option,
         relation,
         flag_client,
       });
+      if (option && option == '1') total = clients?.length;
       return response.success(
         SUCCESS_RETRIEVED,
-        { total: count, values: clients },
+        { total: total, values: clients },
         res
       );
     } catch (err: any) {
