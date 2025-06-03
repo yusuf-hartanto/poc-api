@@ -58,7 +58,8 @@ export default class Helper {
           data[i] !== undefined &&
           data[i] !== '' &&
           data[i] != 'null') ||
-        data[i] === 0
+        data[i] === 0 ||
+        isUpdate
       ) {
         result[i] = data[i]
           .toString()
