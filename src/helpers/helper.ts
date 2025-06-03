@@ -53,19 +53,20 @@ export default class Helper {
     let result: any = {};
 
     keys.forEach((i) => {
-      if (
-        (data[i] &&
-          data[i] !== undefined &&
-          data[i] !== '' &&
-          data[i] != 'null') ||
-        data[i] === 0 ||
-        isUpdate
-      ) {
-        result[i] = data[i]
-          .toString()
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/&amp;/g, '&');
+      if (data.hasOwnProperty(i)) {
+        if (
+          (data[i] &&
+            data[i] !== undefined &&
+            data[i] !== '' &&
+            data[i] != 'null') ||
+          data[i] === 0
+        ) {
+          result[i] = data[i]
+            .toString()
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/&amp;/g, '&');
+        } else if (isUpdate) result[i] = data[i] || null;
       }
     });
     if (isUpdate) {
