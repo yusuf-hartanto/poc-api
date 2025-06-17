@@ -191,7 +191,7 @@ export default class Middleware {
     }
   }
 
-  public checkAccess(role: string) {
+  public checkAccess(role: string = '') {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { role_name } = req?.user;
@@ -202,6 +202,7 @@ export default class Middleware {
           const ability = role_menu?.dataValues?.role_menu.find((rm: any) => {
             let moduleName: string = rm?.menu?.module_name.toLowerCase();
             if (moduleName.includes('user')) moduleName = 'resource';
+            else if (moduleName.includes('assesment')) moduleName = 'event';
             return req?.originalUrl.split('?')[0].includes(moduleName);
           });
 
