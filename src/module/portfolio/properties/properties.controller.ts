@@ -16,13 +16,23 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  holder_name: 'Holder',
+  properties_name: 'Name',
+  currency: 'Currency',
+  purchase_value: 'Purchase Value',
+  current_value: 'Current Value',
+  address: 'Address',
+};
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
     const images = req?.files?.images;
     let dataFiles: Array<String> = [];
     if (images?.length > 0) {
-      for (let i in images) {
+      for (const i in images) {
         let checkFile = helper.checkExtention(images[i]);
         if (checkFile == 'allowed') {
           const path_image = await helper.upload(
@@ -177,6 +187,40 @@ export default class Controller {
       return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`properties delete: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name, client_id } = req?.user;
+    const clientId: any = req?.query?.client;
+
+    try {
+      let condition: any = {};
+      if (clientId != undefined) condition = { properties_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { properties_holder: client_id };
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+      const properties = await transformer.list(result);
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          { name: 'PROPERTIES', start: 'A', end: 'G', keys: keyExport },
+          properties
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'PROPERTIES', keys: keyExport },
+          properties
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(`properties ${type}: ${err?.message}`, 500, res);
     }
   }
 }

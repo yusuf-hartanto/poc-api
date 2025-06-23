@@ -7,7 +7,7 @@ import { repository as repoCurr } from '../../currency/currency.repository';
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       const policy = data[i]?.dataValues;
 
       let rateCurr = 1;

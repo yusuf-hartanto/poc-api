@@ -22,7 +22,7 @@ export const up: Migration = async () => {
   const childmenu = datamenu.childmenu();
   const resource = await repoResource.detail({ username: 'adminuser' }, '');
 
-  for (let i in menus) {
+  for (const i in menus) {
     const menu = await Model.create({
       ...menus[i],
       menu_id: uuidv4(),

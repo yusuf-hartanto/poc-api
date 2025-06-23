@@ -26,6 +26,12 @@ router.get(
   client.relation
 );
 router.get(
+  '/client/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('client'),
+  client.export
+);
+router.get(
   '/client/:id',
   auth.checkBearerToken,
   auth.checkAccess('client'),

@@ -12,6 +12,14 @@ export default class Repository {
     return Model.findAll({
       where: data?.condition,
       order: [['created_date', 'DESC']],
+      include: [
+        {
+          model: AppRole,
+          attributes: ['role_id', 'role_name', 'status'],
+          as: 'role',
+          required: true,
+        },
+      ],
     });
   }
 

@@ -23,6 +23,9 @@ export const SUCCESS_SAVED: string = 'Data successfully saved';
 export const SUCCESS_UPDATED: string = 'Data successfully updated';
 export const SUCCESS_DELETED: string = 'Data successfully deleted';
 export const SUCCESS_RETRIEVED: string = 'Data successfully retrieved';
+export const SUCCESS_PDF: string = 'Export PDF successfully';
+export const SUCCESS_EXCEL: string = 'Export Excel successfully';
+export const ALLOWED_EXPORT: string = 'Allowed export pdf or excel';
 
 // database
 export const MYSQL: string = 'mysql';

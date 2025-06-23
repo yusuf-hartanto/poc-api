@@ -5,7 +5,7 @@ import { repository as repoCurr } from '../../currency/currency.repository';
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       let bonds: any = data[i]?.dataValues;
 
       let rateCurr = 1;
@@ -19,6 +19,7 @@ export default class Transformer {
         }
       }
 
+      bonds.holder_name = bonds?.holder?.name || '';
       result.push({
         ...bonds,
         currency_rate: rateCurr,
@@ -43,6 +44,7 @@ export default class Transformer {
       }
     }
 
+    result.holder_name = result?.holder?.name || '';
     return {
       ...result,
       currency_rate: rateCurr,

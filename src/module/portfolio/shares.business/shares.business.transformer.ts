@@ -5,9 +5,10 @@ import { repository as repoCurr } from '../../currency/currency.repository';
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       let sharesBusiness: any = data[i]?.dataValues;
 
+      sharesBusiness.holder_name = sharesBusiness?.holder?.name || '';
       result.push({
         ...sharesBusiness,
         doc_location: sharesBusiness?.doc_location
@@ -22,6 +23,7 @@ export default class Transformer {
     const sharesBusiness = data?.dataValues;
     let result: any = sharesBusiness;
 
+    result.holder_name = sharesBusiness?.holder?.name || '';
     return {
       ...result,
       doc_location: sharesBusiness?.doc_location

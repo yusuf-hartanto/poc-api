@@ -15,6 +15,15 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  holder_name: 'Holder',
+  bonds_name: 'Product Name',
+  currency: 'Currency',
+  amount: 'Amount',
+  broker: 'Selling Agent',
+};
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -133,6 +142,40 @@ export default class Controller {
       return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`bonds delete: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name, client_id } = req?.user;
+    const clientId: any = req?.query?.client;
+
+    try {
+      let condition: any = {};
+      if (clientId != undefined) condition = { bonds_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { bonds_holder: client_id };
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+      const bonds = await transformer.list(result);
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          { name: 'BONDS', start: 'A', end: 'F', keys: keyExport },
+          bonds
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'BONDS', keys: keyExport },
+          bonds
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(`bonds ${type}: ${err?.message}`, 500, res);
     }
   }
 }

@@ -6,14 +6,14 @@ import { repository } from './survey.repository';
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       const forms = await repository.findForm({
         form_id: data[i]?.dataValues?.form_id,
       });
 
       let resForm: Array<object> = [];
       if (forms?.length > 0) {
-        for (let n in forms) {
+        for (const n in forms) {
           const resAnswer = await repository.findFormAnswer({
             question_id: forms[n]?.dataValues?.question_id,
           });
@@ -40,7 +40,7 @@ export default class Transformer {
 
     let resForm: Array<object> = [];
     if (forms?.length > 0) {
-      for (let n in forms) {
+      for (const n in forms) {
         const resAnswer = await repository.findFormAnswer({
           question_id: forms[n]?.dataValues?.question_id,
         });
@@ -66,7 +66,7 @@ export default class Transformer {
     });
 
     if (groupAnswerValueByClient?.length > 0) {
-      for (let x in groupAnswerValueByClient) {
+      for (const x in groupAnswerValueByClient) {
         const answerValues = await repository.findFormAnswerValue({
           client_id: data?.dataValues?.id,
           periode: groupAnswerValueByClient[x]?.dataValues?.periode,
@@ -74,7 +74,7 @@ export default class Transformer {
 
         let question: Array<object> = [];
         if (answerValues?.length > 0) {
-          for (let n in answerValues) {
+          for (const n in answerValues) {
             const answer = await repository.detailFormAnswer({
               question_id: answerValues[n]?.dataValues?.question_id,
               text_answer: {

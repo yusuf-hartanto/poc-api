@@ -16,13 +16,24 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  holder_name: 'Holder',
+  type: 'Type',
+  vehicles_machineries_name: 'Name',
+  brand: 'Brand',
+  currency: 'Currency',
+  purchase_value: 'Purchase Value',
+  current_value: 'Current Value',
+};
 
 const uploadImages = async (req: Request) => {
   if (req?.files && req?.files?.images) {
     const images = req?.files?.images;
     let dataFiles: Array<String> = [];
     if (images?.length > 0) {
-      for (let i in images) {
+      for (const i in images) {
         let checkFile = helper.checkExtention(images[i]);
         if (checkFile == 'allowed') {
           const path_image = await helper.upload(
@@ -196,6 +207,50 @@ export default class Controller {
     } catch (err: any) {
       return helper.catchError(
         `vehicles machineries delete: ${err?.message}`,
+        500,
+        res
+      );
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name, client_id } = req?.user;
+    const clientId: any = req?.query?.client;
+
+    try {
+      let condition: any = {};
+      if (clientId != undefined)
+        condition = { vehicles_machineries_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { vehicles_machineries_holder: client_id };
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+      const vehiclesMachineries = await transformer.list(result);
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          {
+            name: 'VEHICLES-MACHINERIES',
+            start: 'A',
+            end: 'H',
+            keys: keyExport,
+          },
+          vehiclesMachineries
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'VEHICLES-MACHINERIES', keys: keyExport },
+          vehiclesMachineries
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(
+        `vehicles machineries ${type}: ${err?.message}`,
         500,
         res
       );

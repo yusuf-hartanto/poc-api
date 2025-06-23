@@ -26,7 +26,7 @@ export const up: Migration = async () => {
   const formAnswers = datasurvey.formanswer();
   const resource = await repoResource.detail({ username: 'adminuser' }, '');
 
-  for (let i in events) {
+  for (const i in events) {
     await Model.create({
       ...events[i],
       id: uuidv4(),
@@ -34,7 +34,7 @@ export const up: Migration = async () => {
       created_by: resource?.getDataValue('resource_id'),
     });
   }
-  for (let n in forms) {
+  for (const n in forms) {
     const form = await ModelForm.create({
       ...forms[n],
       question_id: uuidv4(),

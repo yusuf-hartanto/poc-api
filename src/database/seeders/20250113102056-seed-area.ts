@@ -21,7 +21,7 @@ export const up: Migration = async () => {
   const provinces = dataarea.provinces();
   const regencies = dataarea.regencies();
 
-  for (let i in provinces) {
+  for (const i in provinces) {
     const province = await ModelProvince.create({
       id: uuidv4(),
       name: provinces[i]?.name,

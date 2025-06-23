@@ -50,7 +50,7 @@ export default class Transformer {
       dijamin: 0,
     };
 
-    for (let jt in jatuhTempo) {
+    for (const jt in jatuhTempo) {
       const data: any = jatuhTempo[jt]?.dataValues;
 
       let premiValue = parseFloat(data?.premi_value);
@@ -63,7 +63,7 @@ export default class Transformer {
       result.total_premi += premiValue;
     }
 
-    for (let b in benefit) {
+    for (const b in benefit) {
       const dataBenefit: any = benefit[b]?.dataValues;
 
       let rateCurr = 1;
@@ -74,7 +74,7 @@ export default class Transformer {
       }
 
       if (dataBenefit?.detail?.length > 0) {
-        for (let d in dataBenefit?.detail) {
+        for (const d in dataBenefit?.detail) {
           const detail: any = dataBenefit?.detail[d]?.dataValues;
           if (detail?.benefit == 'up_jiwa') {
             result.up_jiwa += parseFloat(detail?.cash_value) * rateCurr;

@@ -5,12 +5,12 @@ import { repository as repoCurr } from '../../currency/currency.repository';
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
-      let forex: any = data[i]?.dataValues;
+    for (const i in data) {
+      let cryptoAssets: any = data[i]?.dataValues;
 
       let rateCurr = 1;
-      let currentValueCurr = parseFloat(forex?.current_value);
-      const curr = forex?.currency;
+      let currentValueCurr = parseFloat(cryptoAssets?.current_value);
+      const curr = cryptoAssets?.currency;
       if (curr && curr != 'IDR') {
         const rate = await repoCurr.detail({ base: curr, key: 'IDR' });
         if (rate) {
@@ -19,8 +19,9 @@ export default class Transformer {
         }
       }
 
+      cryptoAssets.holder_name = cryptoAssets?.holder?.name || '';
       result.push({
-        ...forex,
+        ...cryptoAssets,
         currency_rate: rateCurr,
         currency_total: currentValueCurr,
       });
@@ -43,6 +44,7 @@ export default class Transformer {
       }
     }
 
+    result.holder_name = result?.holder?.name || '';
     return {
       ...result,
       currency_rate: rateCurr,

@@ -74,7 +74,7 @@ export default class Controller {
       });
       const { detail } = req?.body;
       if (detail?.length > 0) {
-        for (let i in detail) {
+        for (const i in detail) {
           const dataDetail: Object = helper.only(variable.detail(), detail[i]);
           await repository.createDetail({
             payload: {
@@ -112,7 +112,7 @@ export default class Controller {
         await repository.deleteDetail({
           condition: { policy_id: id },
         });
-        for (let i in detail) {
+        for (const i in detail) {
           const dataDetail: Object = helper.only(
             variable.detail(),
             detail[i],

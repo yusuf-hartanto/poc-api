@@ -34,6 +34,12 @@ router.get(
   properties.index
 );
 router.get(
+  '/properties/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('properties'),
+  properties.export
+);
+router.get(
   '/properties/:id',
   auth.checkBearerToken,
   auth.checkAccess('properties'),
@@ -69,6 +75,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('bonds'),
   bonds.index
+);
+router.get(
+  '/bonds/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('bonds'),
+  bonds.export
 );
 router.get(
   '/bonds/:id',
@@ -108,6 +120,12 @@ router.get(
   cash.index
 );
 router.get(
+  '/cash/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('cash'),
+  cash.export
+);
+router.get(
   '/cash/:id',
   auth.checkBearerToken,
   auth.checkAccess('cash'),
@@ -143,6 +161,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('mutual-funds'),
   mutualfunds.index
+);
+router.get(
+  '/mutual-funds/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('mutual-funds'),
+  mutualfunds.export
 );
 router.get(
   '/mutual-funds/:id',
@@ -182,6 +206,12 @@ router.get(
   forex.index
 );
 router.get(
+  '/forex/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('forex'),
+  forex.export
+);
+router.get(
   '/forex/:id',
   auth.checkBearerToken,
   auth.checkAccess('forex'),
@@ -217,6 +247,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('collectibles'),
   collectibles.index
+);
+router.get(
+  '/collectibles/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('collectibles'),
+  collectibles.export
 );
 router.get(
   '/collectibles/:id',
@@ -256,6 +292,12 @@ router.get(
   stocks.index
 );
 router.get(
+  '/stocks/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('stocks'),
+  stocks.export
+);
+router.get(
   '/stocks/:id',
   auth.checkBearerToken,
   auth.checkAccess('stocks'),
@@ -291,6 +333,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('precious-metal'),
   preciousmetal.index
+);
+router.get(
+  '/precious-metal/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('precious-metal'),
+  preciousmetal.export
 );
 router.get(
   '/precious-metal/:id',
@@ -330,6 +378,12 @@ router.get(
   watchesjeweleries.index
 );
 router.get(
+  '/watches-jeweleries/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('watches-jeweleries'),
+  watchesjeweleries.export
+);
+router.get(
   '/watches-jeweleries/:id',
   auth.checkBearerToken,
   auth.checkAccess('watches-jeweleries'),
@@ -365,6 +419,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('vehicles-machineries'),
   vehiclesmachineries.index
+);
+router.get(
+  '/vehicles-machineries/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('vehicles-machineries'),
+  vehiclesmachineries.export
 );
 router.get(
   '/vehicles-machineries/:id',
@@ -404,6 +464,12 @@ router.get(
   sharesbusiness.index
 );
 router.get(
+  '/shares-business/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('shares-business'),
+  sharesbusiness.export
+);
+router.get(
   '/shares-business/:id',
   auth.checkBearerToken,
   auth.checkAccess('shares-business'),
@@ -439,6 +505,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('receivables'),
   receivables.index
+);
+router.get(
+  '/receivables/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('receivables'),
+  receivables.export
 );
 router.get(
   '/receivables/:id',
@@ -478,6 +550,12 @@ router.get(
   cryptoassets.index
 );
 router.get(
+  '/crypto-assets/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('crypto-assets'),
+  cryptoassets.export
+);
+router.get(
   '/crypto-assets/:id',
   auth.checkBearerToken,
   auth.checkAccess('crypto-assets'),
@@ -513,6 +591,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('safe-deposit-box'),
   safedepositbox.index
+);
+router.get(
+  '/safe-deposit-box/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('safe-deposit-box'),
+  safedepositbox.export
 );
 router.get(
   '/safe-deposit-box/:id',
@@ -552,6 +636,12 @@ router.get(
   intellectualproperties.index
 );
 router.get(
+  '/intellectual-properties/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('intellectual-properties'),
+  intellectualproperties.export
+);
+router.get(
   '/intellectual-properties/:id',
   auth.checkBearerToken,
   auth.checkAccess('intellectual-properties'),
@@ -587,6 +677,12 @@ router.get(
   auth.checkBearerToken,
   auth.checkAccess('digital-assets'),
   digitalassets.index
+);
+router.get(
+  '/digital-assets/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('digital-assets'),
+  digitalassets.export
 );
 router.get(
   '/digital-assets/:id',

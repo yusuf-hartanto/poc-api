@@ -10,6 +10,7 @@ import { transformer } from './resource.transformer';
 import { appConfig } from '../../../config/config.app';
 import { repository as repoClient } from '../../insurance/client/client.repository';
 import {
+  ALLOWED_EXPORT,
   ALREADY_EXIST,
   NOT_FOUND,
   REQUIRED,
@@ -20,8 +21,18 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
 
 const date: string = helper.date();
+const keyExport: any = {
+  no: 'No',
+  full_name: 'Name',
+  username: 'Username',
+  email: 'Email',
+  telepon: 'Telephon',
+  role_name: 'Role',
+  status: 'Status',
+};
 
 export default class Controller {
   public async index(req: Request, res: Response) {
@@ -279,6 +290,65 @@ export default class Controller {
       return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`resource delete: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name } = req?.user;
+    const role: any = req?.query?.role;
+
+    try {
+      if (!type || type == undefined)
+        return response.failed(`Type ${REQUIRED}`, 422, res);
+      if (!['excel', 'pdf'].includes(type))
+        return response.failed(ALLOWED_EXPORT, 422, res);
+
+      let conditionRole: Object = { '$role.role_name$': { [Op.ne]: '' } };
+      if (role_name != ROLE_ADMIN) {
+        conditionRole = { '$role.role_name$': { [Op.ne]: ROLE_ADMIN } };
+
+        if (role && role != undefined && !ROLE_ADMIN.includes(role)) {
+          conditionRole = { '$role.role_name$': { [Op.like]: `%${role}%` } };
+        }
+      } else if (role && role != undefined) {
+        conditionRole = { '$role.role_name$': { [Op.like]: `%${role}%` } };
+      }
+
+      let condition: any = {};
+      if (role_name != ROLE_ADMIN) {
+        condition['client_id'] = req?.user?.client_id;
+
+        let clientIds: Array<String> = [];
+        const resClient = await repoClient.list({ agent_id: req?.user?.id });
+        if (resClient) clientIds = resClient.map((c) => c?.dataValues?.id);
+        if (role_name.includes(ROLE_AGENT)) {
+          condition = {
+            [Op.or]: [
+              { resource_id: req?.user?.id },
+              { client_id: { [Op.in]: clientIds } },
+            ],
+          };
+        }
+      }
+
+      condition = { ...condition, ...conditionRole };
+      const result = await repository.list({ condition });
+      if (!result) return response.success(NOT_FOUND, null, res, false);
+      const users = await transformer.list(result, false);
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          { name: 'USER', start: 'A', end: 'G', keys: keyExport },
+          users
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf({ name: 'USER', keys: keyExport }, users);
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(`resource ${type}: ${err?.message}`, 500, res);
     }
   }
 }

@@ -14,6 +14,15 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  holder_name: 'Holder',
+  intellectual_properties_name: 'Name',
+  type: 'Type',
+  contract_number: 'Certificate Number',
+  creation_date: 'Creation Date',
+};
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -152,6 +161,57 @@ export default class Controller {
     } catch (err: any) {
       return helper.catchError(
         `intellectual properties delete: ${err?.message}`,
+        500,
+        res
+      );
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name, client_id } = req?.user;
+    const clientId: any = req?.query?.client;
+
+    try {
+      let condition: any = {};
+      if (clientId != undefined)
+        condition = { intellectual_properties_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { intellectual_properties_holder: client_id };
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+
+      let intellectualProperties: Array<object> = [];
+      for (const i in result) {
+        let ip: any = result[i]?.dataValues;
+
+        ip.holder_name = ip?.holder?.name || '';
+        intellectualProperties.push(ip);
+      }
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          {
+            name: 'INTELLECTUAL-PROPERTIES',
+            start: 'A',
+            end: 'F',
+            keys: keyExport,
+          },
+          intellectualProperties
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'INTELLECTUAL-PROPERTIES', keys: keyExport },
+          intellectualProperties
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(
+        `intellectual properties ${type}: ${err?.message}`,
         500,
         res
       );

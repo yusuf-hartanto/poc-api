@@ -10,7 +10,7 @@ const nestedChild = async (data: any) => {
 
   let result: Array<object> = [];
   if (client && client?.length > 0) {
-    for (let i in client) {
+    for (const i in client) {
       const child = await nestedChild(client[i]?.dataValues);
 
       const c: any = {
@@ -42,7 +42,7 @@ const nestedChildOption = async (
   const client = await repository.list(condition);
 
   if (client && client?.length > 0) {
-    for (let i in client) {
+    for (const i in client) {
       result.push(client[i]?.dataValues);
       cins.push(client[i]?.dataValues?.cin);
       await nestedChildOption(result, client[i]?.dataValues, flag_client, cins);
@@ -70,7 +70,7 @@ const nestedParentOption = async (
   const client = await repository.list(condition);
 
   if (client && client?.length > 0) {
-    for (let i in client) {
+    for (const i in client) {
       result.push(client[i]?.dataValues);
       cins.push(client[i]?.dataValues?.cin);
       await nestedParentOption(
@@ -87,7 +87,7 @@ const nestedParentOption = async (
 export default class Transformer {
   public async list(data: any) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       let client: any = data[i]?.dataValues;
 
       let relation: any = null;
@@ -131,7 +131,7 @@ export default class Transformer {
   public async relation(data: any, flag: any) {
     let result: Array<object> = [];
     let cins = data.map((d: any) => d?.dataValues?.cin);
-    for (let i in data) {
+    for (const i in data) {
       if (flag && flag?.option == 1) {
         result.push(data[i]?.dataValues);
 

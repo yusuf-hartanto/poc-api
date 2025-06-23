@@ -276,7 +276,7 @@ const generateDataExcel = (sheet: any, details: any) => {
     }
   }
 
-  for (let i in details) {
+  for (const i in details) {
     const benefit: any = formatBenefit(details[i]?.detail);
 
     sheet.addRow([
@@ -368,7 +368,7 @@ const generateHtmlPDF = (title: string, details: any) => {
             <th>Premi IDR</th>
           </tr>
   `;
-  for (let i in details) {
+  for (const i in details) {
     html += `
       <tr>
         <td>${parseInt(i) + 1}</td>
@@ -451,7 +451,7 @@ export default class Controller {
       if (req?.files && req?.files?.attachs) {
         const attachs = req?.files?.attachs;
         if (attachs?.length > 0) {
-          for (let i in attachs) {
+          for (const i in attachs) {
             attachments.push({
               filename: attachs[i]?.name,
               path: attachs[i]?.tempFilePath,
@@ -637,7 +637,7 @@ export default class Controller {
       const name: string =
         flag && flag != 'false' ? flag.replace(/,/g, '-') : 'dashboard';
       const filename: string = `${name}-${moment().format('DDMMYYYY')}.xlsx`;
-      const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
+      const title: string = `DATA ${name.replace(/[_-]/g, ' ').toUpperCase()}`;
       const urlExcel: string = `${dir}/${filename}`;
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet('DATA DASHBOARD');
@@ -672,7 +672,7 @@ export default class Controller {
       const name: string =
         flag && flag != 'false' ? flag.replace(/,/g, '-') : 'dashboard';
       const filename: string = `${name}-${moment().format('DDMMYYYY')}.pdf`;
-      const title: string = `DATA ${name.replace(/_/g, ' ').toUpperCase()}`;
+      const title: string = `DATA ${name.replace(/[_-]/g, ' ').toUpperCase()}`;
       const urlPDF: string = `${dir}/${filename}`;
 
       const browser = await puppeteer.launch({

@@ -4256,6 +4256,144 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/app/resource/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["app", "resource", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "a",
+                      "disabled": true
+                    },
+                    {
+                      "key": "role",
+                      "value": "agent",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "excel",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/app/resource/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["app", "resource", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "a",
+                          "disabled": true
+                        },
+                        {
+                          "key": "role",
+                          "value": "agent",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "91"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5b-lnR7Bz6GcfR7ONdl7e2g6+/9THk\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 07:37:54 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/USER-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         }
@@ -5279,6 +5417,134 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data client\",\n    \"data\": {\n        \"total\": 1,\n        \"values\": [\n            {\n                \"id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"cin\": \"2501250005\",\n                \"name\": \"Hartanto\",\n                \"ktp\": \"5\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 33,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"KABUPATEN BANTUL, DI YOGYAKARTA\",\n                \"relation_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"relation_name\": null,\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-24T23:40:29.000Z\",\n                \"modified_by\": null,\n                \"modified_date\": null\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"cin\": \"2501140004\",\n                \"name\": \"Yusuf Hartanto\",\n                \"ktp\": \"4\",\n                \"dob\": \"1992-03-05\",\n                \"age\": 33,\n                \"contact_number\": \"085811866445\",\n                \"address\": \"Kab. Bantul, DI Yogyakarta\",\n                \"relation_id\": \"25b4402e-6ae1-4519-8573-3608edebd87b\",\n                \"relation_name\": \"Kakak\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            },\n            {\n                \"id\": \"3f88f9e8-9f91-4983-903c-2d5376b34635\",\n                \"cin\": \"2502020006\",\n                \"name\": \"Aldi Dewangga\",\n                \"ktp\": \"12322\",\n                \"dob\": \"2025-02-02\",\n                \"age\": 0,\n                \"contact_number\": \"\",\n                \"address\": \"jalan babakan irigasi rt.05/07 GG.satatasariksa 3 no. 56\",\n                \"relation_id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"relation_name\": \"Ponakan\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-02-02T05:52:39.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-02-02T08:02:13.000Z\"\n            },\n            {\n                \"id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445b\",\n                \"cin\": \"2501140003\",\n                \"name\": \"Hana Panjaitan\",\n                \"ktp\": \"3\",\n                \"dob\": \"1999-01-01\",\n                \"age\": 26,\n                \"contact_number\": \"083621726182\",\n                \"address\": \"Kab. Bandung, Jawa Barat\",\n                \"relation_id\": \"77588f9d-d292-4c00-b7fb-5e9fa08f445c\",\n                \"relation_name\": \"Sepupu\",\n                \"status\": 1,\n                \"created_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"created_date\": \"2025-01-14T05:09:53.000Z\",\n                \"modified_by\": \"3e0d9e86-cbae-45e7-b32f-b7bcfa667073\",\n                \"modified_date\": \"2025-01-14T05:12:25.000Z\"\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/insurance/client/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["insurance", "client", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/insurance/client/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["insurance", "client", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "93"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5d-HoNNUPjPPpiXkpD8iqu96Ky/nTs\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 07:46:34 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/CLIENT-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -8217,6 +8483,134 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/properties/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "properties", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/properties/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "properties", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "97"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"61-AcVJ/qIL9kWTMgsnJBp2fWjqFTk\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:07:29 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/PROPERTIES-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -8845,6 +9239,134 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/bonds/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "bonds", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/bonds/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "bonds", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "92"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5c-CMh0DmV/yImJzNMH8aqBKpbgb9M\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:09:49 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/BONDS-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -9477,6 +9999,134 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/cash/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "cash", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/cash/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "cash", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "91"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5b-tNgmawTyLi04HIcUMaaNYh2oia4\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:11:03 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/CASH-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -10107,6 +10757,134 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/mutual-funds/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "mutual-funds", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/mutual-funds/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "mutual-funds", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "99"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"63-gnVEgxmTJXdfLLBKyeywPOJfU6E\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:15:31 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/MUTUAL-FUNDS-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -10710,6 +11488,134 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/forex/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "forex", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/forex/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "forex", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "92"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5c-8lr6Rq+kcgwQTwhMSTWotmM7jVU\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:19:48 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/FOREX-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -11360,6 +12266,134 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/collectibles/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "collectibles", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/collectibles/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "collectibles", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "99"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"63-x0RqDIJAUVoMNxgoDJnrTzfccrI\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:21:58 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/COLLECTIBLES-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -12006,6 +13040,134 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/stocks/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "stocks", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/stocks/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "stocks", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "93"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5d-fc7KVKBHoE2/0c0JJLF2JYzzf8M\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:25:32 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/STOCKS-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -12872,6 +14034,139 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/precious-metal/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "precious-metal", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/precious-metal/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "precious-metal",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"64-D13sAwIrQwv8mtn1AIForGNvbcg\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:26:40 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/PRECIUS-METAL-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -13702,6 +14997,144 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/watches-jeweleries/export/:type",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "watches-jeweleries",
+                    "export",
+                    ":type"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/watches-jeweleries/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "watches-jeweleries",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "105"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"69-+xG46sfrazTvKBC3o1FHF8z3Gls\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:28:46 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/WATCHES-JEWELERIES-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -14546,6 +15979,144 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/vehicles-machineries/export/:type",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "vehicles-machineries",
+                    "export",
+                    ":type"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/vehicles-machineries/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "vehicles-machineries",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "107"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"6b-jSZUB8QuKfQuO7W/IpvuGXn5DOA\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:29:51 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/VEHICLES-MACHINERIES-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -15420,6 +16991,139 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/shares-business/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "shares-business", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/shares-business/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "shares-business",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "102"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"66-7e/et0S3Mmc1TBIKMdS4msknv88\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:31:02 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/SHARES-BUSINESS-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -16292,6 +17996,134 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/receivables/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "receivables", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/receivables/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "receivables", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "98"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"62-4enHMkkRtJ66348+iGQwjz6J5J4\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:35:04 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/RECEIVABLES-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -16938,6 +18770,134 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/crypto-assets/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "crypto-assets", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/crypto-assets/export/:type",
+                      "host": ["{{url}}"],
+                      "path": ["portfolio", "crypto-assets", "export", ":type"],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "100"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"64-byAbMSuY0ON/McVOrm689+rK8gE\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:36:48 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/CRYPTO-ASSETS-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -17592,6 +19552,139 @@
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
                 }
               ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/safe-deposit-box/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "safe-deposit-box", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/safe-deposit-box/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "safe-deposit-box",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "103"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"67-RtFgzhPBkk+HvMTk4HlUmeCI8vI\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:37:50 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/SAFE-DEPOSIT-BOX-23062025.pdf\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -18242,6 +20335,144 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data success deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/intellectual-properties/export/:type",
+                  "host": ["{{url}}"],
+                  "path": [
+                    "portfolio",
+                    "intellectual-properties",
+                    "export",
+                    ":type"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/intellectual-properties/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "intellectual-properties",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "110"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"6e-oSoy7YUW5Ug39hcj9E8efRungjw\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:39:26 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/INTELLECTUAL-PROPERTIES-23062025.pdf\"\n}"
                 }
               ]
             }
@@ -19134,6 +21365,139 @@
                   ],
                   "cookie": [],
                   "body": "{\n    \"status\": true,\n    \"message\": \"Data successfully deleted\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Export",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{access_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/portfolio/digital-assets/export/:type",
+                  "host": ["{{url}}"],
+                  "path": ["portfolio", "digital-assets", "export", ":type"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "type",
+                      "value": "pdf",
+                      "description": "pdf / excel"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Export",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/portfolio/digital-assets/export/:type",
+                      "host": ["{{url}}"],
+                      "path": [
+                        "portfolio",
+                        "digital-assets",
+                        "export",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "key": "q",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type",
+                          "value": "pdf",
+                          "description": "pdf / excel"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "101"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"65-85ChVQexZKjzCcRAFAPN9PIwo8g\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Jun 2025 09:42:56 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"Export PDF successfully\",\n    \"data\": \"/pdf/2025-06/DIGITAL-ASSETS-23062025.pdf\"\n}"
                 }
               ]
             }

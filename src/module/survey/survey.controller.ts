@@ -87,7 +87,7 @@ export default class Controller {
 
       const { form, form_id } = req?.body;
       if (form?.length > 0) {
-        for (let i in form) {
+        for (const i in form) {
           const dataForm: Object = helper.only(variable.form(), form[i]);
           const f = await repository.createForm({
             payload: {
@@ -101,7 +101,7 @@ export default class Controller {
 
           let answers = form[i]?.answer;
           if (answers?.length > 0) {
-            for (let x in answers) {
+            for (const x in answers) {
               const dataFormAnswer: Object = helper.only(
                 variable.formanswer(),
                 answers[x]
@@ -130,7 +130,7 @@ export default class Controller {
     try {
       const { client_id, event_id, form_id, answer } = req?.body;
       if (answer && answer?.length > 0) {
-        for (let i in answer) {
+        for (const i in answer) {
           let condition = {
             client_id,
             event_id,
@@ -206,7 +206,7 @@ export default class Controller {
         await repository.deleteForm({
           condition: { form_id },
         });
-        for (let i in form) {
+        for (const i in form) {
           const dataForm: Object = helper.only(variable.form(), form[i], true);
           const f = await repository.createForm({
             payload: {
@@ -225,7 +225,7 @@ export default class Controller {
                 condition: { question_id: form[i]?.question_id },
               });
             }
-            for (let x in answers) {
+            for (const x in answers) {
               const dataFormAnswer: Object = helper.only(
                 variable.formanswer(),
                 answers[x],

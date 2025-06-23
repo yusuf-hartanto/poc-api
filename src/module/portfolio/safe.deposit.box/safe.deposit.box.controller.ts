@@ -14,6 +14,14 @@ import {
   ROLE_ADMIN,
   ROLE_AGENT,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  holder_name: 'Holder',
+  name: 'Name',
+  location: 'Location',
+  address: 'Address',
+};
 
 export default class Controller {
   public async list(req: Request, res: Response) {
@@ -160,6 +168,56 @@ export default class Controller {
     } catch (err: any) {
       return helper.catchError(
         `safe deposit box delete: ${err?.message}`,
+        500,
+        res
+      );
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name, client_id } = req?.user;
+    const flagSDB: any = req?.query?.flag_sdb;
+    const clientId: any = req?.query?.client;
+
+    try {
+      let condition: any = {};
+      if (clientId != undefined) condition = { sdb_holder: clientId };
+      else if (![ROLE_ADMIN, ROLE_AGENT].includes(role_name))
+        condition = { sdb_holder: client_id };
+
+      if (flagSDB || flagSDB == '0') {
+        condition = { ...condition, flag_sdb: flagSDB };
+      }
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+
+      let SDB: Array<object> = [];
+      for (const i in result) {
+        let r: any = result[i]?.dataValues;
+
+        r.holder_name = r?.holder?.name || '';
+        SDB.push(r);
+      }
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          { name: 'SAFE-DEPOSIT-BOX', start: 'A', end: 'E', keys: keyExport },
+          SDB
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'SAFE-DEPOSIT-BOX', keys: keyExport },
+          SDB
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(
+        `safe deposit box ${type}: ${err?.message}`,
         500,
         res
       );

@@ -21,6 +21,15 @@ import {
   SUCCESS_SAVED,
   SUCCESS_UPDATED,
 } from '../../../utils/constant';
+import { hExport } from '../../../helpers/export';
+const keyExport: any = {
+  no: 'No',
+  cin: 'CIN',
+  name: 'Name',
+  email: 'Email',
+  contact_number: 'Phone',
+  flag_client: 'Is Main Client',
+};
 
 const generateCin = async () => {
   let nextCin: string = moment().locale('id').format('YYMMDD');
@@ -264,6 +273,50 @@ export default class Controller {
       return response.success(SUCCESS_DELETED, null, res);
     } catch (err: any) {
       return helper.catchError(`client delete: ${err?.message}`, 500, res);
+    }
+  }
+
+  public async export(req: Request, res: Response) {
+    const type: any = req?.params?.type || '';
+    const { role_name } = req?.user;
+
+    try {
+      let condition: any = {};
+      if (role_name != ROLE_ADMIN) {
+        if (role_name == ROLE_AGENT) {
+          condition = {
+            agent_id: req?.user?.id,
+          };
+        } else {
+          condition = {
+            [Op.or]: [
+              { id: req?.user?.client_id },
+              { relation_id: req?.user?.client_id },
+            ],
+          };
+        }
+      }
+
+      const result = await repository.list(condition);
+      if (result?.length < 1)
+        return response.success(NOT_FOUND, null, res, false);
+      const clients = await transformer.list(result);
+
+      if (type == 'excel') {
+        const excel = await hExport.excel(
+          { name: 'CLIENT', start: 'A', end: 'F', keys: keyExport },
+          clients
+        );
+        return response.success(excel?.message, excel?.url, res, excel?.status);
+      } else {
+        const pdf = await hExport.pdf(
+          { name: 'CLIENT', keys: keyExport },
+          clients
+        );
+        return response.success(pdf?.message, pdf?.url, res, pdf?.status);
+      }
+    } catch (err: any) {
+      return helper.catchError(`client ${type}: ${err?.message}`, 500, res);
     }
   }
 }

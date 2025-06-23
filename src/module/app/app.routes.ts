@@ -132,6 +132,12 @@ router.get(
   resource.check
 );
 router.get(
+  '/resource/export/:type',
+  auth.checkBearerToken,
+  auth.checkAccess('user'),
+  resource.export
+);
+router.get(
   '/resource/:id',
   auth.checkBearerToken,
   auth.checkAccess('user'),

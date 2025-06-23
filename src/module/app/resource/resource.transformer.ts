@@ -5,7 +5,7 @@ import { repository as repoRoleMenu } from '../role.menu/role.menu.repository';
 export default class Transformer {
   public async list(data: any, withAbility: boolean = true) {
     let result: Array<object> = [];
-    for (let i in data) {
+    for (const i in data) {
       let resource: any = data[i]?.dataValues;
 
       if (withAbility) {
@@ -41,6 +41,7 @@ export default class Transformer {
       delete resource?.password;
       delete resource?.confirm_hash;
       delete resource?.role_menu;
+      resource.role_name = resource?.role?.role_name;
       result.push(resource);
     }
     return result;
@@ -83,6 +84,7 @@ export default class Transformer {
     delete result?.password;
     delete result?.confirm_hash;
     delete result?.role_menu;
+    result.role_name = result?.role?.role_name;
     return result;
   }
 }
