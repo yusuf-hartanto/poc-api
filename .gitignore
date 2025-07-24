@@ -15,3 +15,5 @@
 !/public/pdf/.gitkeep
 
 .github/backup/
+
+ecosystem.config.js
