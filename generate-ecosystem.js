@@ -3,7 +3,7 @@ module.exports = {
     name : 'api',
     script: './dist/apps/api/server.js',
     node_args: "-r dotenv/config",
-    args: ["dotenv_config_path=./.env.stage.dev"],
+    args: ["dotenv_config_path=./.env.stage.prod"],
   }
 ]};
 
