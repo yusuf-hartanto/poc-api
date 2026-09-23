@@ -78,6 +78,7 @@ import {
   initVehiclesMachineries,
   associateVehiclesMachineries,
 } from '../portfolio/vehicles.machineries/vehicles.machineries.model';
+import { initImage, associateImage } from '../upload/upload.model';
 import {
   initIntellectualProperties,
   associateIntellectualProperties,
@@ -86,6 +87,7 @@ import {
 export function initializeModels(sequelize: Sequelize) {
   // initialize
   initCash(sequelize);
+  initImage(sequelize);
   initForex(sequelize);
   initBonds(sequelize);
   initStocks(sequelize);
@@ -121,6 +123,7 @@ export function initializeModels(sequelize: Sequelize) {
 
   // associate
   associateCash();
+  associateImage();
   associateForex();
   associateBonds();
   associateClient();

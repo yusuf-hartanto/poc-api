@@ -3,6 +3,7 @@
 import express from 'express';
 import { global } from './global.controller';
 import { auth } from '../auth/auth.middleware';
+import { upload } from '../upload/upload.controller';
 
 const router = express.Router();
 
@@ -36,5 +37,6 @@ router.get(
   auth.checkAccess('dashboard'),
   global.dashboardPDF
 );
+router.post('/upload', upload.upload);
 
 export default router;

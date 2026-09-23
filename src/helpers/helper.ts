@@ -9,6 +9,7 @@ import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import TelegramBot from 'tele-sender';
 import { QueryTypes } from 'sequelize';
+import SmallPict from '@smallpict/sdk';
 import { Request, Response } from 'express';
 import { response } from '../helpers/response';
 import { s3Service } from '../utils/s3.service';
@@ -97,16 +98,80 @@ export default class Helper {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  public checkExtention(file: File, type: string = 'image') {
-    if (type == 'image' && file?.size > 2048000)
-      return 'file size maksimal *2MB.';
+  public checkExtention(file: any, type: string = 'image') {
     const allowedExt: any = {
-      image: ['jpg', 'jpeg', 'png', 'gif'],
+      image: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'bmp'],
       video: ['mp4', 'webm', 'avi', 'mkv', 'mov', 'flv', 'mts', 'wmv'],
       file: ['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'],
     };
-    let ext: string = file?.name.split('.').pop() || '-';
-    if (allowedExt[type].includes(ext.toLocaleLowerCase())) return 'allowed';
+
+    if (typeof file === 'string') {
+      // 1. Format Data URI: data:image/png;base64,...
+      if (file.startsWith('data:')) {
+        const match = file.match(/^data:([A-Za-z-+\/]+);base64,/);
+        if (match) {
+          const mime = match[1];
+          const ext = mime.split('/')[1]?.toLowerCase();
+          const base64Data = file.replace(/^data:([A-Za-z-+\/]+);base64,/, '');
+          const sizeInBytes = (base64Data.length * 3) / 4;
+          if (type === 'image' && sizeInBytes > 10485760) {
+            return 'file size maksimal *10MB.';
+          }
+          if (ext && allowedExt[type]?.includes(ext)) return 'allowed';
+        }
+      }
+
+      // 2. Format Raw Base64 string (e.g. iVBORw0KGgo...)
+      const cleaned = file.trim().replace(/\s/g, '');
+      const isBase64 = /^[A-Za-z0-9+/=]+$/.test(cleaned);
+      if (isBase64) {
+        const sizeInBytes = (cleaned.length * 3) / 4;
+        if (type === 'image' && sizeInBytes > 10485760) {
+          return 'file size maksimal *10MB.';
+        }
+
+        try {
+          const headerBuf = Buffer.from(cleaned.slice(0, 48), 'base64');
+          if (
+            headerBuf[0] === 0x89 &&
+            headerBuf[1] === 0x50 &&
+            headerBuf[2] === 0x4e &&
+            headerBuf[3] === 0x47
+          ) {
+            return 'allowed'; // PNG
+          }
+          if (
+            headerBuf[0] === 0xff &&
+            headerBuf[1] === 0xd8 &&
+            headerBuf[2] === 0xff
+          ) {
+            return 'allowed'; // JPEG
+          }
+          if (
+            headerBuf[0] === 0x47 &&
+            headerBuf[1] === 0x49 &&
+            headerBuf[2] === 0x46
+          ) {
+            return 'allowed'; // GIF
+          }
+          if (
+            headerBuf.length >= 12 &&
+            headerBuf.toString('ascii', 0, 4) === 'RIFF' &&
+            headerBuf.toString('ascii', 8, 12) === 'WEBP'
+          ) {
+            return 'allowed'; // WEBP
+          }
+          if (headerBuf[0] === 0x42 && headerBuf[1] === 0x4d) {
+            return 'allowed'; // BMP
+          }
+        } catch (_) {}
+      }
+    }
+
+    if (type == 'image' && file?.size > 10485760)
+      return 'file size maksimal *10MB.';
+    let ext: string = file?.name?.split('.').pop() || '-';
+    if (allowedExt[type]?.includes(ext.toLocaleLowerCase())) return 'allowed';
     return `file extension allowed *${allowedExt[type]?.join(', ')}.`;
   }
 
@@ -449,6 +514,224 @@ export default class Helper {
       offset: parseInt(limit) * (parseInt(offset) - 1),
       keyword,
     };
+  }
+
+  public async uploadSmallpict(file: any, options: any = {}) {
+    const apiKey: string =
+      process.env.SMALLPICT_API_KEY || 'https://api.smallpict.app';
+    const secretKey: string = process.env.SMALLPICT_SECRET_KEY || '';
+    const baseUrl: string = process.env.SMALLPICT_URL || '';
+    const mode: string = (
+      options?.mode ||
+      process.env.SMALLPICT_MODE ||
+      'locale'
+    ).toLowerCase();
+    const folder: string = options?.folder || 'images';
+    const currentMonth: string = moment().format('YYYY-MM');
+
+    if (!apiKey || !secretKey || !baseUrl) {
+      throw new Error('SmallPict configuration is incomplete');
+    }
+
+    const client = new SmallPict({
+      apiKey: apiKey,
+      secretKey: secretKey,
+      baseUrl: baseUrl,
+    });
+
+    // Resolve buffer from input file
+    let imageBuffer: Buffer;
+    let detectedMimeType: string | null = null;
+    let detectedExt: string = 'png';
+
+    if (Buffer.isBuffer(file)) {
+      imageBuffer = file;
+    } else if (typeof file === 'string' && file.startsWith('data:image/')) {
+      const matches = file.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      if (matches && matches.length === 3) {
+        detectedMimeType = matches[1];
+        detectedExt = detectedMimeType.split('/')[1] || 'png';
+        imageBuffer = Buffer.from(matches[2], 'base64');
+      } else {
+        imageBuffer = Buffer.from(file, 'base64');
+      }
+    } else if (typeof file === 'string' && fs.existsSync(file)) {
+      imageBuffer = fs.readFileSync(path.resolve(file));
+    } else if (typeof file === 'string') {
+      const cleaned = file.trim().replace(/\s/g, '');
+      const isBase64 = /^[A-Za-z0-9+/=]+$/.test(cleaned);
+      imageBuffer = Buffer.from(cleaned, isBase64 ? 'base64' : 'utf-8');
+      if (
+        imageBuffer[0] === 0x89 &&
+        imageBuffer[1] === 0x50 &&
+        imageBuffer[2] === 0x4e &&
+        imageBuffer[3] === 0x47
+      ) {
+        detectedMimeType = 'image/png';
+        detectedExt = 'png';
+      } else if (
+        imageBuffer[0] === 0xff &&
+        imageBuffer[1] === 0xd8 &&
+        imageBuffer[2] === 0xff
+      ) {
+        detectedMimeType = 'image/jpeg';
+        detectedExt = 'jpg';
+      } else if (
+        imageBuffer[0] === 0x47 &&
+        imageBuffer[1] === 0x49 &&
+        imageBuffer[2] === 0x46
+      ) {
+        detectedMimeType = 'image/gif';
+        detectedExt = 'gif';
+      } else if (
+        imageBuffer.length >= 12 &&
+        imageBuffer.toString('ascii', 0, 4) === 'RIFF' &&
+        imageBuffer.toString('ascii', 8, 12) === 'WEBP'
+      ) {
+        detectedMimeType = 'image/webp';
+        detectedExt = 'webp';
+      }
+    } else if (file?.tempFilePath && fs.existsSync(file.tempFilePath)) {
+      imageBuffer = fs.readFileSync(path.resolve(file.tempFilePath));
+    } else if (file?.data && Buffer.isBuffer(file.data)) {
+      imageBuffer = file.data;
+    } else if (file?.buffer && Buffer.isBuffer(file.buffer)) {
+      imageBuffer = file.buffer;
+    } else {
+      imageBuffer = Buffer.from(file);
+    }
+
+    const rawFilename: string =
+      options?.filename ||
+      file?.name ||
+      file?.filename ||
+      file?.originalname ||
+      `image.${detectedExt}`;
+    const sanitizedFilename: string = rawFilename.replace(/ /g, '');
+    const extName: string =
+      path.extname(sanitizedFilename) || `.${detectedExt}`;
+    const baseName: string = path.basename(sanitizedFilename, extName);
+    const timestamp: number = Date.now();
+    const filename: string = `${baseName}_${timestamp}${extName}`;
+    const mimeType: string =
+      options?.mimeType ||
+      detectedMimeType ||
+      file?.mimetype ||
+      file?.mimeType ||
+      'image/png';
+    const format = options?.format || process.env.SMALLPICT_FORMAT || 'auto';
+    const quality =
+      options?.quality ||
+      (process.env.SMALLPICT_QUALITY
+        ? Number(process.env.SMALLPICT_QUALITY)
+        : 80);
+
+    const handleCompletedResult = async (finalResult: any) => {
+      console.log('🎉 Konversi Berhasil!');
+      console.log('Bytes Saved:', finalResult.bytesSaved);
+
+      if (mode === 'cdn') {
+        console.log('CDN URL:', finalResult.url);
+        return {
+          ...finalResult,
+          filename: finalResult.filename || filename,
+          size_origin: imageBuffer.length,
+          originalSize: finalResult.originalSize || imageBuffer.length,
+        };
+      }
+
+      if (finalResult?.url) {
+        try {
+          const response = await axios.get(finalResult.url, {
+            responseType: 'arraybuffer',
+          });
+          const optimizedBuffer = Buffer.from(response.data);
+
+          const ext = finalResult.format
+            ? `.${finalResult.format}`
+            : path.extname(filename) || '.png';
+          const baseName = path.basename(filename, path.extname(filename));
+          const savedFilename = `${baseName}${ext}`;
+
+          const uploadDir = `./public/uploads/${folder}/${currentMonth}`;
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+          }
+
+          const localFilePath = `${uploadDir}/${savedFilename}`;
+          fs.writeFileSync(path.resolve(localFilePath), optimizedBuffer);
+          const relativePath = localFilePath.replace('./public', '');
+
+          console.log('📁 File disimpan di server lokal:', relativePath);
+
+          return {
+            ...finalResult,
+            url: relativePath,
+            path_doc: relativePath,
+            cdnUrl: finalResult.url,
+            localPath: localFilePath,
+            filename: savedFilename,
+            size: optimizedBuffer.length,
+            compressedSize: optimizedBuffer.length,
+            size_origin: imageBuffer.length,
+            originalSize: finalResult.originalSize || imageBuffer.length,
+          };
+        } catch (downloadErr: any) {
+          console.error(
+            'Gagal mendownload file dari SmallPict ke lokal server:',
+            downloadErr?.message
+          );
+          return finalResult;
+        }
+      }
+
+      return finalResult;
+    };
+
+    const result = await client.optimize(imageBuffer, {
+      filename,
+      mimeType,
+      format,
+      quality,
+    });
+
+    console.log('Ticket diterima, Job ID:', result.jobId);
+
+    if (result.status === 'completed') {
+      return await handleCompletedResult(result);
+    }
+
+    if (result.uploadUrl) {
+      const uploadRes = await fetch(result.uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': mimeType,
+          'Content-Length': String(imageBuffer.length),
+        },
+        body: new Uint8Array(imageBuffer),
+      });
+      console.log('Upload S3 Status:', uploadRes.status);
+
+      for (let attempt = 1; attempt <= 15; attempt++) {
+        await new Promise((r) => setTimeout(r, 2000));
+        const statusResult = await client.getJobStatus(result.jobId);
+        console.log(`Polling status attempt ${attempt}:`, statusResult.status);
+
+        if (
+          statusResult.status === 'completed' ||
+          (statusResult.status as any) === 'succeeded'
+        ) {
+          return await handleCompletedResult(statusResult);
+        }
+
+        if (statusResult.status === 'failed') {
+          console.error('Konversi Gagal:', statusResult.error?.message);
+          return statusResult;
+        }
+      }
+    }
+
+    return result;
   }
 }
 
