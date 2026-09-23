@@ -632,9 +632,16 @@ export default class Helper {
 
       if (mode === 'cdn') {
         console.log('CDN URL:', finalResult.url);
+        const calculatedCompressedSize =
+          finalResult.compressedSize ||
+          (finalResult.bytesSaved
+            ? Math.max(0, imageBuffer.length - finalResult.bytesSaved)
+            : imageBuffer.length);
         return {
           ...finalResult,
           filename: finalResult.filename || filename,
+          size: calculatedCompressedSize,
+          compressedSize: calculatedCompressedSize,
           size_origin: imageBuffer.length,
           originalSize: finalResult.originalSize || imageBuffer.length,
         };
